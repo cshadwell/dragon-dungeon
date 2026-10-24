@@ -1,7 +1,7 @@
-import {DRAGON,freshDragon,dragonAct,missing} from './dragon.js?v=0b62ecb75af7';
-import {QUEEN,SEAL,queenNotes,freshQueen,queenAct} from './queen.js?v=0b62ecb75af7';
-import {WIZARD,LENS,wizardNotes,freshWizard,wizardAct} from './wizard.js?v=0b62ecb75af7';
-import {SHIELD,lessons,notes} from './ogre.js?v=0b62ecb75af7';
+import {DRAGON,freshDragon,dragonAct,missing} from './dragon.js?v=94a4c0988f32';
+import {QUEEN,SEAL,queenNotes,freshQueen,queenAct} from './queen.js?v=94a4c0988f32';
+import {WIZARD,LENS,wizardNotes,freshWizard,wizardAct} from './wizard.js?v=94a4c0988f32';
+import {SHIELD,lessons,notes} from './ogre.js?v=94a4c0988f32';
 export const VERSION = 1;
 export const CONTENT = 'dragon-1';
 export const DIRS = [[0,-1],[1,0],[0,1],[-1,0]];

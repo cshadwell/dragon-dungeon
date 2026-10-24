@@ -1,28 +1,27 @@
-import {ogreGateArt} from './ogre-gate.js?v=0b62ecb75af7';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=0b62ecb75af7';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=0b62ecb75af7';
-import {drawCorridor} from './corridor.js?v=0b62ecb75af7';
-import {exploredMap} from './explored-map.js?v=0b62ecb75af7';
-import {dragonView,dragonArt} from './dragon.js?v=0b62ecb75af7';
-import {queenView,queenArt} from './queen.js?v=0b62ecb75af7';
-import {wizardView,wizardArt} from './wizard.js?v=0b62ecb75af7';
-import {createAttempt,tick,respond} from './reaction.js?v=0b62ecb75af7';
-import {lessons} from './ogre.js?v=0b62ecb75af7';
-import {ogreView} from './ogre.js?v=0b62ecb75af7';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=0b62ecb75af7';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=0b62ecb75af7';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=94a4c0988f32';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=94a4c0988f32';
+import {drawCorridor} from './corridor.js?v=94a4c0988f32';
+import {exploredMap} from './explored-map.js?v=94a4c0988f32';
+import {dragonView,dragonArt} from './dragon.js?v=94a4c0988f32';
+import {queenView,queenArt} from './queen.js?v=94a4c0988f32';
+import {wizardView,wizardArt} from './wizard.js?v=94a4c0988f32';
+import {createAttempt,tick,respond} from './reaction.js?v=94a4c0988f32';
+import {lessons} from './ogre.js?v=94a4c0988f32';
+import {ogreView} from './ogre.js?v=94a4c0988f32';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=94a4c0988f32';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=94a4c0988f32';
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
 let loaded=load(storage), state=loaded.state, writable=loaded.writable, panel=null, lastInput=0;
 $('storage').textContent=loaded.notice;
 // Local, isolated review link; never writes over the player's adventure save.
 const previewMode=['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='ogre';
-if(previewMode){state={...fresh(),pos:ENCOUNTER,visited:[START,ENCOUNTER],gate:'ogre'};writable=false;$('storage').textContent='Ogre room preview — progress is not saved.';}
+if(previewMode){state={...fresh(),pos:'35,32',facing:0,visited:[START,'35,32'],gate:null,message:'An iron-bound wooden door stands at the end of the corridor.'};writable=false;$('storage').textContent='Ogre approach preview — progress is not saved.';}
 
 let attempt=null, reactionFrame=null, slowReaction=false, motion=null;
 const names=['NORTH','EAST','SOUTH','WEST'];
 function persist(){if(writable&&!save(storage,state)){writable=false;$('storage').textContent='Saving failed. Progress lasts only for this open session.';}}
-function scene(){drawCorridor($('scene'),state);if(state.pos===ENCOUNTER&&!state.encounter)$('scene').innerHTML=ogreGateArt();}
+function scene(){drawCorridor($('scene'),state);}
 function render(){
   $('direction').textContent=names[state.facing];$('health').textContent='♥ '.repeat(state.health)+'♡ '.repeat(3-state.health);
   $('health').setAttribute('aria-label',`${state.health} of 3 health`);
@@ -164,7 +163,7 @@ function startReaction(){
     if(change==='late'){resolveReaction('late');return;}
     if(change==='snort'){
       $('scene').querySelector('.ogre-art,.dragon-art')?.classList.add('snorting');
-      $('tell').classList.add('snort-cue');$('tell').textContent=dragon?'EMBERS! Block high now — ↑':'SNORT! Block now — ←  ↑  →';
+      if(dragon){$('tell').classList.add('snort-cue');$('tell').textContent='EMBERS! Block high now — ↑';}else{$('tell').textContent='Watch his nose.';}
     }
     reactionFrame=requestAnimationFrame(frame);
   };

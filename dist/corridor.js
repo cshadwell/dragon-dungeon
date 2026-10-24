@@ -1,6 +1,7 @@
 // Original procedural 256×216 renderer. World cells are shared with collision/map.
-import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=0b62ecb75af7';
-import {textures,sample} from './textures.js?v=0b62ecb75af7';
+import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=94a4c0988f32';
+import {textures,sample} from './textures.js?v=94a4c0988f32';
+import {isOgreDoorFace,ogreDoorPixel} from './ogre-gate.js?v=94a4c0988f32';
 export function corridorPixels(state,w=256,h=216,pose=null){
  const data=new Uint8ClampedArray(w*h*4),[cx,cy]=state.pos.split(',').map(Number);
  const px=pose?.x??cx+.5,py=pose?.y??cy+.5,angle=pose?.angle??state.facing*Math.PI/2;
@@ -16,7 +17,7 @@ export function corridorPixels(state,w=256,h=216,pose=null){
    const hit=side?px+dist*rx:py+dist*ry,u=Math.floor((hit-Math.floor(hit))*128);
    for(let y=0;y<h;y++){
      if(y>=top&&y<=bottom){
-       const v=Math.floor((y-top)/wallH*128),shade=(side?.88:1)/(1+dist*.13),[r,g,b]=sample(textures.wall,u,v);
+       const v=Math.floor((y-top)/wallH*128),shade=(side?.88:1)/(1+dist*.13),door=isOgreDoorFace(mx,my,side,side?sy:sx),[r,g,b]=(door&&ogreDoorPixel(u,v))||sample(textures.wall,u,v);
        put(x,y,r*shade,g*shade,b*shade);
      }else{
        const ceiling=y<h/2,depth=h/(2*Math.max(1,Math.abs(y-h/2))),wx=px+depth*rx,wy=py+depth*ry;

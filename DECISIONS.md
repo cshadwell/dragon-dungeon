@@ -25,3 +25,17 @@ Future changes: record decision, established reason, superseded behavior and con
 ## Local version control — 2026-10-23
 
 User authorized Git initialization in dragon-dungeon and an initial verified baseline commit. Track editable dist source, tests, tools, configuration, documentation and referenced verification images; ignore local secrets, caches, backups and temporary/generated test reports. This replaces unversioned-only development. Keep the existing snapshot; do not configure a remote or push without authorization.
+
+## Integrated doorway — 2026-10-23
+
+User reference requires the door to exist on the maze wall and be visible before arrival. Replace the full gate-scene swap with pixel sampling on the existing north end wall of the Ogre corridor; preserve geometry and entry tile. Only accepting entry switches to the wide room. Door renders with the same perspective, shading and occlusion as stone.
+
+User requested the Ogre trigger one tile earlier because the final approach was too close. Trigger moved to (35,30); wall/maze unchanged. Existing active close-up saves migrate to the new trigger.
+
+User selected the supplied Ogre Character, Attack and Swing artwork as the interaction basis. Replace geometric placeholder with a transparent derivative atlas, preserve original references, and map pose changes to existing reaction phases without changing timing or outcomes.
+
+Original-art fidelity update: all displayed Ogre poses now use isolated cutouts of the supplied Character, Attack, Snorting Ogre Attacks and Swing sheets. No generated atlas is referenced at runtime. Preparation → original steam/snort pose → original follow-through uses existing timing; on-screen SNORT word/overlay removed. Pixel colors preserved in retained foreground, no resampling during extraction, nearest-neighbor display. Browser safe practice succeeded using the visual steam cue.
+
+User supplied transparent v2 Ogre sheets and requested discarding all earlier artwork versions. Use supplied alpha directly; isolate poses without background heuristics or redrawing. Supersedes white-keying/extraction and generated-atlas approaches.
+
+User chose red brick walls and cobblestone floor specifically for the Ogre chamber, with exact supplied shield hanging behind him on the left. Maze palette stays gray/green. Stock wall preview is style reference only; original red-brick rendering avoids importing its watermark.

@@ -1,4 +1,4 @@
-import {SHIELD} from './ogre.js?v=0b62ecb75af7';import {LENS} from './wizard.js?v=0b62ecb75af7';import {SEAL} from './queen.js?v=0b62ecb75af7';
+import {SHIELD} from './ogre.js?v=94a4c0988f32';import {LENS} from './wizard.js?v=94a4c0988f32';import {SEAL} from './queen.js?v=94a4c0988f32';
 export const DRAGON='4,2';
 // Development answer only. Replace only after testing the actual book's letter lock.
 export const NAME_CONFIG={name:'TEST',placeholder:true};

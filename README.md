@@ -1,6 +1,8 @@
 # Dragon Dungeon — Full maze with approved encounters
 
-**Current baseline:** [PROJECT_STATE.md](PROJECT_STATE.md) · [Development instructions](AGENTS.md) · [Decisions](DECISIONS.md) · [Larger Project handoff](PROJECT_HANDOFF.md). Audited 2026-10-23: 55 tests pass; release hash `0b62ecb75af7`. Run `npm start` / `npm test` from this folder. Local Git baseline established. No remote or production deployment. Subsequent sections record milestones; their counts and prior configuration are historical.
+**Current baseline:** [PROJECT_STATE.md](PROJECT_STATE.md) · [Development instructions](AGENTS.md) · [Decisions](DECISIONS.md) · [Larger Project handoff](PROJECT_HANDOFF.md). Audited 2026-10-23: 57 tests pass; release hash `94a4c0988f32`. Run `npm start` / `npm test` from this folder. Local Git baseline established. Private GitHub origin configured; no production deployment. Subsequent sections record milestones; their counts and prior configuration are historical.
+
+Current Ogre: wall-mounted door with earlier entry prompt, exact transparent pixel-art poses (preparation → snort → swing), red-brick/cobblestone chamber and supplied shield. See [OGRE-ROOM.md](OGRE-ROOM.md).
 
 Historical prototype notes begin below. The live content version is `maze-encounters-1` (schema 1); `dragon-1` is the retained engine default. The user approved replacing the earlier untimed guard trials with a safe tutorial followed by timed reactions. This supersedes the reference blueprint's no-reflex baseline for this encounter. Reference files remain unchanged; recommend updating the master blueprint after review.
 

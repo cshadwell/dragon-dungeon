@@ -1,28 +1,30 @@
-// Original geometric study; player-relative stance and paths are also described in text.
+import {ogreSprites} from './ogre-sprite-data.js?v=94a4c0988f32';
+// Original supplied transparent Ogre sprites over the chamber scene.
+// Original code-drawn chipped red masonry, using the supplied stock preview as palette/style reference.
+function redBricks(){
+ let stones='';
+ for(let row=0;row<8;row++)for(let col=-1;col<8;col++){
+  const x=col*64+(row%2)*32,y=row*32,n=((row+5)*173+(col+7)*89)%23;
+  const colors=['#641324','#74182b','#81192d','#58101e'];
+  stones+=`<path d="M${x+3} ${y+2}h54l5 5v19l-5 4H${x+5}l-4-5V7Z" fill="${colors[(row+col+8)%4]}"/><path d="M${x+4} ${y+4}h47l-8 5-18-2-8 7-13 3Z" fill="#a02a3d" opacity=".65"/><path d="M${x+9} ${y+25}l16-8 8 4 20-6 7 9-9 4H${x+12}Z" fill="#330b17" opacity=".65"/><path d="M${x+14+n} ${y+3}l-4 7 6 4-7 8" stroke="#390b17" stroke-width="2" fill="none"/>`;
+ }
+ return stones;
+}
+const redMasonry=redBricks();
 export function ogreArt(s){
- const phase=s.encounter,round=s.ogre.round,training=['brief','stance','hint','hurt','tutorial'].includes(phase),stance=phase==='tutorial'?'high':phase==='success'?['high','left','right'][Math.max(0,round-1)]:training?['high','left','right'][round]:'rest';
- const club=stance==='high'?'<path d="M167 32 L252 32"/>':stance==='left'?'<path d="M145 163 L65 110"/>':stance==='right'?'<path d="M275 163 L355 110"/>':'<path d="M286 174 L318 241"/>';
- const flame=phase.startsWith('flame')||phase==='reward';
- return `<svg class="ogre-art stance-${stance}" viewBox="0 0 420 290" role="img" aria-label="${training?`Ogre holding a padded club ${stance==='high'?'overhead':'on your '+stance}.`:'A broad green ogre with a padded club and polished shield.'}">
- <defs><radialGradient id="oglow"><stop stop-color="#71633b"/><stop offset="1" stop-color="#17201b"/></radialGradient><linearGradient id="metal"><stop stop-color="#a5b7ad"/><stop offset=".5" stop-color="#e5e6c6"/><stop offset="1" stop-color="#768b84"/></linearGradient></defs>
- <rect width="420" height="290" fill="#111b17"/><path d="M30 270V95Q30 20 110 20H310Q390 20 390 95V270" fill="url(#oglow)" stroke="#3e493b" stroke-width="8"/>
- <path d="M25 254H395M50 70H125M295 70H370M45 152H98M323 152H375" stroke="#72704b" opacity=".3"/>
- <ellipse cx="210" cy="265" rx="95" ry="12" fill="#0b120e"/>
- <path d="M163 220L153 264H190L203 228M222 228L229 264H267L254 218" fill="#596c45" stroke="#15251a" stroke-width="3"/>
- <path d="M150 124Q114 132 118 183L155 210H265L301 183Q306 132 268 124Z" fill="#738557" stroke="#263824" stroke-width="3"/>
- <path d="M158 127L166 192H254L262 127L243 139H181Z" fill="#544832"/>
- <path d="M154 185L144 235H276L264 185Z" fill="#443e2e" stroke="#83724b" stroke-width="2"/>
- <path d="M159 201H263" stroke="#c4a867" stroke-width="8"/><rect x="199" y="192" width="24" height="18" rx="3" fill="#b7a06c"/>
- <path d="M170 62Q210 42 249 65L257 107Q251 140 212 143Q172 140 165 109Z" fill="#8c9d68" stroke="#263824" stroke-width="3"/>
- <path d="M170 80L150 75L163 102M249 80L272 75L259 103" fill="#879761" stroke="#263824" stroke-width="3"/>
- <path d="M179 83L196 79M225 79L243 84" stroke="#35422a" stroke-width="5"/>
- <ellipse cx="190" cy="91" rx="4" ry="5" fill="#e9dba4"/><ellipse cx="233" cy="91" rx="4" ry="5" fill="#e9dba4"/>
- <g class="ogre-nose"><path d="M207 96L198 111Q211 117 224 111L217 96Z" fill="#8b9d65" stroke="#415030" stroke-width="2"/><ellipse cx="204" cy="109" rx="3" ry="2" fill="#293522"/><ellipse cx="217" cy="109" rx="3" ry="2" fill="#293522"/></g><g class="snort-breath" fill="#e5ead6"><ellipse cx="184" cy="119" rx="16" ry="7"/><ellipse cx="238" cy="119" rx="16" ry="7"/><text x="210" y="165" text-anchor="middle" font-size="19" font-weight="bold" letter-spacing="3">SNORT!</text></g><path d="M186 119Q211 ${phase==='hurt'?120:136} 239 117" fill="none" stroke="#31412b" stroke-width="3"/>
- <path d="M184 121L185 108L194 124M230 124L240 108L239 121" fill="#e6dcaf"/>
- ${stance==='high'?'<path d="M135 160L143 74L168 43M285 160L278 74L252 43" fill="none" stroke="#80945d" stroke-width="24" stroke-linecap="round"/>':stance==='left'?'<path d="M133 169L125 145L104 138" fill="none" stroke="#80945d" stroke-width="22" stroke-linecap="round"/>':stance==='right'?'<path d="M285 169L295 145L318 138" fill="none" stroke="#80945d" stroke-width="22" stroke-linecap="round"/>':''}
- <g class="ogre-club" fill="none" stroke="#b4aa86" stroke-width="23" stroke-linecap="round">${club}</g><g fill="none" stroke="#e0d6ad" stroke-width="2" stroke-dasharray="4 7">${club}</g>
- ${flame?'<path d="M50 237H105L96 259H59Z" fill="#b7a16a"/><path d="M326 237H380L370 259H337Z" fill="#b7a16a"/>'+ (phase==='reward'?'<path d="M341 236Q330 215 351 201Q346 218 363 223L361 237Z" fill="#e9bb65"/>':''):'<path d="M45 205L78 194L110 205V235Q95 256 78 263Q58 253 45 235Z" fill="url(#metal)" stroke="#e0d5a8" stroke-width="3"/>'}
- <text x="210" y="283" text-anchor="middle" fill="#b5b497" font-size="10" letter-spacing="3">${training?'YOUR VIEW · '+(stance==='high'?'OVERHEAD':'CLUB ON YOUR '+stance.toUpperCase()):'THE SHIELD KEEPER'}</text></svg>`;
+ const phase=s.encounter,round=s.ogre.round,training=['brief','stance','hint','hurt','tutorial','success'].includes(phase);
+ const stance=phase==='tutorial'?'high':phase==='success'?['high','left','right'][Math.max(0,round-1)]:training?['high','left','right'][Math.min(round,2)]:'rest';
+ const col=stance==='left'?0:stance==='right'?2:1;
+ const frame=(pose,column,kind)=>{
+  const sprite=ogreSprites[`${pose}-${column}`],scale=sprite.scale;
+  return `<image class="ogre-frame ${kind}" href="assets/ogre/${sprite.file}" x="${210-sprite.anchor*scale}" y="${264-sprite.h*scale}" width="${sprite.w*scale}" height="${sprite.h*scale}" style="image-rendering:pixelated"/>`;
+ };
+ return `<svg class="ogre-art ogre-sprites stance-${stance}" viewBox="0 0 420 290" role="img" aria-label="Armored green ogre ${stance==='rest'?'holding his club':stance==='high'?'raising his club overhead':'preparing a swing on your '+stance}. Watch his nose for the snort.">
+ <defs><radialGradient id="ogre-room-light"><stop stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#090507" stop-opacity=".48"/></radialGradient><pattern id="ogre-red-brick" width="420" height="256" patternUnits="userSpaceOnUse"><rect width="420" height="256" fill="#19060c"/>${redMasonry}</pattern><pattern id="ogre-cobbles" width="128" height="64" patternUnits="userSpaceOnUse"><image href="assets/ogre-room/cobblestone-v1.png" width="128" height="64" preserveAspectRatio="none" style="image-rendering:pixelated"/></pattern></defs>
+ <rect width="420" height="225" fill="url(#ogre-red-brick)"/><path d="M0 225H420V290H0Z" fill="url(#ogre-cobbles)"/><path d="M0 225H420" stroke="#160b0d" stroke-width="4"/><rect width="420" height="290" fill="url(#ogre-room-light)"/><path d="M76 61v12" stroke="#1b1315" stroke-width="4"/><image href="assets/ogre-room/shield-v1.png" x="43" y="70" width="68" height="69" style="image-rendering:pixelated" role="img" aria-label="Round iron shield hanging on the left wall"/><ellipse cx="210" cy="264" rx="95" ry="8" fill="#080607" opacity=".7"/>
+ ${frame('idle',0,'ogre-idle')}${frame('attack',col,'ogre-preparation')}${frame('snort',col,'ogre-snort')}${frame('swing',col,'ogre-follow-through')}
+
+ <text x="210" y="285" text-anchor="middle" fill="#d1ccb2" font-family="monospace" font-size="9" letter-spacing="2">${training?'WATCH THE NOSE · '+(stance==='high'?'OVERHEAD':stance.toUpperCase()):'THE SHIELD KEEPER'}</text></svg>`;
 }
 export function flameDiagram(angle){
  const path=angle==='left'?'M110 14V48L28 90':angle==='right'?'M110 14V48L192 90':'M110 14V48L114 17';

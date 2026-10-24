@@ -1,9 +1,9 @@
 // Supplied maze + user-approved encounter locations. The small prototype remains intact.
-import * as adventure from './engine.js?v=0b62ecb75af7';
-import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=0b62ecb75af7';
+import * as adventure from './engine.js?v=94a4c0988f32';
+import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=94a4c0988f32';
 export const MAZE_ONLY=false;
 export const WORLD_WIDTH=MAZE_WIDTH,WORLD_HEIGHT=MAZE_HEIGHT;
-export const START=MAZE_START,ENCOUNTER='35,29',WIZARD='4,22',QUEEN='56,4',DRAGON='0,0',DIRS=adventure.DIRS;
+export const START=MAZE_START,ENCOUNTER='35,30',WIZARD='4,22',QUEEN='56,4',DRAGON='0,0',DIRS=adventure.DIRS;
 export const cells=new Set(MAZE_ROWS.flatMap((row,y)=>Array.from(row).flatMap((c,x)=>c==='.'?[`${x},${y}`]:[])));
 export const WORLD={START,ENCOUNTER,WIZARD,QUEEN,DRAGON,cells,CONTENT:'maze-encounters-1'};
 export const neighbor=adventure.neighbor;
@@ -25,7 +25,7 @@ export const valid=s=>adventure.valid(s,WORLD)&&([undefined,null].includes(s.gat
 function explorationValid(s){return s&&s.content==='maze-image-1'&&cells.has(s.pos)&&Number.isInteger(s.facing)&&s.facing>=0&&s.facing<4&&Array.isArray(s.visited)&&s.visited.every(p=>cells.has(p))&&s.visited.includes(s.pos)&&s.visited.includes(START);}
 export function load(storage){try{
  const raw=storage.getItem(SAVE_KEY);
- if(raw!==null){try{const s=JSON.parse(raw);if(valid(s))return {state:{...s,gate:s.gate??null},writable:true,notice:'Maze adventure restored. Earlier saves kept separate.'};}catch{}return {state:fresh(),writable:false,notice:'Unreadable adventure save preserved. New game can replace it.'};}
+ if(raw!==null){try{let s=JSON.parse(raw);if(s.pos==='35,29'&&(s.gate==='ogre'||(s.encounter&&!['wizard','queen','dragon'].includes(s.encounter)))&&adventure.valid(s,{...WORLD,ENCOUNTER:'35,29'})){s={...s,pos:ENCOUNTER,visited:[...new Set([...s.visited,ENCOUNTER])]};}if(valid(s))return {state:{...s,gate:s.gate??null},writable:true,notice:'Maze adventure restored. Earlier saves kept separate.'};}catch{}return {state:fresh(),writable:false,notice:'Unreadable adventure save preserved. New game can replace it.'};}
  const previous=storage.getItem(EXPLORATION_KEY);
  if(previous){try{const old=JSON.parse(previous);if(explorationValid(old)){
    let s={...fresh(),pos:old.pos,facing:old.facing,visited:[...new Set(old.visited)],message:'Your explored paths are retained. The four marked encounters are now active; this maze has fresh encounter progress.'};
