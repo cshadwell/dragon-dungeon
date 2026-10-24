@@ -1,0 +1,9 @@
+{
+  "name": "dragon-dungeon-prototype",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "start": "python3 tools/stamp-release.py && python3 tools/serve.py"
+  }
+}

@@ -1,0 +1,13 @@
+# Handoff to White Elephant Puzzle Experience
+
+As of 2026-10-23, P05 Dragon Dungeon is a local playable browser prototype with 55 passing automated tests. Software source of truth: local `dragon-dungeon/`, especially AGENTS.md, PROJECT_STATE.md and DECISIONS.md. Local Git baseline is established; no remote or production deployment. This handoff is ready to copy into larger Project reference documents; those documents were not edited.
+
+Implemented: full supplied maze with explored map, smooth first-person movement, gray stone/green floor/charcoal ceiling, three independently accessible guardians, inventory/journal, recoverable health, saved progress, early-dragon retreat/return and combined final challenge. Ogre teaches timed blocks using a snort tell and reflection; wizard teaches false-claim deduction with a lens; elf queen teaches observation/consent/restraint. Dragon combines the lessons and reveals TEST on independent evidence.
+
+Changes from original handoff: reflex challenge is now explicitly user-approved, replacing no-reflex baseline. Large supplied maze replaces compact prototype; map stays visible during exploration. Encounters now use wide top scene with lower text/actions. Ogre has an optional wood-and-iron entrance matching maze surfaces; other themed entrances pending. User-approved map2 dots fix guardian placements. Safari cache mismatch corrected and checked on actual Safari; coherent asset stamping must remain.
+
+Physical dependencies: four-letter true name must be selected against actual book slider constraints and tested on the physical lock. TEST must not become the production answer accidentally. Production URL/hosting and QR remain open; test hosted build from final QR on intended phones before fabrication. The game's answer is separate from later musical password A FADED AGE DEFACED. Rune Match is unchanged. No new physical puzzle stage is introduced.
+
+Unresolved: final name/letter layouts, hosting, final artwork/story polish, real-device touch and rotation, fresh-player fairness/navigation duration, full manual large-maze route, new layout checks for wizard/queen/dragon. Suggested milestones: refine remaining entrances/interactions; real-device and independent playtests; confirm physical name/lock; authorize hosting and verify QR; release checkpoint. These milestones are proposals, not evidence of completion or scheduled commitments.
+
+Protection: full pre-continuity local snapshot and code hashes are in sibling development-checkpoints/. The initial local Git checkpoint includes the verified baseline and continuity documents; separate backup remains recommended. No remote connection or push performed.

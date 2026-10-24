@@ -1,0 +1,26 @@
+// Editable encounter content. Directions are always from the player's viewpoint.
+export const SHIELD='Polished shield';
+export const lessons=[
+ {guard:'high',title:'The overhead blow',cue:'He lifts the club above his head. Both elbows rise; his eyes settle on the top of your shield.',tip:'Club overhead, guard high. Catch it above your head.',reply:'The club lands squarely on your raised shield. “Good. You looked before you moved.”'},
+ {guard:'left',title:'The side sweep',cue:'He draws the club back on YOUR LEFT. His shoulders turn toward that side; the club will enter from your left.',tip:'A club drawn back on your left needs a left guard. All directions are from your viewpoint.',reply:'Your left guard catches the sweep. The ogre grins. “Now you’re watching ME.”'},
+ {guard:'right',title:'The other side',cue:'He plants his feet and draws the club back on YOUR RIGHT. His shoulders coil toward your right.',tip:'Watch which side he draws back on. This blow enters from your right.',reply:'You catch the final sweep on your right. He lowers the club. “Three good reads. Better than three lucky swings.”'}
+];
+export const notes=[
+ 'Every creature has a tell. Ogres snort before they swing: watch the flaring nose and white breath. Block after the snort, not during the windup. Read the stance: club overhead → high guard; drawn back on your left → left guard; drawn back on your right → right guard. Directions are from your viewpoint.',
+ 'A polished shield can redirect flame. Aim the reflected path at the target; facing it flat sends the flame back toward its source.'
+];
+export function ogreView(s){
+ const o=s.ogre,stage=s.encounter,lesson=lessons[Math.min(o.round,2)];
+ if(stage==='intro')return {title:'The keeper of the shield',text:'An ogre sits beside a polished shield, carefully wrapping his enormous club in padding. “Want it? Show me you can watch. Everyone watches the club. Club’s not doing the thinking.” He hands you a practice shield. “Every creature has a tell. Ogres always snort before they swing. Watch the nose. My stance tells you where; my snort tells you when. We’ll practice safely first.”',choices:[['Show me how to guard','begin'],['I’ll return later','leave']]};
+ if(stage==='tutorial')return {title:'Every creature has a tell.',text:'“Watch my nose. When the nostrils flare and white breath appears — SNORT! — block. Before that, wait.” He raises his club overhead. Press ↑ or tap Guard high AFTER the snort. This practice costs no health, however many tries you need.',reaction:true,practice:true,choices:[['Return later','leave']]};
+ if(stage==='practice-result')return {title:o.taught?'You saw the tell.':'Try the tell again.',text:s.message+' Practice costs no health.',choices:o.taught?[['Begin the three trials','trials'],['Practice again','practice'],['Take a break','leave']]:[['Practice again','practice'],['Take a break','leave']]};
+ if(stage==='brief')return {title:lesson.title,text:`${lesson.cue} “${lesson.tip}” Read the stance, then start the attempt. Wait for the visible snort before pressing ←, ↑, or →. The swing follows automatically; there is no timer until you start.`,choices:[['Study the stance','study']]};
+ if(stage==='stance')return {title:`Trial ${o.round+1} of 3 · ${lesson.title}`,text:lesson.cue+' Wait for the nose flare and SNORT cue, then block with ←, ↑, or →.',reaction:true,choices:[['Study the stance again','hint'],['Put down the practice shield','leave']]};
+ if(stage==='hint')return {title:'Watch the shoulders.',text:`“${lesson.tip}” The ogre holds his stance while you think. Start when ready, then wait for his snort.`,choices:[['Return to my guard','study'],['Return later','leave']]};
+ if(stage==='success')return {title:'A clean block.',text:`${s.message} Your training progress is recorded.`,choices:[['Continue the lesson','continue'],['Take a break','leave']]};
+ if(stage==='hurt')return {title:'The guard gives way.',text:`${s.message} You lose one health. The ogre steps back. “Breathe. Then look again.”`,choices:[['Study the same stance','retry'],['Take a break','leave']]};
+ if(stage==='flame')return {title:'A shield can do more.',text:'“Last thing. Dragon fire won’t ask nicely.” The ogre opens a tiny training-flame nozzle. A brazier stands to YOUR RIGHT. The diagrams below show where each shield angle sends the flame. Choose a path, then press Ready. Nothing moves until you commit.',flame:true,choices:[['Ask about the flame','flame-hint'],['Practice later','leave']]};
+ if(stage==='flame-hint')return {title:'Choose where the flame goes.',text:'“Flat sends it back to the nozzle. One tilt sends it left. The other sends it right. Follow the drawn path to the brazier on your right.” This is a safe demonstration; a wrong angle costs no health.',choices:[['Try the angles','flame-back']]};
+ if(stage==='flame-miss')return {title:'An empty target.',text:s.message+' The ogre closes the nozzle. “No harm. Follow the path, then try another angle.”',choices:[['Try another angle','flame-back'],['Return later','leave']]};
+ return {title:'Earned, not borrowed.',text:'The brazier catches with a small golden flame. “There. Strength gets the shield off the floor. Attention makes it useful.” The ogre gives you the polished shield. His lessons are recorded in your journal.',choices:[['Return to the dungeon','leave']]};
+}
