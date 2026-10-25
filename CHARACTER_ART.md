@@ -1,10 +1,10 @@
 # Approved character artwork and stable pose IDs
 
-Locked by user approval on 2026-10-25. This is the authoritative game-wide character-art baseline.
+V2 locked by user approval on 2026-10-25. This is the authoritative game-wide character-art baseline.
 
 **Do not redraw, regenerate, restyle, recolor, smooth, white-key, trim, overwrite or replace these approved images without a new explicit user instruction.** Pose extractions preserve original foreground pixels; only reference guides carry numbering. Keep poses separate and render with nearest-neighbor scaling.
 
-Canonical assets: dist/assets/characters/approved-v1/. catalog.json stores sheet/pose hashes, source cells and crop bounds. All 17 approved sheets are unchanged copies of the accepted batch. The 78 individual PNGs preserve exact retained foreground RGBA pixels from their approved source regions, with no resampling, recoloring or redraw. Connected figures and detached effects are isolated because some figures cross nominal sheet grid boundaries; other figures are excluded. Original sheets remain byte-identical.
+Canonical assets: dist/assets/characters/approved-v2/. The 78 individual PNGs are byte-identical copies of the reviewed pose-density-v2 outputs. Each pose has its approved native logical resolution, transparent padding and natural aspect ratio; Elf pose 1 is the pixel-density benchmark. Do not resize and resave them, change their palette, smooth them, or regenerate them. Use only nearest-neighbor display scaling, with a shared pixel scale rather than stretching every sprite to fill a box. catalog.json records exact PNG hashes, dimensions and IDs. approved-v1 remains an archived superseded baseline, not the reference for future scene work.
 
 ## Stable numbering
 
@@ -34,8 +34,8 @@ Numbers are global within each character, not restarted on each sheet. Sheet ord
 
 getCharacterPose("dragon", 3) in dist/character-art.js returns Dragon 3, its exact image URL, approved sheet/cell and native crop dimensions. listCharacterPoses(character) lists registered poses. Invalid IDs throw; never silently substitute another pose. Elf queen aliases resolve to elf.
 
-Numbered HTML guide: art-review/2026-10-25/character-sheets-v1/numbered/index.html. Four character-specific numbered PNG guides are alongside it. Printed numbers live outside sprite pixels.
+Canonical numbered HTML guide: art-review/2026-10-25/pose-density-v2/index.html. Four character-specific numbered V2 PNG guides are alongside it. Printed numbers live outside sprite pixels.
 
 The guide refers to exact poses; it does not select new gameplay mechanics. Current live encounters retain earlier assets until connected to these IDs; no encounter logic changed by locking this library. Future character integration MUST use these registered images; older runtime assets are legacy and must not become the reference for new art.
 
-Verification: tools/lock-character-library.py checks retained foreground RGBA bytes against source regions and refuses to overwrite an existing locked catalog. Tests verify hashes for every registered sheet/pose, contiguous numbering, exact lookup and invalid IDs. Keep a Git checkpoint; no automatic remote push.
+Verification: The earlier lock-character-library.py is a V1 extraction tool and must not be used to regenerate V2. The V2 review generator is guarded by APPROVED.lock. Tests verify every canonical PNG hash, native dimensions, exact lookup, invalid IDs and unchanged V1-to-V2 numbering. Keep a Git checkpoint; no automatic remote push.

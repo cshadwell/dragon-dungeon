@@ -1,0 +1,2175 @@
+[
+  {
+    "character": "ogre",
+    "number": 1,
+    "id": "ogre-001",
+    "sheet": "ogre-base",
+    "cell": 1,
+    "bounds": [
+      21,
+      135,
+      617,
+      897
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-001.png",
+    "width": 596,
+    "height": 762,
+    "sha256": "ed39ac21e26c8ab5b54ab89222dd09f0049bb52423b640e5e2a015789664c1ce",
+    "feature": [
+      211,
+      104,
+      455,
+      249
+    ],
+    "alternatives": [
+      {
+        "n": 18841,
+        "box": [
+          211,
+          104,
+          455,
+          249
+        ]
+      },
+      {
+        "n": 9633,
+        "box": [
+          469,
+          329,
+          581,
+          458
+        ]
+      },
+      {
+        "n": 6763,
+        "box": [
+          53,
+          370,
+          144,
+          458
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 2,
+    "id": "ogre-002",
+    "sheet": "ogre-base",
+    "cell": 2,
+    "bounds": [
+      643,
+      199,
+      992,
+      905
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-002.png",
+    "width": 349,
+    "height": 706,
+    "sha256": "0269ff948d0060fa095e204acd37436a33bf884f49bae1c90079b67222de22ac",
+    "feature": [
+      76,
+      14,
+      280,
+      197
+    ],
+    "alternatives": [
+      {
+        "n": 19591,
+        "box": [
+          76,
+          14,
+          280,
+          197
+        ]
+      },
+      {
+        "n": 10898,
+        "box": [
+          39,
+          238,
+          158,
+          363
+        ]
+      },
+      {
+        "n": 459,
+        "box": [
+          111,
+          414,
+          158,
+          424
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 3,
+    "id": "ogre-003",
+    "sheet": "ogre-base",
+    "cell": 3,
+    "bounds": [
+      1088,
+      199,
+      1438,
+      905
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-003.png",
+    "width": 350,
+    "height": 706,
+    "sha256": "6c414162777336b52452f758548f19eec25e94d4e9fdde02c24e3bff10d25949",
+    "feature": [
+      68,
+      14,
+      274,
+      197
+    ],
+    "alternatives": [
+      {
+        "n": 19727,
+        "box": [
+          68,
+          14,
+          274,
+          197
+        ]
+      },
+      {
+        "n": 10804,
+        "box": [
+          194,
+          238,
+          313,
+          362
+        ]
+      },
+      {
+        "n": 472,
+        "box": [
+          193,
+          414,
+          241,
+          424
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 4,
+    "id": "ogre-004",
+    "sheet": "ogre-dodge",
+    "cell": 1,
+    "bounds": [
+      179,
+      46,
+      664,
+      532
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-004.png",
+    "width": 485,
+    "height": 486,
+    "sha256": "87a86b5aecdd44f8d40235eb152f5d7d6185348463b3af47fb5addf78f31b125",
+    "feature": [
+      234,
+      133,
+      396,
+      262
+    ],
+    "alternatives": [
+      {
+        "n": 12047,
+        "box": [
+          234,
+          133,
+          396,
+          262
+        ]
+      },
+      {
+        "n": 2587,
+        "box": [
+          80,
+          221,
+          130,
+          286
+        ]
+      },
+      {
+        "n": 565,
+        "box": [
+          133,
+          213,
+          154,
+          248
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 5,
+    "id": "ogre-005",
+    "sheet": "ogre-dodge",
+    "cell": 2,
+    "bounds": [
+      784,
+      212,
+      1464,
+      534
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-005.png",
+    "width": 680,
+    "height": 322,
+    "sha256": "adab6bf8df72dfb7ba6aaf74f687a8c73271a5306dde829f2fb0bd3a7771cd21",
+    "feature": [
+      186,
+      11,
+      356,
+      140
+    ],
+    "alternatives": [
+      {
+        "n": 12867,
+        "box": [
+          186,
+          11,
+          356,
+          140
+        ]
+      },
+      {
+        "n": 3248,
+        "box": [
+          11,
+          150,
+          102,
+          194
+        ]
+      },
+      {
+        "n": 2078,
+        "box": [
+          106,
+          122,
+          178,
+          187
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 6,
+    "id": "ogre-006",
+    "sheet": "ogre-dodge",
+    "cell": 3,
+    "bounds": [
+      104,
+      555,
+      703,
+      962
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-006.png",
+    "width": 599,
+    "height": 407,
+    "sha256": "964558a3388afc24d62d456c32497ca07c1b3e41f61746810654d1c0603fd322",
+    "feature": [
+      284,
+      132,
+      449,
+      245
+    ],
+    "alternatives": [
+      {
+        "n": 10946,
+        "box": [
+          284,
+          132,
+          449,
+          245
+        ]
+      },
+      {
+        "n": 1679,
+        "box": [
+          122,
+          174,
+          159,
+          230
+        ]
+      },
+      {
+        "n": 523,
+        "box": [
+          183,
+          206,
+          213,
+          242
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 7,
+    "id": "ogre-007",
+    "sheet": "ogre-dodge",
+    "cell": 4,
+    "bounds": [
+      797,
+      592,
+      1464,
+      967
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-007.png",
+    "width": 667,
+    "height": 375,
+    "sha256": "12b982ca642366ca952dff7d7ce96c241e249fd9c1ecd5107cd52fd49f0d37ad",
+    "feature": [
+      129,
+      111,
+      300,
+      225
+    ],
+    "alternatives": [
+      {
+        "n": 11721,
+        "box": [
+          129,
+          111,
+          300,
+          225
+        ]
+      },
+      {
+        "n": 675,
+        "box": [
+          237,
+          87,
+          294,
+          109
+        ]
+      },
+      {
+        "n": 40,
+        "box": [
+          276,
+          213,
+          282,
+          222
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 8,
+    "id": "ogre-008",
+    "sheet": "ogre-emotions",
+    "cell": 1,
+    "bounds": [
+      199,
+      11,
+      735,
+      485
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-008.png",
+    "width": 536,
+    "height": 474,
+    "sha256": "5646f29461da1b8d9cd187bfd5996d77f1b19b45f1915b33266366140ede3321",
+    "feature": [
+      209,
+      134,
+      390,
+      271
+    ],
+    "alternatives": [
+      {
+        "n": 10220,
+        "box": [
+          209,
+          134,
+          390,
+          271
+        ]
+      },
+      {
+        "n": 3078,
+        "box": [
+          22,
+          180,
+          92,
+          249
+        ]
+      },
+      {
+        "n": 2446,
+        "box": [
+          96,
+          185,
+          152,
+          258
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 9,
+    "id": "ogre-009",
+    "sheet": "ogre-emotions",
+    "cell": 2,
+    "bounds": [
+      827,
+      70,
+      1292,
+      489
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-009.png",
+    "width": 465,
+    "height": 419,
+    "sha256": "bc29173d8ca2090ecadf3c1cc2820985d24305da63cd06987416cfb18569e189",
+    "feature": [
+      176,
+      48,
+      354,
+      174
+    ],
+    "alternatives": [
+      {
+        "n": 11037,
+        "box": [
+          176,
+          48,
+          354,
+          174
+        ]
+      },
+      {
+        "n": 3030,
+        "box": [
+          371,
+          175,
+          454,
+          249
+        ]
+      },
+      {
+        "n": 1454,
+        "box": [
+          68,
+          213,
+          116,
+          252
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 10,
+    "id": "ogre-010",
+    "sheet": "ogre-emotions",
+    "cell": 3,
+    "bounds": [
+      188,
+      497,
+      690,
+      982
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-010.png",
+    "width": 502,
+    "height": 485,
+    "sha256": "ccb11c6005577aee66bed831cb2d2da2334043e27811cf0db732a73e185301a3",
+    "feature": [
+      207,
+      101,
+      376,
+      221
+    ],
+    "alternatives": [
+      {
+        "n": 7887,
+        "box": [
+          207,
+          101,
+          376,
+          221
+        ]
+      },
+      {
+        "n": 4855,
+        "box": [
+          399,
+          134,
+          483,
+          231
+        ]
+      },
+      {
+        "n": 3022,
+        "box": [
+          113,
+          169,
+          179,
+          247
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 11,
+    "id": "ogre-011",
+    "sheet": "ogre-emotions",
+    "cell": 4,
+    "bounds": [
+      860,
+      528,
+      1284,
+      982
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-011.png",
+    "width": 424,
+    "height": 454,
+    "sha256": "e8a06a191357cccb7dc1186a339a0c68b0c263855ee193afa31a074cb4d3bb07",
+    "feature": [
+      129,
+      52,
+      312,
+      173
+    ],
+    "alternatives": [
+      {
+        "n": 10322,
+        "box": [
+          129,
+          52,
+          312,
+          173
+        ]
+      },
+      {
+        "n": 3116,
+        "box": [
+          320,
+          184,
+          413,
+          256
+        ]
+      },
+      {
+        "n": 1881,
+        "box": [
+          61,
+          193,
+          132,
+          253
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 12,
+    "id": "ogre-012",
+    "sheet": "ogre-hit",
+    "cell": 1,
+    "bounds": [
+      92,
+      70,
+      617,
+      472
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-012.png",
+    "width": 525,
+    "height": 402,
+    "sha256": "869f73fd0b02abcb88e196cbf986263121fc841b94ac54b277630b162b3b65c0",
+    "feature": [
+      286,
+      12,
+      447,
+      153
+    ],
+    "alternatives": [
+      {
+        "n": 11727,
+        "box": [
+          286,
+          12,
+          447,
+          153
+        ]
+      },
+      {
+        "n": 3550,
+        "box": [
+          354,
+          172,
+          429,
+          240
+        ]
+      },
+      {
+        "n": 2117,
+        "box": [
+          181,
+          141,
+          256,
+          202
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 13,
+    "id": "ogre-013",
+    "sheet": "ogre-hit",
+    "cell": 2,
+    "bounds": [
+      783,
+      44,
+      1429,
+      472
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-013.png",
+    "width": 646,
+    "height": 428,
+    "sha256": "89ce8b7c01a0c50e84385677dcbaa4b3778e92326617129f099bc175ecf48648",
+    "feature": [
+      323,
+      12,
+      502,
+      144
+    ],
+    "alternatives": [
+      {
+        "n": 11207,
+        "box": [
+          323,
+          12,
+          502,
+          144
+        ]
+      },
+      {
+        "n": 3089,
+        "box": [
+          558,
+          142,
+          635,
+          207
+        ]
+      },
+      {
+        "n": 1952,
+        "box": [
+          162,
+          202,
+          228,
+          257
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 14,
+    "id": "ogre-014",
+    "sheet": "ogre-hit",
+    "cell": 3,
+    "bounds": [
+      103,
+      551,
+      689,
+      962
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-014.png",
+    "width": 586,
+    "height": 411,
+    "sha256": "9e89fd62f8ce6c1f616cf09ea7cfc8fe9f63fff701c110719c3fc8d62b4d5a98",
+    "feature": [
+      313,
+      12,
+      465,
+      114
+    ],
+    "alternatives": [
+      {
+        "n": 7758,
+        "box": [
+          313,
+          12,
+          465,
+          114
+        ]
+      },
+      {
+        "n": 4053,
+        "box": [
+          449,
+          177,
+          542,
+          247
+        ]
+      },
+      {
+        "n": 3140,
+        "box": [
+          152,
+          171,
+          232,
+          241
+        ]
+      }
+    ]
+  },
+  {
+    "character": "ogre",
+    "number": 15,
+    "id": "ogre-015",
+    "sheet": "ogre-hit",
+    "cell": 4,
+    "bounds": [
+      808,
+      559,
+      1437,
+      962
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "ogre/pose-015.png",
+    "width": 629,
+    "height": 403,
+    "sha256": "655f8862ad238b4ba8e45c3340511dc40791f907d7ec2df6b72e807b3c92eef1",
+    "feature": [
+      369,
+      12,
+      533,
+      146
+    ],
+    "alternatives": [
+      {
+        "n": 12216,
+        "box": [
+          369,
+          12,
+          533,
+          146
+        ]
+      },
+      {
+        "n": 3560,
+        "box": [
+          159,
+          147,
+          245,
+          217
+        ]
+      },
+      {
+        "n": 3502,
+        "box": [
+          535,
+          174,
+          618,
+          242
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 1,
+    "id": "wizard-001",
+    "sheet": "wizard-base",
+    "cell": 1,
+    "bounds": [
+      322,
+      57,
+      1208,
+      951
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-001.png",
+    "width": 886,
+    "height": 894,
+    "sha256": "46c685dec2e5fd2658fbd2ac5ef6f9dea824011dbc6c935693e021abc14c9165",
+    "feature": [
+      543,
+      471,
+      685,
+      537
+    ],
+    "alternatives": [
+      {
+        "n": 6034,
+        "box": [
+          543,
+          471,
+          685,
+          537
+        ]
+      },
+      {
+        "n": 4674,
+        "box": [
+          76,
+          375,
+          145,
+          483
+        ]
+      },
+      {
+        "n": 1149,
+        "box": [
+          399,
+          341,
+          440,
+          383
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 2,
+    "id": "wizard-002",
+    "sheet": "wizard-emotions",
+    "cell": 1,
+    "bounds": [
+      196,
+      22,
+      745,
+      501
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-002.png",
+    "width": 549,
+    "height": 479,
+    "sha256": "ab7ae9e7f3c61ef0249e86d1f5bf380af63bd5a7689bfde22964ccb9a89bbd5f",
+    "feature": [
+      444,
+      130,
+      539,
+      217
+    ],
+    "alternatives": [
+      {
+        "n": 3588,
+        "box": [
+          444,
+          130,
+          539,
+          217
+        ]
+      },
+      {
+        "n": 1389,
+        "box": [
+          60,
+          190,
+          102,
+          246
+        ]
+      },
+      {
+        "n": 1056,
+        "box": [
+          242,
+          171,
+          287,
+          286
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 3,
+    "id": "wizard-003",
+    "sheet": "wizard-emotions",
+    "cell": 2,
+    "bounds": [
+      905,
+      36,
+      1361,
+      501
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-003.png",
+    "width": 456,
+    "height": 465,
+    "sha256": "e631f335b6471adab1c254ce913c06b3edc54e0d7f75afc175f2ea4014696704",
+    "feature": [
+      241,
+      179,
+      317,
+      279
+    ],
+    "alternatives": [
+      {
+        "n": 1634,
+        "box": [
+          241,
+          179,
+          317,
+          279
+        ]
+      },
+      {
+        "n": 1479,
+        "box": [
+          58,
+          202,
+          98,
+          260
+        ]
+      },
+      {
+        "n": 1186,
+        "box": [
+          318,
+          166,
+          359,
+          279
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 4,
+    "id": "wizard-004",
+    "sheet": "wizard-emotions",
+    "cell": 3,
+    "bounds": [
+      205,
+      525,
+      669,
+      988
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-004.png",
+    "width": 464,
+    "height": 463,
+    "sha256": "53d518f61fff4cd1a01b2e284c8317f199a880b925e8fc6205a7dd117f4f2729",
+    "feature": [
+      276,
+      181,
+      347,
+      238
+    ],
+    "alternatives": [
+      {
+        "n": 2252,
+        "box": [
+          276,
+          181,
+          347,
+          238
+        ]
+      },
+      {
+        "n": 1245,
+        "box": [
+          64,
+          205,
+          102,
+          259
+        ]
+      },
+      {
+        "n": 1236,
+        "box": [
+          245,
+          183,
+          313,
+          270
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 5,
+    "id": "wizard-005",
+    "sheet": "wizard-emotions",
+    "cell": 4,
+    "bounds": [
+      840,
+      515,
+      1415,
+      989
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-005.png",
+    "width": 575,
+    "height": 474,
+    "sha256": "dac67660366afbcfd546d269044e46cf92bf7ad02ea958ab652085eda315ba06",
+    "feature": [
+      449,
+      125,
+      565,
+      228
+    ],
+    "alternatives": [
+      {
+        "n": 4087,
+        "box": [
+          449,
+          125,
+          565,
+          228
+        ]
+      },
+      {
+        "n": 1474,
+        "box": [
+          236,
+          171,
+          295,
+          285
+        ]
+      },
+      {
+        "n": 1358,
+        "box": [
+          56,
+          179,
+          95,
+          236
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 6,
+    "id": "wizard-006",
+    "sheet": "wizard-response",
+    "cell": 1,
+    "bounds": [
+      216,
+      32,
+      705,
+      507
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-006.png",
+    "width": 489,
+    "height": 475,
+    "sha256": "1de70997728266cde11d68ee3996c3bb76e25aec44c5b51337dfa0a6c6d9d4f0",
+    "feature": [
+      62,
+      212,
+      105,
+      273
+    ],
+    "alternatives": [
+      {
+        "n": 1831,
+        "box": [
+          62,
+          212,
+          105,
+          273
+        ]
+      },
+      {
+        "n": 1660,
+        "box": [
+          440,
+          177,
+          480,
+          233
+        ]
+      },
+      {
+        "n": 1113,
+        "box": [
+          219,
+          152,
+          294,
+          206
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 7,
+    "id": "wizard-007",
+    "sheet": "wizard-response",
+    "cell": 2,
+    "bounds": [
+      888,
+      32,
+      1353,
+      507
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-007.png",
+    "width": 465,
+    "height": 475,
+    "sha256": "251ceee4cdcb783e43d3062a52c440f7f1c170337f910f7c534407334e08c9eb",
+    "feature": [
+      280,
+      218,
+      354,
+      282
+    ],
+    "alternatives": [
+      {
+        "n": 2685,
+        "box": [
+          280,
+          218,
+          354,
+          282
+        ]
+      },
+      {
+        "n": 1777,
+        "box": [
+          63,
+          212,
+          105,
+          273
+        ]
+      },
+      {
+        "n": 1283,
+        "box": [
+          242,
+          128,
+          304,
+          175
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 8,
+    "id": "wizard-008",
+    "sheet": "wizard-response",
+    "cell": 3,
+    "bounds": [
+      206,
+      532,
+      759,
+      998
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-008.png",
+    "width": 553,
+    "height": 466,
+    "sha256": "7ce9df510f0f8ac47c372131c45b8ec38476454a56b86fbbc13b6f539dbccac1",
+    "feature": [
+      449,
+      144,
+      543,
+      202
+    ],
+    "alternatives": [
+      {
+        "n": 2400,
+        "box": [
+          449,
+          144,
+          543,
+          202
+        ]
+      },
+      {
+        "n": 1647,
+        "box": [
+          55,
+          194,
+          96,
+          253
+        ]
+      },
+      {
+        "n": 929,
+        "box": [
+          252,
+          131,
+          318,
+          169
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 9,
+    "id": "wizard-009",
+    "sheet": "wizard-response",
+    "cell": 4,
+    "bounds": [
+      878,
+      532,
+      1409,
+      998
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-009.png",
+    "width": 531,
+    "height": 466,
+    "sha256": "670fd461f6fc9dcb02b993cec3ec9683e1295ff28aee635130e5c6db6af2a027",
+    "feature": [
+      428,
+      144,
+      523,
+      230
+    ],
+    "alternatives": [
+      {
+        "n": 4162,
+        "box": [
+          428,
+          144,
+          523,
+          230
+        ]
+      },
+      {
+        "n": 1716,
+        "box": [
+          48,
+          184,
+          89,
+          242
+        ]
+      },
+      {
+        "n": 1004,
+        "box": [
+          203,
+          122,
+          266,
+          162
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 10,
+    "id": "wizard-010",
+    "sheet": "wizard-spells",
+    "cell": 1,
+    "bounds": [
+      305,
+      24,
+      689,
+      496
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-010.png",
+    "width": 384,
+    "height": 472,
+    "sha256": "f4750fa230e1124a3a20bab3304bed272b05d5a4b97c0d56a5423bce4dc95652",
+    "feature": [
+      300,
+      220,
+      367,
+      271
+    ],
+    "alternatives": [
+      {
+        "n": 1290,
+        "box": [
+          300,
+          220,
+          367,
+          271
+        ]
+      },
+      {
+        "n": 463,
+        "box": [
+          36,
+          162,
+          62,
+          188
+        ]
+      },
+      {
+        "n": 322,
+        "box": [
+          69,
+          150,
+          87,
+          183
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 11,
+    "id": "wizard-011",
+    "sheet": "wizard-spells",
+    "cell": 2,
+    "bounds": [
+      815,
+      173,
+      1270,
+      498
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-011.png",
+    "width": 455,
+    "height": 325,
+    "sha256": "940145a725a28464a9c4ba17787835a5cdb2f13c94621ccf05f1f2fcff4381f2",
+    "feature": [
+      380,
+      35,
+      446,
+      82
+    ],
+    "alternatives": [
+      {
+        "n": 1102,
+        "box": [
+          380,
+          35,
+          446,
+          82
+        ]
+      },
+      {
+        "n": 404,
+        "box": [
+          139,
+          146,
+          171,
+          168
+        ]
+      },
+      {
+        "n": 210,
+        "box": [
+          128,
+          165,
+          149,
+          184
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 12,
+    "id": "wizard-012",
+    "sheet": "wizard-spells",
+    "cell": 3,
+    "bounds": [
+      293,
+      514,
+      656,
+      950
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-012.png",
+    "width": 363,
+    "height": 436,
+    "sha256": "9d795e88e210294463620e7f31c5a8f892ae1c21b6c7b1d19173e8f985b1c8ee",
+    "feature": [
+      75,
+      83,
+      114,
+      121
+    ],
+    "alternatives": [
+      {
+        "n": 811,
+        "box": [
+          75,
+          83,
+          114,
+          121
+        ]
+      },
+      {
+        "n": 717,
+        "box": [
+          252,
+          83,
+          290,
+          118
+        ]
+      },
+      {
+        "n": 176,
+        "box": [
+          179,
+          180,
+          198,
+          194
+        ]
+      }
+    ]
+  },
+  {
+    "character": "wizard",
+    "number": 13,
+    "id": "wizard-013",
+    "sheet": "wizard-spells",
+    "cell": 4,
+    "bounds": [
+      852,
+      529,
+      1263,
+      950
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "wizard/pose-013.png",
+    "width": 411,
+    "height": 421,
+    "sha256": "04269eaec5d61f31f5a1414036d3eb00823459df341ac87e13eed401140a6f7c",
+    "feature": [
+      330,
+      160,
+      394,
+      227
+    ],
+    "alternatives": [
+      {
+        "n": 1446,
+        "box": [
+          330,
+          160,
+          394,
+          227
+        ]
+      },
+      {
+        "n": 1061,
+        "box": [
+          36,
+          152,
+          69,
+          202
+        ]
+      },
+      {
+        "n": 375,
+        "box": [
+          300,
+          207,
+          325,
+          235
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 1,
+    "id": "elf-001",
+    "sheet": "elf-base",
+    "cell": 1,
+    "bounds": [
+      419,
+      69,
+      1128,
+      975
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-001.png",
+    "width": 709,
+    "height": 906,
+    "sha256": "b6855b1c3cc8b70dbdc54e4de0ebb13ef312df8ce2f6209c723ceaf1f5bf0de4",
+    "feature": [
+      272,
+      125,
+      424,
+      276
+    ],
+    "alternatives": [
+      {
+        "n": 11611,
+        "box": [
+          272,
+          125,
+          424,
+          276
+        ]
+      },
+      {
+        "n": 3355,
+        "box": [
+          305,
+          280,
+          391,
+          351
+        ]
+      },
+      {
+        "n": 2288,
+        "box": [
+          158,
+          150,
+          230,
+          210
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 2,
+    "id": "elf-002",
+    "sheet": "elf-emote",
+    "cell": 1,
+    "bounds": [
+      289,
+      23,
+      675,
+      489
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-002.png",
+    "width": 386,
+    "height": 466,
+    "sha256": "6c9c0f0e69f3c1e83fd127c266c4e45915f556565b6f72034847e955d13c8aa7",
+    "feature": [
+      156,
+      61,
+      238,
+      145
+    ],
+    "alternatives": [
+      {
+        "n": 3520,
+        "box": [
+          156,
+          61,
+          238,
+          145
+        ]
+      },
+      {
+        "n": 1526,
+        "box": [
+          40,
+          94,
+          83,
+          151
+        ]
+      },
+      {
+        "n": 759,
+        "box": [
+          175,
+          151,
+          220,
+          183
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 3,
+    "id": "elf-003",
+    "sheet": "elf-emote",
+    "cell": 2,
+    "bounds": [
+      852,
+      23,
+      1247,
+      489
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-003.png",
+    "width": 395,
+    "height": 466,
+    "sha256": "5b5ace62c9c00f7a63cfcff308069d19895e7a54df07b594f4a729cb960ed785",
+    "feature": [
+      160,
+      62,
+      239,
+      145
+    ],
+    "alternatives": [
+      {
+        "n": 3831,
+        "box": [
+          160,
+          62,
+          239,
+          145
+        ]
+      },
+      {
+        "n": 1274,
+        "box": [
+          58,
+          153,
+          88,
+          201
+        ]
+      },
+      {
+        "n": 797,
+        "box": [
+          179,
+          149,
+          221,
+          182
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 4,
+    "id": "elf-004",
+    "sheet": "elf-emote",
+    "cell": 3,
+    "bounds": [
+      290,
+      511,
+      679,
+      974
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-004.png",
+    "width": 389,
+    "height": 463,
+    "sha256": "a22403be56780466d2d7eaea078d7d8ba5d4915b141edadc38d2f4fd724c85b6",
+    "feature": [
+      162,
+      60,
+      241,
+      138
+    ],
+    "alternatives": [
+      {
+        "n": 3238,
+        "box": [
+          162,
+          60,
+          241,
+          138
+        ]
+      },
+      {
+        "n": 749,
+        "box": [
+          120,
+          173,
+          163,
+          201
+        ]
+      },
+      {
+        "n": 618,
+        "box": [
+          262,
+          77,
+          298,
+          105
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 5,
+    "id": "elf-005",
+    "sheet": "elf-emote",
+    "cell": 4,
+    "bounds": [
+      843,
+      517,
+      1242,
+      974
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-005.png",
+    "width": 399,
+    "height": 457,
+    "sha256": "af77ab357a8f9fdab292b4b250dd123e5cc7d2acbfb95eda8c2c21255cbf0a5d",
+    "feature": [
+      156,
+      66,
+      217,
+      140
+    ],
+    "alternatives": [
+      {
+        "n": 2804,
+        "box": [
+          156,
+          66,
+          217,
+          140
+        ]
+      },
+      {
+        "n": 1995,
+        "box": [
+          119,
+          73,
+          167,
+          138
+        ]
+      },
+      {
+        "n": 687,
+        "box": [
+          240,
+          69,
+          280,
+          99
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 6,
+    "id": "elf-006",
+    "sheet": "elf-emotions",
+    "cell": 1,
+    "bounds": [
+      279,
+      35,
+      679,
+      489
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-006.png",
+    "width": 400,
+    "height": 454,
+    "sha256": "1f6a9ef05c80a85ec08ef830dac8bee8c3be815c5bd72a7ae4e44f791e79f384",
+    "feature": [
+      165,
+      64,
+      244,
+      143
+    ],
+    "alternatives": [
+      {
+        "n": 3693,
+        "box": [
+          165,
+          64,
+          244,
+          143
+        ]
+      },
+      {
+        "n": 1156,
+        "box": [
+          52,
+          61,
+          97,
+          113
+        ]
+      },
+      {
+        "n": 552,
+        "box": [
+          265,
+          82,
+          302,
+          112
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 7,
+    "id": "elf-007",
+    "sheet": "elf-emotions",
+    "cell": 2,
+    "bounds": [
+      855,
+      35,
+      1255,
+      489
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-007.png",
+    "width": 400,
+    "height": 454,
+    "sha256": "d82e08a6c5a2fc573fed810a4d9556e3a5bac78b16563bff1b8d7ae879c3eef4",
+    "feature": [
+      166,
+      64,
+      243,
+      143
+    ],
+    "alternatives": [
+      {
+        "n": 3469,
+        "box": [
+          166,
+          64,
+          243,
+          143
+        ]
+      },
+      {
+        "n": 887,
+        "box": [
+          119,
+          242,
+          160,
+          273
+        ]
+      },
+      {
+        "n": 641,
+        "box": [
+          101,
+          82,
+          143,
+          112
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 8,
+    "id": "elf-008",
+    "sheet": "elf-emotions",
+    "cell": 3,
+    "bounds": [
+      264,
+      519,
+      683,
+      974
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-008.png",
+    "width": 419,
+    "height": 455,
+    "sha256": "d424ef89e7d4883dfc9d117c3fcee9f69775d4a0dc2093c7584fc385040e69df",
+    "feature": [
+      177,
+      62,
+      258,
+      147
+    ],
+    "alternatives": [
+      {
+        "n": 3183,
+        "box": [
+          177,
+          62,
+          258,
+          147
+        ]
+      },
+      {
+        "n": 1067,
+        "box": [
+          95,
+          201,
+          128,
+          244
+        ]
+      },
+      {
+        "n": 647,
+        "box": [
+          111,
+          78,
+          154,
+          110
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 9,
+    "id": "elf-009",
+    "sheet": "elf-emotions",
+    "cell": 4,
+    "bounds": [
+      856,
+      519,
+      1256,
+      974
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-009.png",
+    "width": 400,
+    "height": 455,
+    "sha256": "0b22a98d2c8a5d2a3b3e31e1bb25a3f70c5e4bb6d3c061e31b628d1110099134",
+    "feature": [
+      165,
+      62,
+      243,
+      141
+    ],
+    "alternatives": [
+      {
+        "n": 3092,
+        "box": [
+          165,
+          62,
+          243,
+          141
+        ]
+      },
+      {
+        "n": 1253,
+        "box": [
+          180,
+          137,
+          221,
+          185
+        ]
+      },
+      {
+        "n": 721,
+        "box": [
+          100,
+          78,
+          142,
+          110
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 10,
+    "id": "elf-010",
+    "sheet": "elf-defense",
+    "cell": 1,
+    "bounds": [
+      158,
+      42,
+      620,
+      492
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-010.png",
+    "width": 462,
+    "height": 450,
+    "sha256": "e3db88c355f40124049c7c5c6b91d41a1e8096ad53bf9a5e3310f48211a98f2a",
+    "feature": [
+      256,
+      73,
+      336,
+      156
+    ],
+    "alternatives": [
+      {
+        "n": 3256,
+        "box": [
+          256,
+          73,
+          336,
+          156
+        ]
+      },
+      {
+        "n": 1373,
+        "box": [
+          168,
+          77,
+          229,
+          122
+        ]
+      },
+      {
+        "n": 1342,
+        "box": [
+          79,
+          229,
+          124,
+          270
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 11,
+    "id": "elf-011",
+    "sheet": "elf-defense",
+    "cell": 2,
+    "bounds": [
+      938,
+      42,
+      1403,
+      492
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-011.png",
+    "width": 465,
+    "height": 450,
+    "sha256": "4ba24c931235b0c372925293e47d377e12ed247a6196304a6c74634069841a52",
+    "feature": [
+      129,
+      73,
+      210,
+      156
+    ],
+    "alternatives": [
+      {
+        "n": 3272,
+        "box": [
+          129,
+          73,
+          210,
+          156
+        ]
+      },
+      {
+        "n": 1128,
+        "box": [
+          233,
+          77,
+          285,
+          122
+        ]
+      },
+      {
+        "n": 984,
+        "box": [
+          343,
+          241,
+          387,
+          270
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 12,
+    "id": "elf-012",
+    "sheet": "elf-defense",
+    "cell": 3,
+    "bounds": [
+      167,
+      577,
+      630,
+      970
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-012.png",
+    "width": 463,
+    "height": 393,
+    "sha256": "909937d4e18793338c80ba41ca165a7b2255afcc46ac2aa9f9e5fe323c6fcbd1",
+    "feature": [
+      257,
+      72,
+      336,
+      150
+    ],
+    "alternatives": [
+      {
+        "n": 3048,
+        "box": [
+          257,
+          72,
+          336,
+          150
+        ]
+      },
+      {
+        "n": 1237,
+        "box": [
+          108,
+          184,
+          153,
+          223
+        ]
+      },
+      {
+        "n": 1189,
+        "box": [
+          181,
+          68,
+          234,
+          112
+        ]
+      }
+    ]
+  },
+  {
+    "character": "elf",
+    "number": 13,
+    "id": "elf-013",
+    "sheet": "elf-defense",
+    "cell": 4,
+    "bounds": [
+      864,
+      489,
+      1338,
+      980
+    ],
+    "isolation": "assigned connected figure and detached effects; original retained RGBA",
+    "file": "elf/pose-013.png",
+    "width": 474,
+    "height": 491,
+    "sha256": "66716c00fde93a0befa61e41030188ae523fd09823d934c48808d34fecf2e6a2",
+    "feature": [
+      188,
+      109,
+      256,
+      190
+    ],
+    "alternatives": [
+      {
+        "n": 3070,
+        "box": [
+          188,
+          109,
+          256,
+          190
+        ]
+      },
+      {
+        "n": 1169,
+        "box": [
+          104,
+          147,
+          159,
+          179
+        ]
+      },
+      {
+        "n": 1021,
+        "box": [
+          184,
+          186,
+          224,
+          230
+        ]
+      }
+    ]
+  }
+]

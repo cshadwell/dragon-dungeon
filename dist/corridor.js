@@ -1,7 +1,7 @@
 // Original procedural 256×216 renderer. World cells are shared with collision/map.
-import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=eebe14fdbc32';
-import {textures,sample} from './textures.js?v=eebe14fdbc32';
-import {isOgreDoorFace,ogreDoorPixel} from './ogre-gate.js?v=eebe14fdbc32';
+import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=830f4095e72a';
+import {textures,sample} from './textures.js?v=830f4095e72a';
+import {isOgreDoorFace,ogreDoorPixel} from './ogre-gate.js?v=830f4095e72a';
 export function corridorPixels(state,w=256,h=216,pose=null){
  const data=new Uint8ClampedArray(w*h*4),[cx,cy]=state.pos.split(',').map(Number);
  const px=pose?.x??cx+.5,py=pose?.y??cy+.5,angle=pose?.angle??state.facing*Math.PI/2;

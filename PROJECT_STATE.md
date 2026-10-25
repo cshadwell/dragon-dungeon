@@ -54,6 +54,14 @@ User approved the v2 lineup pixelation and authorized normalizing all 17 supplie
 
 ## Approved locked character catalog - 2026-10-25
 
-User accepted all 17 normalized sheets unchanged as the game-wide base art. Canonical copies and 78 lossless pose crops are in dist/assets/characters/approved-v1/, with immutable-number policy in CHARACTER_ART.md / AGENTS.md. Counts: Ogre 15, wizard 13, elf queen 13, dragon 37. getCharacterPose(character, number) provides exact lookup; invalid IDs fail explicitly. Numbered guides have labels above each pose, outside approved image pixels. Retained foreground RGBA verified against approved source regions; sheet/pose hashes and stable numbering are now tested. 59 tests pass. Current release hash eebe14fdbc32.
+User accepted all 17 normalized sheets unchanged as the game-wide base art. Canonical copies and 78 lossless pose crops are in dist/assets/characters/approved-v1/, with immutable-number policy in CHARACTER_ART.md / AGENTS.md. Counts: Ogre 15, wizard 13, elf queen 13, dragon 37. getCharacterPose(character, number) provides exact lookup; invalid IDs fail explicitly. Numbered guides have labels above each pose, outside approved image pixels. Retained foreground RGBA verified against approved source regions; sheet/pose hashes and stable numbering are now tested. 60 tests pass. Current release hash 830f4095e72a.
 
 No encounter behavior or live character display was replaced by this catalog work; new interactions remain undecided. Existing runtime Ogre art is legacy pending intentional integration. No remote push for this art lock unless separately authorized.
+
+## Individual pose pixel-density revision V2 - pending review
+
+User identified remaining per-pose density differences and explicitly authorized normalization of the existing 78 poses using Elf1 as the benchmark, not another generative redraw. Candidate PNGs, stable IDs, calibrated scale metadata, fixed-integer-zoom gallery and comparison previews are in art-review/2026-10-25/pose-density-v2/. Direct nearest-neighbor RGBA sampling preserves source colors/alpha without interpolation. 78/78 asset checks pass. User review is required before any promotion; approved-v1 and runtime lookup remain untouched.
+
+## V2 baseline approved and promoted - 2026-10-25
+
+User approved all 78 individual density-normalized poses exactly as reviewed. Canonical library and getCharacterPose lookup now point to dist/assets/characters/approved-v2/. Counts/IDs unchanged: Ogre 1-15, wizard 1-13, elf queen 1-13, dragon 1-37. Files were copied byte-for-byte; no artwork regenerated, resized or recolored during promotion. V1 remains archived and protected. V2 generator has an APPROVED.lock guard. Numbered V2 guide is the future reference. 60 tests pass, including PNG hashes/native dimensions and cross-version ID stability. No encounter mechanics or on-screen character assignments were changed; future scene integration must use the approved V2 lookup. Local checkpoint only; no push authorized in this turn.

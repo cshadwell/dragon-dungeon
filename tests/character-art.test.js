@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {getCharacterPose,listCharacterPoses,CHARACTER_POSE_COUNTS} from '../dist/character-art.js';
-const root=new URL('../dist/assets/characters/approved-v1/',import.meta.url);
+const root=new URL('../dist/assets/characters/approved-v2/',import.meta.url);
 const catalog=JSON.parse(readFileSync(new URL('catalog.json',root)));
-test('locked approved sheets and all isolated poses retain their exact registered bytes',()=>{
+test('locked approved V2 poses retain their exact reviewed bytes',()=>{
  for(const item of [...catalog.sheets,...catalog.poses])assert.equal(createHash('sha256').update(readFileSync(new URL(item.file,root))).digest('hex'),item.sha256,item.file+' changed from approved artwork');
 });
 test('stable character numbering covers every approved pose once, with safe exact lookup',()=>{
@@ -16,4 +16,10 @@ test('stable character numbering covers every approved pose once, with safe exac
  }
  assert.equal(getCharacterPose('Dragon',3).sheet,'dragon-emotions');assert.equal(getCharacterPose('elf queen',13).id,'elf-013');
  assert.throws(()=>getCharacterPose('dragon',38),RangeError);assert.throws(()=>getCharacterPose('ogre',0),RangeError);assert.throws(()=>getCharacterPose('wizard',1.5),RangeError);assert.throws(()=>getCharacterPose('unknown',1),RangeError);
+});
+
+test('V2 promotion preserves every V1 pose ID and the reviewed native image dimensions',()=>{
+ const previous=JSON.parse(readFileSync(new URL('../dist/assets/characters/approved-v1/catalog.json',import.meta.url)));
+ assert.equal(catalog.version,'approved-v2');assert.deepEqual(catalog.poses.map(p=>[p.id,p.number,p.character]),previous.poses.map(p=>[p.id,p.number,p.character]));
+ for(const p of catalog.poses){const png=readFileSync(new URL(p.file,root));assert.equal(png.readUInt32BE(16),p.width);assert.equal(png.readUInt32BE(20),p.height);}
 });
