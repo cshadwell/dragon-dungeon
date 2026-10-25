@@ -53,3 +53,7 @@ User clarified that sheet size is not the relevant standard: normalize all 78 in
 ## Final individual-pose baseline V2 accepted - 2026-10-25
 
 User explicitly approved the 78 reviewed individual pixel-density revision poses and requested locking their corresponding numbers. Promote byte-identical PNGs to approved-v2 and switch canonical lookup to V2. Keep every ID unchanged and retain V1 historically. This supersedes the prior sheet-based baseline and pending-review status. Prohibit further image normalization, redraws, palette changes, smoothing or replacement without explicit user instruction. Preserve native pixel scale in display rather than auto-fitting every pose to an identical box.
+
+## Four room backgrounds accepted as defaults - 2026-10-25
+
+After reviewing each room with approved characters in the game encounter frame, user approved the four displayed backgrounds and V2 character library as the default visual baseline and authorized pushing all current work to private GitHub. Preserve exact room files, use darkened dragon lair, retain pose IDs and use a shared room/pose registry for future scene integration. This locks the presented art, not an unplanned minigame redesign. Protect room images with hashes and keep 470x200 logical nearest-neighbor rendering.

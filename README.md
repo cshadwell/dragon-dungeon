@@ -1,6 +1,8 @@
 # Dragon Dungeon — Full maze with approved encounters
 
-**Current baseline:** [PROJECT_STATE.md](PROJECT_STATE.md) · [Development instructions](AGENTS.md) · [Decisions](DECISIONS.md) · [Larger Project handoff](PROJECT_HANDOFF.md). Audited 2026-10-23: 60 tests pass; release hash `830f4095e72a`. Run `npm start` / `npm test` from this folder. Local Git baseline established. Private GitHub origin configured; no production deployment. Subsequent sections record milestones; their counts and prior configuration are historical.
+**Current baseline:** [PROJECT_STATE.md](PROJECT_STATE.md) · [Development instructions](AGENTS.md) · [Decisions](DECISIONS.md) · [Larger Project handoff](PROJECT_HANDOFF.md). Audited 2026-10-23: 61 tests pass; release hash `e5525698eaf8`. Run `npm start` / `npm test` from this folder. Local Git baseline established. Private GitHub origin configured; no production deployment. Subsequent sections record milestones; their counts and prior configuration are historical.
+
+**Approved room art:** [Room defaults and rendering rules](ROOM_ART.md). All four backgrounds are locked alongside the V2 characters; [open the accepted room preview](http://127.0.0.1:4173/?preview=rooms&room=dragon).
 
 **Approved character art:** [Stable pose catalog and rules](CHARACTER_ART.md). Ogre 1-15, wizard 1-13, elf queen 1-13, dragon 1-37. The approved-v2 individual-pose images are the mandatory reference for future character integration.
 

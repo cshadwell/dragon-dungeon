@@ -22,3 +22,6 @@ body.encounter-room .viewport{grid-column:1/-1}.encounter-room .cartography{disp
 
 /* Original isolated source pixels only; snort artwork replaces preparation at the cue. */
 .ogre-sprites .ogre-snort{display:none}.ogre-sprites.snorting .ogre-preparation{display:none;filter:none}.ogre-sprites.snorting .ogre-snort{display:block}.ogre-sprites.block-impact .ogre-snort,.ogre-sprites.swing-impact .ogre-snort{display:none}.ogre-sprites .ogre-frame{image-rendering:pixelated;filter:none}
+
+/* Visual-only room review; uses the normal encounter frame and approved native sprites. */
+.room-preview .scene{aspect-ratio:470/200!important;max-height:none!important}.room-preview .scene canvas{object-fit:contain;image-rendering:pixelated}.room-preview .room-switches{grid-template-columns:1fr 1fr;gap:8px}.room-preview .room-switches button[aria-pressed="true"]{border-color:#e1c174;background:#35402e}.room-preview .room-exit{display:block;color:#e1c174;margin-top:18px}.room-preview .guards{grid-template-columns:1fr 1fr}.room-preview .narrative h2{margin-top:18px}

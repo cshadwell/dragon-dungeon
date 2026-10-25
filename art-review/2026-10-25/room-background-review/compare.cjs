@@ -1,0 +1,13 @@
+// Read-only visual comparison: source background and approved sprites are never overwritten.
+const fs=require('fs'),path=require('path'),crypto=require('crypto');const sharp=require('/Users/cshadwell/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/sharp');const {createCanvas,loadImage}=require('/Users/cshadwell/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@napi-rs/canvas');
+const root=path.resolve(__dirname,'../../../'),library=path.join(root,'dist/assets/characters/approved-v2'),catalog=JSON.parse(fs.readFileSync(path.join(library,'catalog.json')));
+const rooms=[['Elf queen','elf','Enchanted Forest Shrine Hall.png'],['Ogre','ogre','Pixel-Art Dungeon Armory Hall.png'],['Dragon','dragon','Volcanic Dungeon Throne Lair.png'],['Wizard','wizard','Pixel-Art Wizard’s Alchemy Study.png']];
+(async()=>{const board=createCanvas(1900,1900),ctx=board.getContext('2d');ctx.fillStyle='#242b2e';ctx.fillRect(0,0,1900,1900);ctx.fillStyle='#eee7d4';ctx.font='25px sans-serif';ctx.fillText('ROOM BACKGROUNDS + LOCKED CHARACTER POSE 1 (comparison only)',18,32);const report=[];
+for(let row=0;row<rooms.length;row++){const [label,char,name]=rooms[row],p=path.join('/Users/cshadwell/Desktop',name),input=fs.readFileSync(p),meta=await sharp(input).metadata(),pose=catalog.poses.find(p=>p.character===char&&p.number===1),sprite=await loadImage(path.join(library,pose.file));
+ const current=await sharp(input).resize(940,400,{fit:'fill',kernel:'lanczos3'}).png().toBuffer();
+ const raw=await sharp(input).ensureAlpha().raw().toBuffer(),pixels=Buffer.alloc(470*200*4);for(let y=0;y<200;y++)for(let x=0;x<470;x++){const sx=Math.floor((x+.5)*meta.width/470),sy=Math.floor((y+.5)*meta.height/200);raw.copy(pixels,(y*470+x)*4,(sy*meta.width+sx)*4,(sy*meta.width+sx)*4+4);}
+ const native=await sharp(pixels,{raw:{width:470,height:200,channels:4}}).png().toBuffer();
+ for(let col=0;col<2;col++){const x=col*950,y=76+row*450;ctx.fillStyle='#f0d58d';ctx.font='21px sans-serif';ctx.fillText(label+' / '+(col?'shared 470x200 grid (2x)':'current detail at window size'),x+12,y-10);const im=await loadImage(col?native:current);ctx.imageSmoothingEnabled=!col;ctx.drawImage(im,x,y,940,400);ctx.imageSmoothingEnabled=false;ctx.drawImage(sprite,x+470-pose.width, y+(192-pose.height)*2,pose.width*2,pose.height*2);}
+ report.push({character:char,source:name,sha256:crypto.createHash('sha256').update(input).digest('hex'),dimensions:[meta.width,meta.height],ratio:meta.width/meta.height,pose:pose.id,logicalBackground:[470,200]});
+}
+fs.writeFileSync(path.join(__dirname,'comparison.png'),board.toBuffer('image/png'));fs.writeFileSync(path.join(__dirname,'source-audit.json'),JSON.stringify(report,null,2)+'\n');})();

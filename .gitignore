@@ -45,3 +45,6 @@ playwright-report/
 
 # dist/ is editable application source: always track it.
 # Existing *-check.png images are documented verification evidence: track them.
+
+# Local unpacked review ZIP; canonical poses and guides are tracked separately.
+/art-review/2026-10-25/Dragon-Dungeon-Individual-Poses-v2-REVIEW/

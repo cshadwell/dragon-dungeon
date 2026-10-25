@@ -1,15 +1,17 @@
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=830f4095e72a';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=830f4095e72a';
-import {drawCorridor} from './corridor.js?v=830f4095e72a';
-import {exploredMap} from './explored-map.js?v=830f4095e72a';
-import {dragonView,dragonArt} from './dragon.js?v=830f4095e72a';
-import {queenView,queenArt} from './queen.js?v=830f4095e72a';
-import {wizardView,wizardArt} from './wizard.js?v=830f4095e72a';
-import {createAttempt,tick,respond} from './reaction.js?v=830f4095e72a';
-import {lessons} from './ogre.js?v=830f4095e72a';
-import {ogreView} from './ogre.js?v=830f4095e72a';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=830f4095e72a';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=830f4095e72a';
+import {showRoomPreview} from './room-preview.js?v=e5525698eaf8';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=e5525698eaf8';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=e5525698eaf8';
+import {drawCorridor} from './corridor.js?v=e5525698eaf8';
+import {exploredMap} from './explored-map.js?v=e5525698eaf8';
+import {dragonView,dragonArt} from './dragon.js?v=e5525698eaf8';
+import {queenView,queenArt} from './queen.js?v=e5525698eaf8';
+import {wizardView,wizardArt} from './wizard.js?v=e5525698eaf8';
+import {createAttempt,tick,respond} from './reaction.js?v=e5525698eaf8';
+import {lessons} from './ogre.js?v=e5525698eaf8';
+import {ogreView} from './ogre.js?v=e5525698eaf8';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=e5525698eaf8';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=e5525698eaf8';
+if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
 let loaded=load(storage), state=loaded.state, writable=loaded.writable, panel=null, lastInput=0;
@@ -215,3 +217,5 @@ window.addEventListener('keydown',e=>{
   if(action){e.preventDefault();if(attempt){const guard={ArrowLeft:'left',ArrowUp:'high',ArrowRight:'right'}[e.key];if(guard)react(guard);}else if(!modal.open)perform(action);return;}
   if(['m','j'].includes(e.key.toLowerCase())){if(['BUTTON','INPUT','TEXTAREA'].includes(e.target.tagName)&&e.key===' ')return;e.preventDefault();if(modal.open){if(panel!=='encounter'&&panel!=='gate')close();}else openPanel(e.key.toLowerCase()==='m'?'map':'journal');}
 });render();
+
+}

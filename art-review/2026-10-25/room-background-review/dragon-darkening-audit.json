@@ -1,0 +1,20 @@
+{
+  "pose": "dragon-001",
+  "poseUnchanged": true,
+  "backgrounds": [
+    {
+      "file": "/Users/cshadwell/Desktop/Volcanic Dungeon Throne Lair.png",
+      "width": 1921,
+      "height": 819,
+      "centralMeanLuminance": 61.88011836923061,
+      "sha256": "2fb859db61fa5b284e9bf3968bedb5f013e23f727ceb66a03033f6c27bd12f42"
+    },
+    {
+      "file": "/Users/cshadwell/.codex/.chatgpt-projects/g-p-6ad60113c4748191bffbf7c0777254f5/dragon-dungeon/art-review/2026-10-25/room-background-review/dragon-darkened-v1.png",
+      "width": 1920,
+      "height": 819,
+      "centralMeanLuminance": 30.056840092308104,
+      "sha256": "0edcd459321bea99a1fe352a8e54d7ff095ff3e20e900b1d9f120574c8bf6ed8"
+    }
+  ]
+}

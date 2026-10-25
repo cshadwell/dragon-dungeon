@@ -1,0 +1,62 @@
+[
+  {
+    "character": "elf",
+    "source": "Enchanted Forest Shrine Hall.png",
+    "sha256": "ea63773cf1d71030f4ea5a80d67b337a18adec00b0308fd240c633ad7fe57e8e",
+    "dimensions": [
+      1922,
+      818
+    ],
+    "ratio": 2.349633251833741,
+    "pose": "elf-001",
+    "logicalBackground": [
+      470,
+      200
+    ]
+  },
+  {
+    "character": "ogre",
+    "source": "Pixel-Art Dungeon Armory Hall.png",
+    "sha256": "59a8dfa6f169807a044dadc58f524791d6d2d1733fc42457089baef79628a9d1",
+    "dimensions": [
+      1922,
+      818
+    ],
+    "ratio": 2.349633251833741,
+    "pose": "ogre-001",
+    "logicalBackground": [
+      470,
+      200
+    ]
+  },
+  {
+    "character": "dragon",
+    "source": "Volcanic Dungeon Throne Lair.png",
+    "sha256": "2fb859db61fa5b284e9bf3968bedb5f013e23f727ceb66a03033f6c27bd12f42",
+    "dimensions": [
+      1921,
+      819
+    ],
+    "ratio": 2.3455433455433456,
+    "pose": "dragon-001",
+    "logicalBackground": [
+      470,
+      200
+    ]
+  },
+  {
+    "character": "wizard",
+    "source": "Pixel-Art Wizard’s Alchemy Study.png",
+    "sha256": "4f480ebbea36fd23f80931f1fe0de210b326c01f55fe21a1bc4968e57ffce51d",
+    "dimensions": [
+      1922,
+      818
+    ],
+    "ratio": 2.349633251833741,
+    "pose": "wizard-001",
+    "logicalBackground": [
+      470,
+      200
+    ]
+  }
+]

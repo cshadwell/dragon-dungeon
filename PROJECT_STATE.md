@@ -1,6 +1,6 @@
 # Current software state
 
-Audited 2026-10-23. Authoritative working folder: `dragon-dungeon/` under the White Elephant Gift local Project mirror. Local Git version control is now established in this folder, with the initial 60-file checkpoint titled `Baseline: verified Dragon Dungeon working version`. Private GitHub origin is configured at https://github.com/cshadwell/dragon-dungeon.git; baseline 03ef24b was pushed. The earlier audit preceded Git initialization. README links here; older milestone documents are historical evidence, not current configuration.
+Latest approved-art checkpoint 2026-10-25; initial audit 2026-10-23. Authoritative working folder: `dragon-dungeon/` under the White Elephant Gift local Project mirror. Local Git version control is now established in this folder, with the initial 60-file checkpoint titled `Baseline: verified Dragon Dungeon working version`. Private GitHub origin is configured at https://github.com/cshadwell/dragon-dungeon.git; baseline 03ef24b was pushed. The earlier audit preceded Git initialization. README links here; older milestone documents are historical evidence, not current configuration.
 
 ## Baseline and launch
 - Native browser ES modules, CSS, HTML and original canvas/SVG art, edited directly in `dist/`. No framework, backend, accounts, third-party runtime packages or bundler. Node runs tests; Python 3 runs the local server.
@@ -65,3 +65,13 @@ User identified remaining per-pose density differences and explicitly authorized
 ## V2 baseline approved and promoted - 2026-10-25
 
 User approved all 78 individual density-normalized poses exactly as reviewed. Canonical library and getCharacterPose lookup now point to dist/assets/characters/approved-v2/. Counts/IDs unchanged: Ogre 1-15, wizard 1-13, elf queen 1-13, dragon 1-37. Files were copied byte-for-byte; no artwork regenerated, resized or recolored during promotion. V1 remains archived and protected. V2 generator has an APPROVED.lock guard. Numbered V2 guide is the future reference. 60 tests pass, including PNG hashes/native dimensions and cross-version ID stability. No encounter mechanics or on-screen character assignments were changed; future scene integration must use the approved V2 lookup. Local checkpoint only; no push authorized in this turn.
+
+## In-game room-art preview
+
+Local /?preview=rooms&room=dragon displays the four new room backgrounds and approved-v2 character poses inside the actual encounter layout. Switch among ogre, wizard, elf and dragon; previous/next pose keeps stable IDs. Common native 470x200 canvas, nearest-neighbor background sampling and unchanged native character pixels. Dragon uses the center-darkened lair. Preview is isolated before save loading and never reads/writes localStorage; normal gameplay remains unchanged. Browser checked all four rooms, Elf pose 2 switching, and normal maze restored-save view. Screenshots room-*-preview-check.png. 60 tests pass; source graph stamped cdfda601c2e2. Normal encounter art replacement awaits deliberate integration; this is a visual review mode.
+
+## Current approved visual baseline - 2026-10-25
+
+User accepted all four room backgrounds with the approved-v2 character library in the actual encounter window. Defaults now registered in dist/room-art.js, with exact image hashes/source dimensions in dist/assets/rooms/catalog.json. See ROOM_ART.md. The dragon default is the darkened-center lair. All 78 character images and pose numbers remain unchanged. New background hash/default-reference test brings total to 61 passing tests. Release e5525698eaf8.
+
+The local rooms preview is the accepted visual reference. Existing normal maze/encounter behavior is retained; no new minigame design or full legacy encounter-art migration is claimed. Source files, artwork, scripts, guides, screenshots and continuity docs are included in this Git checkpoint for the user's requested private GitHub backup. The local unpacked review ZIP is a duplicate export and ignored; canonical images and guides are tracked, not deleted.

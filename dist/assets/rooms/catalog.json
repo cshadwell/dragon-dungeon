@@ -1,0 +1,51 @@
+{
+  "version": "approved-rooms-v1",
+  "approved": "2026-10-25",
+  "characterLibrary": "approved-v2",
+  "logicalCanvas": [
+    470,
+    200
+  ],
+  "rooms": {
+    "ogre": {
+      "title": "The Ogre’s Armory",
+      "background": "ogre-armory-v1.png",
+      "description": "Firelight falls across red masonry and the weapons lining the armory. The ogre waits in the open space before you.",
+      "character": "ogre",
+      "defaultPose": 1,
+      "sha256": "59a8dfa6f169807a044dadc58f524791d6d2d1733fc42457089baef79628a9d1",
+      "width": 1922,
+      "height": 818
+    },
+    "wizard": {
+      "title": "The Wizard’s Study",
+      "background": "wizard-study-v1.png",
+      "description": "Books, bottles and curious instruments fill the study. The wizard stands in front of his worktable.",
+      "character": "wizard",
+      "defaultPose": 1,
+      "sha256": "4f480ebbea36fd23f80931f1fe0de210b326c01f55fe21a1bc4968e57ffce51d",
+      "width": 1922,
+      "height": 818
+    },
+    "elf": {
+      "title": "The Elf Queen’s Shrine",
+      "background": "elf-shrine-v1.png",
+      "description": "Vines climb the old stonework beneath green banners. The elf queen meets you in the shrine hall.",
+      "character": "elf",
+      "defaultPose": 1,
+      "sha256": "ea63773cf1d71030f4ea5a80d67b337a18adec00b0308fd240c633ad7fe57e8e",
+      "width": 1922,
+      "height": 818
+    },
+    "dragon": {
+      "title": "The Dragon’s Lair",
+      "background": "dragon-lair-darkened-v1.png",
+      "description": "Lava illuminates the outer walls. The shadowed center leaves the dragon’s wings, eyes and claws clearly visible.",
+      "character": "dragon",
+      "defaultPose": 1,
+      "sha256": "0edcd459321bea99a1fe352a8e54d7ff095ff3e20e900b1d9f120574c8bf6ed8",
+      "width": 1920,
+      "height": 819
+    }
+  }
+}
