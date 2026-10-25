@@ -39,3 +39,11 @@ Original-art fidelity update: all displayed Ogre poses now use isolated cutouts 
 User supplied transparent v2 Ogre sheets and requested discarding all earlier artwork versions. Use supplied alpha directly; isolate poses without background heuristics or redrawing. Supersedes white-keying/extraction and generated-atlas approaches.
 
 User chose red brick walls and cobblestone floor specifically for the Ogre chamber, with exact supplied shield hanging behind him on the left. Maze palette stays gray/green. Stock wall preview is style reference only; original red-brick rendering avoids importing its watermark.
+
+## Cohesive character library — 2026-10-25
+
+User approved art-review/2026-10-25/style-study-v2.png pixelation across all four characters, then requested one coordinated batch of all 17 supplied character sheets. Preserve every original pose/identity and use common 1536x1024 transparent canvases. Produce new derivatives alongside unchanged source copies; no unapproved new actions or effects. This authorizes style normalization for the revised library, superseding exact-pixel fidelity only for these new derivatives; existing runtime assets remain intact pending interaction redesign/integration.
+
+## All character sheets locked with permanent pose numbers - 2026-10-25
+
+User accepted the entire normalized set exactly as it appears and requested a game-wide rule against changing the art. Preserve the 17 approved PNG sheets byte-for-byte. Number poses globally per character in fixed sheet order, then reading order within each sheet. Ogre 1-15; wizard 1-13; elf queen 1-13; dragon 1-37. Guides display numbers above poses; sprites stay unlabelled. Extract only lossless source-cell crops, record hashes, and require explicit new user instruction before modifying art. No renumbering; new poses append. Canonical lookup replaces filename guessing for future scene integration. This supersedes earlier original-Ogre-v2 fidelity as the reference for new gameplay art; current runtime remains unchanged until deliberate integration.

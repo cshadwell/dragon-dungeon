@@ -1,4 +1,4 @@
-import {ogreSprites} from './ogre-sprite-data.js?v=94a4c0988f32';
+import {ogreSprites} from './ogre-sprite-data.js?v=eebe14fdbc32';
 // Original supplied transparent Ogre sprites over the chamber scene.
 // Original code-drawn chipped red masonry, using the supplied stock preview as palette/style reference.
 function redBricks(){

@@ -1,0 +1,1588 @@
+{
+  "version": "approved-v1",
+  "approved": "2026-10-25",
+  "counts": {
+    "ogre": 15,
+    "wizard": 13,
+    "elf": 13,
+    "dragon": 37
+  },
+  "sheets": [
+    {
+      "id": "ogre-base",
+      "character": "ogre",
+      "file": "sheets/ogre-base.png",
+      "sha256": "9dadbd90b51403486a368481f2c1043e34280633f05cd4b3eb971ffdf3cd5fd6",
+      "first": 1,
+      "last": 3,
+      "columns": 3,
+      "rows": 1
+    },
+    {
+      "id": "ogre-dodge",
+      "character": "ogre",
+      "file": "sheets/ogre-dodge.png",
+      "sha256": "762ad3f794f1283290a54f17e6f0ef868f77c4ab779c5b777d6d31e1d3930e2a",
+      "first": 4,
+      "last": 7,
+      "columns": 2,
+      "rows": 2
+    },
+    {
+      "id": "ogre-emotions",
+      "character": "ogre",
+      "file": "sheets/ogre-emotions.png",
+      "sha256": "3a6eb127e8dec8b1ab14fc7e4409272455faa76d21e06a57bcf3fade9c13bf6a",
+      "first": 8,
+      "last": 11,
+      "columns": 2,
+      "rows": 2
+    },
+    {
+      "id": "ogre-hit",
+      "character": "ogre",
+      "file": "sheets/ogre-hit.png",
+      "sha256": "775c52985c66d86e9c83e1a116ab4b59e9766c9b1912a724a2bf5c3dcf0d06b6",
+      "first": 12,
+      "last": 15,
+      "columns": 2,
+      "rows": 2
+    },
+    {
+      "id": "wizard-base",
+      "character": "wizard",
+      "file": "sheets/wizard-base.png",
+      "sha256": "523ba35df764eb5d77afd8e2d3564431397b8de0085701b2717ccb011e03ae1a",
+      "first": 1,
+      "last": 1,
+      "columns": 1,
+      "rows": 1
+    },
+    {
+      "id": "wizard-emotions",
+      "character": "wizard",
+      "file": "sheets/wizard-emotions.png",
+      "sha256": "b6f8071e3058a5300303acc082507d24c189e379a0122eb232f8498695abc4d8",
+      "first": 2,
+      "last": 5,
+      "columns": 2,
+      "rows": 2
+    },
+    {
+      "id": "wizard-response",
+      "character": "wizard",
+      "file": "sheets/wizard-response.png",
+      "sha256": "21fe72164f64bc9b023db549f5b0bae2b7e25b452187c653772de6b4c4db2d43",
+      "first": 6,
+      "last": 9,
+      "columns": 2,
+      "rows": 2
+    },
+    {
+      "id": "wizard-spells",
+      "character": "wizard",
+      "file": "sheets/wizard-spells.png",
+      "sha256": "3510924c38f2f9dc58f773737e8d287e1fa1a1b1a14e60b2ceef302768dbea4e",
+      "first": 10,
+      "last": 13,
+      "columns": 2,
+      "rows": 2
+    },
+    {
+      "id": "elf-base",
+      "character": "elf",
+      "file": "sheets/elf-base.png",
+      "sha256": "c7af2a518313b61a5925e16d813285a80e69ba7c79e5d7280bc124f6ce7f0e61",
+      "first": 1,
+      "last": 1,
+      "columns": 1,
+      "rows": 1
+    },
+    {
+      "id": "elf-emote",
+      "character": "elf",
+      "file": "sheets/elf-emote.png",
+      "sha256": "1941e886f5e37c03c70807d1285fd297eaeb8cf4c65caeac6865fd8349bc2b36",
+      "first": 2,
+      "last": 5,
+      "columns": 2,
+      "rows": 2
+    },
+    {
+      "id": "elf-emotions",
+      "character": "elf",
+      "file": "sheets/elf-emotions.png",
+      "sha256": "8a1314ebd06e87b026b5c1743a91e150d75cba8a9134b8dcc2adb8e6ea298f42",
+      "first": 6,
+      "last": 9,
+      "columns": 2,
+      "rows": 2
+    },
+    {
+      "id": "elf-defense",
+      "character": "elf",
+      "file": "sheets/elf-defense.png",
+      "sha256": "191fd4ade98de1c825dbbb13e0806d964936a47ed94f46543086f7ae7602d28e",
+      "first": 10,
+      "last": 13,
+      "columns": 2,
+      "rows": 2
+    },
+    {
+      "id": "dragon-base",
+      "character": "dragon",
+      "file": "sheets/dragon-base.png",
+      "sha256": "81b4e837bfe5ff461e20da4500a5d2ea12c82c4cc8b0050a6a6f008e66330ef6",
+      "first": 1,
+      "last": 1,
+      "columns": 1,
+      "rows": 1
+    },
+    {
+      "id": "dragon-emotions",
+      "character": "dragon",
+      "file": "sheets/dragon-emotions.png",
+      "sha256": "0a0eafed9eba5114408c347ce3b0f4f35783320af76a02acef3a018e03e07fef",
+      "first": 2,
+      "last": 13,
+      "columns": 4,
+      "rows": 3
+    },
+    {
+      "id": "dragon-damage",
+      "character": "dragon",
+      "file": "sheets/dragon-damage.png",
+      "sha256": "c1cd303dec288ea75fc5ac4155f0406a430fd551e37143e0526e35ba444930a3",
+      "first": 14,
+      "last": 22,
+      "columns": 3,
+      "rows": 3
+    },
+    {
+      "id": "dragon-fire",
+      "character": "dragon",
+      "file": "sheets/dragon-fire.png",
+      "sha256": "d77997ebee15979c0e2cfae3808ca9d4eae2d53ec82dbc9dc2bbc9406be199ab",
+      "first": 23,
+      "last": 28,
+      "columns": 3,
+      "rows": 2
+    },
+    {
+      "id": "dragon-spells",
+      "character": "dragon",
+      "file": "sheets/dragon-spells.png",
+      "sha256": "3c9d7fbb34112592c61a202212a61909af0ea8a8a51aa4363ed30345307c8cd1",
+      "first": 29,
+      "last": 37,
+      "columns": 3,
+      "rows": 3
+    }
+  ],
+  "poses": [
+    {
+      "character": "ogre",
+      "number": 1,
+      "id": "ogre-001",
+      "sheet": "ogre-base",
+      "cell": 1,
+      "bounds": [
+        21,
+        135,
+        617,
+        897
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-001.png",
+      "width": 596,
+      "height": 762,
+      "sha256": "ed39ac21e26c8ab5b54ab89222dd09f0049bb52423b640e5e2a015789664c1ce"
+    },
+    {
+      "character": "ogre",
+      "number": 2,
+      "id": "ogre-002",
+      "sheet": "ogre-base",
+      "cell": 2,
+      "bounds": [
+        643,
+        199,
+        992,
+        905
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-002.png",
+      "width": 349,
+      "height": 706,
+      "sha256": "0269ff948d0060fa095e204acd37436a33bf884f49bae1c90079b67222de22ac"
+    },
+    {
+      "character": "ogre",
+      "number": 3,
+      "id": "ogre-003",
+      "sheet": "ogre-base",
+      "cell": 3,
+      "bounds": [
+        1088,
+        199,
+        1438,
+        905
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-003.png",
+      "width": 350,
+      "height": 706,
+      "sha256": "6c414162777336b52452f758548f19eec25e94d4e9fdde02c24e3bff10d25949"
+    },
+    {
+      "character": "ogre",
+      "number": 4,
+      "id": "ogre-004",
+      "sheet": "ogre-dodge",
+      "cell": 1,
+      "bounds": [
+        179,
+        46,
+        664,
+        532
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-004.png",
+      "width": 485,
+      "height": 486,
+      "sha256": "87a86b5aecdd44f8d40235eb152f5d7d6185348463b3af47fb5addf78f31b125"
+    },
+    {
+      "character": "ogre",
+      "number": 5,
+      "id": "ogre-005",
+      "sheet": "ogre-dodge",
+      "cell": 2,
+      "bounds": [
+        784,
+        212,
+        1464,
+        534
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-005.png",
+      "width": 680,
+      "height": 322,
+      "sha256": "adab6bf8df72dfb7ba6aaf74f687a8c73271a5306dde829f2fb0bd3a7771cd21"
+    },
+    {
+      "character": "ogre",
+      "number": 6,
+      "id": "ogre-006",
+      "sheet": "ogre-dodge",
+      "cell": 3,
+      "bounds": [
+        104,
+        555,
+        703,
+        962
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-006.png",
+      "width": 599,
+      "height": 407,
+      "sha256": "964558a3388afc24d62d456c32497ca07c1b3e41f61746810654d1c0603fd322"
+    },
+    {
+      "character": "ogre",
+      "number": 7,
+      "id": "ogre-007",
+      "sheet": "ogre-dodge",
+      "cell": 4,
+      "bounds": [
+        797,
+        592,
+        1464,
+        967
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-007.png",
+      "width": 667,
+      "height": 375,
+      "sha256": "12b982ca642366ca952dff7d7ce96c241e249fd9c1ecd5107cd52fd49f0d37ad"
+    },
+    {
+      "character": "ogre",
+      "number": 8,
+      "id": "ogre-008",
+      "sheet": "ogre-emotions",
+      "cell": 1,
+      "bounds": [
+        199,
+        11,
+        735,
+        485
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-008.png",
+      "width": 536,
+      "height": 474,
+      "sha256": "5646f29461da1b8d9cd187bfd5996d77f1b19b45f1915b33266366140ede3321"
+    },
+    {
+      "character": "ogre",
+      "number": 9,
+      "id": "ogre-009",
+      "sheet": "ogre-emotions",
+      "cell": 2,
+      "bounds": [
+        827,
+        70,
+        1292,
+        489
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-009.png",
+      "width": 465,
+      "height": 419,
+      "sha256": "bc29173d8ca2090ecadf3c1cc2820985d24305da63cd06987416cfb18569e189"
+    },
+    {
+      "character": "ogre",
+      "number": 10,
+      "id": "ogre-010",
+      "sheet": "ogre-emotions",
+      "cell": 3,
+      "bounds": [
+        188,
+        497,
+        690,
+        982
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-010.png",
+      "width": 502,
+      "height": 485,
+      "sha256": "ccb11c6005577aee66bed831cb2d2da2334043e27811cf0db732a73e185301a3"
+    },
+    {
+      "character": "ogre",
+      "number": 11,
+      "id": "ogre-011",
+      "sheet": "ogre-emotions",
+      "cell": 4,
+      "bounds": [
+        860,
+        528,
+        1284,
+        982
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-011.png",
+      "width": 424,
+      "height": 454,
+      "sha256": "e8a06a191357cccb7dc1186a339a0c68b0c263855ee193afa31a074cb4d3bb07"
+    },
+    {
+      "character": "ogre",
+      "number": 12,
+      "id": "ogre-012",
+      "sheet": "ogre-hit",
+      "cell": 1,
+      "bounds": [
+        92,
+        70,
+        617,
+        472
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-012.png",
+      "width": 525,
+      "height": 402,
+      "sha256": "869f73fd0b02abcb88e196cbf986263121fc841b94ac54b277630b162b3b65c0"
+    },
+    {
+      "character": "ogre",
+      "number": 13,
+      "id": "ogre-013",
+      "sheet": "ogre-hit",
+      "cell": 2,
+      "bounds": [
+        783,
+        44,
+        1429,
+        472
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-013.png",
+      "width": 646,
+      "height": 428,
+      "sha256": "89ce8b7c01a0c50e84385677dcbaa4b3778e92326617129f099bc175ecf48648"
+    },
+    {
+      "character": "ogre",
+      "number": 14,
+      "id": "ogre-014",
+      "sheet": "ogre-hit",
+      "cell": 3,
+      "bounds": [
+        103,
+        551,
+        689,
+        962
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-014.png",
+      "width": 586,
+      "height": 411,
+      "sha256": "9e89fd62f8ce6c1f616cf09ea7cfc8fe9f63fff701c110719c3fc8d62b4d5a98"
+    },
+    {
+      "character": "ogre",
+      "number": 15,
+      "id": "ogre-015",
+      "sheet": "ogre-hit",
+      "cell": 4,
+      "bounds": [
+        808,
+        559,
+        1437,
+        962
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "ogre/pose-015.png",
+      "width": 629,
+      "height": 403,
+      "sha256": "655f8862ad238b4ba8e45c3340511dc40791f907d7ec2df6b72e807b3c92eef1"
+    },
+    {
+      "character": "wizard",
+      "number": 1,
+      "id": "wizard-001",
+      "sheet": "wizard-base",
+      "cell": 1,
+      "bounds": [
+        322,
+        57,
+        1208,
+        951
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-001.png",
+      "width": 886,
+      "height": 894,
+      "sha256": "46c685dec2e5fd2658fbd2ac5ef6f9dea824011dbc6c935693e021abc14c9165"
+    },
+    {
+      "character": "wizard",
+      "number": 2,
+      "id": "wizard-002",
+      "sheet": "wizard-emotions",
+      "cell": 1,
+      "bounds": [
+        196,
+        22,
+        745,
+        501
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-002.png",
+      "width": 549,
+      "height": 479,
+      "sha256": "ab7ae9e7f3c61ef0249e86d1f5bf380af63bd5a7689bfde22964ccb9a89bbd5f"
+    },
+    {
+      "character": "wizard",
+      "number": 3,
+      "id": "wizard-003",
+      "sheet": "wizard-emotions",
+      "cell": 2,
+      "bounds": [
+        905,
+        36,
+        1361,
+        501
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-003.png",
+      "width": 456,
+      "height": 465,
+      "sha256": "e631f335b6471adab1c254ce913c06b3edc54e0d7f75afc175f2ea4014696704"
+    },
+    {
+      "character": "wizard",
+      "number": 4,
+      "id": "wizard-004",
+      "sheet": "wizard-emotions",
+      "cell": 3,
+      "bounds": [
+        205,
+        525,
+        669,
+        988
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-004.png",
+      "width": 464,
+      "height": 463,
+      "sha256": "53d518f61fff4cd1a01b2e284c8317f199a880b925e8fc6205a7dd117f4f2729"
+    },
+    {
+      "character": "wizard",
+      "number": 5,
+      "id": "wizard-005",
+      "sheet": "wizard-emotions",
+      "cell": 4,
+      "bounds": [
+        840,
+        515,
+        1415,
+        989
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-005.png",
+      "width": 575,
+      "height": 474,
+      "sha256": "dac67660366afbcfd546d269044e46cf92bf7ad02ea958ab652085eda315ba06"
+    },
+    {
+      "character": "wizard",
+      "number": 6,
+      "id": "wizard-006",
+      "sheet": "wizard-response",
+      "cell": 1,
+      "bounds": [
+        216,
+        32,
+        705,
+        507
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-006.png",
+      "width": 489,
+      "height": 475,
+      "sha256": "1de70997728266cde11d68ee3996c3bb76e25aec44c5b51337dfa0a6c6d9d4f0"
+    },
+    {
+      "character": "wizard",
+      "number": 7,
+      "id": "wizard-007",
+      "sheet": "wizard-response",
+      "cell": 2,
+      "bounds": [
+        888,
+        32,
+        1353,
+        507
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-007.png",
+      "width": 465,
+      "height": 475,
+      "sha256": "251ceee4cdcb783e43d3062a52c440f7f1c170337f910f7c534407334e08c9eb"
+    },
+    {
+      "character": "wizard",
+      "number": 8,
+      "id": "wizard-008",
+      "sheet": "wizard-response",
+      "cell": 3,
+      "bounds": [
+        206,
+        532,
+        759,
+        998
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-008.png",
+      "width": 553,
+      "height": 466,
+      "sha256": "7ce9df510f0f8ac47c372131c45b8ec38476454a56b86fbbc13b6f539dbccac1"
+    },
+    {
+      "character": "wizard",
+      "number": 9,
+      "id": "wizard-009",
+      "sheet": "wizard-response",
+      "cell": 4,
+      "bounds": [
+        878,
+        532,
+        1409,
+        998
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-009.png",
+      "width": 531,
+      "height": 466,
+      "sha256": "670fd461f6fc9dcb02b993cec3ec9683e1295ff28aee635130e5c6db6af2a027"
+    },
+    {
+      "character": "wizard",
+      "number": 10,
+      "id": "wizard-010",
+      "sheet": "wizard-spells",
+      "cell": 1,
+      "bounds": [
+        305,
+        24,
+        689,
+        496
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-010.png",
+      "width": 384,
+      "height": 472,
+      "sha256": "f4750fa230e1124a3a20bab3304bed272b05d5a4b97c0d56a5423bce4dc95652"
+    },
+    {
+      "character": "wizard",
+      "number": 11,
+      "id": "wizard-011",
+      "sheet": "wizard-spells",
+      "cell": 2,
+      "bounds": [
+        815,
+        173,
+        1270,
+        498
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-011.png",
+      "width": 455,
+      "height": 325,
+      "sha256": "940145a725a28464a9c4ba17787835a5cdb2f13c94621ccf05f1f2fcff4381f2"
+    },
+    {
+      "character": "wizard",
+      "number": 12,
+      "id": "wizard-012",
+      "sheet": "wizard-spells",
+      "cell": 3,
+      "bounds": [
+        293,
+        514,
+        656,
+        950
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-012.png",
+      "width": 363,
+      "height": 436,
+      "sha256": "9d795e88e210294463620e7f31c5a8f892ae1c21b6c7b1d19173e8f985b1c8ee"
+    },
+    {
+      "character": "wizard",
+      "number": 13,
+      "id": "wizard-013",
+      "sheet": "wizard-spells",
+      "cell": 4,
+      "bounds": [
+        852,
+        529,
+        1263,
+        950
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "wizard/pose-013.png",
+      "width": 411,
+      "height": 421,
+      "sha256": "04269eaec5d61f31f5a1414036d3eb00823459df341ac87e13eed401140a6f7c"
+    },
+    {
+      "character": "elf",
+      "number": 1,
+      "id": "elf-001",
+      "sheet": "elf-base",
+      "cell": 1,
+      "bounds": [
+        419,
+        69,
+        1128,
+        975
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-001.png",
+      "width": 709,
+      "height": 906,
+      "sha256": "b6855b1c3cc8b70dbdc54e4de0ebb13ef312df8ce2f6209c723ceaf1f5bf0de4"
+    },
+    {
+      "character": "elf",
+      "number": 2,
+      "id": "elf-002",
+      "sheet": "elf-emote",
+      "cell": 1,
+      "bounds": [
+        289,
+        23,
+        675,
+        489
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-002.png",
+      "width": 386,
+      "height": 466,
+      "sha256": "6c9c0f0e69f3c1e83fd127c266c4e45915f556565b6f72034847e955d13c8aa7"
+    },
+    {
+      "character": "elf",
+      "number": 3,
+      "id": "elf-003",
+      "sheet": "elf-emote",
+      "cell": 2,
+      "bounds": [
+        852,
+        23,
+        1247,
+        489
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-003.png",
+      "width": 395,
+      "height": 466,
+      "sha256": "5b5ace62c9c00f7a63cfcff308069d19895e7a54df07b594f4a729cb960ed785"
+    },
+    {
+      "character": "elf",
+      "number": 4,
+      "id": "elf-004",
+      "sheet": "elf-emote",
+      "cell": 3,
+      "bounds": [
+        290,
+        511,
+        679,
+        974
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-004.png",
+      "width": 389,
+      "height": 463,
+      "sha256": "a22403be56780466d2d7eaea078d7d8ba5d4915b141edadc38d2f4fd724c85b6"
+    },
+    {
+      "character": "elf",
+      "number": 5,
+      "id": "elf-005",
+      "sheet": "elf-emote",
+      "cell": 4,
+      "bounds": [
+        843,
+        517,
+        1242,
+        974
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-005.png",
+      "width": 399,
+      "height": 457,
+      "sha256": "af77ab357a8f9fdab292b4b250dd123e5cc7d2acbfb95eda8c2c21255cbf0a5d"
+    },
+    {
+      "character": "elf",
+      "number": 6,
+      "id": "elf-006",
+      "sheet": "elf-emotions",
+      "cell": 1,
+      "bounds": [
+        279,
+        35,
+        679,
+        489
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-006.png",
+      "width": 400,
+      "height": 454,
+      "sha256": "1f6a9ef05c80a85ec08ef830dac8bee8c3be815c5bd72a7ae4e44f791e79f384"
+    },
+    {
+      "character": "elf",
+      "number": 7,
+      "id": "elf-007",
+      "sheet": "elf-emotions",
+      "cell": 2,
+      "bounds": [
+        855,
+        35,
+        1255,
+        489
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-007.png",
+      "width": 400,
+      "height": 454,
+      "sha256": "d82e08a6c5a2fc573fed810a4d9556e3a5bac78b16563bff1b8d7ae879c3eef4"
+    },
+    {
+      "character": "elf",
+      "number": 8,
+      "id": "elf-008",
+      "sheet": "elf-emotions",
+      "cell": 3,
+      "bounds": [
+        264,
+        519,
+        683,
+        974
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-008.png",
+      "width": 419,
+      "height": 455,
+      "sha256": "d424ef89e7d4883dfc9d117c3fcee9f69775d4a0dc2093c7584fc385040e69df"
+    },
+    {
+      "character": "elf",
+      "number": 9,
+      "id": "elf-009",
+      "sheet": "elf-emotions",
+      "cell": 4,
+      "bounds": [
+        856,
+        519,
+        1256,
+        974
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-009.png",
+      "width": 400,
+      "height": 455,
+      "sha256": "0b22a98d2c8a5d2a3b3e31e1bb25a3f70c5e4bb6d3c061e31b628d1110099134"
+    },
+    {
+      "character": "elf",
+      "number": 10,
+      "id": "elf-010",
+      "sheet": "elf-defense",
+      "cell": 1,
+      "bounds": [
+        158,
+        42,
+        620,
+        492
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-010.png",
+      "width": 462,
+      "height": 450,
+      "sha256": "e3db88c355f40124049c7c5c6b91d41a1e8096ad53bf9a5e3310f48211a98f2a"
+    },
+    {
+      "character": "elf",
+      "number": 11,
+      "id": "elf-011",
+      "sheet": "elf-defense",
+      "cell": 2,
+      "bounds": [
+        938,
+        42,
+        1403,
+        492
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-011.png",
+      "width": 465,
+      "height": 450,
+      "sha256": "4ba24c931235b0c372925293e47d377e12ed247a6196304a6c74634069841a52"
+    },
+    {
+      "character": "elf",
+      "number": 12,
+      "id": "elf-012",
+      "sheet": "elf-defense",
+      "cell": 3,
+      "bounds": [
+        167,
+        577,
+        630,
+        970
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-012.png",
+      "width": 463,
+      "height": 393,
+      "sha256": "909937d4e18793338c80ba41ca165a7b2255afcc46ac2aa9f9e5fe323c6fcbd1"
+    },
+    {
+      "character": "elf",
+      "number": 13,
+      "id": "elf-013",
+      "sheet": "elf-defense",
+      "cell": 4,
+      "bounds": [
+        864,
+        489,
+        1338,
+        980
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "elf/pose-013.png",
+      "width": 474,
+      "height": 491,
+      "sha256": "66716c00fde93a0befa61e41030188ae523fd09823d934c48808d34fecf2e6a2"
+    },
+    {
+      "character": "dragon",
+      "number": 1,
+      "id": "dragon-001",
+      "sheet": "dragon-base",
+      "cell": 1,
+      "bounds": [
+        152,
+        13,
+        1382,
+        991
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-001.png",
+      "width": 1230,
+      "height": 978,
+      "sha256": "8983e29dd178c7b939b8cad458991c0a2a67c650b361e37f98507206f27c3946"
+    },
+    {
+      "character": "dragon",
+      "number": 2,
+      "id": "dragon-002",
+      "sheet": "dragon-emotions",
+      "cell": 1,
+      "bounds": [
+        14,
+        10,
+        400,
+        339
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-002.png",
+      "width": 386,
+      "height": 329,
+      "sha256": "4d8ca5c2e81d2b592bb8e40c783776dc3b6397a91d278fc36330a3cc1f09db62"
+    },
+    {
+      "character": "dragon",
+      "number": 3,
+      "id": "dragon-003",
+      "sheet": "dragon-emotions",
+      "cell": 2,
+      "bounds": [
+        420,
+        10,
+        805,
+        339
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-003.png",
+      "width": 385,
+      "height": 329,
+      "sha256": "70b058472efac155daf14d11a09e906dd8345c5dbcddba608e7150087f2920dd"
+    },
+    {
+      "character": "dragon",
+      "number": 4,
+      "id": "dragon-004",
+      "sheet": "dragon-emotions",
+      "cell": 3,
+      "bounds": [
+        819,
+        13,
+        1168,
+        340
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-004.png",
+      "width": 349,
+      "height": 327,
+      "sha256": "7c51d35d0cae5288ee23828521999c68fcbbc68cf7145d2d40870db4daa5f9b7"
+    },
+    {
+      "character": "dragon",
+      "number": 5,
+      "id": "dragon-005",
+      "sheet": "dragon-emotions",
+      "cell": 4,
+      "bounds": [
+        1183,
+        15,
+        1527,
+        345
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-005.png",
+      "width": 344,
+      "height": 330,
+      "sha256": "bc1408b7fed73c14f04e7f55269d7726cc6f974bb69c2febfdb0627e44b5c98c"
+    },
+    {
+      "character": "dragon",
+      "number": 6,
+      "id": "dragon-006",
+      "sheet": "dragon-emotions",
+      "cell": 5,
+      "bounds": [
+        8,
+        343,
+        400,
+        657
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-006.png",
+      "width": 392,
+      "height": 314,
+      "sha256": "06978fc47d580f9156c603aa4edf0ebe09931b83c5488eaa26d1ca8502821d35"
+    },
+    {
+      "character": "dragon",
+      "number": 7,
+      "id": "dragon-007",
+      "sheet": "dragon-emotions",
+      "cell": 6,
+      "bounds": [
+        414,
+        352,
+        811,
+        657
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-007.png",
+      "width": 397,
+      "height": 305,
+      "sha256": "e865aeacf05707e9c8cbcb0a95091510a3042866836aec897f1dd994cd13ce3d"
+    },
+    {
+      "character": "dragon",
+      "number": 8,
+      "id": "dragon-008",
+      "sheet": "dragon-emotions",
+      "cell": 7,
+      "bounds": [
+        825,
+        352,
+        1191,
+        660
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-008.png",
+      "width": 366,
+      "height": 308,
+      "sha256": "f1d6777768a7684b448c5df52e44d718e47eec598a5c130a556d57603345876d"
+    },
+    {
+      "character": "dragon",
+      "number": 9,
+      "id": "dragon-009",
+      "sheet": "dragon-emotions",
+      "cell": 8,
+      "bounds": [
+        1202,
+        366,
+        1532,
+        655
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-009.png",
+      "width": 330,
+      "height": 289,
+      "sha256": "1957fb70a76cd57ea9b5ce9c2e5feefdd1acec825d74c2d85f967773a79a6f1d"
+    },
+    {
+      "character": "dragon",
+      "number": 10,
+      "id": "dragon-010",
+      "sheet": "dragon-emotions",
+      "cell": 9,
+      "bounds": [
+        9,
+        652,
+        403,
+        1004
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-010.png",
+      "width": 394,
+      "height": 352,
+      "sha256": "9f70992afc9cee916e5a771fb2c83363c62753f6bf1cc089f55dd0cac2874a49"
+    },
+    {
+      "character": "dragon",
+      "number": 11,
+      "id": "dragon-011",
+      "sheet": "dragon-emotions",
+      "cell": 10,
+      "bounds": [
+        419,
+        682,
+        789,
+        993
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-011.png",
+      "width": 370,
+      "height": 311,
+      "sha256": "ac403c89a6a37ae101f3976ff4ed51512106c48c51bdd1ccb2dd440943701b6f"
+    },
+    {
+      "character": "dragon",
+      "number": 12,
+      "id": "dragon-012",
+      "sheet": "dragon-emotions",
+      "cell": 11,
+      "bounds": [
+        795,
+        672,
+        1180,
+        1004
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-012.png",
+      "width": 385,
+      "height": 332,
+      "sha256": "ba5e7c683a9e366848ab5deb192063c6fe28bb882aaecb2733efa07870c355d6"
+    },
+    {
+      "character": "dragon",
+      "number": 13,
+      "id": "dragon-013",
+      "sheet": "dragon-emotions",
+      "cell": 12,
+      "bounds": [
+        1191,
+        662,
+        1527,
+        1003
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-013.png",
+      "width": 336,
+      "height": 341,
+      "sha256": "10d2cd124559b0ad5ca04b8ae5ef754c80af5a6dc71b92632b70859fda7ebdf2"
+    },
+    {
+      "character": "dragon",
+      "number": 14,
+      "id": "dragon-014",
+      "sheet": "dragon-damage",
+      "cell": 1,
+      "bounds": [
+        29,
+        12,
+        500,
+        348
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-014.png",
+      "width": 471,
+      "height": 336,
+      "sha256": "53cfaed34fa27590bbf057180c3f1fdcfb011556fee72a84f2b38e2ec7817037"
+    },
+    {
+      "character": "dragon",
+      "number": 15,
+      "id": "dragon-015",
+      "sheet": "dragon-damage",
+      "cell": 2,
+      "bounds": [
+        553,
+        25,
+        998,
+        351
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-015.png",
+      "width": 445,
+      "height": 326,
+      "sha256": "20610f5698c5d2b6776b42ce252b8fd8a7421ee6d44cd35fc07bf84a8715187c"
+    },
+    {
+      "character": "dragon",
+      "number": 16,
+      "id": "dragon-016",
+      "sheet": "dragon-damage",
+      "cell": 3,
+      "bounds": [
+        1043,
+        27,
+        1518,
+        355
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-016.png",
+      "width": 475,
+      "height": 328,
+      "sha256": "2cd44fe9e89b4e32b09c7fef0b6ba5b0fb5c7403623f6184728ee0a30d62319b"
+    },
+    {
+      "character": "dragon",
+      "number": 17,
+      "id": "dragon-017",
+      "sheet": "dragon-damage",
+      "cell": 4,
+      "bounds": [
+        30,
+        365,
+        529,
+        672
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-017.png",
+      "width": 499,
+      "height": 307,
+      "sha256": "3d02c765b3049330038d132721cbcc59a7841d77c5ade5c7b42fd3b184f2385a"
+    },
+    {
+      "character": "dragon",
+      "number": 18,
+      "id": "dragon-018",
+      "sheet": "dragon-damage",
+      "cell": 5,
+      "bounds": [
+        566,
+        358,
+        1018,
+        647
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-018.png",
+      "width": 452,
+      "height": 289,
+      "sha256": "18adbc6d0ec6f57623963803580491f21758c22badc3576caa3c7fa2c302017e"
+    },
+    {
+      "character": "dragon",
+      "number": 19,
+      "id": "dragon-019",
+      "sheet": "dragon-damage",
+      "cell": 6,
+      "bounds": [
+        1048,
+        393,
+        1523,
+        671
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-019.png",
+      "width": 475,
+      "height": 278,
+      "sha256": "03e97bd5107d23f72cc0e9e72c869f09cea4432569c0680b739468a36c904b1b"
+    },
+    {
+      "character": "dragon",
+      "number": 20,
+      "id": "dragon-020",
+      "sheet": "dragon-damage",
+      "cell": 7,
+      "bounds": [
+        29,
+        674,
+        496,
+        980
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-020.png",
+      "width": 467,
+      "height": 306,
+      "sha256": "301fb33fab7753d87dfca32b0897da73f7193f9461b1645670759006ecad434b"
+    },
+    {
+      "character": "dragon",
+      "number": 21,
+      "id": "dragon-021",
+      "sheet": "dragon-damage",
+      "cell": 8,
+      "bounds": [
+        539,
+        662,
+        1022,
+        981
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-021.png",
+      "width": 483,
+      "height": 319,
+      "sha256": "fd0e8539bef9a4bf05f73b324129d971d301dc38ebf482b44072ed267362674d"
+    },
+    {
+      "character": "dragon",
+      "number": 22,
+      "id": "dragon-022",
+      "sheet": "dragon-damage",
+      "cell": 9,
+      "bounds": [
+        1056,
+        679,
+        1519,
+        981
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-022.png",
+      "width": 463,
+      "height": 302,
+      "sha256": "0143f30846c2401f9831503f6357f95ad5869193c4c4f5a92639aa2298b80878"
+    },
+    {
+      "character": "dragon",
+      "number": 23,
+      "id": "dragon-023",
+      "sheet": "dragon-fire",
+      "cell": 1,
+      "bounds": [
+        12,
+        82,
+        493,
+        480
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-023.png",
+      "width": 481,
+      "height": 398,
+      "sha256": "50a4fda983d5c350e42d1ec214ed4ed91dd3a96ea8bca9d469259d2c96c49818"
+    },
+    {
+      "character": "dragon",
+      "number": 24,
+      "id": "dragon-024",
+      "sheet": "dragon-fire",
+      "cell": 2,
+      "bounds": [
+        525,
+        108,
+        993,
+        480
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-024.png",
+      "width": 468,
+      "height": 372,
+      "sha256": "0b5dba950e422c5fb4b9374c3378b95c6e87e039983157c354077fe1b84d7096"
+    },
+    {
+      "character": "dragon",
+      "number": 25,
+      "id": "dragon-025",
+      "sheet": "dragon-fire",
+      "cell": 3,
+      "bounds": [
+        1021,
+        108,
+        1522,
+        480
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-025.png",
+      "width": 501,
+      "height": 372,
+      "sha256": "4e0a551883a5eb30eed4c3ce4aa4409132797994cf0f7a28bd36417968065ac0"
+    },
+    {
+      "character": "dragon",
+      "number": 26,
+      "id": "dragon-026",
+      "sheet": "dragon-fire",
+      "cell": 4,
+      "bounds": [
+        10,
+        538,
+        545,
+        905
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-026.png",
+      "width": 535,
+      "height": 367,
+      "sha256": "6c08cbc35eac46c04d2e7c3a77908bb9dd1c3129f7f08ab74b7b858781079c26"
+    },
+    {
+      "character": "dragon",
+      "number": 27,
+      "id": "dragon-027",
+      "sheet": "dragon-fire",
+      "cell": 5,
+      "bounds": [
+        543,
+        538,
+        1006,
+        919
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-027.png",
+      "width": 463,
+      "height": 381,
+      "sha256": "3bcdc5b4e9462615c7b58ce5f3f8b684578187ad9e311378fd5943549e3130c6"
+    },
+    {
+      "character": "dragon",
+      "number": 28,
+      "id": "dragon-028",
+      "sheet": "dragon-fire",
+      "cell": 6,
+      "bounds": [
+        1015,
+        538,
+        1529,
+        904
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-028.png",
+      "width": 514,
+      "height": 366,
+      "sha256": "0e207f8778b4e1761ab9506f816e0c82ef62797b1300bd139114cb1238b2a7e6"
+    },
+    {
+      "character": "dragon",
+      "number": 29,
+      "id": "dragon-029",
+      "sheet": "dragon-spells",
+      "cell": 1,
+      "bounds": [
+        37,
+        29,
+        490,
+        363
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-029.png",
+      "width": 453,
+      "height": 334,
+      "sha256": "9dc20a0e98442bdf77e70393b49a15eb274ac37910177d016cf5f575715ca1f1"
+    },
+    {
+      "character": "dragon",
+      "number": 30,
+      "id": "dragon-030",
+      "sheet": "dragon-spells",
+      "cell": 2,
+      "bounds": [
+        520,
+        33,
+        1080,
+        363
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-030.png",
+      "width": 560,
+      "height": 330,
+      "sha256": "9d58cc5fb30af61df3c36788aa32f4c1679b6c6004409a9ac4d02b21ac1b86f4"
+    },
+    {
+      "character": "dragon",
+      "number": 31,
+      "id": "dragon-031",
+      "sheet": "dragon-spells",
+      "cell": 3,
+      "bounds": [
+        1091,
+        12,
+        1505,
+        377
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-031.png",
+      "width": 414,
+      "height": 365,
+      "sha256": "50be63ec8a6b0ebb5998f12e6571ab28f9f85c39c1420dc44cdb22c452270be2"
+    },
+    {
+      "character": "dragon",
+      "number": 32,
+      "id": "dragon-032",
+      "sheet": "dragon-spells",
+      "cell": 4,
+      "bounds": [
+        23,
+        376,
+        548,
+        671
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-032.png",
+      "width": 525,
+      "height": 295,
+      "sha256": "166b3fdd8ee3d42e34e350e2c1b0ea32ba34d8ed341ccfaa50026388c0fed2f5"
+    },
+    {
+      "character": "dragon",
+      "number": 33,
+      "id": "dragon-033",
+      "sheet": "dragon-spells",
+      "cell": 5,
+      "bounds": [
+        559,
+        370,
+        979,
+        671
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-033.png",
+      "width": 420,
+      "height": 301,
+      "sha256": "b67a03caef58d0724948a1977ecbb5e47cf521c4636891e6b286d7ad3a40a787"
+    },
+    {
+      "character": "dragon",
+      "number": 34,
+      "id": "dragon-034",
+      "sheet": "dragon-spells",
+      "cell": 6,
+      "bounds": [
+        1017,
+        383,
+        1521,
+        671
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-034.png",
+      "width": 504,
+      "height": 288,
+      "sha256": "82e346762cf1baec2dda0ded38eee7ca2256c974930a6524141d2d7e891cf015"
+    },
+    {
+      "character": "dragon",
+      "number": 35,
+      "id": "dragon-035",
+      "sheet": "dragon-spells",
+      "cell": 7,
+      "bounds": [
+        13,
+        656,
+        475,
+        1001
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-035.png",
+      "width": 462,
+      "height": 345,
+      "sha256": "9e3a139e32e6207545c4b4fa355d33430dfc90c99e1cf42e361c77bdddc69026"
+    },
+    {
+      "character": "dragon",
+      "number": 36,
+      "id": "dragon-036",
+      "sheet": "dragon-spells",
+      "cell": 8,
+      "bounds": [
+        483,
+        682,
+        1045,
+        991
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-036.png",
+      "width": 562,
+      "height": 309,
+      "sha256": "c0c78006451bad68963f2f2786cdf2e075c20c820ce109e850f453bc657d38fb"
+    },
+    {
+      "character": "dragon",
+      "number": 37,
+      "id": "dragon-037",
+      "sheet": "dragon-spells",
+      "cell": 9,
+      "bounds": [
+        1021,
+        673,
+        1520,
+        1002
+      ],
+      "isolation": "assigned connected figure and detached effects; original retained RGBA",
+      "file": "dragon/pose-037.png",
+      "width": 499,
+      "height": 329,
+      "sha256": "23faec01e76fd9d737b952f2c685dbce235ae132af7b2ba4427e336b27487de2"
+    }
+  ]
+}

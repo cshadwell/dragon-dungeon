@@ -1,0 +1,342 @@
+[
+  {
+    "id": "ogre-base",
+    "file": "sheets/ogre-base.png",
+    "source": "Ogre Character2.png",
+    "poses": 3,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      22,
+      137,
+      1437,
+      904
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "9dadbd90b51403486a368481f2c1043e34280633f05cd4b3eb971ffdf3cd5fd6",
+    "fidelity_revision": false
+  },
+  {
+    "id": "ogre-dodge",
+    "file": "sheets/ogre-dodge.png",
+    "source": "Ogre Dodge.png",
+    "poses": 4,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      106,
+      47,
+      1463,
+      966
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "762ad3f794f1283290a54f17e6f0ef868f77c4ab779c5b777d6d31e1d3930e2a",
+    "fidelity_revision": false
+  },
+  {
+    "id": "ogre-emotions",
+    "file": "sheets/ogre-emotions.png",
+    "source": "Ogre Emotions.png",
+    "poses": 4,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      189,
+      12,
+      1291,
+      981
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "3a6eb127e8dec8b1ab14fc7e4409272455faa76d21e06a57bcf3fade9c13bf6a",
+    "fidelity_revision": false
+  },
+  {
+    "id": "ogre-hit",
+    "file": "sheets/ogre-hit.png",
+    "source": "Ogre Hit.png",
+    "poses": 4,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      93,
+      46,
+      1436,
+      961
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "775c52985c66d86e9c83e1a116ab4b59e9766c9b1912a724a2bf5c3dcf0d06b6",
+    "fidelity_revision": true
+  },
+  {
+    "id": "wizard-base",
+    "file": "sheets/wizard-base.png",
+    "source": "Base Wizard.png",
+    "poses": 1,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      323,
+      59,
+      1207,
+      950
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "523ba35df764eb5d77afd8e2d3564431397b8de0085701b2717ccb011e03ae1a",
+    "fidelity_revision": false
+  },
+  {
+    "id": "wizard-emotions",
+    "file": "sheets/wizard-emotions.png",
+    "source": "Wizard Emotion.png",
+    "poses": 4,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      197,
+      24,
+      1413,
+      987
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "b6f8071e3058a5300303acc082507d24c189e379a0122eb232f8498695abc4d8",
+    "fidelity_revision": false
+  },
+  {
+    "id": "wizard-response",
+    "file": "sheets/wizard-response.png",
+    "source": "Wizard Response.png",
+    "poses": 4,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      208,
+      33,
+      1409,
+      996
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "21fe72164f64bc9b023db549f5b0bae2b7e25b452187c653772de6b4c4db2d43",
+    "fidelity_revision": true
+  },
+  {
+    "id": "wizard-spells",
+    "file": "sheets/wizard-spells.png",
+    "source": "Wizard Spells.png",
+    "poses": 4,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      295,
+      26,
+      1269,
+      949
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "3510924c38f2f9dc58f773737e8d287e1fa1a1b1a14e60b2ceef302768dbea4e",
+    "fidelity_revision": true
+  },
+  {
+    "id": "elf-base",
+    "file": "sheets/elf-base.png",
+    "source": "Elf Base Pose.png",
+    "poses": 1,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      420,
+      70,
+      1127,
+      974
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "c7af2a518313b61a5925e16d813285a80e69ba7c79e5d7280bc124f6ce7f0e61",
+    "fidelity_revision": false
+  },
+  {
+    "id": "elf-emote",
+    "file": "sheets/elf-emote.png",
+    "source": " Elf  Emote Sheet.png",
+    "poses": 4,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      290,
+      24,
+      1245,
+      973
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "1941e886f5e37c03c70807d1285fd297eaeb8cf4c65caeac6865fd8349bc2b36",
+    "fidelity_revision": true
+  },
+  {
+    "id": "elf-emotions",
+    "file": "sheets/elf-emotions.png",
+    "source": "Elf  Emotion  Sheet2_.png",
+    "poses": 4,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      265,
+      37,
+      1255,
+      973
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "8a1314ebd06e87b026b5c1743a91e150d75cba8a9134b8dcc2adb8e6ea298f42",
+    "fidelity_revision": true
+  },
+  {
+    "id": "elf-defense",
+    "file": "sheets/elf-defense.png",
+    "source": "Elf  Defense  Sheet.png",
+    "poses": 4,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      159,
+      43,
+      1402,
+      978
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "191fd4ade98de1c825dbbb13e0806d964936a47ed94f46543086f7ae7602d28e",
+    "fidelity_revision": true
+  },
+  {
+    "id": "dragon-base",
+    "file": "sheets/dragon-base.png",
+    "source": "Dragon Boss Sprite.png",
+    "poses": 1,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      153,
+      14,
+      1381,
+      990
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "81b4e837bfe5ff461e20da4500a5d2ea12c82c4cc8b0050a6a6f008e66330ef6",
+    "fidelity_revision": false
+  },
+  {
+    "id": "dragon-emotions",
+    "file": "sheets/dragon-emotions.png",
+    "source": "Dragon Emotion Sheet.png",
+    "poses": 12,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      9,
+      11,
+      1530,
+      1002
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "0a0eafed9eba5114408c347ce3b0f4f35783320af76a02acef3a018e03e07fef",
+    "fidelity_revision": false
+  },
+  {
+    "id": "dragon-damage",
+    "file": "sheets/dragon-damage.png",
+    "source": "Dragon Damage.png",
+    "poses": 9,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      30,
+      13,
+      1522,
+      980
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "c1cd303dec288ea75fc5ac4155f0406a430fd551e37143e0526e35ba444930a3",
+    "fidelity_revision": false
+  },
+  {
+    "id": "dragon-fire",
+    "file": "sheets/dragon-fire.png",
+    "source": "Dragon Fire.png",
+    "poses": 6,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      11,
+      83,
+      1527,
+      918
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "d77997ebee15979c0e2cfae3808ca9d4eae2d53ec82dbc9dc2bbc9406be199ab",
+    "fidelity_revision": false
+  },
+  {
+    "id": "dragon-spells",
+    "file": "sheets/dragon-spells.png",
+    "source": "Dragon Spellcasting  Sheet.png",
+    "poses": 9,
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent": true,
+    "visible_bounds": [
+      15,
+      13,
+      1520,
+      1000
+    ],
+    "pose_count_review": "passed visual overview",
+    "sha256": "3c9d7fbb34112592c61a202212a61909af0ea8a8a51aa4363ed30345307c8cd1",
+    "fidelity_revision": false
+  }
+]

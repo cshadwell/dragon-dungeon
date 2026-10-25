@@ -1,6 +1,8 @@
 # Dragon Dungeon — Full maze with approved encounters
 
-**Current baseline:** [PROJECT_STATE.md](PROJECT_STATE.md) · [Development instructions](AGENTS.md) · [Decisions](DECISIONS.md) · [Larger Project handoff](PROJECT_HANDOFF.md). Audited 2026-10-23: 57 tests pass; release hash `94a4c0988f32`. Run `npm start` / `npm test` from this folder. Local Git baseline established. Private GitHub origin configured; no production deployment. Subsequent sections record milestones; their counts and prior configuration are historical.
+**Current baseline:** [PROJECT_STATE.md](PROJECT_STATE.md) · [Development instructions](AGENTS.md) · [Decisions](DECISIONS.md) · [Larger Project handoff](PROJECT_HANDOFF.md). Audited 2026-10-23: 59 tests pass; release hash `eebe14fdbc32`. Run `npm start` / `npm test` from this folder. Local Git baseline established. Private GitHub origin configured; no production deployment. Subsequent sections record milestones; their counts and prior configuration are historical.
+
+**Approved character art:** [Stable pose catalog and rules](CHARACTER_ART.md). Ogre 1-15, wizard 1-13, elf queen 1-13, dragon 1-37. These locked images are the mandatory reference for future character integration.
 
 Current Ogre: wall-mounted door with earlier entry prompt, exact transparent pixel-art poses (preparation → snort → swing), red-brick/cobblestone chamber and supplied shield. See [OGRE-ROOM.md](OGRE-ROOM.md).
 

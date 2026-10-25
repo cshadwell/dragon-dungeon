@@ -1,0 +1,185 @@
+[
+  {
+    "id": "ogre-base",
+    "file": "Ogre Character2.png",
+    "count": 3,
+    "layout": "one row of three: front idle upright club, right-facing side idle, left-facing side idle",
+    "character": "Ogre",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-550f4d04-9ec3-487f-b081-2e763e1fd87f.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-550f4d04-9ec3-487f-b081-2e763e1fd87f.png"
+  },
+  {
+    "id": "ogre-dodge",
+    "file": "Ogre Dodge.png",
+    "count": 4,
+    "layout": "two rows by two columns, preserve all four directional duck/dodge poses",
+    "character": "Ogre",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-4f5118c2-68ef-4e95-bdf5-6b755a08e005.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-4f5118c2-68ef-4e95-bdf5-6b755a08e005.png"
+  },
+  {
+    "id": "ogre-emotions",
+    "file": "Ogre Emotions.png",
+    "count": 4,
+    "layout": "two rows by two columns, preserve angry, neutral, delighted/celebrating, relaxed poses",
+    "character": "Ogre",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-7ff4fffe-9a48-4bb1-a3ab-88661ffe2655.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-7ff4fffe-9a48-4bb1-a3ab-88661ffe2655.png"
+  },
+  {
+    "id": "ogre-hit",
+    "file": "Ogre Hit.png",
+    "count": 4,
+    "layout": "two rows by two columns, preserve all four distinct hit/recoil reactions",
+    "character": "Ogre",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-0aec4edc-a067-457e-b7d1-fd236490d224.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-931b9155-1d79-4bbd-9d93-b5e031c9f49d.png",
+    "previousGeneratedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-0aec4edc-a067-457e-b7d1-fd236490d224.png",
+    "fidelityRevision": true
+  },
+  {
+    "id": "wizard-base",
+    "file": "Base Wizard.png",
+    "count": 1,
+    "layout": "one single complete front base pose",
+    "character": "Wizard",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-f12e3d49-539a-455d-a0e5-ba38268abea1.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-f12e3d49-539a-455d-a0e5-ba38268abea1.png"
+  },
+  {
+    "id": "wizard-emotions",
+    "file": "Wizard Emotion.png",
+    "count": 4,
+    "layout": "two rows by two columns; retain exact expression/gesture in each original cell",
+    "character": "Wizard",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-e364179e-5f6f-41ef-948e-757d885a0290.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-e364179e-5f6f-41ef-948e-757d885a0290.png"
+  },
+  {
+    "id": "wizard-response",
+    "file": "Wizard Response.png",
+    "count": 4,
+    "layout": "two rows by two columns; retain exact response gesture in each original cell",
+    "character": "Wizard",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-d2bcb629-e2ae-42f8-b09a-03db40b7e46e.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-8b58c7cd-7a8c-48f9-9a56-461b38c024df.png",
+    "previousGeneratedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-d2bcb629-e2ae-42f8-b09a-03db40b7e46e.png",
+    "fidelityRevision": true
+  },
+  {
+    "id": "wizard-spells",
+    "file": "Wizard Spells.png",
+    "count": 4,
+    "layout": "two rows by two columns; retain exact casting/staff gesture in each original cell",
+    "character": "Wizard",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-83ec042d-2d5a-4707-8d0b-e7a3d29161cb.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-1a519a39-7f0c-4de0-83b1-d52f5867944f.png",
+    "previousGeneratedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-83ec042d-2d5a-4707-8d0b-e7a3d29161cb.png",
+    "fidelityRevision": true
+  },
+  {
+    "id": "elf-base",
+    "file": "Elf Base Pose.png",
+    "count": 1,
+    "layout": "one single complete front base pose",
+    "character": "Elf queen",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-d0054c10-525b-453e-9a73-e0d30acbda67.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-d0054c10-525b-453e-9a73-e0d30acbda67.png"
+  },
+  {
+    "id": "elf-emote",
+    "file": " Elf  Emote Sheet.png",
+    "count": 4,
+    "layout": "two rows by two columns; retain exact gesture/expression in each original cell",
+    "character": "Elf queen",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-1c1fb6e3-d364-4d6a-b906-287e2e633341.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-6e3b3b69-2d71-4936-a381-ab488f5ea501.png",
+    "previousGeneratedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-1c1fb6e3-d364-4d6a-b906-287e2e633341.png",
+    "fidelityRevision": true
+  },
+  {
+    "id": "elf-emotions",
+    "file": "Elf  Emotion  Sheet2_.png",
+    "count": 4,
+    "layout": "two rows by two columns; retain exact emotion and gesture in each original cell",
+    "character": "Elf queen",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-cc75dab2-7599-4621-ba84-c26613e8458b.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-8f717f9d-1649-4dec-b8d9-3b5517ef3d80.png",
+    "previousGeneratedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-cc75dab2-7599-4621-ba84-c26613e8458b.png",
+    "fidelityRevision": true
+  },
+  {
+    "id": "elf-defense",
+    "file": "Elf  Defense  Sheet.png",
+    "count": 4,
+    "layout": "two rows by two columns; preserve the four distinct shield-defense positions including overhead",
+    "character": "Elf queen",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-2c1708f7-d0ac-435b-aaa7-42023cf37ad7.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-9a07cd52-e31c-4381-88c5-785fc0a476cc.png",
+    "previousGeneratedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-2c1708f7-d0ac-435b-aaa7-42023cf37ad7.png",
+    "fidelityRevision": true,
+    "review_note": "Original bottom-left shield contact sparkle retained; other three poses have no invented effects."
+  },
+  {
+    "id": "dragon-base",
+    "file": "Dragon Boss Sprite.png",
+    "count": 1,
+    "layout": "one single complete front base pose, wings open",
+    "character": "Dragon",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-5e1ce195-4836-4c48-9843-25e0a0d0d0ef.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-5e1ce195-4836-4c48-9843-25e0a0d0d0ef.png"
+  },
+  {
+    "id": "dragon-emotions",
+    "file": "Dragon Emotion Sheet.png",
+    "count": 12,
+    "layout": "three rows by four columns; preserve ALL TWELVE emotions/body gestures in reading order",
+    "character": "Dragon",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-a3228024-5fb3-4634-a719-e3b7f7b2c254.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-a3228024-5fb3-4634-a719-e3b7f7b2c254.png"
+  },
+  {
+    "id": "dragon-damage",
+    "file": "Dragon Damage.png",
+    "count": 9,
+    "layout": "three rows by three columns; preserve ALL NINE recoil/damage poses and distinct impact effects in reading order",
+    "character": "Dragon",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-415f0681-2579-40c7-b5b8-c1cbba4ac4a3.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-415f0681-2579-40c7-b5b8-c1cbba4ac4a3.png"
+  },
+  {
+    "id": "dragon-fire",
+    "file": "Dragon Fire.png",
+    "count": 6,
+    "layout": "two rows by three columns; preserve ALL SIX fire directions/body poses in reading order",
+    "character": "Dragon",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-0805ca9a-0085-4a5a-aea8-d948b8c54312.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-0805ca9a-0085-4a5a-aea8-d948b8c54312.png"
+  },
+  {
+    "id": "dragon-spells",
+    "file": "Dragon Spellcasting  Sheet.png",
+    "count": 9,
+    "layout": "three rows by three columns; preserve ALL NINE spell poses and fire/purple-magic effects in reading order",
+    "character": "Dragon",
+    "status": "generated",
+    "outputHint": "Generated images are saved to /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7 as /Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-e2311877-f934-49e1-bcbb-9d3620fbd47c.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedPath": "/Users/cshadwell/.codex/generated_images/01a16627-a5fc-7a50-b273-bd06ecda52f7/exec-e2311877-f934-49e1-bcbb-9d3620fbd47c.png"
+  }
+]

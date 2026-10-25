@@ -1,0 +1,138 @@
+[
+  {
+    "file": " Elf  Emote Sheet.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "e4f5c03207677ff103dcd695ebed493bbf507d842c7d80e1bf8c7c87e69168c7"
+  },
+  {
+    "file": "Base Wizard.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "4049e135131272a52c33d5869e01e5b3485902cf6dc1d5ff386b27c245f41beb"
+  },
+  {
+    "file": "Dragon Boss Sprite.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "3e2fe924a549c6579ff0b83dea01443e6b470b78a618a15f82616c7845bb803c"
+  },
+  {
+    "file": "Dragon Damage.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "30cddab7bf82719793fa0361b2bf681bdf90ab8b346b0acf323022746a8a02a4"
+  },
+  {
+    "file": "Dragon Emotion Sheet.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "5eddc3b29a5ce245079701471f8da557336a6a539683f001e9f3f5289c58ba36"
+  },
+  {
+    "file": "Dragon Fire.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "ee2cb9b349c8719f366f2ea99311f86f9bc0cce5a735a7550c5480e99084b872"
+  },
+  {
+    "file": "Dragon Spellcasting  Sheet.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "743e36407c0ccfb1503b85fb35d85a5780f6c8bdcbd0ab7714b8696ee2b091b7"
+  },
+  {
+    "file": "Elf  Defense  Sheet.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "4ae55feeaaefbe46e443a51c54bc9c83b89a749d2edd4d0508689572c73a5a21"
+  },
+  {
+    "file": "Elf  Emotion  Sheet2_.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "1bb2894672a0fb7dbfbe268cae310493da501a7edba3c269858026c59df15a48"
+  },
+  {
+    "file": "Elf Base Pose.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "de883a43f32ee1827669e4195ff56a51dde3abcacb138e857d1b5b34da663ba8"
+  },
+  {
+    "file": "Ogre Character2.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "3c780ab4beca43e916641d89016e487606b57c2963e4384acc10f047fdf800b2"
+  },
+  {
+    "file": "Ogre Dodge.png",
+    "source_size": [
+      1983,
+      793
+    ],
+    "sha256": "a482faa288bcea1390f5059530ec9115500eaa50dac97c46292548da90fae525"
+  },
+  {
+    "file": "Ogre Emotions.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "744d37b4c2e3f9542eb80c1cebfb817909f877f6dc5b21bde1289f627853bee4"
+  },
+  {
+    "file": "Ogre Hit.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "022c55a8010b5eb67516e6263a08e660ed3650b657765981acb859f2d3596fc4"
+  },
+  {
+    "file": "Wizard Emotion.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "c9cc98ce8c0866214483d8ee95aa1b8c74d7a7b450fdb3a946eaaa2fd3345cb9"
+  },
+  {
+    "file": "Wizard Response.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "a775f1cfd98dcdb53d74cd1a2126d3241c4afe0f9cd97684058ec63f97628a2b"
+  },
+  {
+    "file": "Wizard Spells.png",
+    "source_size": [
+      1536,
+      1024
+    ],
+    "sha256": "03f0d625e93324faa5a6cc53b65f377c0ca7371a721ffb0551c68795acc8144b"
+  }
+]

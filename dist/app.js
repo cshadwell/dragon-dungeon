@@ -1,15 +1,15 @@
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=94a4c0988f32';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=94a4c0988f32';
-import {drawCorridor} from './corridor.js?v=94a4c0988f32';
-import {exploredMap} from './explored-map.js?v=94a4c0988f32';
-import {dragonView,dragonArt} from './dragon.js?v=94a4c0988f32';
-import {queenView,queenArt} from './queen.js?v=94a4c0988f32';
-import {wizardView,wizardArt} from './wizard.js?v=94a4c0988f32';
-import {createAttempt,tick,respond} from './reaction.js?v=94a4c0988f32';
-import {lessons} from './ogre.js?v=94a4c0988f32';
-import {ogreView} from './ogre.js?v=94a4c0988f32';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=94a4c0988f32';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=94a4c0988f32';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=eebe14fdbc32';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=eebe14fdbc32';
+import {drawCorridor} from './corridor.js?v=eebe14fdbc32';
+import {exploredMap} from './explored-map.js?v=eebe14fdbc32';
+import {dragonView,dragonArt} from './dragon.js?v=eebe14fdbc32';
+import {queenView,queenArt} from './queen.js?v=eebe14fdbc32';
+import {wizardView,wizardArt} from './wizard.js?v=eebe14fdbc32';
+import {createAttempt,tick,respond} from './reaction.js?v=eebe14fdbc32';
+import {lessons} from './ogre.js?v=eebe14fdbc32';
+import {ogreView} from './ogre.js?v=eebe14fdbc32';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=eebe14fdbc32';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=eebe14fdbc32';
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
 let loaded=load(storage), state=loaded.state, writable=loaded.writable, panel=null, lastInput=0;

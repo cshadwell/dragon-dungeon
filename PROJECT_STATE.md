@@ -45,3 +45,15 @@ Ogre chamber: original code-drawn red masonry inspired by the supplied watermark
 57 tests pass, including doorway distance/face visibility and migration from the former close trigger. Recent browser checks verified integrated approach, earlier prompt, wide room, isolated poses, visual steam cue with successful tutorial block, transparent v2 assets and red-brick/cobblestone/shield presentation. All directions have source assets; exhaustive visual checking of every direction/device remains pending.
 
 Baseline commit 03ef24b is preserved in history. This checkpoint records subsequent Ogre work; use git log for its commit ID. origin points to the private cshadwell/dragon-dungeon GitHub repository. No production hosting deployment has occurred. The sibling development-checkpoints/ archive preserves the pre-continuity baseline; browser localStorage is not included in Git or that archive. Synced Project Sources are unchanged.
+
+## Character consistency review — 2026-10-25
+
+User is reconsidering character interactions; replacement mechanics are not yet specified. Read-only review of 17 Desktop/Characters sheets identified inconsistent pixel density, notably original Ogre versus its newer poses and finer elf/dragon art. Four-character style samples and a proposed visual contract live under art-review/2026-10-25/. These are pending review; originals and production sprites/behavior remain unchanged. Consistency is the stated priority.
+
+User approved the v2 lineup pixelation and authorized normalizing all 17 supplied sheets (78 source poses) together, preserving poses/identity on uniform 1536x1024 transparent canvases. New derivatives and original source copies are in art-review/2026-10-25/character-sheets-v1/. Runtime artwork and encounter logic remain unchanged; new interaction mechanics are not specified yet. See the batch QA manifest for completed outputs and fidelity review.
+
+## Approved locked character catalog - 2026-10-25
+
+User accepted all 17 normalized sheets unchanged as the game-wide base art. Canonical copies and 78 lossless pose crops are in dist/assets/characters/approved-v1/, with immutable-number policy in CHARACTER_ART.md / AGENTS.md. Counts: Ogre 15, wizard 13, elf queen 13, dragon 37. getCharacterPose(character, number) provides exact lookup; invalid IDs fail explicitly. Numbered guides have labels above each pose, outside approved image pixels. Retained foreground RGBA verified against approved source regions; sheet/pose hashes and stable numbering are now tested. 59 tests pass. Current release hash eebe14fdbc32.
+
+No encounter behavior or live character display was replaced by this catalog work; new interactions remain undecided. Existing runtime Ogre art is legacy pending intentional integration. No remote push for this art lock unless separately authorized.
