@@ -1,4 +1,4 @@
-import {cells,neighbor,START,ENCOUNTER,DRAGON,WIZARD,QUEEN,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=e5525698eaf8';
+import {cells,neighbor,START,ENCOUNTER,DRAGON,WIZARD,QUEEN,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=58ca7a61fdaa';
 
 // Fixed atlas: discovering cells never changes the map's scale or reveals new bounds.
 export function exploredMap(s){

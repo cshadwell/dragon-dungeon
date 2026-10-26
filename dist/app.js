@@ -1,24 +1,26 @@
-import {showRoomPreview} from './room-preview.js?v=e5525698eaf8';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=e5525698eaf8';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=e5525698eaf8';
-import {drawCorridor} from './corridor.js?v=e5525698eaf8';
-import {exploredMap} from './explored-map.js?v=e5525698eaf8';
-import {dragonView,dragonArt} from './dragon.js?v=e5525698eaf8';
-import {queenView,queenArt} from './queen.js?v=e5525698eaf8';
-import {wizardView,wizardArt} from './wizard.js?v=e5525698eaf8';
-import {createAttempt,tick,respond} from './reaction.js?v=e5525698eaf8';
-import {lessons} from './ogre.js?v=e5525698eaf8';
-import {ogreView} from './ogre.js?v=e5525698eaf8';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=e5525698eaf8';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=e5525698eaf8';
+import {showRoomPreview} from './room-preview.js?v=58ca7a61fdaa';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=58ca7a61fdaa';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=58ca7a61fdaa';
+import {drawCorridor} from './corridor.js?v=58ca7a61fdaa';
+import {exploredMap} from './explored-map.js?v=58ca7a61fdaa';
+import {dragonView,dragonArt} from './dragon.js?v=58ca7a61fdaa';
+import {queenView,queenArt} from './queen.js?v=58ca7a61fdaa';
+import {wizardView,wizardArt} from './wizard.js?v=58ca7a61fdaa';
+import {createAttempt,tick,respond} from './reaction.js?v=58ca7a61fdaa';
+import {lessons} from './ogre.js?v=58ca7a61fdaa';
+import {ogreView} from './ogre.js?v=58ca7a61fdaa';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=58ca7a61fdaa';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=58ca7a61fdaa';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
 let loaded=load(storage), state=loaded.state, writable=loaded.writable, panel=null, lastInput=0;
 $('storage').textContent=loaded.notice;
 // Local, isolated review link; never writes over the player's adventure save.
-const previewMode=['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='ogre';
+const previewMode=['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='ogre'||(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='doors');
 if(previewMode){state={...fresh(),pos:'35,32',facing:0,visited:[START,'35,32'],gate:null,message:'An iron-bound wooden door stands at the end of the corridor.'};writable=false;$('storage').textContent='Ogre approach preview — progress is not saved.';}
+
+if(previewMode&&new URLSearchParams(location.search).get('preview')==='doors'){const door=new URLSearchParams(location.search).get('door')||'ogre';const views={ogre:['35,32',0],wizard:['1,22',1],elf:['53,4',1],dragon:['0,3',0]};const [pos,facing]=views[door]||views.ogre;state={...fresh(),pos,facing,visited:[START,pos],message:'Approach the guardian’s door. This preview does not save progress.'};$('storage').textContent='Door approach preview — progress is not saved.';}
 
 let attempt=null, reactionFrame=null, slowReaction=false, motion=null;
 const names=['NORTH','EAST','SOUTH','WEST'];
@@ -59,8 +61,8 @@ function updatePanel(){
   const body=$('modal-body');body.replaceChildren();$('close').hidden=panel==='encounter'||panel==='gate';
   $('modal-label').textContent=panel==='encounter'?(state.encounter==='wizard'?'THE WIZARD’S STUDY · ':state.encounter==='queen'?'THE ROOT COURT · ':state.encounter==='dragon'?'THE BOUND CHAMBER · ':'THE SHIELD KEEPER · ')+state.health+' / 3 HEALTH':'FIELD NOTES';
   if(panel==='gate'){
-    $('modal-label').textContent='OUTSIDE THE OGRE’S HALL';$('modal-title').textContent='A gate of oak and iron.';
-    const text=document.createElement('p');text.textContent='Heavy wooden planks are bound with riveted iron. From beyond the gate comes a deliberate, rumbling snort. Do you wish to enter?';body.append(text);
+    $('modal-label').textContent='OUTSIDE THE '+state.gate.toUpperCase()+' CHAMBER';$('modal-title').textContent='Do you wish to enter the chamber?';
+    const text=document.createElement('p');text.textContent='The guardian’s door stands before you. Enter now, or remain in the maze and explore.';body.append(text);
     const choices=document.createElement('div');choices.className='choices';choices.append(choice('Open the gate and enter','gate-enter'),choice('Stay in the maze','gate-decline'));body.append(choices);
   }else if(panel==='map'){
     $('modal-title').textContent='The passages you know.';

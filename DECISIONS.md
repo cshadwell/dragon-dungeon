@@ -57,3 +57,15 @@ User explicitly approved the 78 reviewed individual pixel-density revision poses
 ## Four room backgrounds accepted as defaults - 2026-10-25
 
 After reviewing each room with approved characters in the game encounter frame, user approved the four displayed backgrounds and V2 character library as the default visual baseline and authorized pushing all current work to private GitHub. Preserve exact room files, use darkened dragon lair, retain pose IDs and use a shared room/pose registry for future scene integration. This locks the presented art, not an unplanned minigame redesign. Protect room images with hashes and keep 470x200 logical nearest-neighbor rendering.
+
+## Four supplied maze doors - 2026-10-25
+User requested all four supplied doors integrated into the corridor wall with one-tile-back entry prompts. Isolated original artwork, removed only edge-connected near-white backdrop, normalized to 112px artwork height in a 128px transparent wall tile using nearest-neighbor sampling. Original preserved; no generative redraw. Perspective, wall occlusion and distance shading shared with stone renderer. Ogre wall (35,28)/trigger (35,30); wizard wall (5,22)/trigger (3,22); queen wall (57,4)/trigger (55,4); dragon wall (0,-1)/trigger (0,1). Maze geometry unchanged. Enter/stay choice for all four; only accepting opens existing wide encounter. Older active guardian saves migrate safely, retaining progress. 63 automated tests pass. Browser inspected all four approaches and Ogre prompt while corridor/map remain visible. Character and room baselines untouched. No GitHub push in this turn.
+
+## Corridor distance darkness - 2026-10-25
+Strengthened shared depth shading for walls, integrated doors, floor and ceiling. Nearby surfaces retain the previous brightness through one tile; a quadratic falloff increasingly darkens distant passages toward black. Pixel sampling, texture assets, movement and saves unchanged. Browser inspected Ogre approach; screenshot corridor-depth-check.png. Existing 63 tests pass; release 990b975e4fa5.
+
+## Map-defined proximity hints - 2026-10-25
+Traced supplied map2 copy.png at 10px per maze cell; source retained in art-review/2026-10-25/hint-zones/source.png. Walkable zone counts: Ogre 118, wizard 176, elf 115, dragon 130. hint-zone-data.js stores irregular tile boundaries; maze-hints.js stores exact user wording. Successful forward/back exploration steps select destination text; leaving a zone restores the footsteps default. Gate prompts, active encounter feedback, blocked movement and turns retain their established behavior. No save schema or maze geometry changes. Tests exhaustively check movement across zone boundaries in both directions and all four exits, plus collision/turn behavior: 65 pass. Browser verified exact Ogre hint (maze-hint-check.png). Release 58ca7a61fdaa. No remote push.
+
+## Maze update accepted - 2026-10-25
+User approved doors, depth shading and exact map-zone hint behavior as the current maze baseline and requested committing/pushing it to the existing private GitHub repository.

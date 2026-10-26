@@ -15,3 +15,24 @@ test('Ogre door is visible down its corridor, projects larger nearby, and stays 
 });
 
 test('previous close-up gate save resumes one tile back without losing training',()=>{const s={...fresh(),pos:'35,29',visited:[fresh().pos,'35,29'],gate:'ogre'};s.ogre.taught=true;const storage={getItem(){return JSON.stringify(s);}};const loaded=load(storage);assert.equal(loaded.state.pos,'35,30');assert.equal(loaded.state.gate,'ogre');assert.ok(loaded.state.ogre.taught);assert.ok(loaded.writable);assert.ok(valid(loaded.state));});
+
+import {MAZE_DOORS,doorFace,doorPixel} from '../dist/maze-doors.js';
+test('all four wall doors prompt at the earlier tile, preserve saves, and enter only on acceptance',()=>{
+ for(const d of MAZE_DOORS){
+  const facing=d.side?(d.step<0?0:2):(d.step>0?1:3),before=neighbor(d.pos,(facing+2)%4);
+  let s={...fresh(),pos:before,facing,visited:[fresh().pos,before]};s=act(s,'forward');
+  assert.equal(s.pos,d.pos);assert.equal(s.gate,d.character);assert.equal(s.encounter,null);assert.ok(valid(s));
+  assert.equal(Math.abs(Number(d.pos.split(',')[0])-d.wallX)+Math.abs(Number(d.pos.split(',')[1])-d.wallY),2);
+  assert.equal(doorFace(d.wallX,d.wallY,d.side,d.step),d);assert.equal(doorFace(d.wallX,d.wallY,d.side,-d.step),undefined);assert.ok(doorPixel(d,64,80));assert.equal(doorPixel(d,0,0),null);
+  const mem={value:null,getItem(){return this.value;},setItem(k,v){this.value=v;}};save(mem,s);assert.equal(load(mem).state.gate,d.character);
+  const outside=act(s,'gate-decline');assert.equal(outside.encounter,null);assert.equal(outside.gate,null);
+  s=act(s,'gate-enter');assert.equal(s.encounter,d.character==='ogre'?'intro':d.character);assert.ok(valid(s));
+ }
+});
+test('older active guardian saves migrate from the close tile with progress intact',()=>{
+ for(const [oldPos,encounter] of [['4,22','wizard'],['56,4','queen'],['0,0','dragon']]){
+  const s={...fresh(),pos:oldPos,visited:[fresh().pos,oldPos],encounter};
+  if(encounter==='dragon')s.dragon.discovered=true;
+  const result=load({getItem(){return JSON.stringify(s);}});assert.ok(result.writable);assert.equal(result.state.encounter,encounter);assert.ok(valid(result.state));assert.notEqual(result.state.pos,oldPos);
+ }
+});

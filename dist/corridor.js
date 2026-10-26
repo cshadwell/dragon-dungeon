@@ -1,7 +1,10 @@
 // Original procedural 256×216 renderer. World cells are shared with collision/map.
-import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=e5525698eaf8';
-import {textures,sample} from './textures.js?v=e5525698eaf8';
-import {isOgreDoorFace,ogreDoorPixel} from './ogre-gate.js?v=e5525698eaf8';
+import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=58ca7a61fdaa';
+import {textures,sample} from './textures.js?v=58ca7a61fdaa';
+import {doorFace,doorPixel} from './maze-doors.js?v=58ca7a61fdaa';
+// Preserve nearby texture detail; progressively fade distant surfaces toward black.
+// One shared depth curve keeps doors, walls, floor and ceiling visually connected.
+export function distanceShade(depth){return 1/(1+depth*.13+Math.max(0,depth-1)**2*.075);}
 export function corridorPixels(state,w=256,h=216,pose=null){
  const data=new Uint8ClampedArray(w*h*4),[cx,cy]=state.pos.split(',').map(Number);
  const px=pose?.x??cx+.5,py=pose?.y??cy+.5,angle=pose?.angle??state.facing*Math.PI/2;
@@ -17,11 +20,11 @@ export function corridorPixels(state,w=256,h=216,pose=null){
    const hit=side?px+dist*rx:py+dist*ry,u=Math.floor((hit-Math.floor(hit))*128);
    for(let y=0;y<h;y++){
      if(y>=top&&y<=bottom){
-       const v=Math.floor((y-top)/wallH*128),shade=(side?.88:1)/(1+dist*.13),door=isOgreDoorFace(mx,my,side,side?sy:sx),[r,g,b]=(door&&ogreDoorPixel(u,v))||sample(textures.wall,u,v);
+       const v=Math.floor((y-top)/wallH*128),shade=(side?.88:1)*distanceShade(dist),door=doorFace(mx,my,side,side?sy:sx),[r,g,b]=(door&&doorPixel(door,u,v))||sample(textures.wall,u,v);
        put(x,y,r*shade,g*shade,b*shade);
      }else{
        const ceiling=y<h/2,depth=h/(2*Math.max(1,Math.abs(y-h/2))),wx=px+depth*rx,wy=py+depth*ry;
-       const shade=1/(1+depth*.13),[r,g,b]=sample(ceiling?textures.ceiling:textures.floor,wx*64,wy*64);
+       const shade=distanceShade(depth),[r,g,b]=sample(ceiling?textures.ceiling:textures.floor,wx*64,wy*64);
        put(x,y,r*shade,g*shade,b*shade);
      }
    }
