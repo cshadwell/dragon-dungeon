@@ -41,3 +41,5 @@ body.title-open{overflow:hidden;background:#050606}
 /* The self-contained attack encounter shares the approved room and control layout. */
 body.ogre-attack-room{overflow:hidden}body.ogre-attack-room>header,body.ogre-attack-room>main,body.ogre-attack-room>footer{display:none}
 #ogre-attack-encounter{position:fixed;inset:0;width:100%;height:100%;border:0;background:#141515;z-index:20}
+
+#title-music{position:absolute;top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));font:11px monospace;min-height:44px;padding:8px 12px;color:#e3cd91;background:#142018e8;border:1px solid #93835a;letter-spacing:0}

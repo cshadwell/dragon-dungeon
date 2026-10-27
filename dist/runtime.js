@@ -1,8 +1,8 @@
-import {SHIELD,notes} from './ogre.js?v=dc674bfe9cf8';
-import {mazeHint} from './maze-hints.js?v=dc674bfe9cf8';
+import {SHIELD,notes} from './ogre.js?v=642c1f189ebb';
+import {mazeHint} from './maze-hints.js?v=642c1f189ebb';
 // Supplied maze + user-approved encounter locations. The small prototype remains intact.
-import * as adventure from './engine.js?v=dc674bfe9cf8';
-import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=dc674bfe9cf8';
+import * as adventure from './engine.js?v=642c1f189ebb';
+import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=642c1f189ebb';
 export const MAZE_ONLY=false;
 export const WORLD_WIDTH=MAZE_WIDTH,WORLD_HEIGHT=MAZE_HEIGHT;
 export const START=MAZE_START,ENCOUNTER='35,30',WIZARD='3,22',QUEEN='55,4',DRAGON='0,1',DIRS=adventure.DIRS;
