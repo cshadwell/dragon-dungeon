@@ -25,3 +25,19 @@ body.encounter-room .viewport{grid-column:1/-1}.encounter-room .cartography{disp
 
 /* Visual-only room review; uses the normal encounter frame and approved native sprites. */
 .room-preview .scene{aspect-ratio:470/200!important;max-height:none!important}.room-preview .scene canvas{object-fit:contain;image-rendering:pixelated}.room-preview .room-switches{grid-template-columns:1fr 1fr;gap:8px}.room-preview .room-switches button[aria-pressed="true"]{border-color:#e1c174;background:#35402e}.room-preview .room-exit{display:block;color:#e1c174;margin-top:18px}.room-preview .guards{grid-template-columns:1fr 1fr}.room-preview .narrative h2{margin-top:18px}
+
+/* Full-screen 4:3 title artwork, sampled on a fixed pixel grid without cropping. */
+body.title-open{overflow:hidden;background:#050606}
+.title-open>header,.title-open>main,.title-open>footer{display:none}
+#title-screen{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:#050606;height:100vh;height:100dvh}
+.title-stage{position:relative;width:min(100vw,133.333vh);width:min(100vw,133.333dvh);aspect-ratio:4/3}
+#title-art{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+.title-entry{position:absolute;bottom:3%;left:0;right:0;display:grid;justify-items:center;gap:5px;padding:0 12px}
+#title-enter{min-width:220px;min-height:48px;padding:12px 24px;background:#17221ded;border:2px solid #c4a15c;box-shadow:inset 2px 2px #6a714e,inset -2px -2px #080d09,0 3px 0 #050605;color:#f1d58e;font:bold clamp(12px,1.6vw,17px)/1.4 monospace;letter-spacing:2px;text-transform:uppercase}
+#title-enter:hover{background:#34402b;border-color:#ffe3a1}
+#title-status{margin:0;color:#e2d2af;text-shadow:1px 1px #000;font:10px/1.4 monospace;letter-spacing:1px;text-align:center;background:#080d09b8;padding:3px 8px}
+@media(max-width:500px){#title-enter{min-width:190px;min-height:44px;padding:8px 14px;letter-spacing:1px}#title-status{font-size:8px}.title-entry{bottom:2%;gap:2px}}
+
+/* The self-contained attack encounter shares the approved room and control layout. */
+body.ogre-attack-room{overflow:hidden}body.ogre-attack-room>header,body.ogre-attack-room>main,body.ogre-attack-room>footer{display:none}
+#ogre-attack-encounter{position:fixed;inset:0;width:100%;height:100%;border:0;background:#141515;z-index:20}

@@ -1,7 +1,8 @@
-import {mazeHint} from './maze-hints.js?v=58ca7a61fdaa';
+import {SHIELD,notes} from './ogre.js?v=dc674bfe9cf8';
+import {mazeHint} from './maze-hints.js?v=dc674bfe9cf8';
 // Supplied maze + user-approved encounter locations. The small prototype remains intact.
-import * as adventure from './engine.js?v=58ca7a61fdaa';
-import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=58ca7a61fdaa';
+import * as adventure from './engine.js?v=dc674bfe9cf8';
+import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=dc674bfe9cf8';
 export const MAZE_ONLY=false;
 export const WORLD_WIDTH=MAZE_WIDTH,WORLD_HEIGHT=MAZE_HEIGHT;
 export const START=MAZE_START,ENCOUNTER='35,30',WIZARD='3,22',QUEEN='55,4',DRAGON='0,1',DIRS=adventure.DIRS;
@@ -12,6 +13,17 @@ export const SAVE_KEY='dragon-dungeon-maze-adventure-v1';
 const EXPLORATION_KEY='dragon-dungeon-maze-image-v1';
 export function fresh(){return {...adventure.fresh(),content:WORLD.CONTENT,gate:null,pos:START,checkpoint:START,facing:0,visited:[START],message:'You stand at the southeast entrance. Seek the three guardians, then confront the dragon. Their locations appear on the map only after discovery.'};}
 export function act(s,a){
+ // The attack encounter replaces the live Ogre UI; retain legacy save/reward fields
+ // until the remaining guardians and dragon are deliberately redesigned.
+ const inOgre=s.pos===ENCOUNTER&&s.encounter&&!['wizard','queen','dragon'].includes(s.encounter);
+ if(inOgre&&['attack-practice-1','attack-practice-2','attack-complete'].includes(a)){
+  const next=structuredClone(s);
+  if(a==='attack-complete'){
+   next.completed=true;next.items=[...new Set([...next.items,SHIELD])];next.knowledge=[...new Set([...next.knowledge,...notes])];
+   next.ogre={...next.ogre,attackPractice:2,round:3,taught:true,guard:null,angle:null};next.encounter='reward';next.message='You proved your timing and accuracy. The Ogre’s polished shield is yours.';
+  }else next.ogre.attackPractice=Math.max(next.ogre.attackPractice??0,Number(a.slice(-1)));
+  return next;
+ }
  const entries={ogre:ENCOUNTER,wizard:WIZARD,queen:QUEEN,dragon:DRAGON};
  const character=Object.keys(entries).find(k=>entries[k]===s.pos);
  if(s.gate){
@@ -26,7 +38,7 @@ export function act(s,a){
  if(!s.encounter&&['forward','back'].includes(a)&&next.pos!==s.pos&&Object.values(entries).includes(next.pos)){next.encounter=null;next.gate=Object.keys(entries).find(k=>entries[k]===next.pos);next.message='A doorway leads to the '+next.gate+' chamber. Do you wish to enter?';}
  return next;
 }
-export const valid=s=>adventure.valid(s,WORLD)&&([undefined,null].includes(s.gate)||(['ogre','wizard','queen','dragon'].includes(s.gate)&&s.pos===({ogre:ENCOUNTER,wizard:WIZARD,queen:QUEEN,dragon:DRAGON}[s.gate])&&s.encounter===null));
+export const valid=s=>adventure.valid(s,WORLD)&&(s.ogre.attackPractice===undefined||(Number.isInteger(s.ogre.attackPractice)&&s.ogre.attackPractice>=0&&s.ogre.attackPractice<=2))&&([undefined,null].includes(s.gate)||(['ogre','wizard','queen','dragon'].includes(s.gate)&&s.pos===({ogre:ENCOUNTER,wizard:WIZARD,queen:QUEEN,dragon:DRAGON}[s.gate])&&s.encounter===null));
 function explorationValid(s){return s&&s.content==='maze-image-1'&&cells.has(s.pos)&&Number.isInteger(s.facing)&&s.facing>=0&&s.facing<4&&Array.isArray(s.visited)&&s.visited.every(p=>cells.has(p))&&s.visited.includes(s.pos)&&s.visited.includes(START);}
 export function load(storage){try{
  const raw=storage.getItem(SAVE_KEY);

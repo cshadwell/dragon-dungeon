@@ -1,16 +1,16 @@
-import {showRoomPreview} from './room-preview.js?v=58ca7a61fdaa';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=58ca7a61fdaa';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=58ca7a61fdaa';
-import {drawCorridor} from './corridor.js?v=58ca7a61fdaa';
-import {exploredMap} from './explored-map.js?v=58ca7a61fdaa';
-import {dragonView,dragonArt} from './dragon.js?v=58ca7a61fdaa';
-import {queenView,queenArt} from './queen.js?v=58ca7a61fdaa';
-import {wizardView,wizardArt} from './wizard.js?v=58ca7a61fdaa';
-import {createAttempt,tick,respond} from './reaction.js?v=58ca7a61fdaa';
-import {lessons} from './ogre.js?v=58ca7a61fdaa';
-import {ogreView} from './ogre.js?v=58ca7a61fdaa';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=58ca7a61fdaa';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=58ca7a61fdaa';
+import {showRoomPreview} from './room-preview.js?v=dc674bfe9cf8';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=dc674bfe9cf8';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=dc674bfe9cf8';
+import {drawCorridor} from './corridor.js?v=dc674bfe9cf8';
+import {exploredMap} from './explored-map.js?v=dc674bfe9cf8';
+import {dragonView,dragonArt} from './dragon.js?v=dc674bfe9cf8';
+import {queenView,queenArt} from './queen.js?v=dc674bfe9cf8';
+import {wizardView,wizardArt} from './wizard.js?v=dc674bfe9cf8';
+import {createAttempt,tick,respond} from './reaction.js?v=dc674bfe9cf8';
+import {lessons} from './ogre.js?v=dc674bfe9cf8';
+import {ogreView} from './ogre.js?v=dc674bfe9cf8';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=dc674bfe9cf8';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=dc674bfe9cf8';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
@@ -36,7 +36,22 @@ function render(){
   $('live-map').innerHTML=exploredMap(state);
   scene();if(state.encounter)openPanel('encounter');else if(state.gate)openPanel('gate');else syncPanels();
 }
+let ogreFrame=null;
+window.addEventListener('message',event=>{
+ if(!ogreFrame||event.source!==ogreFrame.contentWindow||event.origin!==location.origin)return;
+ const actions={'ogre-attack:practice1':'attack-practice-1','ogre-attack:practice2':'attack-practice-2','ogre-attack:complete':'attack-complete','ogre-attack:leave':'leave'};
+ const action=actions[event.data?.type];if(!action)return;
+ state=act(state,action);persist();if(!state.encounter&&modal.open){panel=null;modal.close();}render();
+});
 function syncPanels(){
+ const attackRoom=Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
+ document.body.classList.toggle('ogre-attack-room',attackRoom);
+ if(attackRoom&&!ogreFrame){
+  ogreFrame=document.createElement('iframe');ogreFrame.id='ogre-attack-encounter';ogreFrame.title='Ogre attack training';
+  const params=new URLSearchParams({encounter:'1',practice:String(state.ogre.attackPractice??0),completed:String(state.completed)});
+  ogreFrame.src='./ogre-playtest.html?'+params;document.body.append(ogreFrame);
+ }else if(!attackRoom&&ogreFrame){ogreFrame.remove();ogreFrame=null;}
+
   const inside=Boolean(state.encounter);
   document.body.classList.toggle('encounter-room',inside);
   const controls=$('encounter-controls');controls.replaceChildren();controls.hidden=!inside;
@@ -99,7 +114,8 @@ function updatePanel(){
       if(view.inscription){const inscription=document.createElement('p');inscription.className='revealed-inscription';inscription.textContent=view.inscription;body.append(inscription);}
       const choices=document.createElement('div');choices.className='choices';for(const [label,action]of view.choices)choices.append(choice(label,action));body.append(choices);return;
     }
-    const view=state.encounter==='dragon'?dragonView(state):ogreView(state);
+    if(!['wizard','queen','dragon'].includes(state.encounter)){$('modal-title').textContent='The Ogre’s Armory';return;}
+    const view=dragonView(state);
     $('modal-title').textContent=view.title;
     const art=document.createElement('div');art.innerHTML=view.dragon?dragonArt(state):ogreArt(state);body.append(art);
     const text=document.createElement('p');text.textContent=view.text;body.append(text);
