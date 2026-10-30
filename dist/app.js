@@ -1,16 +1,17 @@
-import {showRoomPreview} from './room-preview.js?v=642c1f189ebb';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=642c1f189ebb';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=642c1f189ebb';
-import {drawCorridor} from './corridor.js?v=642c1f189ebb';
-import {exploredMap} from './explored-map.js?v=642c1f189ebb';
-import {dragonView,dragonArt} from './dragon.js?v=642c1f189ebb';
-import {queenView,queenArt} from './queen.js?v=642c1f189ebb';
-import {wizardView,wizardArt} from './wizard.js?v=642c1f189ebb';
-import {createAttempt,tick,respond} from './reaction.js?v=642c1f189ebb';
-import {lessons} from './ogre.js?v=642c1f189ebb';
-import {ogreView} from './ogre.js?v=642c1f189ebb';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=642c1f189ebb';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=642c1f189ebb';
+import {createDungeonMusic} from './dungeon-music.js?v=e24eed294c16';
+import {showRoomPreview} from './room-preview.js?v=e24eed294c16';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=e24eed294c16';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=e24eed294c16';
+import {drawCorridor} from './corridor.js?v=e24eed294c16';
+import {exploredMap} from './explored-map.js?v=e24eed294c16';
+import {dragonView,dragonArt} from './dragon.js?v=e24eed294c16';
+import {queenView,queenArt} from './queen.js?v=e24eed294c16';
+import {wizardView,wizardArt} from './wizard.js?v=e24eed294c16';
+import {createAttempt,tick,respond} from './reaction.js?v=e24eed294c16';
+import {lessons} from './ogre.js?v=e24eed294c16';
+import {ogreView} from './ogre.js?v=e24eed294c16';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=e24eed294c16';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=e24eed294c16';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
@@ -22,8 +23,21 @@ if(previewMode){state={...fresh(),pos:'35,32',facing:0,visited:[START,'35,32'],g
 
 if(previewMode&&new URLSearchParams(location.search).get('preview')==='doors'){const door=new URLSearchParams(location.search).get('door')||'ogre';const views={ogre:['35,32',0],wizard:['1,22',1],elf:['53,4',1],dragon:['0,3',0]};const [pos,facing]=views[door]||views.ogre;state={...fresh(),pos,facing,visited:[START,pos],message:'Approach the guardian’s door. This preview does not save progress.'};$('storage').textContent='Door approach preview — progress is not saved.';}
 
+const explorationAudio=new Audio('./assets/audio/dungeon-exploration.mp3');explorationAudio.id='dungeon-music';explorationAudio.preload='metadata';explorationAudio.hidden=true;document.body.append(explorationAudio);
+const musicControl=document.createElement('button');musicControl.id='dungeon-music-toggle';musicControl.textContent='Play dungeon music';musicControl.setAttribute('aria-pressed','false');document.querySelector('.toolbar').append(musicControl);
+const dungeonMusic=createDungeonMusic(explorationAudio,status=>{musicControl.textContent=status.muted?'Music off':status.playing?'Mute dungeon music':'Play dungeon music';musicControl.setAttribute('aria-pressed',String(status.playing&&!status.muted));});
+musicControl.onclick=()=>dungeonMusic.toggle();
+// Retry only on a real player gesture if the browser blocked initial playback.
+window.addEventListener('pointerdown',e=>{if(!e.target.closest('#dungeon-music-toggle'))dungeonMusic.retry();},{capture:true});window.addEventListener('keydown',e=>{if(!e.target.closest('#dungeon-music-toggle'))dungeonMusic.retry();},{capture:true});
+window.addEventListener('pagehide',()=>dungeonMusic.stop());
+window.addEventListener('pageshow',()=>dungeonMusic.setExploring(!state.encounter));
 let attempt=null, reactionFrame=null, slowReaction=false, motion=null;
 const names=['NORTH','EAST','SOUTH','WEST'];
+const navigationKeys={ArrowUp:'forward',ArrowDown:'back',ArrowLeft:'left',ArrowRight:'right'};
+const heldNavigation=new Set();let heldFrame=null;
+function stopHeldMovement(){heldNavigation.clear();if(heldFrame!==null)cancelAnimationFrame(heldFrame);heldFrame=null;}
+function repeatMovement(){heldFrame=null;if(document.hidden||modal.open||state.encounter||state.gate){stopHeldMovement();return;}const key=[...heldNavigation].at(-1);if(!key)return;perform(navigationKeys[key]);if(heldNavigation.size)heldFrame=requestAnimationFrame(repeatMovement);}
+
 function persist(){if(writable&&!save(storage,state)){writable=false;$('storage').textContent='Saving failed. Progress lasts only for this open session.';}}
 function scene(){drawCorridor($('scene'),state);}
 function render(){
@@ -36,16 +50,28 @@ function render(){
   $('live-map').innerHTML=exploredMap(state);
   scene();if(state.encounter)openPanel('encounter');else if(state.gate)openPanel('gate');else syncPanels();
 }
-let ogreFrame=null;
+let ogreFrame=null,elfFrame=null;
 window.addEventListener('message',event=>{
+ if(elfFrame&&event.source===elfFrame.contentWindow&&event.origin===location.origin){
+  const type=event.data?.type;let action=null;
+  if(type==='elf-defence:progress'&&Number.isInteger(event.data.blocks)&&event.data.blocks>=0&&event.data.blocks<=9)action='defence-progress-'+event.data.blocks;
+  if(type==='elf-defence:complete')action='defence-complete';if(type==='elf-defence:leave')action='leave';
+  if(action){state=act(state,action);persist();if(!state.encounter&&modal.open){panel=null;modal.close();}render();}return;
+ }
+
  if(!ogreFrame||event.source!==ogreFrame.contentWindow||event.origin!==location.origin)return;
  const actions={'ogre-attack:practice1':'attack-practice-1','ogre-attack:practice2':'attack-practice-2','ogre-attack:complete':'attack-complete','ogre-attack:leave':'leave'};
  const action=actions[event.data?.type];if(!action)return;
  state=act(state,action);persist();if(!state.encounter&&modal.open){panel=null;modal.close();}render();
 });
 function syncPanels(){
+ dungeonMusic.setExploring(!state.encounter);musicControl.disabled=false;
  const attackRoom=Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
- document.body.classList.toggle('ogre-attack-room',attackRoom);
+ const defenceRoom=state.encounter==='queen';
+ document.body.classList.toggle('ogre-attack-room',attackRoom||defenceRoom);
+ if(defenceRoom&&!elfFrame){elfFrame=document.createElement('iframe');elfFrame.id='elf-defence-encounter';elfFrame.title='Elf Queen defence training';elfFrame.src='./elf-playtest.html?'+new URLSearchParams({encounter:'1',blocks:String(state.queen.defenceBlocks??0),completed:String(state.queen.completed)});document.body.append(elfFrame);}
+ else if(!defenceRoom&&elfFrame){elfFrame.remove();elfFrame=null;}
+
  if(attackRoom&&!ogreFrame){
   ogreFrame=document.createElement('iframe');ogreFrame.id='ogre-attack-encounter';ogreFrame.title='Ogre attack training';
   const params=new URLSearchParams({encounter:'1',practice:String(state.ogre.attackPractice??0),completed:String(state.completed)});
@@ -67,6 +93,7 @@ function syncPanels(){
 }
 function openPanel(type){
   if(motion)return;
+  stopHeldMovement();
   panel=type;updatePanel();if(!modal.open)modal.show();
   syncPanels();
 }
@@ -100,12 +127,7 @@ function updatePanel(){
       if(state.dragon.victory)namePlate(body);
       const choices=document.createElement('div');choices.className='choices';for(const [label,action]of view.choices)choices.append(choice(label,action));body.append(choices);return;
     }
-    if(state.encounter==='queen'){
-      const view=queenView(state);$('modal-title').textContent=view.title;
-      const art=document.createElement('div');art.innerHTML=queenArt(state);body.append(art);
-      const text=document.createElement('p');text.textContent=view.text;body.append(text);
-      const choices=document.createElement('div');choices.className='choices';for(const [label,action]of view.choices)choices.append(choice(label,action));body.append(choices);return;
-    }
+    if(state.encounter==='queen'){$('modal-title').textContent='The Elf Queen’s Shrine';return;}
     if(state.encounter==='wizard'){
       const view=wizardView(state);$('modal-title').textContent=view.title;
       const art=document.createElement('div');art.innerHTML=wizardArt(state);body.append(art);
@@ -189,8 +211,8 @@ function startReaction(){
   };
   reactionFrame=requestAnimationFrame(frame);
 }
-window.addEventListener('blur',()=>{cancelReaction();finishMotion();});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelReaction();finishMotion();}});
+window.addEventListener('blur',()=>{stopHeldMovement();cancelReaction();finishMotion();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){stopHeldMovement();cancelReaction();finishMotion();}});
 function finishMotion(){
   if(!motion)return;
   cancelAnimationFrame(motion.frame);motion=null;$('scene').removeAttribute('aria-busy');render();
@@ -216,7 +238,9 @@ function perform(action){
   if(action==='reset'){state=fresh();writable=!previewMode;persist();$('storage').textContent=writable?'New expedition. Progress saves on this browser.':'Storage unavailable. Session only.';panel=null;modal.close();render();return;}
   if(panel&&panel!=='encounter'&&panel!=='gate')return;
   const before=state;
-  state=act(state,action);persist();
+  state=act(state,action);
+  if(['forward','back'].includes(action)&&state.pos===before.pos&&!before.encounter&&!before.gate)return;
+  persist();
   if(['forward','back','left','right'].includes(action)&&navigationChanged(before,state)){
     animateNavigation(before,state,action);return;
   }
@@ -228,12 +252,14 @@ $('dragon-return').onclick=()=>perform('dragon-shortcut');$('earned-name').oncli
 modal.addEventListener('cancel',e=>{e.preventDefault();if(panel!=='encounter'&&panel!=='gate')close();});
 document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>perform(b.dataset.action));
 window.addEventListener('keydown',e=>{
-  if(e.repeat){if(e.key.startsWith('Arrow'))e.preventDefault();return;}
-  if(motion){if(e.key.startsWith('Arrow'))e.preventDefault();return;}
+  if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)||e.target.isContentEditable)return;
+  if(e.repeat){if(navigationKeys[e.key])e.preventDefault();return;}
   if(e.key==='Escape'&&modal.open&&panel!=='encounter'){e.preventDefault();close();return;}
-  const action={ArrowUp:'forward',ArrowDown:'back',ArrowLeft:'left',ArrowRight:'right'}[e.key];
-  if(action){e.preventDefault();if(attempt){const guard={ArrowLeft:'left',ArrowUp:'high',ArrowRight:'right'}[e.key];if(guard)react(guard);}else if(!modal.open)perform(action);return;}
+  const action=navigationKeys[e.key];
+  if(action){e.preventDefault();if(attempt){const guard={ArrowLeft:'left',ArrowUp:'high',ArrowRight:'right'}[e.key];if(guard)react(guard);}else if(!modal.open&&!state.encounter&&!state.gate){heldNavigation.delete(e.key);heldNavigation.add(e.key);if(heldFrame===null)repeatMovement();}return;}
   if(['m','j'].includes(e.key.toLowerCase())){if(['BUTTON','INPUT','TEXTAREA'].includes(e.target.tagName)&&e.key===' ')return;e.preventDefault();if(modal.open){if(panel!=='encounter'&&panel!=='gate')close();}else openPanel(e.key.toLowerCase()==='m'?'map':'journal');}
-});render();
+});
+window.addEventListener('keyup',e=>{if(navigationKeys[e.key]){heldNavigation.delete(e.key);if(!heldNavigation.size)stopHeldMovement();}});
+render();
 
 }

@@ -37,3 +37,7 @@ Supplied Doors.png is preserved in art-review/2026-10-25/doors/source.png. Four 
 Title entry: index.html loads boot.js; normal launch shows supplied title art before app.js is dynamically imported. Preserve delayed save initialization and local preview bypass. Release stamping covers dynamic imports as well as static imports.
 
 Ogre attack training is now integrated through the existing door using the shared ogre-playtest.html / ogre-playtest.js / ogre-attack-model.js module. Standalone playtest remains available. The parent owns saves/rewards; accept only messages from the active same-origin encounter frame. Preserve practice-stage persistence and one-time shield reward compatibility. Old snort tutorial code remains historical/test support, not the live Ogre UI. Dragon/other guardian redesign remains pending.
+
+Elf defence is integrated through her existing maze door using the shared elf-playtest.html and pure elf-defence-model.js. Parent owns saved queen.defenceBlocks and one-time Queen seal reward. Standalone URL remains isolated. Frame messages must match active frame source and same origin. Preserve approved role poses and shrine artwork.
+
+Elf defence reaction roles are user-approved in ELF_DEFENCE_ART.md and dist/elf-defence-poses.js. Preserve those role pools and use exact approved-v2 IDs; poses10-13 are for her defence-against-dragon explanation.

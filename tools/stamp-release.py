@@ -14,7 +14,7 @@ html.write_text(html_source.replace('src="boot.js"',f'src="boot.js?v={version}"'
 print('Stamped release:',version)
 
 # Standalone playtests share the release graph, without entering the main app.
-for extra in [root/"ogre-playtest.html"]:
+for extra in [root/"ogre-playtest.html",root/"elf-playtest.html"]:
  if extra.exists():
   source=clean(extra.read_text())
   source=re.sub(r'(src|href)="([^"?]+\.(?:js|css))"',lambda m:f'{m[1]}="{m[2]}?v={version}"',source)

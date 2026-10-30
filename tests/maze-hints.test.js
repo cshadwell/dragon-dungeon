@@ -17,8 +17,8 @@ test('supplied map zones contain only maze paths and successful steps use the de
  }
  assert.deepEqual([...found].sort(),['D','E','O','W']);assert.deepEqual([...exits].sort(),['D','E','O','W']);
 });
-test('turning keeps the zone hint and collisions retain useful wall feedback',()=>{
+test('turning and wall bumps preserve the zone hint',()=>{
  const s={...fresh(),pos:'35,31',message:ZONE_MESSAGES.O};assert.equal(mazeHint(s.pos),ZONE_MESSAGES.O);
  assert.equal(act(s,'right').message,ZONE_MESSAGES.O);
- const wall={...s,facing:1};assert.equal(act(wall,'forward').message,'A stone wall blocks the way.');
+ const wall={...s,facing:1};assert.equal(act(wall,'forward').message,ZONE_MESSAGES.O);
 });
