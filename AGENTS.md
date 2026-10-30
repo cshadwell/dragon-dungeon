@@ -41,3 +41,7 @@ Ogre attack training is now integrated through the existing door using the share
 Elf defence is integrated through her existing maze door using the shared elf-playtest.html and pure elf-defence-model.js. Parent owns saved queen.defenceBlocks and one-time Queen seal reward. Standalone URL remains isolated. Frame messages must match active frame source and same origin. Preserve approved role poses and shrine artwork.
 
 Elf defence reaction roles are user-approved in ELF_DEFENCE_ART.md and dist/elf-defence-poses.js. Preserve those role pools and use exact approved-v2 IDs; poses10-13 are for her defence-against-dragon explanation.
+
+Wizard additions2026-10-30: gallery lookup now includes Wizard14–34 from separate wizard-spells-v1 catalog (seven colors × three poses). Original approved-v2 Wizard1–13 and all78baseline assets remain unchanged. See CHARACTER_ART.md and art-review/2026-10-30/wizard-spell-poses/index.html; new additions await visual approval before being called a new locked baseline.
+
+Wizard mind encounter now uses wizard-playtest iframe through existing door. Parent owns wizard.mindCorrect0–9 and one-time lens; validate active source/origin as other encounters. Four arrow-key/click compass choices, unique words/inks,4/3/2s stages. Final READY/GO then0.18s gaps without reaction poses; earlier reactions6/5/4,stage3,victory9,welcome2. Original spell assets now wizard-spells-v2 (white correction), IDs14–34 unchanged. Preserve earlier approved-v2 assets. Dragon remains legacy pending redesign.

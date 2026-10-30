@@ -1,4 +1,4 @@
-import {animateTitle} from './title-effects.js?v=e24eed294c16';
+import {animateTitle} from './title-effects.js?v=9b095cd0d72d';
 // Title view precedes app initialization: opening it never loads or writes a save.
 const title=document.getElementById('title-screen'),enter=document.getElementById('title-enter');
 let titleMusic=null,titleMusicActive=false,stopTitleEffects=()=>{};
@@ -7,7 +7,7 @@ const preview=['localhost','127.0.0.1'].includes(location.hostname)&&new URLSear
 async function start(){
  enter.disabled=true;stopTitleMusic();stopTitleEffects();
  try{
-  await import('./app.js?v=e24eed294c16');
+  await import('./app.js?v=9b095cd0d72d');
   document.body.classList.remove('title-open');title.remove();
   document.querySelector('[data-action="forward"]')?.focus({preventScroll:true});
  }catch(error){enter.disabled=false;document.getElementById('title-status').textContent='The dungeon could not load. Please try again.';console.error(error);}

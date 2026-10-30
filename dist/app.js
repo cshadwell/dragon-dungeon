@@ -1,17 +1,17 @@
-import {createDungeonMusic} from './dungeon-music.js?v=e24eed294c16';
-import {showRoomPreview} from './room-preview.js?v=e24eed294c16';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=e24eed294c16';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=e24eed294c16';
-import {drawCorridor} from './corridor.js?v=e24eed294c16';
-import {exploredMap} from './explored-map.js?v=e24eed294c16';
-import {dragonView,dragonArt} from './dragon.js?v=e24eed294c16';
-import {queenView,queenArt} from './queen.js?v=e24eed294c16';
-import {wizardView,wizardArt} from './wizard.js?v=e24eed294c16';
-import {createAttempt,tick,respond} from './reaction.js?v=e24eed294c16';
-import {lessons} from './ogre.js?v=e24eed294c16';
-import {ogreView} from './ogre.js?v=e24eed294c16';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=e24eed294c16';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=e24eed294c16';
+import {createDungeonMusic} from './dungeon-music.js?v=9b095cd0d72d';
+import {showRoomPreview} from './room-preview.js?v=9b095cd0d72d';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=9b095cd0d72d';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=9b095cd0d72d';
+import {drawCorridor} from './corridor.js?v=9b095cd0d72d';
+import {exploredMap} from './explored-map.js?v=9b095cd0d72d';
+import {dragonView,dragonArt} from './dragon.js?v=9b095cd0d72d';
+import {queenView,queenArt} from './queen.js?v=9b095cd0d72d';
+import {wizardView,wizardArt} from './wizard.js?v=9b095cd0d72d';
+import {createAttempt,tick,respond} from './reaction.js?v=9b095cd0d72d';
+import {lessons} from './ogre.js?v=9b095cd0d72d';
+import {ogreView} from './ogre.js?v=9b095cd0d72d';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=9b095cd0d72d';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=9b095cd0d72d';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
@@ -50,8 +50,15 @@ function render(){
   $('live-map').innerHTML=exploredMap(state);
   scene();if(state.encounter)openPanel('encounter');else if(state.gate)openPanel('gate');else syncPanels();
 }
-let ogreFrame=null,elfFrame=null;
+let ogreFrame=null,elfFrame=null,wizardFrame=null;
 window.addEventListener('message',event=>{
+ if(wizardFrame&&event.source===wizardFrame.contentWindow&&event.origin===location.origin){
+  const type=event.data?.type;let action=null;
+  if(type==='wizard-mind:progress'&&Number.isInteger(event.data.correct)&&event.data.correct>=0&&event.data.correct<=9)action='mind-progress-'+event.data.correct;
+  if(type==='wizard-mind:complete')action='mind-complete';if(type==='wizard-mind:leave')action='leave';
+  if(action){state=act(state,action);persist();if(!state.encounter&&modal.open){panel=null;modal.close();}render();}return;
+ }
+
  if(elfFrame&&event.source===elfFrame.contentWindow&&event.origin===location.origin){
   const type=event.data?.type;let action=null;
   if(type==='elf-defence:progress'&&Number.isInteger(event.data.blocks)&&event.data.blocks>=0&&event.data.blocks<=9)action='defence-progress-'+event.data.blocks;
@@ -68,7 +75,11 @@ function syncPanels(){
  dungeonMusic.setExploring(!state.encounter);musicControl.disabled=false;
  const attackRoom=Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
  const defenceRoom=state.encounter==='queen';
- document.body.classList.toggle('ogre-attack-room',attackRoom||defenceRoom);
+ const mindRoom=state.encounter==='wizard';
+ document.body.classList.toggle('ogre-attack-room',attackRoom||defenceRoom||mindRoom);
+ if(mindRoom&&!wizardFrame){wizardFrame=document.createElement('iframe');wizardFrame.id='wizard-mind-encounter';wizardFrame.title='Wizard mind training';wizardFrame.src='./wizard-playtest.html?'+new URLSearchParams({encounter:'1',correct:String(state.wizard.mindCorrect??0),completed:String(state.wizard.completed)});document.body.append(wizardFrame);}
+ else if(!mindRoom&&wizardFrame){wizardFrame.remove();wizardFrame=null;}
+
  if(defenceRoom&&!elfFrame){elfFrame=document.createElement('iframe');elfFrame.id='elf-defence-encounter';elfFrame.title='Elf Queen defence training';elfFrame.src='./elf-playtest.html?'+new URLSearchParams({encounter:'1',blocks:String(state.queen.defenceBlocks??0),completed:String(state.queen.completed)});document.body.append(elfFrame);}
  else if(!defenceRoom&&elfFrame){elfFrame.remove();elfFrame=null;}
 
@@ -128,14 +139,7 @@ function updatePanel(){
       const choices=document.createElement('div');choices.className='choices';for(const [label,action]of view.choices)choices.append(choice(label,action));body.append(choices);return;
     }
     if(state.encounter==='queen'){$('modal-title').textContent='The Elf Queen’s Shrine';return;}
-    if(state.encounter==='wizard'){
-      const view=wizardView(state);$('modal-title').textContent=view.title;
-      const art=document.createElement('div');art.innerHTML=wizardArt(state);body.append(art);
-      const text=document.createElement('p');text.textContent=view.text;body.append(text);
-      if(view.claim){const claim=document.createElement('blockquote');claim.className='mask-claim';claim.textContent=view.claim;body.append(claim);}
-      if(view.inscription){const inscription=document.createElement('p');inscription.className='revealed-inscription';inscription.textContent=view.inscription;body.append(inscription);}
-      const choices=document.createElement('div');choices.className='choices';for(const [label,action]of view.choices)choices.append(choice(label,action));body.append(choices);return;
-    }
+    if(state.encounter==='wizard'){$('modal-title').textContent='The Wizard’s Study';return;}
     if(!['wizard','queen','dragon'].includes(state.encounter)){$('modal-title').textContent='The Ogre’s Armory';return;}
     const view=dragonView(state);
     $('modal-title').textContent=view.title;

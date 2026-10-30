@@ -1,7 +1,7 @@
 // Original procedural 256×216 renderer. World cells are shared with collision/map.
-import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=e24eed294c16';
-import {textures,sample} from './textures.js?v=e24eed294c16';
-import {doorFace,doorPixel} from './maze-doors.js?v=e24eed294c16';
+import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=9b095cd0d72d';
+import {textures,sample} from './textures.js?v=9b095cd0d72d';
+import {doorFace,doorPixel} from './maze-doors.js?v=9b095cd0d72d';
 // Preserve nearby texture detail; progressively fade distant surfaces toward black.
 // One shared depth curve keeps doors, walls, floor and ceiling visually connected.
 export function distanceShade(depth){return 1/(1+depth*.13+Math.max(0,depth-1)**2*.075);}

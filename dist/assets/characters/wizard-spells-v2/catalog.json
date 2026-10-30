@@ -1,0 +1,618 @@
+{
+  "version": "wizard-spells-v2",
+  "status": "User-requested white highlight restoration and white spell brightness revision",
+  "scale": 0.24375,
+  "poses": [
+    {
+      "character": "wizard",
+      "number": 14,
+      "id": "wizard-014",
+      "sheet": "wizard-spells-blue",
+      "cell": 1,
+      "color": "blue",
+      "spellPose": 1,
+      "file": "../wizard-spells-v2/wizard/pose-014.png",
+      "width": 104,
+      "height": 136,
+      "bounds": [
+        53,
+        276,
+        401,
+        739
+      ],
+      "scale": 0.24375,
+      "artWidth": 85,
+      "artHeight": 113,
+      "artOffset": [
+        9,
+        15
+      ],
+      "baselineY": 128,
+      "sha256": "2aa419f0fb2c7bbf4acdf2e22a8955ca74fc1b340df3127331652674ebdab5c8",
+      "sourceSha256": "8403857c465620f187b5f83a39122ae8ddd6fb55d2fed06f33b72021fc95a1ec"
+    },
+    {
+      "character": "wizard",
+      "number": 15,
+      "id": "wizard-015",
+      "sheet": "wizard-spells-blue",
+      "cell": 2,
+      "color": "blue",
+      "spellPose": 2,
+      "file": "../wizard-spells-v2/wizard/pose-015.png",
+      "width": 144,
+      "height": 128,
+      "bounds": [
+        446,
+        293,
+        954,
+        735
+      ],
+      "scale": 0.24375,
+      "artWidth": 124,
+      "artHeight": 108,
+      "artOffset": [
+        10,
+        12
+      ],
+      "baselineY": 120,
+      "sha256": "317d8587881fd96f774e376fb80a7cdcefec58a7ad7e783cdaefbecc5635f706",
+      "sourceSha256": "8403857c465620f187b5f83a39122ae8ddd6fb55d2fed06f33b72021fc95a1ec"
+    },
+    {
+      "character": "wizard",
+      "number": 16,
+      "id": "wizard-016",
+      "sheet": "wizard-spells-blue",
+      "cell": 3,
+      "color": "blue",
+      "spellPose": 3,
+      "file": "../wizard-spells-v2/wizard/pose-016.png",
+      "width": 112,
+      "height": 128,
+      "bounds": [
+        1056,
+        326,
+        1450,
+        760
+      ],
+      "scale": 0.24375,
+      "artWidth": 96,
+      "artHeight": 106,
+      "artOffset": [
+        8,
+        14
+      ],
+      "baselineY": 120,
+      "sha256": "b1bcd1aaca7536cf247760557e5b342acf9afea13deed5b52520505ef10b18d4",
+      "sourceSha256": "8403857c465620f187b5f83a39122ae8ddd6fb55d2fed06f33b72021fc95a1ec"
+    },
+    {
+      "character": "wizard",
+      "number": 17,
+      "id": "wizard-017",
+      "sheet": "wizard-spells-green",
+      "cell": 1,
+      "color": "green",
+      "spellPose": 1,
+      "file": "../wizard-spells-v2/wizard/pose-017.png",
+      "width": 104,
+      "height": 136,
+      "bounds": [
+        53,
+        276,
+        401,
+        739
+      ],
+      "scale": 0.24375,
+      "artWidth": 85,
+      "artHeight": 113,
+      "artOffset": [
+        9,
+        15
+      ],
+      "baselineY": 128,
+      "sha256": "9620196a132b29e9ae87df20b33f5c50b5aff1a2da60f6bb9ddaabb936264282",
+      "sourceSha256": "579e51c2dddaed0b40ac4d655e7dcc6b5d05a2dde171f40e978362903e4a22fd"
+    },
+    {
+      "character": "wizard",
+      "number": 18,
+      "id": "wizard-018",
+      "sheet": "wizard-spells-green",
+      "cell": 2,
+      "color": "green",
+      "spellPose": 2,
+      "file": "../wizard-spells-v2/wizard/pose-018.png",
+      "width": 144,
+      "height": 128,
+      "bounds": [
+        446,
+        293,
+        954,
+        735
+      ],
+      "scale": 0.24375,
+      "artWidth": 124,
+      "artHeight": 108,
+      "artOffset": [
+        10,
+        12
+      ],
+      "baselineY": 120,
+      "sha256": "0cd6dcdd5ed7835225787d3a840664598e3d27d1715e16df329897d702acf458",
+      "sourceSha256": "579e51c2dddaed0b40ac4d655e7dcc6b5d05a2dde171f40e978362903e4a22fd"
+    },
+    {
+      "character": "wizard",
+      "number": 19,
+      "id": "wizard-019",
+      "sheet": "wizard-spells-green",
+      "cell": 3,
+      "color": "green",
+      "spellPose": 3,
+      "file": "../wizard-spells-v2/wizard/pose-019.png",
+      "width": 112,
+      "height": 128,
+      "bounds": [
+        1056,
+        326,
+        1450,
+        760
+      ],
+      "scale": 0.24375,
+      "artWidth": 96,
+      "artHeight": 106,
+      "artOffset": [
+        8,
+        14
+      ],
+      "baselineY": 120,
+      "sha256": "a4bb8394dc4b956ce1c84c01b14d7b554ce0b164d7ba0d95d6afefdb8d01b1ca",
+      "sourceSha256": "579e51c2dddaed0b40ac4d655e7dcc6b5d05a2dde171f40e978362903e4a22fd"
+    },
+    {
+      "character": "wizard",
+      "number": 20,
+      "id": "wizard-020",
+      "sheet": "wizard-spells-orange",
+      "cell": 1,
+      "color": "orange",
+      "spellPose": 1,
+      "file": "../wizard-spells-v2/wizard/pose-020.png",
+      "width": 104,
+      "height": 136,
+      "bounds": [
+        53,
+        276,
+        401,
+        739
+      ],
+      "scale": 0.24375,
+      "artWidth": 85,
+      "artHeight": 113,
+      "artOffset": [
+        9,
+        15
+      ],
+      "baselineY": 128,
+      "sha256": "c58402152e6fe0e5234308365576463e72f520680eda96fdf8d545962213b483",
+      "sourceSha256": "ecb8c9969963d1f940e7e64a1653c71e36ddaec1419bceb3511fd32fc88a97ed"
+    },
+    {
+      "character": "wizard",
+      "number": 21,
+      "id": "wizard-021",
+      "sheet": "wizard-spells-orange",
+      "cell": 2,
+      "color": "orange",
+      "spellPose": 2,
+      "file": "../wizard-spells-v2/wizard/pose-021.png",
+      "width": 144,
+      "height": 128,
+      "bounds": [
+        446,
+        293,
+        954,
+        735
+      ],
+      "scale": 0.24375,
+      "artWidth": 124,
+      "artHeight": 108,
+      "artOffset": [
+        10,
+        12
+      ],
+      "baselineY": 120,
+      "sha256": "8ba61a90a7fea19d3b290fde53e9c21d2a059c626bf78a69b598e054c38e111a",
+      "sourceSha256": "ecb8c9969963d1f940e7e64a1653c71e36ddaec1419bceb3511fd32fc88a97ed"
+    },
+    {
+      "character": "wizard",
+      "number": 22,
+      "id": "wizard-022",
+      "sheet": "wizard-spells-orange",
+      "cell": 3,
+      "color": "orange",
+      "spellPose": 3,
+      "file": "../wizard-spells-v2/wizard/pose-022.png",
+      "width": 112,
+      "height": 128,
+      "bounds": [
+        1056,
+        326,
+        1450,
+        760
+      ],
+      "scale": 0.24375,
+      "artWidth": 96,
+      "artHeight": 106,
+      "artOffset": [
+        8,
+        14
+      ],
+      "baselineY": 120,
+      "sha256": "ffa17eb3b8ba2a130a00346112f3c0c60f0a0394583875000931fac71e8dd172",
+      "sourceSha256": "ecb8c9969963d1f940e7e64a1653c71e36ddaec1419bceb3511fd32fc88a97ed"
+    },
+    {
+      "character": "wizard",
+      "number": 23,
+      "id": "wizard-023",
+      "sheet": "wizard-spells-purple",
+      "cell": 1,
+      "color": "purple",
+      "spellPose": 1,
+      "file": "../wizard-spells-v2/wizard/pose-023.png",
+      "width": 104,
+      "height": 136,
+      "bounds": [
+        53,
+        276,
+        401,
+        739
+      ],
+      "scale": 0.24375,
+      "artWidth": 85,
+      "artHeight": 113,
+      "artOffset": [
+        9,
+        15
+      ],
+      "baselineY": 128,
+      "sha256": "6c2503d08a2bfe05786075ee000aeb87d314ea306b61541eb1647543908bc1d3",
+      "sourceSha256": "4729081cc56703b06dcf5b4eae5705eca09a671499ab7732ba92c515c9f1befa"
+    },
+    {
+      "character": "wizard",
+      "number": 24,
+      "id": "wizard-024",
+      "sheet": "wizard-spells-purple",
+      "cell": 2,
+      "color": "purple",
+      "spellPose": 2,
+      "file": "../wizard-spells-v2/wizard/pose-024.png",
+      "width": 144,
+      "height": 128,
+      "bounds": [
+        446,
+        293,
+        954,
+        735
+      ],
+      "scale": 0.24375,
+      "artWidth": 124,
+      "artHeight": 108,
+      "artOffset": [
+        10,
+        12
+      ],
+      "baselineY": 120,
+      "sha256": "303e2f833c8b55b59ba35daabf309946dae1af495a21a22e307ecbfd6dbf1f3d",
+      "sourceSha256": "4729081cc56703b06dcf5b4eae5705eca09a671499ab7732ba92c515c9f1befa"
+    },
+    {
+      "character": "wizard",
+      "number": 25,
+      "id": "wizard-025",
+      "sheet": "wizard-spells-purple",
+      "cell": 3,
+      "color": "purple",
+      "spellPose": 3,
+      "file": "../wizard-spells-v2/wizard/pose-025.png",
+      "width": 112,
+      "height": 128,
+      "bounds": [
+        1056,
+        326,
+        1450,
+        760
+      ],
+      "scale": 0.24375,
+      "artWidth": 96,
+      "artHeight": 106,
+      "artOffset": [
+        8,
+        14
+      ],
+      "baselineY": 120,
+      "sha256": "e1e8df519d39c4f2ba8f081241f03b00bce2a67f10e1e3a41f76f170cf4b0fba",
+      "sourceSha256": "4729081cc56703b06dcf5b4eae5705eca09a671499ab7732ba92c515c9f1befa"
+    },
+    {
+      "character": "wizard",
+      "number": 26,
+      "id": "wizard-026",
+      "sheet": "wizard-spells-red",
+      "cell": 1,
+      "color": "red",
+      "spellPose": 1,
+      "file": "../wizard-spells-v2/wizard/pose-026.png",
+      "width": 104,
+      "height": 136,
+      "bounds": [
+        53,
+        276,
+        401,
+        739
+      ],
+      "scale": 0.24375,
+      "artWidth": 85,
+      "artHeight": 113,
+      "artOffset": [
+        9,
+        15
+      ],
+      "baselineY": 128,
+      "sha256": "e9d7ebc1819de953ebaed181e552934168ca2253bbf465f49af364b3b8078df0",
+      "sourceSha256": "da30c188f5480ae5456b54bd9bca2b86137b55495719f909034c6baa25742211"
+    },
+    {
+      "character": "wizard",
+      "number": 27,
+      "id": "wizard-027",
+      "sheet": "wizard-spells-red",
+      "cell": 2,
+      "color": "red",
+      "spellPose": 2,
+      "file": "../wizard-spells-v2/wizard/pose-027.png",
+      "width": 144,
+      "height": 128,
+      "bounds": [
+        446,
+        293,
+        954,
+        735
+      ],
+      "scale": 0.24375,
+      "artWidth": 124,
+      "artHeight": 108,
+      "artOffset": [
+        10,
+        12
+      ],
+      "baselineY": 120,
+      "sha256": "8bf31335918e50ff7dc17c6542f3b5c58bf1bd4c368614aecbae0aab2b3c5277",
+      "sourceSha256": "da30c188f5480ae5456b54bd9bca2b86137b55495719f909034c6baa25742211"
+    },
+    {
+      "character": "wizard",
+      "number": 28,
+      "id": "wizard-028",
+      "sheet": "wizard-spells-red",
+      "cell": 3,
+      "color": "red",
+      "spellPose": 3,
+      "file": "../wizard-spells-v2/wizard/pose-028.png",
+      "width": 112,
+      "height": 128,
+      "bounds": [
+        1056,
+        326,
+        1450,
+        760
+      ],
+      "scale": 0.24375,
+      "artWidth": 96,
+      "artHeight": 106,
+      "artOffset": [
+        8,
+        14
+      ],
+      "baselineY": 120,
+      "sha256": "0778ba9e7dd0e7d0b15a5aa916c027802e3a7b2130434ac66caf117c005854a1",
+      "sourceSha256": "da30c188f5480ae5456b54bd9bca2b86137b55495719f909034c6baa25742211"
+    },
+    {
+      "character": "wizard",
+      "number": 29,
+      "id": "wizard-029",
+      "sheet": "wizard-spells-white",
+      "cell": 1,
+      "color": "white",
+      "spellPose": 1,
+      "file": "../wizard-spells-v2/wizard/pose-029.png",
+      "width": 104,
+      "height": 136,
+      "bounds": [
+        53,
+        276,
+        401,
+        739
+      ],
+      "scale": 0.24375,
+      "artWidth": 85,
+      "artHeight": 113,
+      "artOffset": [
+        9,
+        15
+      ],
+      "baselineY": 128,
+      "sha256": "c25b810bed2083a6ac69338cb825238e91e3c9610237f1053b1ccdd6e8dc1973",
+      "sourceSha256": "9e368376c4dddcdab3f6684fb7752586b557dda29fff92f589e4873eaf9b3689"
+    },
+    {
+      "character": "wizard",
+      "number": 30,
+      "id": "wizard-030",
+      "sheet": "wizard-spells-white",
+      "cell": 2,
+      "color": "white",
+      "spellPose": 2,
+      "file": "../wizard-spells-v2/wizard/pose-030.png",
+      "width": 144,
+      "height": 128,
+      "bounds": [
+        446,
+        293,
+        954,
+        735
+      ],
+      "scale": 0.24375,
+      "artWidth": 124,
+      "artHeight": 108,
+      "artOffset": [
+        10,
+        12
+      ],
+      "baselineY": 120,
+      "sha256": "0b5e1353b3053150c2627bed26ed20e17aaca80c3d53ebb5f73a0003024d1a0b",
+      "sourceSha256": "9e368376c4dddcdab3f6684fb7752586b557dda29fff92f589e4873eaf9b3689"
+    },
+    {
+      "character": "wizard",
+      "number": 31,
+      "id": "wizard-031",
+      "sheet": "wizard-spells-white",
+      "cell": 3,
+      "color": "white",
+      "spellPose": 3,
+      "file": "../wizard-spells-v2/wizard/pose-031.png",
+      "width": 112,
+      "height": 128,
+      "bounds": [
+        1056,
+        326,
+        1450,
+        760
+      ],
+      "scale": 0.24375,
+      "artWidth": 96,
+      "artHeight": 106,
+      "artOffset": [
+        8,
+        14
+      ],
+      "baselineY": 120,
+      "sha256": "fb2b61e27d89a5d01188ab732afaa227e8dbc627e69c8b126f241cd314e80871",
+      "sourceSha256": "9e368376c4dddcdab3f6684fb7752586b557dda29fff92f589e4873eaf9b3689"
+    },
+    {
+      "character": "wizard",
+      "number": 32,
+      "id": "wizard-032",
+      "sheet": "wizard-spells-yellow",
+      "cell": 1,
+      "color": "yellow",
+      "spellPose": 1,
+      "file": "../wizard-spells-v2/wizard/pose-032.png",
+      "width": 104,
+      "height": 136,
+      "bounds": [
+        53,
+        276,
+        401,
+        739
+      ],
+      "scale": 0.24375,
+      "artWidth": 85,
+      "artHeight": 113,
+      "artOffset": [
+        9,
+        15
+      ],
+      "baselineY": 128,
+      "sha256": "908c8a1b0af03a198922c9a93b72ba9ed5a91e39a5ff0a19650b57cd7dba0374",
+      "sourceSha256": "8621428179742b2fa2648e204ff447653767e8264523ab57a9b9a38fa896f55c"
+    },
+    {
+      "character": "wizard",
+      "number": 33,
+      "id": "wizard-033",
+      "sheet": "wizard-spells-yellow",
+      "cell": 2,
+      "color": "yellow",
+      "spellPose": 2,
+      "file": "../wizard-spells-v2/wizard/pose-033.png",
+      "width": 144,
+      "height": 128,
+      "bounds": [
+        446,
+        293,
+        954,
+        735
+      ],
+      "scale": 0.24375,
+      "artWidth": 124,
+      "artHeight": 108,
+      "artOffset": [
+        10,
+        12
+      ],
+      "baselineY": 120,
+      "sha256": "24d101348ad1f6111650587690fe3fa8aa4c1ec966e4e1ff41f1b912deed3b25",
+      "sourceSha256": "8621428179742b2fa2648e204ff447653767e8264523ab57a9b9a38fa896f55c"
+    },
+    {
+      "character": "wizard",
+      "number": 34,
+      "id": "wizard-034",
+      "sheet": "wizard-spells-yellow",
+      "cell": 3,
+      "color": "yellow",
+      "spellPose": 3,
+      "file": "../wizard-spells-v2/wizard/pose-034.png",
+      "width": 112,
+      "height": 128,
+      "bounds": [
+        1056,
+        326,
+        1450,
+        760
+      ],
+      "scale": 0.24375,
+      "artWidth": 96,
+      "artHeight": 106,
+      "artOffset": [
+        8,
+        14
+      ],
+      "baselineY": 120,
+      "sha256": "16418475fcff2568a0f3eea1092eb5bcc1ffc46467ae274eecf07eba2d59885f",
+      "sourceSha256": "8621428179742b2fa2648e204ff447653767e8264523ab57a9b9a38fa896f55c"
+    }
+  ],
+  "pixelChanges": {
+    "14": 0,
+    "15": 0,
+    "16": 0,
+    "17": 0,
+    "18": 52,
+    "19": 0,
+    "20": 0,
+    "21": 52,
+    "22": 0,
+    "23": 0,
+    "24": 52,
+    "25": 0,
+    "26": 0,
+    "27": 52,
+    "28": 0,
+    "29": 779,
+    "30": 1658,
+    "31": 306,
+    "32": 0,
+    "33": 52,
+    "34": 0
+  }
+}

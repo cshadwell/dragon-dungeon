@@ -125,3 +125,9 @@ Elf defence stage tuning revised at user request: attack speed/gap 60/0.9s,65/0.
 
 ## Current game checkpoint approved - 2026-10-29
 User approved latest integrated Elf tuning and authorized committing/pushing all current game progress to the existing private GitHub repository.
+
+## Wizard mind standalone test — 2026-10-30
+User approved layout with large bold choices and a visible spell overlay completely covering original blue staff gem; separate spell indicator rejected. Authorized isolated playtest, no live integration. Match spell color to written name; shuffle four unique choices each spell from seven colors. Initial4s matching ink,3s conflicting ink,2s faster conflicting ink. Provisional three successes/stage for tuning, safe retries. Conflicting tile backgrounds reserved as a possible dragon complication, not implemented.
+
+## Wizard integration approved — 2026-10-30
+User approved supplied spell poses and reaction roles and authorized live integration. Final trial prioritizes back-to-back casting over per-answer reactions, with READY/GO cue before trial. Implemented0.18s final gap as initial tuning;4/3/2s answer windows retained. Push deferred until user tests/accepts. Legacy lens/notes maintained for save and dragon compatibility; new story/journal wording remains future refinement.

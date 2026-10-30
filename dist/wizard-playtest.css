@@ -1,0 +1,17 @@
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#141515;color:#eae3c7;font:16px/1.5 Georgia,serif}main{width:min(960px,96vw);margin:14px auto}header{display:flex;justify-content:space-between;gap:10px;color:#c9bd98;font:11px monospace;letter-spacing:1px;margin-bottom:12px}.frame{border:5px solid #777773;box-shadow:inset 0 0 0 2px #b1afa0,0 0 0 2px #333;background:#152019;padding:4px}canvas{display:block;width:100%;aspect-ratio:470/200;image-rendering:pixelated}.lower{display:grid;grid-template-columns:354fr 580fr;gap:18px;margin-top:18px}.guidance,.challenge{padding:16px}h2{font:11px monospace;color:#d5bd78;margin:0}.heading{display:flex;justify-content:space-between;gap:8px;align-items:center}output{font:12px monospace;white-space:nowrap}#message{font:23px/1.3 Georgia;min-height:100px;margin:20px 0}.note{font:11px/1.6 monospace;color:#b0b8a5}.actions{display:flex;gap:10px;margin-top:18px}button{cursor:pointer;color:#e8d49d;background:#243329;border:2px solid #727a60;min-height:44px;padding:10px;font:12px monospace}button:focus-visible{outline:3px solid #ffe3a1;outline-offset:2px}button:hover{border-color:#ead08a}button:disabled{cursor:default}#choices{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}#choices button{font:bold clamp(22px,4.3vw,42px)/1.2 monospace;min-height:85px;padding:10px 4px}#choices button:disabled{opacity:.65}progress{display:block;width:100%;height:8px;margin-top:14px;accent-color:#c7a65b}footer{font:10px monospace;color:#929684;margin-top:18px}a{color:#cdb875}@media(max-width:600px){.lower{grid-template-columns:1fr}#message{min-height:0}header{font-size:9px}#choices button{font-size:32px}}
+
+/* Fixed compass positions; the words and inks shuffle between spells. */
+#choices{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,85px);gap:8px;align-items:stretch}
+#choices .up{grid-column:2;grid-row:1}#choices .left{grid-column:1;grid-row:2}#choices .right{grid-column:3;grid-row:2}#choices .down{grid-column:2;grid-row:3}
+#choices button{font-size:clamp(16px,3.2vw,32px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;padding:6px 2px}
+.direction{font:20px monospace;color:#e4cc8d}#choices button:disabled{opacity:.85}
+@media(max-width:600px){#choices button{font-size:clamp(16px,5vw,26px)}}
+
+/* Color words dominate; neutral black keeps all seven inks readable. */
+#choices button{background:#000;container-type:inline-size;gap:3px;padding:8px 3px;font-weight:900}
+#choices button:hover{background:#000;border-color:#ead08a}
+#choices .color-word{display:block;max-width:100%;font-family:monospace;font-weight:900;font-size:min(42px,calc(155cqi / var(--letters)));line-height:1.1;letter-spacing:-1px}
+#choices .direction{font:14px/1 monospace;color:#cfc8b1;margin-top:4px}
+#choices button:disabled{opacity:1}
+
+.frame:has(#room){position:relative}#ready-cue{position:absolute;inset:0;display:grid;place-items:center;background:#0007;color:#ffe399;font:bold clamp(40px,8vw,80px) monospace;text-shadow:4px 4px #000}#ready-cue[hidden]{display:none}.integrated footer{display:none}

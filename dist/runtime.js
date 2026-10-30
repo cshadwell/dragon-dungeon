@@ -1,9 +1,10 @@
-import {SEAL,queenNotes} from './queen.js?v=e24eed294c16';
-import {SHIELD,notes} from './ogre.js?v=e24eed294c16';
-import {mazeHint} from './maze-hints.js?v=e24eed294c16';
+import {LENS,wizardNotes} from './wizard.js?v=9b095cd0d72d';
+import {SEAL,queenNotes} from './queen.js?v=9b095cd0d72d';
+import {SHIELD,notes} from './ogre.js?v=9b095cd0d72d';
+import {mazeHint} from './maze-hints.js?v=9b095cd0d72d';
 // Supplied maze + user-approved encounter locations. The small prototype remains intact.
-import * as adventure from './engine.js?v=e24eed294c16';
-import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=e24eed294c16';
+import * as adventure from './engine.js?v=9b095cd0d72d';
+import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=9b095cd0d72d';
 export const MAZE_ONLY=false;
 export const WORLD_WIDTH=MAZE_WIDTH,WORLD_HEIGHT=MAZE_HEIGHT;
 export const START=MAZE_START,ENCOUNTER='35,30',WIZARD='3,22',QUEEN='55,4',DRAGON='0,1',DIRS=adventure.DIRS;
@@ -14,6 +15,13 @@ export const SAVE_KEY='dragon-dungeon-maze-adventure-v1';
 const EXPLORATION_KEY='dragon-dungeon-maze-image-v1';
 export function fresh(){return {...adventure.fresh(),content:WORLD.CONTENT,gate:null,pos:START,checkpoint:START,facing:0,visited:[START],message:'You stand at the southeast entrance. Seek the three guardians, then confront the dragon. Their locations appear on the map only after discovery.'};}
 export function act(s,a){
+ if(s.pos===WIZARD&&s.encounter==='wizard'&&(a==='mind-complete'||/^mind-progress-[0-9]$/.test(a))){
+  const next=structuredClone(s),w=next.wizard;
+  if(a.startsWith('mind-progress-'))w.mindCorrect=Math.max(w.mindCorrect??0,Number(a.slice(-1)));
+  if(a==='mind-complete'&&(w.mindCorrect??0)>=9){w.completed=true;w.phase='done';w.returnTo=null;next.items=[...new Set([...next.items,LENS])];next.knowledge=[...new Set([...next.knowledge,...wizardNotes])];next.message='Focus mastered. The wizard’s revealing lens is yours.';}
+  return next;
+ }
+
  // The attack encounter replaces the live Ogre UI; retain legacy save/reward fields
  // until the remaining guardians and dragon are deliberately redesigned.
  if(s.pos===QUEEN&&s.encounter==='queen'&&(a==='defence-complete'||/^defence-progress-[0-9]$/.test(a))){
@@ -40,6 +48,7 @@ export function act(s,a){
  }
  if(a==='interact'&&character&&!s.encounter)return {...s,gate:character};
  const next=adventure.act(s,a,WORLD);
+ if(s.encounter==='wizard'&&a==='leave')next.message='The wizard waits in his study. Your focus training progress is retained.';
  if(s.encounter==='queen'&&a==='leave')next.message='The Elf Queen waits in her shrine. Your defence training progress is retained.';
  if(!s.encounter&&['forward','back'].includes(a)&&next.pos===s.pos)next.message=s.message;
  // Only successful exploration steps replace ambient text; gate/encounter feedback wins.
@@ -47,7 +56,7 @@ export function act(s,a){
  if(!s.encounter&&['forward','back'].includes(a)&&next.pos!==s.pos&&Object.values(entries).includes(next.pos)){next.encounter=null;next.gate=Object.keys(entries).find(k=>entries[k]===next.pos);next.message='A doorway leads to the '+next.gate+' chamber. Do you wish to enter?';}
  return next;
 }
-export const valid=s=>adventure.valid(s,WORLD)&&(s.queen.defenceBlocks===undefined||(Number.isInteger(s.queen.defenceBlocks)&&s.queen.defenceBlocks>=0&&s.queen.defenceBlocks<=9))&&(s.ogre.attackPractice===undefined||(Number.isInteger(s.ogre.attackPractice)&&s.ogre.attackPractice>=0&&s.ogre.attackPractice<=2))&&([undefined,null].includes(s.gate)||(['ogre','wizard','queen','dragon'].includes(s.gate)&&s.pos===({ogre:ENCOUNTER,wizard:WIZARD,queen:QUEEN,dragon:DRAGON}[s.gate])&&s.encounter===null));
+export const valid=s=>adventure.valid(s,WORLD)&&(s.wizard.mindCorrect===undefined||(Number.isInteger(s.wizard.mindCorrect)&&s.wizard.mindCorrect>=0&&s.wizard.mindCorrect<=9))&&(s.queen.defenceBlocks===undefined||(Number.isInteger(s.queen.defenceBlocks)&&s.queen.defenceBlocks>=0&&s.queen.defenceBlocks<=9))&&(s.ogre.attackPractice===undefined||(Number.isInteger(s.ogre.attackPractice)&&s.ogre.attackPractice>=0&&s.ogre.attackPractice<=2))&&([undefined,null].includes(s.gate)||(['ogre','wizard','queen','dragon'].includes(s.gate)&&s.pos===({ogre:ENCOUNTER,wizard:WIZARD,queen:QUEEN,dragon:DRAGON}[s.gate])&&s.encounter===null));
 function explorationValid(s){return s&&s.content==='maze-image-1'&&cells.has(s.pos)&&Number.isInteger(s.facing)&&s.facing>=0&&s.facing<4&&Array.isArray(s.visited)&&s.visited.every(p=>cells.has(p))&&s.visited.includes(s.pos)&&s.visited.includes(START);}
 export function load(storage){try{
  const raw=storage.getItem(SAVE_KEY);

@@ -1,0 +1,12 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {COLORS,STAGES,makeRound,judge} from '../dist/wizard-mind-model.js';
+test('wizard timings and four unique choices always include the answer once',()=>{assert.deepEqual(STAGES.map(s=>s.seconds),[4,3,2]);for(let stage=0;stage<3;stage++)for(let i=0;i<100;i++){const r=makeRound(stage);assert.equal(new Set(r.choices.map(c=>c.word)).size,4);assert.equal(new Set(r.choices.map(c=>c.ink)).size,4);assert.equal(r.choices.filter(c=>c.word===r.answer).length,1);for(const c of r.choices){assert.ok(COLORS.includes(c.ink));assert.equal(c.ink===c.word,stage===0);}}});
+test('wizard answers require written name before deadline',()=>{const r=makeRound(1);assert.equal(judge(r,r.answer,2.999),'correct');assert.equal(judge(r,r.answer,3),'timeout');assert.equal(judge(r,COLORS.find(c=>c!==r.answer),1),'wrong');});
+
+test('seeded shuffle exercises all answer positions and spell colors',()=>{let seed=312;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};const positions=new Set(),answers=new Set();for(let i=0;i<200;i++){const r=makeRound(1,random);positions.add(r.choices.findIndex(c=>c.word===r.answer));answers.add(r.answer);}assert.equal(positions.size,4);assert.equal(answers.size,7);});
+
+import {WIZARD_SPELL_POSES,chooseWizardSpellPose} from '../dist/wizard-spell-poses.js';
+import {getCharacterPose} from '../dist/character-art.js';
+test('each spell selects any of its three exact color poses',()=>{for(const color of COLORS){const ids=WIZARD_SPELL_POSES[color];assert.equal(ids.length,3);for(let i=0;i<3;i++){const id=chooseWizardSpellPose(color,()=>i/3);assert.equal(id,ids[i]);assert.equal(getCharacterPose('wizard',id).color,color);}}assert.throws(()=>chooseWizardSpellPose('pink'),RangeError);});
+
+test('consecutive wizard spells never repeat a color across stage boundaries',()=>{let previous=null,seed=47;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};const seen=new Set();for(let i=0;i<700;i++){const r=makeRound(Math.floor(i/3)%3,random,previous);assert.notEqual(r.answer,previous);seen.add(r.answer);assert.equal(new Set(r.choices.map(c=>c.word)).size,4);assert.equal(new Set(r.choices.map(c=>c.ink)).size,4);previous=r.answer;}assert.equal(seen.size,7);for(const color of COLORS)for(const value of [0,.999999])assert.notEqual(makeRound(2,()=>value,color).answer,color);});
