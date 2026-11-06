@@ -1,0 +1,275 @@
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("assets/fonts/PressStart2P-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: VT323;
+  src: url("assets/fonts/VT323-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --iron: #100e0c;
+  --panel: #211810;
+  --brass: #a07542;
+  --bevel: #4a321c;
+  --key: #312213;
+  --ink: #f1e4ca;
+  --muted: #c8b596;
+  --gold: #ffca74;
+  --pixel: "Press Start 2P", monospace;
+  --dialogue: VT323, monospace;
+  --gutter: clamp(10px, 2vw, 24px);
+}
+body {
+  background: var(--iron);
+  color: var(--ink);
+  font: 22px/1.18 var(--dialogue);
+}
+body > header, body > footer {
+  max-width: none;
+  color: var(--muted);
+}
+.brand, .tag, .caption, .hud, .map-status, .eyebrow,
+.encounter-ui header, .encounter-ui h2, .railhead {
+  color: var(--gold);
+  font: 10px/1.65 var(--pixel);
+  letter-spacing: 0;
+}
+.brand { font-size: clamp(11px, 1.4vw, 18px); }
+.frame {
+  position: relative;
+  background: var(--panel);
+  border: 3px solid var(--brass);
+  border-radius: 0;
+  box-shadow: inset 0 0 0 2px var(--iron), inset 0 0 0 4px var(--bevel);
+}
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--iron), var(--iron)) top left / 3px 3px,
+    linear-gradient(var(--iron), var(--iron)) top right / 3px 3px,
+    linear-gradient(var(--iron), var(--iron)) bottom left / 3px 3px,
+    linear-gradient(var(--iron), var(--iron)) bottom right / 3px 3px;
+  background-repeat: no-repeat;
+}
+button, .secondary, .quiet, #title-enter, #title-music {
+  background: var(--key);
+  border: 2px solid;
+  border-color: var(--brass) var(--bevel) var(--bevel) var(--brass);
+  border-radius: 0;
+  box-shadow: inset 0 -3px #211309;
+  color: var(--ink);
+  font: 10px/1.55 var(--pixel);
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+button:hover, button[aria-pressed="true"], #title-enter:hover {
+  background: #4b311b;
+  border-color: var(--gold) var(--brass) var(--brass) var(--gold);
+}
+button:focus-visible { outline-color: var(--gold); }
+button.ready { background: #503419; color: var(--ink); }
+.controls button { font-size: 22px; }
+.controls small { color: var(--ink); font: 8px/1.5 var(--pixel); letter-spacing: 0; }
+.caption, .control-area, .save, .hud, .tuning { border-color: var(--bevel); }
+#message, dialog p, .mask-claim, .revealed-inscription {
+  font: clamp(22px, 1.75vw, 29px)/1.15 var(--dialogue);
+}
+h2, h3, .earned-name { font-family: var(--pixel); line-height: 1.55; }
+h2, .reaction-active h2 { font-size: clamp(13px, 1.5vw, 19px); }
+h3 { font-size: 12px; }
+.choices button, .guards button, .angles button, .ready { font-size: 10px; }
+.muted, .save, .note, .arena-caption, .railfoot, footer, #title-status {
+  font: 17px/1.15 var(--dialogue);
+  color: var(--muted);
+}
+.note, .tell, .railbox, .badge, .outcome, #title-status {
+  background: var(--panel);
+  border-color: var(--brass);
+}
+.dot { background: var(--gold); border-radius: 0; }
+#title-enter { color: var(--gold); font-size: clamp(10px, 1.3vw, 15px); }
+#title-music { font-size: 9px; }
+#ogre-attack-encounter, #elf-defence-encounter, #wizard-mind-encounter {
+  background: var(--iron);
+}
+
+/* Let the exploration console use the window while preserving the scene geometry. */
+.console {
+  max-width: none;
+  width: 100%;
+  padding-inline: var(--gutter);
+  gap: clamp(8px, 1.2vw, 18px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+body > header, body > footer { padding-inline: var(--gutter); }
+.viewport { display: flex; flex-direction: column; }
+.scene {
+  width: 100%;
+  max-height: max(250px, calc(100dvh - 330px));
+  background: #080705;
+}
+.scene canvas { object-fit: contain; }
+.hud { margin-top: auto; }
+#live-map { min-height: 0; border-color: var(--iron); }
+#live-map svg { min-height: 0; max-height: max(250px, calc(100dvh - 330px)); }
+.narrative { min-height: 140px; max-height: none; }
+.command { gap: clamp(8px, 1vw, 16px); }
+.toolbar { gap: 6px; }
+.toolbar button { padding: 7px; }
+.encounter-room .scene {
+  aspect-ratio: 470 / 200;
+  max-height: max(200px, calc(100dvh - 310px));
+}
+.encounter-room .scene > svg { background: var(--iron); }
+.encounter-room .narrative { max-height: none; min-height: 140px; }
+
+.encounter-ui main { width: auto; margin: 12px var(--gutter); }
+.encounter-ui header { padding: 0; flex-wrap: wrap; }
+.encounter-ui #room, .encounter-ui .stage canvas {
+  max-height: max(175px, 46dvh);
+  object-fit: contain;
+  background: var(--iron);
+}
+.encounter-ui #arena {
+  width: min(100%, max(220px, 39dvh));
+  margin-inline: auto;
+}
+.encounter-ui .guidance #message, .encounter-ui .narrative #message {
+  font: clamp(22px, 1.75vw, 29px)/1.15 var(--dialogue);
+  min-height: 0;
+}
+.encounter-ui .heading { flex-wrap: wrap; }
+.encounter-ui .actions { flex-wrap: wrap; }
+.encounter-ui #choices button, .encounter-ui #choices button:hover {
+  background: #000;
+}
+.encounter-ui #choices .color-word { font-family: var(--pixel); font-weight: 400; font-size: min(32px, calc(92cqi / var(--letters))); letter-spacing: 0; }
+
+@media (max-width: 650px) {
+  .console { grid-template-columns: minmax(0, 1fr); }
+  .scene, #live-map svg { max-height: none; }
+  .viewport { order: 0; }
+  .narrative { order: 1; }
+  .command { order: 2; }
+  .cartography { order: 3; }
+  .hud, .map-status { font-size: 9px; }
+  .encounter-room .scene, .encounter-room.in-reaction #scene { max-height: none; }
+}
+
+/* Exploration chrome is limited to the four framed panels. */
+.dungeon-ui > header, .dungeon-ui > footer,
+.dungeon-ui:not(.encounter-room) .hud, .dungeon-ui .map-status {
+  display: none;
+}
+.dungeon-ui .console {
+  padding-block: var(--gutter);
+}
+.dungeon-ui .cartography {
+  padding: 3px;
+}
+.dungeon-ui #live-map {
+  border: 0;
+}
+.dungeon-ui .command, .dungeon-ui .narrative {
+  padding: clamp(10px, 1.2vw, 18px);
+}
+.dungeon-ui .command .save {
+  padding-top: 6px;
+}
+.dungeon-ui .toolbar button {
+  min-height: 44px;
+}
+
+@media (min-width: 651px) and (min-height: 500px) {
+  .dungeon-ui:not(.encounter-room) .console {
+    height: 100dvh;
+    grid-template-rows: minmax(0, 1fr) clamp(236px, 32dvh, 300px);
+  }
+  .dungeon-ui:not(.encounter-room) .viewport {
+    padding: 3px;
+  }
+  .dungeon-ui:not(.encounter-room) :is(.scene, #live-map svg) {
+    height: 100%;
+    max-height: none;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+  .dungeon-ui:not(.encounter-room) :is(.command, .narrative) {
+    overflow-y: auto;
+    min-height: 0;
+  }
+  .dungeon-ui .controls button { padding-block: 5px; }
+}
+@media (max-width: 650px), (max-height: 499px) {
+  .dungeon-ui:not(.encounter-room) .viewport { padding: 3px; }
+}
+
+@media (max-width: 600px) {
+  /* Keep active answers next to the spell on a narrow screen. */
+  .encounter-ui .challenge:has(#choices button) { order: -1; }
+  .encounter-ui #choices {
+    grid-template-rows: repeat(3, 64px);
+    margin-top: 10px;
+  }
+  .encounter-ui #choices button { min-height: 0; padding-block: 4px; }
+  .encounter-ui #choices .color-word { font-size: min(28px, calc(92cqi / var(--letters))); }
+}
+
+/* Black keycaps in a compass cross, with a matching three-row menu. */
+.dungeon-ui:not(.encounter-room) .command {
+  grid-template-columns: minmax(0, 3fr) minmax(86px, 1fr);
+  align-content: stretch;
+}
+.dungeon-ui .control-area { padding-right: clamp(6px, 1vw, 14px); }
+.movement-pad, .dungeon-ui .toolbar {
+  display: grid;
+  gap: clamp(4px, .65vw, 10px);
+  grid-template-rows: repeat(3, minmax(44px, 1fr));
+  height: 100%;
+}
+.movement-pad { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.movement-pad [data-action="forward"] { grid-area: 1 / 2; }
+.movement-pad [data-action="left"] { grid-area: 2 / 1; }
+#space-action { grid-area: 2 / 2; }
+.movement-pad [data-action="right"] { grid-area: 2 / 3; }
+.movement-pad [data-action="back"] { grid-area: 3 / 2; }
+.dungeon-ui .movement-pad button, .dungeon-ui .toolbar button {
+  display: grid;
+  place-items: center;
+  background: #000;
+  border-color: var(--brass);
+  box-shadow: none;
+  color: var(--gold);
+  padding: 4px;
+  font-size: clamp(8px, .86vw, 13px);
+  text-transform: uppercase;
+  overflow-wrap: normal;
+}
+.dungeon-ui .movement-pad button:not(:disabled):hover,
+.dungeon-ui .toolbar button:not(:disabled):hover { border-color: var(--gold); }
+.pad-arrow {
+  display: block;
+  width: clamp(20px, 2.7vw, 39px);
+  aspect-ratio: 1;
+  background: currentColor;
+  clip-path: polygon(42% 0, 58% 0, 58% 16%, 74% 16%, 74% 32%, 90% 32%, 90% 48%, 60% 48%, 60% 100%, 40% 100%, 40% 48%, 10% 48%, 10% 32%, 26% 32%, 26% 16%, 42% 16%);
+}
+[data-action="left"] .pad-arrow { transform: rotate(-90deg); }
+[data-action="right"] .pad-arrow { transform: rotate(90deg); }
+[data-action="back"] .pad-arrow { transform: rotate(180deg); }
+
+.door-prompt .modal-head, .door-prompt #modal-title { display: none; }
+.door-prompt .choices button { text-align: center; }
+
+#door-fade {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: #000;
+}

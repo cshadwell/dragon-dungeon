@@ -1,13 +1,12 @@
 // Isolated visual review inside the actual encounter UI. Never reads/writes saves.
-import {getCharacterPose,CHARACTER_POSE_COUNTS} from './character-art.js?v=9b095cd0d72d';
-import {ROOM_ART} from './room-art.js?v=9b095cd0d72d';
+import {getCharacterPose,CHARACTER_POSE_COUNTS} from './character-art.js?v=5770abe5927f';
+import {ROOM_ART} from './room-art.js?v=5770abe5927f';
 export const ROOM_PREVIEWS=ROOM_ART;
 export function showRoomPreview(){
  const $=id=>document.getElementById(id),params=new URLSearchParams(location.search);
  let room=Object.hasOwn(ROOM_PREVIEWS,params.get('room'))?params.get('room'):'ogre',number=1,revision=0;
- document.body.classList.add('encounter-room','room-preview');$('modal').close();$('interact').hidden=true;$('encounter-controls').hidden=false;
+ document.body.classList.add('encounter-room','room-preview');$('modal').close();$('encounter-controls').hidden=false;
  $('health').textContent='♥ ♥ ♥';$('health').setAttribute('aria-label','3 of 3 health - visual preview');
- $('storage').textContent='Room art preview — your adventure save is untouched.';
  const canvas=document.createElement('canvas');canvas.width=470;canvas.height=200;canvas.setAttribute('role','img');$('scene').replaceChildren(canvas);const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
  const heading=document.createElement('h2');$('message').before(heading);
  const controls=$('encounter-controls'),rooms=document.createElement('div');rooms.className='choices room-switches';controls.append(rooms);

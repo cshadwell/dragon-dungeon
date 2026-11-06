@@ -169,3 +169,18 @@ Wizard spell variety: user requested no consecutive color repeats. makeRound now
 
 ## Full Wizard baseline approved — 2026-10-30
 User accepted integrated wizard, supplied/revised spell art, compass keyboard/click controls, black buttons/large words, reactions and rapid final stage, and non-repeating consecutive spell colors. Authorized checkpoint and GitHub push. New full baseline: release9b095cd0d72d,93tests pass. Reviewed source, original supplied art, revision archives, numbered galleries, screenshots and continuity files; no secret-pattern matches or unexpected files. Private origin verified. Dragon redesign remains pending.
+
+## 8-bit Iron & Brass interface
+The shared stylesheet is loaded by the title and exploration page and all three guardian playtests, including their in-maze frames. The locally bundled fonts include their OFL licenses. The desktop layout uses viewport height and width, and narrow layouts stack. Release hashing and checks now cover the shared stylesheet. All 93 tests pass. In-app browser checks covered desktop fit at 1440 × 900, exploration reflow at 390 px, entry through the Wizard's door, and spell choices in the themed encounter.
+
+## Exploration interface cleanup
+The exploration console now uses four aligned brass frames without the title strip, corridor and map labels, movement help, routine save notices, or prototype footer. Save failures remain visible. Desktop sizing includes frame borders and outer padding within the viewport. Narrow screens stack and scroll. The menu directions screen is deferred. Release cae841d66cb9 passed all 93 tests. The in-app preview fit 1440 × 900 and 1024 × 600 without scrolling and stacked at 390 px with no horizontal overflow.
+
+## Movement panel cleanup
+The exploration controls now use black keycaps with gold pixel arrows and a center Space Bar interaction button. The center button is enabled at guardian doors when the chamber prompt can be reopened. The adjacent menu shows Journal, Sound On/Off, and New Game, with earned actions appearing when available. Removed the separate Map Key menu and its shortcut. Release 43899166708a passed all 93 tests. Browser check verified forward movement, reopening the Wizard door prompt with the center button, and the sound toggle.
+
+## Chamber door prompts
+The exploration story panel no longer displays location headings. The four door prompts use a shared opening, individual visual clues without naming the occupants, and centered entry and decline buttons. Entry fades the full game view to black and back in five steps per direction, with an immediate switch for reduced motion. Release 278bace473d1 passed all 93 tests. In-app browser verification covered the Elf door prompt, declining, reopening with Space Bar, and arrival in the shrine.
+
+## Door entry sound
+Opening any guardian door pauses exploration music and starts the supplied 6.7-second door creak and footsteps. The game takes 1.25 seconds to fade to black, waits for the sound to finish, then reveals the encounter over 0.95 seconds. Sound Off skips the clip, and reduced motion uses cuts. Release 5770abe5927f passed all 93 tests. The Elf preview showed the loaded chamber held behind a fully black overlay and revealed afterward.

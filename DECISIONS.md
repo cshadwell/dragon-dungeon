@@ -131,3 +131,6 @@ User approved layout with large bold choices and a visible spell overlay complet
 
 ## Wizard integration approved — 2026-10-30
 User approved supplied spell poses and reaction roles and authorized live integration. Final trial prioritizes back-to-back casting over per-answer reactions, with READY/GO cue before trial. Implemented0.18s final gap as initial tuning;4/3/2s answer windows retained. Push deferred until user tests/accepts. Legacy lens/notes maintained for save and dragon compatibility; new story/journal wording remains future refinement.
+
+## 8-bit Iron & Brass interface
+The user selected Iron & Brass and approved the pixel treatment. Use warm dark panels, stepped brass borders, beveled buttons, Press Start 2P for short interface labels, and VT323 for longer text. Exploration uses two columns at desktop widths and stacks at narrow widths. Keep approved pixel artwork at its original proportions and keep wizard choices black with readable color lettering.

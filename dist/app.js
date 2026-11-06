@@ -1,52 +1,70 @@
-import {createDungeonMusic} from './dungeon-music.js?v=9b095cd0d72d';
-import {showRoomPreview} from './room-preview.js?v=9b095cd0d72d';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=9b095cd0d72d';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=9b095cd0d72d';
-import {drawCorridor} from './corridor.js?v=9b095cd0d72d';
-import {exploredMap} from './explored-map.js?v=9b095cd0d72d';
-import {dragonView,dragonArt} from './dragon.js?v=9b095cd0d72d';
-import {queenView,queenArt} from './queen.js?v=9b095cd0d72d';
-import {wizardView,wizardArt} from './wizard.js?v=9b095cd0d72d';
-import {createAttempt,tick,respond} from './reaction.js?v=9b095cd0d72d';
-import {lessons} from './ogre.js?v=9b095cd0d72d';
-import {ogreView} from './ogre.js?v=9b095cd0d72d';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=9b095cd0d72d';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=9b095cd0d72d';
+import {createDungeonMusic} from './dungeon-music.js?v=5770abe5927f';
+import {showRoomPreview} from './room-preview.js?v=5770abe5927f';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=5770abe5927f';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=5770abe5927f';
+import {drawCorridor} from './corridor.js?v=5770abe5927f';
+import {exploredMap} from './explored-map.js?v=5770abe5927f';
+import {dragonView,dragonArt} from './dragon.js?v=5770abe5927f';
+import {queenView,queenArt} from './queen.js?v=5770abe5927f';
+import {wizardView,wizardArt} from './wizard.js?v=5770abe5927f';
+import {createAttempt,tick,respond} from './reaction.js?v=5770abe5927f';
+import {lessons} from './ogre.js?v=5770abe5927f';
+import {ogreView} from './ogre.js?v=5770abe5927f';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=5770abe5927f';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=5770abe5927f';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
 let loaded=load(storage), state=loaded.state, writable=loaded.writable, panel=null, lastInput=0;
-$('storage').textContent=loaded.notice;
+function showStorageWarning(message=''){
+  const status=$('storage');
+  status.textContent=message;
+  status.parentElement.hidden=!message;
+}
+showStorageWarning(writable?undefined:loaded.notice);
 // Local, isolated review link; never writes over the player's adventure save.
 const previewMode=['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='ogre'||(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='doors');
-if(previewMode){state={...fresh(),pos:'35,32',facing:0,visited:[START,'35,32'],gate:null,message:'An iron-bound wooden door stands at the end of the corridor.'};writable=false;$('storage').textContent='Ogre approach preview — progress is not saved.';}
+if(previewMode){state={...fresh(),pos:'35,32',facing:0,visited:[START,'35,32'],gate:null,message:'An iron-bound wooden door stands at the end of the corridor.'};writable=false;showStorageWarning();}
 
-if(previewMode&&new URLSearchParams(location.search).get('preview')==='doors'){const door=new URLSearchParams(location.search).get('door')||'ogre';const views={ogre:['35,32',0],wizard:['1,22',1],elf:['53,4',1],dragon:['0,3',0]};const [pos,facing]=views[door]||views.ogre;state={...fresh(),pos,facing,visited:[START,pos],message:'Approach the guardian’s door. This preview does not save progress.'};$('storage').textContent='Door approach preview — progress is not saved.';}
+if(previewMode&&new URLSearchParams(location.search).get('preview')==='doors'){const door=new URLSearchParams(location.search).get('door')||'ogre';const views={ogre:['35,32',0],wizard:['1,22',1],elf:['53,4',1],dragon:['0,3',0]};const [pos,facing]=views[door]||views.ogre;state={...fresh(),pos,facing,visited:[START,pos],message:'A door stands ahead.'};}
 
 const explorationAudio=new Audio('./assets/audio/dungeon-exploration.mp3');explorationAudio.id='dungeon-music';explorationAudio.preload='metadata';explorationAudio.hidden=true;document.body.append(explorationAudio);
-const musicControl=document.createElement('button');musicControl.id='dungeon-music-toggle';musicControl.textContent='Play dungeon music';musicControl.setAttribute('aria-pressed','false');document.querySelector('.toolbar').append(musicControl);
-const dungeonMusic=createDungeonMusic(explorationAudio,status=>{musicControl.textContent=status.muted?'Music off':status.playing?'Mute dungeon music':'Play dungeon music';musicControl.setAttribute('aria-pressed',String(status.playing&&!status.muted));});
+const doorAudio=new Audio('./assets/audio/door-creaks-open-footsteps.mp3');
+doorAudio.preload='auto';
+const musicControl=$('dungeon-music-toggle');
+let soundMuted=false;
+const dungeonMusic=createDungeonMusic(explorationAudio,status=>{
+  soundMuted=status.muted;
+  const playing=status.playing&&!status.muted;
+  musicControl.textContent=playing?'Sound Off':'Sound On';
+  musicControl.setAttribute('aria-pressed',String(playing));
+});
 musicControl.onclick=()=>dungeonMusic.toggle();
 // Retry only on a real player gesture if the browser blocked initial playback.
 window.addEventListener('pointerdown',e=>{if(!e.target.closest('#dungeon-music-toggle'))dungeonMusic.retry();},{capture:true});window.addEventListener('keydown',e=>{if(!e.target.closest('#dungeon-music-toggle'))dungeonMusic.retry();},{capture:true});
-window.addEventListener('pagehide',()=>dungeonMusic.stop());
-window.addEventListener('pageshow',()=>dungeonMusic.setExploring(!state.encounter));
-let attempt=null, reactionFrame=null, slowReaction=false, motion=null;
+window.addEventListener('pagehide',()=>{dungeonMusic.stop();doorAudio.pause();});
+window.addEventListener('pageshow',()=>dungeonMusic.setExploring(!state.encounter&&!enteringDoor));
+let attempt=null, reactionFrame=null, slowReaction=false, motion=null, enteringDoor=false;
+const doorDescriptions={
+  ogre:'Its hinges are strong and its timber is aged but sturdy.',
+  wizard:'Ancient runes shine from its surface in languages long forgotten.',
+  queen:'Its frame seems to grow and twist from the ground itself.',
+  dragon:'Its carvings are made of glowing metals you’ve never seen before.'
+};
 const names=['NORTH','EAST','SOUTH','WEST'];
 const navigationKeys={ArrowUp:'forward',ArrowDown:'back',ArrowLeft:'left',ArrowRight:'right'};
 const heldNavigation=new Set();let heldFrame=null;
 function stopHeldMovement(){heldNavigation.clear();if(heldFrame!==null)cancelAnimationFrame(heldFrame);heldFrame=null;}
 function repeatMovement(){heldFrame=null;if(document.hidden||modal.open||state.encounter||state.gate){stopHeldMovement();return;}const key=[...heldNavigation].at(-1);if(!key)return;perform(navigationKeys[key]);if(heldNavigation.size)heldFrame=requestAnimationFrame(repeatMovement);}
 
-function persist(){if(writable&&!save(storage,state)){writable=false;$('storage').textContent='Saving failed. Progress lasts only for this open session.';}}
+function persist(){if(writable&&!save(storage,state)){writable=false;showStorageWarning('Saving failed. Progress lasts only for this open session.');}}
 function scene(){drawCorridor($('scene'),state);}
 function render(){
   $('direction').textContent=names[state.facing];$('health').textContent='♥ '.repeat(state.health)+'♡ '.repeat(3-state.health);
   $('health').setAttribute('aria-label',`${state.health} of 3 health`);
-  $('location').textContent=state.pos===START?'LANTERN CHECKPOINT':state.pos===ENCOUNTER?'THE OGRE’S HALL':state.pos===WIZARD?'THE WIZARD’S STUDY':state.pos===QUEEN?'THE ROOT COURT':state.pos===DRAGON?'THE BOUND CHAMBER':'STONE PASSAGE';
-  $('message').textContent=state.message;$('interact').hidden=![ENCOUNTER,WIZARD,QUEEN,DRAGON].includes(state.pos);$('interact').textContent=state.pos===WIZARD?'Speak to the wizard':state.pos===QUEEN?'Speak to the elf queen':state.pos===DRAGON?'Approach the dragon':'Approach the ogre’s gate';
+  $('message').textContent=state.message;
   $('dragon-return').hidden=state.pos!==START||!state.dragon.discovered;$('earned-name').hidden=!state.dragon.victory;
-  if(MAZE_ONLY){$('location').textContent=state.pos===START?'SOUTHEAST ENTRANCE':'DUNGEON PASSAGE';$('health').hidden=true;$('interact').hidden=true;}
+  if(MAZE_ONLY)$('health').hidden=true;
   $('live-map').innerHTML=exploredMap(state);
   scene();if(state.encounter)openPanel('encounter');else if(state.gate)openPanel('gate');else syncPanels();
 }
@@ -72,7 +90,7 @@ window.addEventListener('message',event=>{
  state=act(state,action);persist();if(!state.encounter&&modal.open){panel=null;modal.close();}render();
 });
 function syncPanels(){
- dungeonMusic.setExploring(!state.encounter);musicControl.disabled=false;
+ dungeonMusic.setExploring(!state.encounter);
  const attackRoom=Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
  const defenceRoom=state.encounter==='queen';
  const mindRoom=state.encounter==='wizard';
@@ -94,9 +112,6 @@ function syncPanels(){
   const controls=$('encounter-controls');controls.replaceChildren();controls.hidden=!inside;
   if(inside){for(const node of [...$('modal-body').children])if(node.matches('.choices,.guards,.angles,.ready,.selection,#reaction-start,#reaction-slow'))controls.append(node);}
   $('message').hidden=modal.open;
-  $('interact').disabled=modal.open;$('interact').hidden=MAZE_ONLY||modal.open||![ENCOUNTER,WIZARD,QUEEN,DRAGON].includes(state.pos);
-  document.querySelectorAll('[data-action]').forEach(b=>b.disabled=modal.open);
-  for(const id of ['map','journal','reset','earned-name','dragon-return'])$(id).disabled=Boolean(state.encounter||state.gate);
   if(panel==='encounter'){
     const art=$('modal-body').querySelector('.ogre-art,.wizard-art,.queen-art,.dragon-art');
     if(art)$('scene').replaceChildren(art);
@@ -111,15 +126,16 @@ function openPanel(type){
 function choice(label,action){const b=document.createElement('button');b.textContent=label;b.onclick=()=>perform(action);return b;}
 function updatePanel(){
   modal.classList.remove('reaction-active');document.body.classList.remove('in-reaction');
+  const atDoor=panel==='gate';
+  modal.classList.toggle('door-prompt',atDoor);
+  modal.setAttribute('aria-labelledby',atDoor?'door-intro':'modal-title');
   const body=$('modal-body');body.replaceChildren();$('close').hidden=panel==='encounter'||panel==='gate';
   $('modal-label').textContent=panel==='encounter'?(state.encounter==='wizard'?'THE WIZARD’S STUDY · ':state.encounter==='queen'?'THE ROOT COURT · ':state.encounter==='dragon'?'THE BOUND CHAMBER · ':'THE SHIELD KEEPER · ')+state.health+' / 3 HEALTH':'FIELD NOTES';
   if(panel==='gate'){
-    $('modal-label').textContent='OUTSIDE THE '+state.gate.toUpperCase()+' CHAMBER';$('modal-title').textContent='Do you wish to enter the chamber?';
-    const text=document.createElement('p');text.textContent='The guardian’s door stands before you. Enter now, or remain in the maze and explore.';body.append(text);
-    const choices=document.createElement('div');choices.className='choices';choices.append(choice('Open the gate and enter','gate-enter'),choice('Stay in the maze','gate-decline'));body.append(choices);
-  }else if(panel==='map'){
-    $('modal-title').textContent='The passages you know.';
-    body.innerHTML=exploredMap(state)+'<p>▲ Position and facing · Red square: entrance · Gold arrow: facing · O/W/Q/D: discovered guardians</p><p>Dotted stubs mark visible openings into unvisited rooms. Black areas remain concealed.</p>'+(state.dragon.discovered?'<p>The lantern passage links your checkpoint and the dragon chamber.</p>':'');
+    const intro=document.createElement('p');intro.id='door-intro';intro.textContent='You stand in front of a door in the passage.';
+    const description=document.createElement('p');description.textContent=doorDescriptions[state.gate];
+    const choices=document.createElement('div');choices.className='choices';choices.append(choice('Open the door and enter','gate-enter'),choice('Stay in the maze','gate-decline'));
+    body.append(intro,description,choices);
   }else if(panel==='journal'){
     if(MAZE_ONLY){$('modal-title').textContent='Maze exploration';body.innerHTML='<p>Encounters are disabled for this navigation test. Follow the corridors, return to the entrance, and watch the map fill in as you explore.</p>';return;}
     $('modal-title').textContent='What you carry.';body.innerHTML='<h3>Inventory</h3>';const items=document.createElement('p');items.textContent=state.items.join(', ')||'Nothing yet.';body.append(items);const h=document.createElement('h3');h.textContent='Discoveries';body.append(h);const k=document.createElement('p');k.textContent=state.knowledge.join(' ')||'Seek the ogre. Watch his stance before committing your guard.';body.append(k);
@@ -225,7 +241,6 @@ function animateNavigation(from,to,action){
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){render();return;}
   const duration=motionDuration(action),start=performance.now();
   motion={frame:null,last:-Infinity};$('scene').setAttribute('aria-busy','true');
-  document.querySelectorAll('[data-action],.toolbar button,#interact').forEach(b=>b.disabled=true);
   const frame=now=>{
     if(!motion)return;
     const t=Math.min(1,(now-start)/duration);
@@ -235,12 +250,72 @@ function animateNavigation(from,to,action){
   };
   motion.frame=requestAnimationFrame(frame);
 }
+function enterChamber(){
+  state=act(state,'gate-enter');persist();render();
+}
+function playDoorSound(){
+  if(soundMuted)return Promise.resolve();
+  return new Promise(resolve=>{
+    // Unavailable or stalled audio should never strand the player on black.
+    const timeout=setTimeout(done,9000);
+    doorAudio.addEventListener('ended',done,{once:true});
+    doorAudio.addEventListener('error',done,{once:true});
+    doorAudio.addEventListener('pause',done,{once:true});
+    function done(){
+      clearTimeout(timeout);
+      doorAudio.removeEventListener('ended',done);
+      doorAudio.removeEventListener('error',done);
+      doorAudio.removeEventListener('pause',done);
+      doorAudio.pause();
+      resolve();
+    }
+    doorAudio.currentTime=0;
+    doorAudio.play().catch(done);
+  });
+}
+async function enterThroughDoor(){
+  if(document.hidden){enterChamber();return;}
+  enteringDoor=true;
+  dungeonMusic.setExploring(false);
+  // Start playback directly from the entry click for browsers that require a gesture.
+  const soundFinished=playDoorSound();
+  const fade=$('door-fade');
+  const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  fade.hidden=false;
+  const playFade=(from,to,duration)=>fade.animate([{opacity:from},{opacity:to}],{
+    duration,easing:'steps(10, end)',fill:'both'
+  });
+  const darken=reducedMotion?null:playFade(0,1,1250);
+  let frame;
+  try{
+    await darken?.finished;
+    enterChamber();
+    frame=ogreFrame||elfFrame||wizardFrame;
+    if(frame){
+      frame.inert=true;
+      await new Promise(resolve=>{
+        const timeout=setTimeout(done,700);
+        frame.addEventListener('load',done,{once:true});
+        function done(){clearTimeout(timeout);frame.removeEventListener('load',done);resolve();}
+      });
+    }
+    await soundFinished;
+    if(!reducedMotion){
+      const reveal=playFade(1,0,950);
+      try{await reveal.finished;}finally{reveal.cancel();}
+    }
+  }finally{
+    if(frame)frame.inert=false;
+    fade.hidden=true;darken?.cancel();enteringDoor=false;
+  }
+}
 function perform(action){
-  if(attempt||motion)return;
+  if(attempt||motion||enteringDoor)return;
   if(action==='show-name'&&state.dragon.victory){openPanel('victory');return;}
   const now=performance.now();if(now-lastInput<220)return;lastInput=now;
-  if(action==='reset'){state=fresh();writable=!previewMode;persist();$('storage').textContent=writable?'New expedition. Progress saves on this browser.':'Storage unavailable. Session only.';panel=null;modal.close();render();return;}
+  if(action==='reset'){state=fresh();writable=!previewMode;showStorageWarning();persist();panel=null;modal.close();render();return;}
   if(panel&&panel!=='encounter'&&panel!=='gate')return;
+  if(action==='gate-enter'&&state.gate){enterThroughDoor();return;}
   const before=state;
   state=act(state,action);
   if(['forward','back'].includes(action)&&state.pos===before.pos&&!before.encounter&&!before.gate)return;
@@ -250,18 +325,29 @@ function perform(action){
   }
   if(!state.encounter&&modal.open){panel=null;modal.close();}render();
 }
-$('map').onclick=()=>openPanel('map');$('journal').onclick=()=>openPanel('journal');$('reset').onclick=()=>openPanel('reset');$('close').onclick=close;
-$('interact').onclick=()=>perform('interact');
-$('dragon-return').onclick=()=>perform('dragon-shortcut');$('earned-name').onclick=()=>openPanel('victory');
+function explorationMenu(action){
+  return ()=>{
+    if(!motion&&!state.encounter&&!state.gate)action();
+  };
+}
+$('journal').onclick=explorationMenu(()=>openPanel('journal'));
+$('reset').onclick=explorationMenu(()=>openPanel('reset'));
+$('close').onclick=close;
+$('space-action').onclick=()=>{
+  if(!MAZE_ONLY&&!modal.open&&[ENCOUNTER,WIZARD,QUEEN,DRAGON].includes(state.pos))perform('interact');
+};
+$('dragon-return').onclick=explorationMenu(()=>perform('dragon-shortcut'));
+$('earned-name').onclick=explorationMenu(()=>openPanel('victory'));
 modal.addEventListener('cancel',e=>{e.preventDefault();if(panel!=='encounter'&&panel!=='gate')close();});
-document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>perform(b.dataset.action));
+document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{if(!modal.open)perform(b.dataset.action);});
 window.addEventListener('keydown',e=>{
+  if(enteringDoor){e.preventDefault();return;}
   if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)||e.target.isContentEditable)return;
   if(e.repeat){if(navigationKeys[e.key])e.preventDefault();return;}
   if(e.key==='Escape'&&modal.open&&panel!=='encounter'){e.preventDefault();close();return;}
   const action=navigationKeys[e.key];
   if(action){e.preventDefault();if(attempt){const guard={ArrowLeft:'left',ArrowUp:'high',ArrowRight:'right'}[e.key];if(guard)react(guard);}else if(!modal.open&&!state.encounter&&!state.gate){heldNavigation.delete(e.key);heldNavigation.add(e.key);if(heldFrame===null)repeatMovement();}return;}
-  if(['m','j'].includes(e.key.toLowerCase())){if(['BUTTON','INPUT','TEXTAREA'].includes(e.target.tagName)&&e.key===' ')return;e.preventDefault();if(modal.open){if(panel!=='encounter'&&panel!=='gate')close();}else openPanel(e.key.toLowerCase()==='m'?'map':'journal');}
+  if(e.key.toLowerCase()==='j'){e.preventDefault();if(modal.open){if(panel!=='encounter'&&panel!=='gate')close();}else openPanel('journal');}
 });
 window.addEventListener('keyup',e=>{if(navigationKeys[e.key]){heldNavigation.delete(e.key);if(!heldNavigation.size)stopHeldMovement();}});
 render();

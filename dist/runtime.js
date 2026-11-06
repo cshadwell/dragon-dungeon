@@ -1,10 +1,10 @@
-import {LENS,wizardNotes} from './wizard.js?v=9b095cd0d72d';
-import {SEAL,queenNotes} from './queen.js?v=9b095cd0d72d';
-import {SHIELD,notes} from './ogre.js?v=9b095cd0d72d';
-import {mazeHint} from './maze-hints.js?v=9b095cd0d72d';
+import {LENS,wizardNotes} from './wizard.js?v=5770abe5927f';
+import {SEAL,queenNotes} from './queen.js?v=5770abe5927f';
+import {SHIELD,notes} from './ogre.js?v=5770abe5927f';
+import {mazeHint} from './maze-hints.js?v=5770abe5927f';
 // Supplied maze + user-approved encounter locations. The small prototype remains intact.
-import * as adventure from './engine.js?v=9b095cd0d72d';
-import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=9b095cd0d72d';
+import * as adventure from './engine.js?v=5770abe5927f';
+import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=5770abe5927f';
 export const MAZE_ONLY=false;
 export const WORLD_WIDTH=MAZE_WIDTH,WORLD_HEIGHT=MAZE_HEIGHT;
 export const START=MAZE_START,ENCOUNTER='35,30',WIZARD='3,22',QUEEN='55,4',DRAGON='0,1',DIRS=adventure.DIRS;
@@ -53,7 +53,7 @@ export function act(s,a){
  if(!s.encounter&&['forward','back'].includes(a)&&next.pos===s.pos)next.message=s.message;
  // Only successful exploration steps replace ambient text; gate/encounter feedback wins.
  if(!s.encounter&&['forward','back'].includes(a)&&next.pos!==s.pos&&!next.encounter)next.message=mazeHint(next.pos);
- if(!s.encounter&&['forward','back'].includes(a)&&next.pos!==s.pos&&Object.values(entries).includes(next.pos)){next.encounter=null;next.gate=Object.keys(entries).find(k=>entries[k]===next.pos);next.message='A doorway leads to the '+next.gate+' chamber. Do you wish to enter?';}
+ if(!s.encounter&&['forward','back'].includes(a)&&next.pos!==s.pos&&Object.values(entries).includes(next.pos)){next.encounter=null;next.gate=Object.keys(entries).find(k=>entries[k]===next.pos);next.message='You stand in front of a door in the passage.';}
  return next;
 }
 export const valid=s=>adventure.valid(s,WORLD)&&(s.wizard.mindCorrect===undefined||(Number.isInteger(s.wizard.mindCorrect)&&s.wizard.mindCorrect>=0&&s.wizard.mindCorrect<=9))&&(s.queen.defenceBlocks===undefined||(Number.isInteger(s.queen.defenceBlocks)&&s.queen.defenceBlocks>=0&&s.queen.defenceBlocks<=9))&&(s.ogre.attackPractice===undefined||(Number.isInteger(s.ogre.attackPractice)&&s.ogre.attackPractice>=0&&s.ogre.attackPractice<=2))&&([undefined,null].includes(s.gate)||(['ogre','wizard','queen','dragon'].includes(s.gate)&&s.pos===({ogre:ENCOUNTER,wizard:WIZARD,queen:QUEEN,dragon:DRAGON}[s.gate])&&s.encounter===null));
