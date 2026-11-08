@@ -1,7 +1,7 @@
-import {ELF_DEFENCE_POSES} from './elf-defence-poses.js?v=65931cb8ac8a';
-import {getCharacterPose} from './character-art.js?v=65931cb8ac8a';
-import {getRoomArt} from './room-art.js?v=65931cb8ac8a';
-import {DEFENCE_DEFAULTS,DEFENCE_STAGES,BLOCKS_PER_STAGE,defenceProgress,ORBIT,SPAWN_RADIUS,freshDefence,spawnAttack,stepDefence} from './elf-defence-model.js?v=65931cb8ac8a';
+import {ELF_DEFENCE_POSES} from './elf-defence-poses.js?v=f2edf2fe212f';
+import {getCharacterPose} from './character-art.js?v=f2edf2fe212f';
+import {getRoomArt} from './room-art.js?v=f2edf2fe212f';
+import {DEFENCE_DEFAULTS,DEFENCE_STAGES,BLOCKS_PER_STAGE,defenceProgress,ORBIT,SPAWN_RADIUS,freshDefence,spawnAttack,stepDefence} from './elf-defence-model.js?v=f2edf2fe212f';
 const params=new URLSearchParams(location.search),integrated=params.get('encounter')==='1'&&parent!==window;
 const notify=(type,extra={})=>{if(integrated)parent.postMessage({type:'elf-defence:'+type,...extra},location.origin);};
 const artCache=new Map();let teaching=-1,reactionTime=0,poseNumber=1;

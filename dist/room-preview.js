@@ -1,6 +1,6 @@
 // Isolated visual review inside the actual encounter UI. Never reads/writes saves.
-import {getCharacterPose,CHARACTER_POSE_COUNTS} from './character-art.js?v=65931cb8ac8a';
-import {ROOM_ART} from './room-art.js?v=65931cb8ac8a';
+import {getCharacterPose,CHARACTER_POSE_COUNTS} from './character-art.js?v=f2edf2fe212f';
+import {ROOM_ART} from './room-art.js?v=f2edf2fe212f';
 export const ROOM_PREVIEWS=ROOM_ART;
 export function showRoomPreview(){
  const $=id=>document.getElementById(id),params=new URLSearchParams(location.search);

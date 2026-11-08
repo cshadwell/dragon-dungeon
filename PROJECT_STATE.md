@@ -202,3 +202,6 @@ Journal is now a centered modal overlay with a dimmed game backdrop and retained
 
 ## Door option fit and keyboard selection — 2026-11-07
 Door choices now sit side by side with compact paragraph spacing; desktop bottom row sizes to its content so both options remain within the text frame. Larger dialogue retained. Arrow keys move the highlighted choice, Space confirms; on-screen compass and Space Bar provide the same actions, with mouse choices retained. Repeated Space is suppressed. Browser verified both options visible and keyboard/on-screen selection of Stay in the maze. All94 tests pass; release65931cb8ac8a. Local changes pending approval.
+
+## Ogre music MP3 replacement — 2026-11-07
+Replaced the runtime Ogre WAV with the supplied Ogre_Music.mp3, stored as ogre-chamber.mp3. Retains looping and40% playback volume. Use MP3 for future music and WAV for future sound effects per user preference.

@@ -1,10 +1,10 @@
-import {LENS,wizardNotes} from './wizard.js?v=65931cb8ac8a';
-import {SEAL,queenNotes} from './queen.js?v=65931cb8ac8a';
-import {SHIELD,notes} from './ogre.js?v=65931cb8ac8a';
-import {mazeHint} from './maze-hints.js?v=65931cb8ac8a';
+import {LENS,wizardNotes} from './wizard.js?v=f2edf2fe212f';
+import {SEAL,queenNotes} from './queen.js?v=f2edf2fe212f';
+import {SHIELD,notes} from './ogre.js?v=f2edf2fe212f';
+import {mazeHint} from './maze-hints.js?v=f2edf2fe212f';
 // Supplied maze + user-approved encounter locations. The small prototype remains intact.
-import * as adventure from './engine.js?v=65931cb8ac8a';
-import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=65931cb8ac8a';
+import * as adventure from './engine.js?v=f2edf2fe212f';
+import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=f2edf2fe212f';
 export const MAZE_ONLY=false;
 export const WORLD_WIDTH=MAZE_WIDTH,WORLD_HEIGHT=MAZE_HEIGHT;
 export const START=MAZE_START,ENCOUNTER='35,30',WIZARD='3,22',QUEEN='55,4',DRAGON='0,1',DIRS=adventure.DIRS;

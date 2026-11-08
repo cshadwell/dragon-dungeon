@@ -1,17 +1,17 @@
-import {createDungeonMusic} from './dungeon-music.js?v=65931cb8ac8a';
-import {showRoomPreview} from './room-preview.js?v=65931cb8ac8a';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=65931cb8ac8a';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=65931cb8ac8a';
-import {drawCorridor} from './corridor.js?v=65931cb8ac8a';
-import {exploredMap} from './explored-map.js?v=65931cb8ac8a';
-import {dragonView,dragonArt} from './dragon.js?v=65931cb8ac8a';
-import {queenView,queenArt} from './queen.js?v=65931cb8ac8a';
-import {wizardView,wizardArt} from './wizard.js?v=65931cb8ac8a';
-import {createAttempt,tick,respond} from './reaction.js?v=65931cb8ac8a';
-import {lessons,notes as legacyOgreNotes} from './ogre.js?v=65931cb8ac8a';
-import {ogreView} from './ogre.js?v=65931cb8ac8a';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=65931cb8ac8a';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=65931cb8ac8a';
+import {createDungeonMusic} from './dungeon-music.js?v=f2edf2fe212f';
+import {showRoomPreview} from './room-preview.js?v=f2edf2fe212f';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=f2edf2fe212f';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=f2edf2fe212f';
+import {drawCorridor} from './corridor.js?v=f2edf2fe212f';
+import {exploredMap} from './explored-map.js?v=f2edf2fe212f';
+import {dragonView,dragonArt} from './dragon.js?v=f2edf2fe212f';
+import {queenView,queenArt} from './queen.js?v=f2edf2fe212f';
+import {wizardView,wizardArt} from './wizard.js?v=f2edf2fe212f';
+import {createAttempt,tick,respond} from './reaction.js?v=f2edf2fe212f';
+import {lessons,notes as legacyOgreNotes} from './ogre.js?v=f2edf2fe212f';
+import {ogreView} from './ogre.js?v=f2edf2fe212f';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=f2edf2fe212f';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=f2edf2fe212f';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
@@ -31,7 +31,7 @@ if(previewMode&&new URLSearchParams(location.search).get('preview')==='doors'){c
 const explorationAudio=new Audio('./assets/audio/dungeon-exploration.mp3');explorationAudio.id='dungeon-music';explorationAudio.preload='metadata';explorationAudio.hidden=true;document.body.append(explorationAudio);
 const doorAudio=new Audio('./assets/audio/door-creaks-open-footsteps.mp3');
 doorAudio.preload='auto';
-const ogreAudio=new Audio('./assets/audio/ogre-chamber.wav');
+const ogreAudio=new Audio('./assets/audio/ogre-chamber.mp3');
 ogreAudio.id='ogre-music';ogreAudio.preload='metadata';ogreAudio.hidden=true;document.body.append(ogreAudio);
 const ogreMusic=createDungeonMusic(ogreAudio);
 const musicControl=$('dungeon-music-toggle');

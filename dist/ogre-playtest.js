@@ -1,6 +1,6 @@
-import {getCharacterPose} from './character-art.js?v=65931cb8ac8a';
-import {getRoomArt} from './room-art.js?v=65931cb8ac8a';
-import {ATTACK_DEFAULTS,PRACTICE_NEXT,targetForAttempt,attackPosition,judgeAttack,reactionPose} from './ogre-attack-model.js?v=65931cb8ac8a';
+import {getCharacterPose} from './character-art.js?v=f2edf2fe212f';
+import {getRoomArt} from './room-art.js?v=f2edf2fe212f';
+import {ATTACK_DEFAULTS,PRACTICE_NEXT,targetForAttempt,attackPosition,judgeAttack,reactionPose} from './ogre-attack-model.js?v=f2edf2fe212f';
 const encounterParams=new URLSearchParams(location.search),integrated=encounterParams.get('encounter')==='1'&&window.parent!==window;
 if(integrated)document.body.classList.add('ogre-intro');
 const notify=type=>{if(integrated)window.parent.postMessage({type:'ogre-attack:'+type},location.origin);};

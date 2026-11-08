@@ -1,7 +1,7 @@
-import {getCharacterPose} from './character-art.js?v=65931cb8ac8a';
-import {getRoomArt} from './room-art.js?v=65931cb8ac8a';
-import {makeRound,judge,STAGES} from './wizard-mind-model.js?v=65931cb8ac8a';
-import {chooseWizardSpellPose} from './wizard-spell-poses.js?v=65931cb8ac8a';
+import {getCharacterPose} from './character-art.js?v=f2edf2fe212f';
+import {getRoomArt} from './room-art.js?v=f2edf2fe212f';
+import {makeRound,judge,STAGES} from './wizard-mind-model.js?v=f2edf2fe212f';
+import {chooseWizardSpellPose} from './wizard-spell-poses.js?v=f2edf2fe212f';
 const params=new URLSearchParams(location.search),integrated=params.get('encounter')==='1'&&parent!==window;
 const notify=(type,extra={})=>{if(integrated)parent.postMessage({type:'wizard-mind:'+type,...extra},location.origin);};
 const savedCorrect=integrated?Math.max(0,Math.min(9,Number(params.get('correct'))||0)):0;
