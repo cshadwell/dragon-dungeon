@@ -1,6 +1,7 @@
-import {getCharacterPose} from './character-art.js?v=f2edf2fe212f';
-import {getRoomArt} from './room-art.js?v=f2edf2fe212f';
-import {ATTACK_DEFAULTS,PRACTICE_NEXT,targetForAttempt,attackPosition,judgeAttack,reactionPose} from './ogre-attack-model.js?v=f2edf2fe212f';
+import {setupRoomControls} from './encounter-console.js?v=c27c98be8a54';
+import {getCharacterPose} from './character-art.js?v=c27c98be8a54';
+import {getRoomArt} from './room-art.js?v=c27c98be8a54';
+import {ATTACK_DEFAULTS,PRACTICE_NEXT,targetForAttempt,attackPosition,judgeAttack,reactionPose} from './ogre-attack-model.js?v=c27c98be8a54';
 const encounterParams=new URLSearchParams(location.search),integrated=encounterParams.get('encounter')==='1'&&window.parent!==window;
 if(integrated)document.body.classList.add('ogre-intro');
 const notify=type=>{if(integrated)window.parent.postMessage({type:'ogre-attack:'+type},location.origin);};
@@ -65,47 +66,13 @@ $('attack').addEventListener('click',e=>{if(e.detail===0)trigger();});
 let held=false;document.addEventListener('keydown',e=>{if(integrated){if(e.code==='Space'&&!$('room-menu').open){e.preventDefault();if(!e.repeat&&!held){held=true;roomAction();}}return;}if(!['Space','Enter'].includes(e.code)||['INPUT','SUMMARY'].includes(e.target.tagName)||(e.target.tagName==='BUTTON'&&e.target.id!=='attack'))return;e.preventDefault();if(e.repeat||held)return;held=true;trigger();});document.addEventListener('keyup',e=>{if(['Space','Enter'].includes(e.code))held=false;});
 document.addEventListener('visibilitychange',()=>{lastTime=null;held=false;$('instruction').textContent=document.hidden?'Paused while this tab is hidden.':'Three crossings. Strike in gold before the final pass ends.';});window.addEventListener('blur',()=>{held=false;});
 $('challenge').onclick=()=>setMode('challenge');$('practice').onclick=()=>setMode('practice');$('speed').oninput=tuning;$('width').oninput=tuning;$('defaults').onclick=()=>{const d=mode==='practice'&&practiceStage===1?PRACTICE_NEXT:ATTACK_DEFAULTS[mode];$('speed').value=d.passMs;$('width').value=d.targetWidth*100;tuning();};
-function setupRoomControls(){
-  const controls=document.querySelector('.controls');
-  // Reuse the maze console's exact buttons and fonts.
-  const command=window.parent.document.querySelector('.command');
-  const pad=command.querySelector('.control-area').cloneNode(true);
-  const toolbar=command.querySelector('.toolbar').cloneNode(true);
-  toolbar.querySelectorAll('#dragon-return,#earned-name').forEach(button=>button.remove());
-  controls.append(pad,toolbar);
-  $('space-action').onclick=roomAction;
-  const prompt=document.createElement('p');prompt.id='dialogue-continue';prompt.textContent='-Press Space Bar-';document.querySelector('.narrative').append(prompt);
-  const menu=$('room-menu');
-  $('journal').onclick=()=>notify('journal');
-  $('dungeon-music-toggle').onclick=()=>notify('sound');
-  $('reset').onclick=()=>{
-    $('room-menu-title').textContent='Begin again?';
-    $('room-menu-text').textContent='This replaces your saved expedition and training progress.';
-    $('room-menu-confirm').hidden=false;menu.showModal();
-  };
-  $('room-menu-confirm').onclick=()=>notify('reset');
-  $('room-menu-close').onclick=()=>menu.close();
-  $('room-menu-leave').onclick=()=>notify('leave');
-  window.addEventListener('message',event=>{
-    if(event.source!==window.parent||event.origin!==location.origin)return;
-    if(event.data?.type==='ogre-room:journal'){
-      $('room-menu-title').textContent='Journal';
-      $('room-menu-text').textContent=event.data.text;
-      $('room-menu-confirm').hidden=true;menu.showModal();
-    }
-    if(event.data?.type==='ogre-room:sound'){
-      $('dungeon-music-toggle').textContent=event.data.muted?'Sound On':'Sound Off';
-      $('dungeon-music-toggle').setAttribute('aria-pressed',String(!event.data.muted));
-    }
-  });
-  notify('sound-status');
-}
 function load(key,url){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>{images.set(key,im);resolve();};im.onerror=()=>reject(Error('Artwork unavailable'));im.src=url;});}
 Promise.all([load('room',getRoomArt('ogre').url),...[4,5,6,7,8,9,10,11,12,13,14,15].map(n=>load(n,getCharacterPose('ogre',n).url))]).then(()=>{setMode('practice');
  if(integrated){
   document.querySelector('.tuning').hidden=true;
   document.querySelector('footer').textContent='THE OGRE’S ARMORY · ATTACK TRAINING';
-  setupRoomControls();
+  setupRoomControls({notify,prefix:'ogre-room',onAction:roomAction});
+  const prompt=document.createElement('p');prompt.id='dialogue-continue';prompt.textContent='-Press Space Bar-';document.querySelector('.narrative').append(prompt);
   const stage=Number(encounterParams.get('practice'));
   if(stage===1){practiceStage=1;$('speed').value=PRACTICE_NEXT.passMs;$('width').value=PRACTICE_NEXT.targetWidth*100;tuning();progress();$('message').textContent='“Welcome back. Let’s try that quicker, smaller opening.”';}
   if(stage>=2){practiceDone=true;phase='practice-done';$('attack').textContent='Start Ogre challenge';$('message').textContent='“You know the lesson. Ready to prove your worth?”';}

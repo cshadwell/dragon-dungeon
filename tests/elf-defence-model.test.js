@@ -22,11 +22,16 @@ test('attack and shield speed settings change travel and rotation independently'
  const s=spawnAttack(freshDefence(),90);const slow=stepDefence(s,.1,{right:true},{...settings,shieldSpeed:90,attackSpeed:15});const fast=stepDefence(s,.1,{right:true},{...settings,shieldSpeed:540,attackSpeed:100});assert.ok(slow.projectile.radius>fast.projectile.radius);assert.equal(angleDistance(slow.angle,270),9);assert.equal(angleDistance(fast.angle,270),54);
 });
 
-import {DEFENCE_STAGES,BLOCKS_PER_STAGE,defenceProgress} from '../dist/elf-defence-model.js';
+import {DEFENCE_STAGES,DEFENCE_STAGE_GOALS,defenceProgress} from '../dist/elf-defence-model.js';
 test('Elf training advances through requested speeds and closes gaps without changing shield settings',()=>{
- assert.deepEqual(DEFENCE_DEFAULTS,{shieldSize:50,shieldSpeed:300,attackSpeed:60});assert.equal(BLOCKS_PER_STAGE,3);
+ assert.deepEqual(DEFENCE_DEFAULTS,{shieldSize:50,shieldSpeed:300,attackSpeed:60});assert.deepEqual(DEFENCE_STAGE_GOALS,[3,4,5]);
  assert.deepEqual(DEFENCE_STAGES.map(s=>s.attackSpeed),[60,65,70]);assert.ok(DEFENCE_STAGES[0].gap>DEFENCE_STAGES[1].gap);assert.ok(DEFENCE_STAGES[1].gap>DEFENCE_STAGES[2].gap);assert.deepEqual(DEFENCE_STAGES.map(s=>s.gap),[.9,.4,.2]);
- for(let blocks=0;blocks<=9;blocks++){const p=defenceProgress(blocks);assert.equal(p.stage,Math.min(2,Math.floor(blocks/3)));assert.equal(p.complete,blocks>=9);}
+ for(let blocks=0;blocks<=12;blocks++){
+  const p=defenceProgress(blocks),stage=blocks<3?0:blocks<7?1:2;
+  assert.equal(p.stage,stage);assert.equal(p.stageGoal,[3,4,5][stage]);
+  assert.equal(p.stageBlocks,Math.min(p.stageGoal,blocks-[0,3,7][stage]));
+  assert.equal(p.complete,blocks>=12);
+ }
  // Even an opposite-side arrival is reachable at the fastest preset.
  assert.ok((SPAWN_RADIUS-ORBIT)/70>180/300);
 });

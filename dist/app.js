@@ -1,17 +1,17 @@
-import {createDungeonMusic} from './dungeon-music.js?v=f2edf2fe212f';
-import {showRoomPreview} from './room-preview.js?v=f2edf2fe212f';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=f2edf2fe212f';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=f2edf2fe212f';
-import {drawCorridor} from './corridor.js?v=f2edf2fe212f';
-import {exploredMap} from './explored-map.js?v=f2edf2fe212f';
-import {dragonView,dragonArt} from './dragon.js?v=f2edf2fe212f';
-import {queenView,queenArt} from './queen.js?v=f2edf2fe212f';
-import {wizardView,wizardArt} from './wizard.js?v=f2edf2fe212f';
-import {createAttempt,tick,respond} from './reaction.js?v=f2edf2fe212f';
-import {lessons,notes as legacyOgreNotes} from './ogre.js?v=f2edf2fe212f';
-import {ogreView} from './ogre.js?v=f2edf2fe212f';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=f2edf2fe212f';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=f2edf2fe212f';
+import {createDungeonMusic} from './dungeon-music.js?v=c27c98be8a54';
+import {showRoomPreview} from './room-preview.js?v=c27c98be8a54';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=c27c98be8a54';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=c27c98be8a54';
+import {drawCorridor} from './corridor.js?v=c27c98be8a54';
+import {exploredMap} from './explored-map.js?v=c27c98be8a54';
+import {dragonView,dragonArt} from './dragon.js?v=c27c98be8a54';
+import {queenView,queenArt,queenNotes as legacyQueenNotes} from './queen.js?v=c27c98be8a54';
+import {wizardView,wizardArt} from './wizard.js?v=c27c98be8a54';
+import {createAttempt,tick,respond} from './reaction.js?v=c27c98be8a54';
+import {lessons,notes as legacyOgreNotes} from './ogre.js?v=c27c98be8a54';
+import {ogreView} from './ogre.js?v=c27c98be8a54';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=c27c98be8a54';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=c27c98be8a54';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
@@ -34,6 +34,9 @@ doorAudio.preload='auto';
 const ogreAudio=new Audio('./assets/audio/ogre-chamber.mp3');
 ogreAudio.id='ogre-music';ogreAudio.preload='metadata';ogreAudio.hidden=true;document.body.append(ogreAudio);
 const ogreMusic=createDungeonMusic(ogreAudio);
+const elfAudio=new Audio('./assets/audio/elf-chamber.mp3');
+elfAudio.id='elf-music';elfAudio.preload='metadata';elfAudio.hidden=true;document.body.append(elfAudio);
+const elfMusic=createDungeonMusic(elfAudio);
 const musicControl=$('dungeon-music-toggle');
 let soundMuted=false;
 const dungeonMusic=createDungeonMusic(explorationAudio,status=>{
@@ -45,11 +48,12 @@ const dungeonMusic=createDungeonMusic(explorationAudio,status=>{
 musicControl.onclick=()=>dungeonMusic.toggle();
 // Retry only on a real player gesture if the browser blocked initial playback.
 window.addEventListener('pointerdown',e=>{if(!e.target.closest('#dungeon-music-toggle'))dungeonMusic.retry();},{capture:true});window.addEventListener('keydown',e=>{if(!e.target.closest('#dungeon-music-toggle'))dungeonMusic.retry();},{capture:true});
-window.addEventListener('pagehide',()=>{dungeonMusic.stop();ogreMusic.stop();doorAudio.pause();});
-window.addEventListener('pageshow',()=>{dungeonMusic.setExploring(!state.encounter&&!ogreRefresher&&!enteringDoor);syncOgreMusic();});
-function syncOgreMusic(){
+window.addEventListener('pagehide',()=>{dungeonMusic.stop();ogreMusic.stop();elfMusic.stop();doorAudio.pause();});
+window.addEventListener('pageshow',()=>{dungeonMusic.setExploring(!state.encounter&&!ogreRefresher&&!elfRefresher&&!enteringDoor);syncRoomMusic();});
+function syncRoomMusic(){
   const insideOgre=ogreRefresher||Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
   ogreMusic.setExploring(insideOgre&&!enteringDoor&&!soundMuted);
+  elfMusic.setExploring((elfRefresher||state.encounter==='queen')&&!enteringDoor&&!soundMuted);
 }
 let attempt=null, reactionFrame=null, slowReaction=false, motion=null, enteringDoor=false;
 const doorDescriptions={
@@ -65,8 +69,9 @@ function stopHeldMovement(){heldNavigation.clear();if(heldFrame!==null)cancelAni
 function repeatMovement(){heldFrame=null;if(document.hidden||modal.open||state.encounter||state.gate){stopHeldMovement();return;}const key=[...heldNavigation].at(-1);if(!key)return;perform(navigationKeys[key]);if(heldNavigation.size)heldFrame=requestAnimationFrame(repeatMovement);}
 
 function journalKnowledge(){
-  const discoveries=state.knowledge.filter(note=>!legacyOgreNotes.includes(note));
+  const discoveries=state.knowledge.filter(note=>!legacyOgreNotes.includes(note)&&!legacyQueenNotes.includes(note));
   if(state.completed)discoveries.unshift('The Ogre’s advice: Be fast and accurate when you attack.');
+  if(state.queen.completed)discoveries.push('The Elf Queen’s advice: Stay aware, keep moving, and react quickly to block incoming attacks.');
   return discoveries.join(' ');
 }
 function persist(){if(writable&&!save(storage,state)){writable=false;showStorageWarning('Saving failed. Progress lasts only for this open session.');}}
@@ -80,7 +85,7 @@ function render(){
   $('live-map').innerHTML=exploredMap(state);
   scene();if(state.encounter)openPanel('encounter');else if(state.gate)openPanel('gate');else syncPanels();
 }
-let ogreFrame=null,elfFrame=null,wizardFrame=null,ogreRefresher=false;
+let ogreFrame=null,elfFrame=null,wizardFrame=null,ogreRefresher=false,elfRefresher=false;
 window.addEventListener('message',event=>{
  if(wizardFrame&&event.source===wizardFrame.contentWindow&&event.origin===location.origin){
   const type=event.data?.type;let action=null;
@@ -90,25 +95,25 @@ window.addEventListener('message',event=>{
  }
 
  if(elfFrame&&event.source===elfFrame.contentWindow&&event.origin===location.origin){
+  if(handleRoomMenu(event,elfFrame,'elf-defence','elf-room'))return;
+  if(event.data?.type==='elf-defence:leave'){
+    if(!enteringDoor)enterThroughDoor(()=>{
+      if(elfRefresher)elfRefresher=false;else{state=act(state,'leave');persist();}
+      if(modal.open){panel=null;modal.close();}
+      render();
+    });
+    return;
+  }
+  if(elfRefresher)return;
   const type=event.data?.type;let action=null;
-  if(type==='elf-defence:progress'&&Number.isInteger(event.data.blocks)&&event.data.blocks>=0&&event.data.blocks<=9)action='defence-progress-'+event.data.blocks;
+  if(type==='elf-defence:progress'&&Number.isInteger(event.data.blocks)&&event.data.blocks>=0&&event.data.blocks<=12)action='defence-progress-'+event.data.blocks;
   if(type==='elf-defence:complete')action='defence-complete';if(type==='elf-defence:leave')action='leave';
   if(action){state=act(state,action);persist();if(!state.encounter&&modal.open){panel=null;modal.close();}render();}return;
  }
 
  if(!ogreFrame||event.source!==ogreFrame.contentWindow||event.origin!==location.origin)return;
  const menuType=event.data?.type;
- if(menuType==='ogre-attack:journal'){
-   ogreFrame.contentWindow.postMessage({type:'ogre-room:journal',text:journalKnowledge()||'Seek the three guardians and learn their lessons.'},location.origin);return;
- }
- if(menuType==='ogre-attack:reset'){perform('reset');return;}
- if(menuType==='ogre-attack:sound'||menuType==='ogre-attack:sound-status'){
-   if(menuType==='ogre-attack:sound'){
-     dungeonMusic.setMuted(!soundMuted);
-     syncOgreMusic();
-   }
-   ogreFrame.contentWindow.postMessage({type:'ogre-room:sound',muted:soundMuted},location.origin);return;
- }
+ if(handleRoomMenu(event,ogreFrame,'ogre-attack','ogre-room'))return;
  if(menuType==='ogre-attack:leave'){
    if(!enteringDoor)enterThroughDoor(()=>{
      if(ogreRefresher)ogreRefresher=false;
@@ -123,17 +128,29 @@ window.addEventListener('message',event=>{
  const action=actions[event.data?.type];if(!action)return;
  state=act(state,action);persist();if(!state.encounter&&modal.open){panel=null;modal.close();}render();
 });
+function handleRoomMenu(event,frame,requestPrefix,responsePrefix){
+ const type=event.data?.type;
+ if(type===requestPrefix+':journal'){
+   frame.contentWindow.postMessage({type:responsePrefix+':journal',text:journalKnowledge()||'Seek the three guardians and learn their lessons.'},location.origin);return true;
+ }
+ if(type===requestPrefix+':reset'){perform('reset');return true;}
+ if(type===requestPrefix+':sound'||type===requestPrefix+':sound-status'){
+   if(type===requestPrefix+':sound'){dungeonMusic.setMuted(!soundMuted);syncRoomMusic();}
+   frame.contentWindow.postMessage({type:responsePrefix+':sound',muted:soundMuted},location.origin);return true;
+ }
+ return false;
+}
 function syncPanels(){
- syncOgreMusic();
- dungeonMusic.setExploring(!state.encounter&&!ogreRefresher&&!enteringDoor);
+ syncRoomMusic();
+ dungeonMusic.setExploring(!state.encounter&&!ogreRefresher&&!elfRefresher&&!enteringDoor);
  const attackRoom=ogreRefresher||Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
- const defenceRoom=state.encounter==='queen';
+ const defenceRoom=elfRefresher||state.encounter==='queen';
  const mindRoom=state.encounter==='wizard';
  document.body.classList.toggle('ogre-attack-room',attackRoom||defenceRoom||mindRoom);
  if(mindRoom&&!wizardFrame){wizardFrame=document.createElement('iframe');wizardFrame.id='wizard-mind-encounter';wizardFrame.title='Wizard mind training';wizardFrame.src='./wizard-playtest.html?'+new URLSearchParams({encounter:'1',correct:String(state.wizard.mindCorrect??0),completed:String(state.wizard.completed)});document.body.append(wizardFrame);}
  else if(!mindRoom&&wizardFrame){wizardFrame.remove();wizardFrame=null;}
 
- if(defenceRoom&&!elfFrame){elfFrame=document.createElement('iframe');elfFrame.id='elf-defence-encounter';elfFrame.title='Elf Queen defence training';elfFrame.src='./elf-playtest.html?'+new URLSearchParams({encounter:'1',blocks:String(state.queen.defenceBlocks??0),completed:String(state.queen.completed)});document.body.append(elfFrame);}
+ if(defenceRoom&&!elfFrame){elfFrame=document.createElement('iframe');elfFrame.id='elf-defence-encounter';elfFrame.title='Elf Queen defence training';elfFrame.src='./elf-playtest.html?'+new URLSearchParams({encounter:'1',blocks:String(state.queen.defenceBlocks??0),completed:String(state.queen.completed),refresher:String(Number(elfRefresher))});document.body.append(elfFrame);}
  else if(!defenceRoom&&elfFrame){elfFrame.remove();elfFrame=null;}
 
  if(attackRoom&&!ogreFrame){
@@ -196,6 +213,7 @@ function updatePanel(){
     advice.textContent=journalKnowledge()||'Seek the three guardians and learn their lessons.';
     body.append(advice);
     if(state.completed)body.append(choice('Practice attacking','ogre-refresher'));
+    if(state.queen.completed)body.append(choice('Practice defending','elf-refresher'));
     if(state.dragon.victory)body.append(choice('Read the earned name','show-name'));
   }else if(panel==='victory'){renderVictory(body);
   }else if(panel==='reset'){
@@ -332,8 +350,9 @@ async function enterThroughDoor(changeScene=enterChamber){
   if(document.hidden){changeScene();return;}
   enteringDoor=true;
   dungeonMusic.setExploring(false);
-  ogreMusic.stop();
-  if(ogreFrame)ogreFrame.inert=true;
+  ogreMusic.stop();elfMusic.stop();
+  const currentFrame=ogreFrame||elfFrame||wizardFrame;
+  if(currentFrame)currentFrame.inert=true;
   // Start playback directly from the entry click for browsers that require a gesture.
   const soundFinished=playDoorSound();
   const fade=$('door-fade');
@@ -358,7 +377,8 @@ async function enterThroughDoor(changeScene=enterChamber){
     }
     await soundFinished;
     if(ogreFrame&&!soundMuted)ogreMusic.setExploring(true);
-    if(!state.encounter&&!ogreRefresher)dungeonMusic.setExploring(true);
+    if(elfFrame&&!soundMuted)elfMusic.setExploring(true);
+    if(!state.encounter&&!ogreRefresher&&!elfRefresher)dungeonMusic.setExploring(true);
     if(!reducedMotion){
       const reveal=playFade(1,0,950);
       try{await reveal.finished;}finally{reveal.cancel();}
@@ -370,12 +390,15 @@ async function enterThroughDoor(changeScene=enterChamber){
 }
 function perform(action){
   if(attempt||motion||enteringDoor)return;
+  if(action==='elf-refresher'&&state.queen.completed){
+    panel=null;modal.close();elfRefresher=true;syncPanels();elfFrame.contentWindow.focus();return;
+  }
   if(action==='ogre-refresher'&&state.completed){
     panel=null;modal.close();ogreRefresher=true;syncPanels();ogreFrame.contentWindow.focus();return;
   }
   if(action==='show-name'&&state.dragon.victory){openPanel('victory');return;}
   const now=performance.now();if(now-lastInput<220)return;lastInput=now;
-  if(action==='reset'){ogreRefresher=false;state=fresh();writable=!previewMode;showStorageWarning();persist();panel=null;modal.close();render();return;}
+  if(action==='reset'){ogreRefresher=false;elfRefresher=false;state=fresh();writable=!previewMode;showStorageWarning();persist();panel=null;modal.close();render();return;}
   if(panel&&panel!=='encounter'&&panel!=='gate')return;
   if(action==='gate-enter'&&state.gate){enterThroughDoor();return;}
   const before=state;

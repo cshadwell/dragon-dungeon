@@ -1,6 +1,6 @@
 // Stable character pose lookup. See CHARACTER_ART.md before changing this library.
-import {characterPoseData} from './character-pose-data.js?v=f2edf2fe212f';
-import {wizardSpellPoses} from './wizard-spell-art-data.js?v=f2edf2fe212f';
+import {characterPoseData} from './character-pose-data.js?v=c27c98be8a54';
+import {wizardSpellPoses} from './wizard-spell-art-data.js?v=c27c98be8a54';
 export const CHARACTER_POSE_COUNTS=Object.freeze({...characterPoseData.counts,wizard:34});
 const names={'elf queen':'elf','elf-queen':'elf','elf_queen':'elf'};
 const poses=[...characterPoseData.poses,...wizardSpellPoses].map(p=>Object.freeze({...p,bounds:Object.freeze([...p.bounds]),url:new URL('assets/characters/approved-v2/'+p.file,import.meta.url).href}));

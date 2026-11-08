@@ -1,4 +1,4 @@
-import {DOOR_PIXELS} from './door-pixels.js?v=f2edf2fe212f';
+import {DOOR_PIXELS} from './door-pixels.js?v=c27c98be8a54';
 export const MAZE_DOORS=Object.freeze([
  {character:'ogre',pos:'35,30',wallX:35,wallY:28,side:1,step:-1},
  {character:'wizard',pos:'3,22',wallX:5,wallY:22,side:0,step:1},

@@ -7,9 +7,28 @@ test('defence progress persists through retreat/re-entry and reload without earl
  s=act(s,'defence-complete');assert.ok(!s.items.includes(SEAL));s=act(s,'leave');s=act(act(s,'interact'),'gate-enter');assert.equal(s.queen.defenceBlocks,4);
  s=act(s,'defence-progress-2');assert.equal(s.queen.defenceBlocks,4);const storage=memory();save(storage,s);assert.equal(load(storage).state.queen.defenceBlocks,4);
 });
-test('nine defence blocks grant Queen seal once and preserve unchanged dragon prerequisites',()=>{
- let s=act(act(enter(),'defence-progress-9'),'defence-complete');assert.ok(valid(s));assert.equal(s.queen.phase,'done');assert.equal(s.queen.completed,true);assert.equal(s.items.filter(i=>i===SEAL).length,1);
+test('twelve defence blocks grant Queen seal once and preserve unchanged dragon prerequisites',()=>{
+ let s=act(act(enter(),'defence-progress-12'),'defence-complete');assert.ok(valid(s));assert.equal(s.queen.phase,'done');assert.equal(s.queen.completed,true);assert.equal(s.items.filter(i=>i===SEAL).length,1);
  s=act(s,'defence-complete');assert.equal(s.items.filter(i=>i===SEAL).length,1);const storage=memory();save(storage,s);const restored=load(storage);assert.ok(restored.writable);assert.ok(valid(restored.state));assert.equal(restored.state.queen.completed,true);
  s=act(s,'leave');assert.equal(s.encounter,null);assert.equal(s.pos,QUEEN);
 });
 test('defence actions outside Queen encounter cannot grant progress or reward',()=>{for(const action of ['defence-progress-9','defence-complete'])assert.deepEqual(act(fresh(),action),fresh());});
+
+test('previously completed five- and nine-block saves retain their rewards',()=>{
+ for(const blocks of [5,9]){
+  const s=act(act(enter(),'defence-progress-12'),'defence-complete');
+  s.queen.defenceBlocks=blocks;
+  assert.equal(s.queen.completed,true);assert.ok(valid(s));
+  const storage=memory();save(storage,s);assert.equal(load(storage).state.queen.defenceBlocks,blocks);
+ }
+});
+test('double-digit defence progress persists and cannot complete before twelve blocks',()=>{
+ let s=enter();
+ for(const blocks of [5,7,9,10,11]){
+  s=act(act(s,'defence-progress-'+blocks),'defence-complete');
+  assert.equal(s.queen.defenceBlocks,blocks);assert.equal(s.queen.completed,false);
+  assert.ok(!s.items.includes(SEAL));assert.ok(valid(s));
+ }
+ const storage=memory();save(storage,s);assert.equal(load(storage).state.queen.defenceBlocks,11);
+ assert.deepEqual(act(s,'defence-progress-13'),s);
+});

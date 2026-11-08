@@ -3,8 +3,13 @@ export const DEFENCE_DEFAULTS=Object.freeze({shieldSize:50,shieldSpeed:300,attac
 export const DEFENCE_STAGES=Object.freeze([
  Object.freeze({attackSpeed:60,gap:.9}),Object.freeze({attackSpeed:65,gap:.4}),Object.freeze({attackSpeed:70,gap:.2})
 ]);
-export const BLOCKS_PER_STAGE=3;
-export function defenceProgress(blocks){const stage=Math.min(2,Math.floor(blocks/BLOCKS_PER_STAGE));return {stage,stageBlocks:blocks>=9?3:blocks%BLOCKS_PER_STAGE,complete:blocks>=9};}
+export const DEFENCE_STAGE_GOALS=Object.freeze([3,4,5]);
+export const DEFENCE_GOAL=12;
+export function defenceProgress(blocks){
+ const stage=blocks<3?0:blocks<7?1:2;
+ const stageStart=[0,3,7][stage],stageGoal=DEFENCE_STAGE_GOALS[stage];
+ return {stage,stageGoal,stageBlocks:Math.min(stageGoal,blocks-stageStart),complete:blocks>=DEFENCE_GOAL};
+}
 export const ORBIT=30,SPAWN_RADIUS=91,PLAYER_RADIUS=7;
 export const normalizeAngle=a=>((a%360)+360)%360;
 export const angleDistance=(a,b)=>Math.abs(((normalizeAngle(a)-normalizeAngle(b)+540)%360)-180);
