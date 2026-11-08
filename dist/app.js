@@ -1,17 +1,17 @@
-import {createDungeonMusic} from './dungeon-music.js?v=5770abe5927f';
-import {showRoomPreview} from './room-preview.js?v=5770abe5927f';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=5770abe5927f';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=5770abe5927f';
-import {drawCorridor} from './corridor.js?v=5770abe5927f';
-import {exploredMap} from './explored-map.js?v=5770abe5927f';
-import {dragonView,dragonArt} from './dragon.js?v=5770abe5927f';
-import {queenView,queenArt} from './queen.js?v=5770abe5927f';
-import {wizardView,wizardArt} from './wizard.js?v=5770abe5927f';
-import {createAttempt,tick,respond} from './reaction.js?v=5770abe5927f';
-import {lessons} from './ogre.js?v=5770abe5927f';
-import {ogreView} from './ogre.js?v=5770abe5927f';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=5770abe5927f';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=5770abe5927f';
+import {createDungeonMusic} from './dungeon-music.js?v=65931cb8ac8a';
+import {showRoomPreview} from './room-preview.js?v=65931cb8ac8a';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=65931cb8ac8a';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=65931cb8ac8a';
+import {drawCorridor} from './corridor.js?v=65931cb8ac8a';
+import {exploredMap} from './explored-map.js?v=65931cb8ac8a';
+import {dragonView,dragonArt} from './dragon.js?v=65931cb8ac8a';
+import {queenView,queenArt} from './queen.js?v=65931cb8ac8a';
+import {wizardView,wizardArt} from './wizard.js?v=65931cb8ac8a';
+import {createAttempt,tick,respond} from './reaction.js?v=65931cb8ac8a';
+import {lessons,notes as legacyOgreNotes} from './ogre.js?v=65931cb8ac8a';
+import {ogreView} from './ogre.js?v=65931cb8ac8a';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=65931cb8ac8a';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=65931cb8ac8a';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
@@ -31,6 +31,9 @@ if(previewMode&&new URLSearchParams(location.search).get('preview')==='doors'){c
 const explorationAudio=new Audio('./assets/audio/dungeon-exploration.mp3');explorationAudio.id='dungeon-music';explorationAudio.preload='metadata';explorationAudio.hidden=true;document.body.append(explorationAudio);
 const doorAudio=new Audio('./assets/audio/door-creaks-open-footsteps.mp3');
 doorAudio.preload='auto';
+const ogreAudio=new Audio('./assets/audio/ogre-chamber.wav');
+ogreAudio.id='ogre-music';ogreAudio.preload='metadata';ogreAudio.hidden=true;document.body.append(ogreAudio);
+const ogreMusic=createDungeonMusic(ogreAudio);
 const musicControl=$('dungeon-music-toggle');
 let soundMuted=false;
 const dungeonMusic=createDungeonMusic(explorationAudio,status=>{
@@ -42,8 +45,12 @@ const dungeonMusic=createDungeonMusic(explorationAudio,status=>{
 musicControl.onclick=()=>dungeonMusic.toggle();
 // Retry only on a real player gesture if the browser blocked initial playback.
 window.addEventListener('pointerdown',e=>{if(!e.target.closest('#dungeon-music-toggle'))dungeonMusic.retry();},{capture:true});window.addEventListener('keydown',e=>{if(!e.target.closest('#dungeon-music-toggle'))dungeonMusic.retry();},{capture:true});
-window.addEventListener('pagehide',()=>{dungeonMusic.stop();doorAudio.pause();});
-window.addEventListener('pageshow',()=>dungeonMusic.setExploring(!state.encounter&&!enteringDoor));
+window.addEventListener('pagehide',()=>{dungeonMusic.stop();ogreMusic.stop();doorAudio.pause();});
+window.addEventListener('pageshow',()=>{dungeonMusic.setExploring(!state.encounter&&!ogreRefresher&&!enteringDoor);syncOgreMusic();});
+function syncOgreMusic(){
+  const insideOgre=ogreRefresher||Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
+  ogreMusic.setExploring(insideOgre&&!enteringDoor&&!soundMuted);
+}
 let attempt=null, reactionFrame=null, slowReaction=false, motion=null, enteringDoor=false;
 const doorDescriptions={
   ogre:'Its hinges are strong and its timber is aged but sturdy.',
@@ -57,6 +64,11 @@ const heldNavigation=new Set();let heldFrame=null;
 function stopHeldMovement(){heldNavigation.clear();if(heldFrame!==null)cancelAnimationFrame(heldFrame);heldFrame=null;}
 function repeatMovement(){heldFrame=null;if(document.hidden||modal.open||state.encounter||state.gate){stopHeldMovement();return;}const key=[...heldNavigation].at(-1);if(!key)return;perform(navigationKeys[key]);if(heldNavigation.size)heldFrame=requestAnimationFrame(repeatMovement);}
 
+function journalKnowledge(){
+  const discoveries=state.knowledge.filter(note=>!legacyOgreNotes.includes(note));
+  if(state.completed)discoveries.unshift('The Ogre’s advice: Be fast and accurate when you attack.');
+  return discoveries.join(' ');
+}
 function persist(){if(writable&&!save(storage,state)){writable=false;showStorageWarning('Saving failed. Progress lasts only for this open session.');}}
 function scene(){drawCorridor($('scene'),state);}
 function render(){
@@ -68,7 +80,7 @@ function render(){
   $('live-map').innerHTML=exploredMap(state);
   scene();if(state.encounter)openPanel('encounter');else if(state.gate)openPanel('gate');else syncPanels();
 }
-let ogreFrame=null,elfFrame=null,wizardFrame=null;
+let ogreFrame=null,elfFrame=null,wizardFrame=null,ogreRefresher=false;
 window.addEventListener('message',event=>{
  if(wizardFrame&&event.source===wizardFrame.contentWindow&&event.origin===location.origin){
   const type=event.data?.type;let action=null;
@@ -85,13 +97,36 @@ window.addEventListener('message',event=>{
  }
 
  if(!ogreFrame||event.source!==ogreFrame.contentWindow||event.origin!==location.origin)return;
+ const menuType=event.data?.type;
+ if(menuType==='ogre-attack:journal'){
+   ogreFrame.contentWindow.postMessage({type:'ogre-room:journal',text:journalKnowledge()||'Seek the three guardians and learn their lessons.'},location.origin);return;
+ }
+ if(menuType==='ogre-attack:reset'){perform('reset');return;}
+ if(menuType==='ogre-attack:sound'||menuType==='ogre-attack:sound-status'){
+   if(menuType==='ogre-attack:sound'){
+     dungeonMusic.setMuted(!soundMuted);
+     syncOgreMusic();
+   }
+   ogreFrame.contentWindow.postMessage({type:'ogre-room:sound',muted:soundMuted},location.origin);return;
+ }
+ if(menuType==='ogre-attack:leave'){
+   if(!enteringDoor)enterThroughDoor(()=>{
+     if(ogreRefresher)ogreRefresher=false;
+     else{state=act(state,'leave');persist();}
+     if(modal.open){panel=null;modal.close();}
+     render();
+   });
+   return;
+ }
+ if(ogreRefresher)return;
  const actions={'ogre-attack:practice1':'attack-practice-1','ogre-attack:practice2':'attack-practice-2','ogre-attack:complete':'attack-complete','ogre-attack:leave':'leave'};
  const action=actions[event.data?.type];if(!action)return;
  state=act(state,action);persist();if(!state.encounter&&modal.open){panel=null;modal.close();}render();
 });
 function syncPanels(){
- dungeonMusic.setExploring(!state.encounter);
- const attackRoom=Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
+ syncOgreMusic();
+ dungeonMusic.setExploring(!state.encounter&&!ogreRefresher&&!enteringDoor);
+ const attackRoom=ogreRefresher||Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
  const defenceRoom=state.encounter==='queen';
  const mindRoom=state.encounter==='wizard';
  document.body.classList.toggle('ogre-attack-room',attackRoom||defenceRoom||mindRoom);
@@ -103,7 +138,7 @@ function syncPanels(){
 
  if(attackRoom&&!ogreFrame){
   ogreFrame=document.createElement('iframe');ogreFrame.id='ogre-attack-encounter';ogreFrame.title='Ogre attack training';
-  const params=new URLSearchParams({encounter:'1',practice:String(state.ogre.attackPractice??0),completed:String(state.completed)});
+  const params=new URLSearchParams({encounter:'1',practice:String(state.ogre.attackPractice??0),completed:String(state.completed),refresher:String(Number(ogreRefresher))});
   ogreFrame.src='./ogre-playtest.html?'+params;document.body.append(ogreFrame);
  }else if(!attackRoom&&ogreFrame){ogreFrame.remove();ogreFrame=null;}
 
@@ -111,7 +146,7 @@ function syncPanels(){
   document.body.classList.toggle('encounter-room',inside);
   const controls=$('encounter-controls');controls.replaceChildren();controls.hidden=!inside;
   if(inside){for(const node of [...$('modal-body').children])if(node.matches('.choices,.guards,.angles,.ready,.selection,#reaction-start,#reaction-slow'))controls.append(node);}
-  $('message').hidden=modal.open;
+  $('message').hidden=modal.open&&panel!=='journal';
   if(panel==='encounter'){
     const art=$('modal-body').querySelector('.ogre-art,.wizard-art,.queen-art,.dragon-art');
     if(art)$('scene').replaceChildren(art);
@@ -120,14 +155,32 @@ function syncPanels(){
 function openPanel(type){
   if(motion)return;
   stopHeldMovement();
-  panel=type;updatePanel();if(!modal.open)modal.show();
+  if(modal.open&&panel!==type)modal.close();
+  panel=type;updatePanel();if(!modal.open){if(type==='journal')modal.showModal();else modal.show();}
   syncPanels();
 }
-function choice(label,action){const b=document.createElement('button');b.textContent=label;b.onclick=()=>perform(action);return b;}
+function choice(label,action){
+ const b=document.createElement('button');b.textContent=label;b.onclick=()=>perform(action);
+ b.onfocus=()=>{modal.querySelectorAll('.choice-selected').forEach(button=>button.classList.remove('choice-selected'));b.classList.add('choice-selected');};
+ return b;
+}
+function moveChoice(action){
+ const choices=[...$('modal-body').querySelectorAll('button:not(:disabled)')];
+ if(!choices.length)return;
+ const selected=choices.findIndex(button=>button.classList.contains('choice-selected')||button===document.activeElement);
+ const step=['left','forward'].includes(action)?-1:1;
+ choices[(Math.max(0,selected)+step+choices.length)%choices.length].focus();
+}
+function confirmChoice(){
+ const choices=[...$('modal-body').querySelectorAll('button:not(:disabled)')];
+ const selected=choices.find(button=>button.classList.contains('choice-selected'))||choices[0];
+ selected?.click();
+}
 function updatePanel(){
   modal.classList.remove('reaction-active');document.body.classList.remove('in-reaction');
   const atDoor=panel==='gate';
   modal.classList.toggle('door-prompt',atDoor);
+  modal.classList.toggle('journal-overlay',panel==='journal');
   modal.setAttribute('aria-labelledby',atDoor?'door-intro':'modal-title');
   const body=$('modal-body');body.replaceChildren();$('close').hidden=panel==='encounter'||panel==='gate';
   $('modal-label').textContent=panel==='encounter'?(state.encounter==='wizard'?'THE WIZARD’S STUDY · ':state.encounter==='queen'?'THE ROOT COURT · ':state.encounter==='dragon'?'THE BOUND CHAMBER · ':'THE SHIELD KEEPER · ')+state.health+' / 3 HEALTH':'FIELD NOTES';
@@ -137,10 +190,12 @@ function updatePanel(){
     const choices=document.createElement('div');choices.className='choices';choices.append(choice('Open the door and enter','gate-enter'),choice('Stay in the maze','gate-decline'));
     body.append(intro,description,choices);
   }else if(panel==='journal'){
-    if(MAZE_ONLY){$('modal-title').textContent='Maze exploration';body.innerHTML='<p>Encounters are disabled for this navigation test. Follow the corridors, return to the entrance, and watch the map fill in as you explore.</p>';return;}
-    $('modal-title').textContent='What you carry.';body.innerHTML='<h3>Inventory</h3>';const items=document.createElement('p');items.textContent=state.items.join(', ')||'Nothing yet.';body.append(items);const h=document.createElement('h3');h.textContent='Discoveries';body.append(h);const k=document.createElement('p');k.textContent=state.knowledge.join(' ')||'Seek the ogre. Watch his stance before committing your guard.';body.append(k);
-    const count=Number(state.completed)+Number(state.wizard.completed)+Number(state.queen.completed);
-    if(count){const p=document.createElement('p');p.className='note';p.textContent=count===3?'All three discoveries earned: shield, lens, and queen’s seal. Seek the dragon in the eastern chamber.':`${count} of 3 discoveries earned. The ogre, wizard, and queen may be visited in any order.`;body.append(p);}
+    $('modal-label').textContent='';
+    $('modal-title').textContent='Journal';
+    const advice=document.createElement('p');
+    advice.textContent=journalKnowledge()||'Seek the three guardians and learn their lessons.';
+    body.append(advice);
+    if(state.completed)body.append(choice('Practice attacking','ogre-refresher'));
     if(state.dragon.victory)body.append(choice('Read the earned name','show-name'));
   }else if(panel==='victory'){renderVictory(body);
   }else if(panel==='reset'){
@@ -273,10 +328,12 @@ function playDoorSound(){
     doorAudio.play().catch(done);
   });
 }
-async function enterThroughDoor(){
-  if(document.hidden){enterChamber();return;}
+async function enterThroughDoor(changeScene=enterChamber){
+  if(document.hidden){changeScene();return;}
   enteringDoor=true;
   dungeonMusic.setExploring(false);
+  ogreMusic.stop();
+  if(ogreFrame)ogreFrame.inert=true;
   // Start playback directly from the entry click for browsers that require a gesture.
   const soundFinished=playDoorSound();
   const fade=$('door-fade');
@@ -289,7 +346,7 @@ async function enterThroughDoor(){
   let frame;
   try{
     await darken?.finished;
-    enterChamber();
+    changeScene();
     frame=ogreFrame||elfFrame||wizardFrame;
     if(frame){
       frame.inert=true;
@@ -300,20 +357,25 @@ async function enterThroughDoor(){
       });
     }
     await soundFinished;
+    if(ogreFrame&&!soundMuted)ogreMusic.setExploring(true);
+    if(!state.encounter&&!ogreRefresher)dungeonMusic.setExploring(true);
     if(!reducedMotion){
       const reveal=playFade(1,0,950);
       try{await reveal.finished;}finally{reveal.cancel();}
     }
   }finally{
-    if(frame)frame.inert=false;
+    if(frame){frame.inert=false;frame.contentWindow.focus();}
     fade.hidden=true;darken?.cancel();enteringDoor=false;
   }
 }
 function perform(action){
   if(attempt||motion||enteringDoor)return;
+  if(action==='ogre-refresher'&&state.completed){
+    panel=null;modal.close();ogreRefresher=true;syncPanels();ogreFrame.contentWindow.focus();return;
+  }
   if(action==='show-name'&&state.dragon.victory){openPanel('victory');return;}
   const now=performance.now();if(now-lastInput<220)return;lastInput=now;
-  if(action==='reset'){state=fresh();writable=!previewMode;showStorageWarning();persist();panel=null;modal.close();render();return;}
+  if(action==='reset'){ogreRefresher=false;state=fresh();writable=!previewMode;showStorageWarning();persist();panel=null;modal.close();render();return;}
   if(panel&&panel!=='encounter'&&panel!=='gate')return;
   if(action==='gate-enter'&&state.gate){enterThroughDoor();return;}
   const before=state;
@@ -334,18 +396,23 @@ $('journal').onclick=explorationMenu(()=>openPanel('journal'));
 $('reset').onclick=explorationMenu(()=>openPanel('reset'));
 $('close').onclick=close;
 $('space-action').onclick=()=>{
+  if(modal.open){confirmChoice();return;}
   if(!MAZE_ONLY&&!modal.open&&[ENCOUNTER,WIZARD,QUEEN,DRAGON].includes(state.pos))perform('interact');
 };
 $('dragon-return').onclick=explorationMenu(()=>perform('dragon-shortcut'));
 $('earned-name').onclick=explorationMenu(()=>openPanel('victory'));
 modal.addEventListener('cancel',e=>{e.preventDefault();if(panel!=='encounter'&&panel!=='gate')close();});
-document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{if(!modal.open)perform(b.dataset.action);});
+document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{if(modal.open)moveChoice(b.dataset.action);else perform(b.dataset.action);});
 window.addEventListener('keydown',e=>{
   if(enteringDoor){e.preventDefault();return;}
   if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)||e.target.isContentEditable)return;
-  if(e.repeat){if(navigationKeys[e.key])e.preventDefault();return;}
+  if(e.repeat){if(navigationKeys[e.key]||e.code==='Space')e.preventDefault();return;}
   if(e.key==='Escape'&&modal.open&&panel!=='encounter'){e.preventDefault();close();return;}
   const action=navigationKeys[e.key];
+  if(modal.open&&!attempt){
+    if(action){e.preventDefault();moveChoice(action);return;}
+    if(e.code==='Space'&&e.target!==$('close')){e.preventDefault();confirmChoice();return;}
+  }
   if(action){e.preventDefault();if(attempt){const guard={ArrowLeft:'left',ArrowUp:'high',ArrowRight:'right'}[e.key];if(guard)react(guard);}else if(!modal.open&&!state.encounter&&!state.gate){heldNavigation.delete(e.key);heldNavigation.add(e.key);if(heldFrame===null)repeatMovement();}return;}
   if(e.key.toLowerCase()==='j'){e.preventDefault();if(modal.open){if(panel!=='encounter'&&panel!=='gate')close();}else openPanel('journal');}
 });

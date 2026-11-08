@@ -78,7 +78,7 @@ button.ready { background: #503419; color: var(--ink); }
 .controls small { color: var(--ink); font: 8px/1.5 var(--pixel); letter-spacing: 0; }
 .caption, .control-area, .save, .hud, .tuning { border-color: var(--bevel); }
 #message, dialog p, .mask-claim, .revealed-inscription {
-  font: clamp(22px, 1.75vw, 29px)/1.15 var(--dialogue);
+  font: clamp(28px, 2.3vw, 38px)/1.15 var(--dialogue);
 }
 h2, h3, .earned-name { font-family: var(--pixel); line-height: 1.55; }
 h2, .reaction-active h2 { font-size: clamp(13px, 1.5vw, 19px); }
@@ -141,7 +141,7 @@ body > header, body > footer { padding-inline: var(--gutter); }
   margin-inline: auto;
 }
 .encounter-ui .guidance #message, .encounter-ui .narrative #message {
-  font: clamp(22px, 1.75vw, 29px)/1.15 var(--dialogue);
+  font: clamp(28px, 2.3vw, 38px)/1.15 var(--dialogue);
   min-height: 0;
 }
 .encounter-ui .heading { flex-wrap: wrap; }
@@ -272,4 +272,113 @@ body > header, body > footer { padding-inline: var(--gutter); }
   inset: 0;
   z-index: 30;
   background: #000;
+}
+
+/* Ogre introduction shell, ready for the revised conversation. */
+.ogre-intro header, .ogre-intro footer, .ogre-intro .badge,
+.ogre-intro .railhead, .ogre-intro .railfoot,
+.ogre-intro .narrative > *, .ogre-intro .controls > button,
+.ogre-intro .controls > .keys { display: none; }
+.ogre-intro .rail { visibility: hidden; }
+.ogre-intro .bottom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ogre-intro .narrative, .ogre-intro .controls {
+  min-height: 0;
+  padding: clamp(10px, 1.2vw, 18px);
+}
+.ogre-intro .controls {
+  grid-template-columns: minmax(0, 3fr) minmax(86px, 1fr);
+  gap: clamp(8px, 1vw, 16px);
+  align-content: stretch;
+}
+.ogre-intro .control-area { padding-right: clamp(6px, 1vw, 14px); border-right: 1px solid var(--bevel); }
+.ogre-intro .toolbar { display: grid; grid-template-rows: repeat(3, minmax(44px, 1fr)); }
+.ogre-intro .movement-pad button, .ogre-intro .toolbar button {
+  display: grid; place-items: center; background: #000;
+  border-color: var(--brass); box-shadow: none; color: var(--gold);
+  padding: 4px; font-size: clamp(8px, .86vw, 13px); text-transform: uppercase;
+  letter-spacing: 0;
+}
+.ogre-intro #room-menu {
+  width: min(560px, 92vw); padding: 20px; max-height: 90dvh; overflow-y: auto;
+}
+.ogre-intro #room-menu::backdrop { background: #000b; }
+.ogre-intro #room-menu p { white-space: pre-line; }
+.ogre-intro #room-menu button { margin-top: 8px; }
+@media (min-width: 651px) and (min-height: 500px) {
+  .ogre-intro main {
+    height: 100dvh; margin: 0; padding: var(--gutter);
+    display: grid; gap: clamp(8px, 1.2vw, 18px);
+    grid-template-rows: minmax(0, 1fr) clamp(236px, 32dvh, 300px);
+  }
+  .ogre-intro main > section.frame { min-height: 0; display: flex; flex-direction: column; }
+  .ogre-intro .stage { flex: 1; min-height: 0; }
+  .ogre-intro .stage #room { height: 100%; max-height: none; }
+  .ogre-intro .railbox { flex-shrink: 0; }
+  .ogre-intro .bottom { margin: 0; min-height: 0; gap: clamp(8px, 1.2vw, 18px); }
+}
+@media (max-width: 650px) {
+  .ogre-intro .bottom { grid-template-columns: 1fr; }
+  .ogre-intro .narrative { min-height: 140px; }
+}
+
+.ogre-intro .narrative { display: flex; flex-direction: column; }
+.ogre-intro .narrative > #message,
+.ogre-intro .narrative > #dialogue-continue { display: block; }
+.ogre-intro #message { margin-top: 0; }
+.ogre-intro #dialogue-continue {
+  margin: auto 0 0; padding-top: 12px;
+  text-align: center; color: var(--gold);
+  font: 17px/1.15 var(--dialogue);
+}
+.ogre-intro.ogre-rail-visible .rail { visibility: visible; }
+.ogre-intro .narrative { overflow-y: auto; }
+
+
+/* Journal occupies the top layer while the game remains visible behind it. */
+#modal.journal-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  margin: auto !important;
+  width: min(760px, calc(100vw - 32px)) !important;
+  max-height: calc(100dvh - 32px) !important;
+  height: fit-content;
+  overflow-y: auto !important;
+  padding: clamp(16px, 2vw, 28px) !important;
+  background: var(--panel);
+  border: 3px solid var(--brass) !important;
+  box-shadow: inset 0 0 0 3px var(--bevel);
+}
+#modal.journal-overlay::backdrop { background: #000b; }
+.journal-overlay .eyebrow:empty { display: none; }
+.journal-overlay #modal-title { margin-top: 0; }
+.journal-overlay .modal-head { justify-content: flex-end; }
+.journal-overlay #modal-body button { display: block; margin-top: 14px; text-align: center; }
+.encounter-ui .narrative .note, .encounter-ui .guidance .note {
+  font-size: clamp(24px, 1.9vw, 30px);
+}
+
+.door-prompt #modal-body { display: grid; gap: 10px; }
+.door-prompt #modal-body > p { margin: 0; }
+.door-prompt .choices {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 4px 0 0;
+}
+.door-prompt .choices button {
+  min-height: 52px;
+  padding: 8px;
+  line-height: 1.6;
+}
+#modal .choice-selected {
+  outline: 2px solid var(--gold);
+  outline-offset: -4px;
+  border-color: var(--gold);
+}
+@media (min-width: 651px) and (min-height: 500px) {
+  .dungeon-ui:not(.encounter-room) .console:has(.door-prompt[open]) {
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+  .dungeon-ui:not(.encounter-room) .narrative:has(.door-prompt[open]) {
+    overflow: visible;
+  }
 }

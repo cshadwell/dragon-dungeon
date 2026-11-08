@@ -8,6 +8,7 @@ export function createDungeonMusic(audio,onChange=()=>{}){
  return {
   setExploring(next){if(disposed||next===exploring)return;exploring=next;reset();if(exploring)retry();status();},
   toggle(){if(muted){muted=false;retry();}else if(audio.paused)retry();else{muted=true;audio.pause();}status();},
+  setMuted(value){muted=Boolean(value);if(muted)audio.pause();else retry();status();},
   retry,
   stop(){exploring=false;reset();status();},
   dispose(){disposed=true;exploring=false;reset();}

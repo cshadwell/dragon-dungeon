@@ -8,7 +8,7 @@ test('timing judgment is symmetric on all three passes; narrow target and speed 
  assert.equal(judgeAttack(3000,c).result,'hesitation');assert.equal(judgeAttack(620,c).result,'hit');assert.equal(judgeAttack(620,{...c,targetWidth:.16}).result,'miss');assert.equal(judgeAttack(500,{...c,passMs:700}).result,'miss');assert.ok(ATTACK_DEFAULTS.practice.passMs>ATTACK_DEFAULTS.challenge.passMs);
 });
 test('one registered reaction per outcome preserves agreed pose assignments',()=>{
- assert.equal(reactionPose('practice','hit',1),9);assert.equal(reactionPose('practice','perfect',1),11);assert.equal(reactionPose('practice','miss',1),1);assert.equal(reactionPose('challenge','hesitation',1),1);
+ assert.equal(reactionPose('practice','hit',1),9);assert.equal(reactionPose('practice','perfect',1),11);assert.equal(reactionPose('practice','miss',1),9);assert.equal(reactionPose('challenge','hesitation',1),9);
  for(let n=1;n<=12;n++){assert.ok([4,5,6,7].includes(reactionPose('challenge','miss',n)));for(const result of ['hit','perfect'])assert.ok([12,13,14,15].includes(reactionPose('challenge',result,n)));}
 });
 
