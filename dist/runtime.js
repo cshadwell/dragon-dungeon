@@ -1,11 +1,12 @@
-import {DEFENCE_GOAL} from './elf-defence-model.js?v=c27c98be8a54';
-import {LENS,wizardNotes} from './wizard.js?v=c27c98be8a54';
-import {SEAL,queenNotes} from './queen.js?v=c27c98be8a54';
-import {SHIELD,notes} from './ogre.js?v=c27c98be8a54';
-import {mazeHint} from './maze-hints.js?v=c27c98be8a54';
+import {MIND_GOAL} from './wizard-mind-model.js?v=9b2f8bc9e7ff';
+import {DEFENCE_GOAL} from './elf-defence-model.js?v=9b2f8bc9e7ff';
+import {LENS,wizardNotes} from './wizard.js?v=9b2f8bc9e7ff';
+import {SEAL,queenNotes} from './queen.js?v=9b2f8bc9e7ff';
+import {SHIELD,notes} from './ogre.js?v=9b2f8bc9e7ff';
+import {mazeHint} from './maze-hints.js?v=9b2f8bc9e7ff';
 // Supplied maze + user-approved encounter locations. The small prototype remains intact.
-import * as adventure from './engine.js?v=c27c98be8a54';
-import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=c27c98be8a54';
+import * as adventure from './engine.js?v=9b2f8bc9e7ff';
+import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=9b2f8bc9e7ff';
 export const MAZE_ONLY=false;
 export const WORLD_WIDTH=MAZE_WIDTH,WORLD_HEIGHT=MAZE_HEIGHT;
 export const START=MAZE_START,ENCOUNTER='35,30',WIZARD='3,22',QUEEN='55,4',DRAGON='0,1',DIRS=adventure.DIRS;
@@ -16,10 +17,10 @@ export const SAVE_KEY='dragon-dungeon-maze-adventure-v1';
 const EXPLORATION_KEY='dragon-dungeon-maze-image-v1';
 export function fresh(){return {...adventure.fresh(),content:WORLD.CONTENT,gate:null,pos:START,checkpoint:START,facing:0,visited:[START],message:'You stand at the southeast entrance. Seek the three guardians, then confront the dragon. Their locations appear on the map only after discovery.'};}
 export function act(s,a){
- if(s.pos===WIZARD&&s.encounter==='wizard'&&(a==='mind-complete'||/^mind-progress-[0-9]$/.test(a))){
+ if(s.pos===WIZARD&&s.encounter==='wizard'&&(a==='mind-complete'||/^mind-progress-(?:[0-9]|1[0-2])$/.test(a))){
   const next=structuredClone(s),w=next.wizard;
-  if(a.startsWith('mind-progress-'))w.mindCorrect=Math.max(w.mindCorrect??0,Number(a.slice(-1)));
-  if(a==='mind-complete'&&(w.mindCorrect??0)>=9){w.completed=true;w.phase='done';w.returnTo=null;next.items=[...new Set([...next.items,LENS])];next.knowledge=[...new Set([...next.knowledge,...wizardNotes])];next.message='Focus mastered. The wizard’s revealing lens is yours.';}
+  if(a.startsWith('mind-progress-'))w.mindCorrect=Math.max(w.mindCorrect??0,Number(a.slice('mind-progress-'.length)));
+  if(a==='mind-complete'&&(w.mindCorrect??0)>=MIND_GOAL){w.completed=true;w.phase='done';w.returnTo=null;next.items=[...new Set([...next.items,LENS])];next.knowledge=[...new Set([...next.knowledge,...wizardNotes])];next.message='Focus mastered. The wizard’s revealing lens is yours.';}
   return next;
  }
 
@@ -57,7 +58,7 @@ export function act(s,a){
  if(!s.encounter&&['forward','back'].includes(a)&&next.pos!==s.pos&&Object.values(entries).includes(next.pos)){next.encounter=null;next.gate=Object.keys(entries).find(k=>entries[k]===next.pos);next.message='You stand in front of a door in the passage.';}
  return next;
 }
-export const valid=s=>adventure.valid(s,WORLD)&&(s.wizard.mindCorrect===undefined||(Number.isInteger(s.wizard.mindCorrect)&&s.wizard.mindCorrect>=0&&s.wizard.mindCorrect<=9))&&(s.queen.defenceBlocks===undefined||(Number.isInteger(s.queen.defenceBlocks)&&s.queen.defenceBlocks>=0&&s.queen.defenceBlocks<=DEFENCE_GOAL))&&(s.ogre.attackPractice===undefined||(Number.isInteger(s.ogre.attackPractice)&&s.ogre.attackPractice>=0&&s.ogre.attackPractice<=2))&&([undefined,null].includes(s.gate)||(['ogre','wizard','queen','dragon'].includes(s.gate)&&s.pos===({ogre:ENCOUNTER,wizard:WIZARD,queen:QUEEN,dragon:DRAGON}[s.gate])&&s.encounter===null));
+export const valid=s=>adventure.valid(s,WORLD)&&(s.wizard.mindCorrect===undefined||(Number.isInteger(s.wizard.mindCorrect)&&s.wizard.mindCorrect>=0&&s.wizard.mindCorrect<=MIND_GOAL))&&(s.queen.defenceBlocks===undefined||(Number.isInteger(s.queen.defenceBlocks)&&s.queen.defenceBlocks>=0&&s.queen.defenceBlocks<=DEFENCE_GOAL))&&(s.ogre.attackPractice===undefined||(Number.isInteger(s.ogre.attackPractice)&&s.ogre.attackPractice>=0&&s.ogre.attackPractice<=2))&&([undefined,null].includes(s.gate)||(['ogre','wizard','queen','dragon'].includes(s.gate)&&s.pos===({ogre:ENCOUNTER,wizard:WIZARD,queen:QUEEN,dragon:DRAGON}[s.gate])&&s.encounter===null));
 function explorationValid(s){return s&&s.content==='maze-image-1'&&cells.has(s.pos)&&Number.isInteger(s.facing)&&s.facing>=0&&s.facing<4&&Array.isArray(s.visited)&&s.visited.every(p=>cells.has(p))&&s.visited.includes(s.pos)&&s.visited.includes(START);}
 export function load(storage){try{
  const raw=storage.getItem(SAVE_KEY);

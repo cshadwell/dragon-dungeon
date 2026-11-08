@@ -1,8 +1,8 @@
-import {setupRoomControls} from './encounter-console.js?v=c27c98be8a54';
-import {ELF_DEFENCE_POSES} from './elf-defence-poses.js?v=c27c98be8a54';
-import {getCharacterPose} from './character-art.js?v=c27c98be8a54';
-import {getRoomArt} from './room-art.js?v=c27c98be8a54';
-import {DEFENCE_DEFAULTS,DEFENCE_STAGES,DEFENCE_GOAL,defenceProgress,ORBIT,SPAWN_RADIUS,freshDefence,spawnAttack,stepDefence} from './elf-defence-model.js?v=c27c98be8a54';
+import {setupRoomControls} from './encounter-console.js?v=9b2f8bc9e7ff';
+import {ELF_DEFENCE_POSES} from './elf-defence-poses.js?v=9b2f8bc9e7ff';
+import {getCharacterPose} from './character-art.js?v=9b2f8bc9e7ff';
+import {getRoomArt} from './room-art.js?v=9b2f8bc9e7ff';
+import {DEFENCE_DEFAULTS,DEFENCE_STAGES,DEFENCE_GOAL,defenceProgress,ORBIT,SPAWN_RADIUS,freshDefence,spawnAttack,stepDefence} from './elf-defence-model.js?v=9b2f8bc9e7ff';
 const params=new URLSearchParams(location.search),integrated=params.get('encounter')==='1'&&parent!==window;
 if(integrated)document.body.classList.add('elf-intro');
 const notify=(type,extra={})=>{if(integrated)parent.postMessage({type:'elf-defence:'+type,...extra},location.origin);};

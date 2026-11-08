@@ -1,5 +1,10 @@
 export const COLORS=Object.freeze(['red','blue','green','orange','purple','white','yellow']);
-export const STAGES=Object.freeze([{seconds:4,conflict:false},{seconds:3,conflict:true},{seconds:2,conflict:true}].map(Object.freeze));
+export const STAGES=Object.freeze([{seconds:4,conflict:false,hits:3},{seconds:3,conflict:false,hits:4},{seconds:2,conflict:true,hits:5}].map(Object.freeze));
+export const MIND_GOAL=12;
+export function mindProgress(correct){
+ const stage=correct<3?0:correct<7?1:2;
+ return {stage,hits:Math.min(STAGES[stage].hits,correct-[0,3,7][stage]),complete:correct>=MIND_GOAL};
+}
 export function shuffle(items,random=Math.random){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 export function makeRound(stage,random=Math.random,previousColor=null){
  const availableColors=COLORS.filter(color=>color!==previousColor);

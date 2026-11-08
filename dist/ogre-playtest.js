@@ -1,7 +1,7 @@
-import {setupRoomControls} from './encounter-console.js?v=c27c98be8a54';
-import {getCharacterPose} from './character-art.js?v=c27c98be8a54';
-import {getRoomArt} from './room-art.js?v=c27c98be8a54';
-import {ATTACK_DEFAULTS,PRACTICE_NEXT,targetForAttempt,attackPosition,judgeAttack,reactionPose} from './ogre-attack-model.js?v=c27c98be8a54';
+import {setupRoomControls} from './encounter-console.js?v=9b2f8bc9e7ff';
+import {getCharacterPose} from './character-art.js?v=9b2f8bc9e7ff';
+import {getRoomArt} from './room-art.js?v=9b2f8bc9e7ff';
+import {ATTACK_DEFAULTS,PRACTICE_NEXT,targetForAttempt,attackPosition,judgeAttack,reactionPose} from './ogre-attack-model.js?v=9b2f8bc9e7ff';
 const encounterParams=new URLSearchParams(location.search),integrated=encounterParams.get('encounter')==='1'&&window.parent!==window;
 if(integrated)document.body.classList.add('ogre-intro');
 const notify=type=>{if(integrated)window.parent.postMessage({type:'ogre-attack:'+type},location.origin);};
