@@ -321,3 +321,11 @@ After the CHAZ plaque reveal, keep the upper frame and exact plaque visible. Fad
 
 ## 2026-11-09 — GitHub Pages preparation
 Added official Actions artifact/deploy workflow, deterministic optional package output, relative-reference/CHAZ validator, and GITHUB_PAGES.md. Existing source, save keys and migrations unchanged. Corrected browser smoke setup to wait for and click movement controls instead of sending keys before boot; completed-victory fixture now includes its required visited tile and consistent dragon fields. Initial private Pages activation was rejected by the account plan. User explicitly approved making existing repository/source/history public; repository is now public and Pages uses workflow publishing at https://cshadwell.github.io/dragon-dungeon/.
+
+
+## 2026-11-09 — Audio entry standalone test
+Added audio-entry-preview.html/js, excluded from Pages release packaging. Black Space/click entry calls title audio play directly within the user gesture, waits for playback/art readiness, then reveals exact animated title at40%volume. Enter ends this isolated preview; it does not read/write adventure storage. Includes mute, error retry/silent fallback, replay and visibility suspension. In-app browser verified both Space and click start title audio (paused=false with advancing time); not yet verified across Safari/mobile.137tests pass. Live game unchanged; not pushed.
+
+
+## 2026-11-09 — Approved audio entry integrated
+User verified the standalone entry in three browsers and approved integration. Initial black screen now asks Press Space Bar or tap to begin. The gesture starts non-looping title music directly at40% before awaiting title art readiness, then reveals the unchanged animated title. Title Play/Mute button removed; in-game sound control retained. Second Space/click enters the existing prologue/dungeon sequence. Includes blocked-audio retry/silent fallback and visibility resume. Initial title is hidden in HTML to avoid a premature visual flash. No adventure storage read/write until entering the game, as before. Added Space/click browser coverage and generalized main-page stylesheet/module cache stamping so the new stylesheet shares the release ID.137local tests pass; final GitHub browser/deploy result recorded in workflow. Standalone audio preview excluded from release package.

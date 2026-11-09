@@ -1,4 +1,4 @@
-import {SHIELD} from './ogre.js?v=5847e2b65376';import {LENS} from './wizard.js?v=5847e2b65376';import {SEAL} from './queen.js?v=5847e2b65376';
+import {SHIELD} from './ogre.js?v=6f08161e9101';import {LENS} from './wizard.js?v=6f08161e9101';import {SEAL} from './queen.js?v=6f08161e9101';
 export const DRAGON='4,2';
 // Approved final name from the supplied golden plaque.
 export const NAME_CONFIG={name:'CHAZ',placeholder:false};

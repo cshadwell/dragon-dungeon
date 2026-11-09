@@ -1,4 +1,4 @@
-import {createOpeningPlayback} from './opening-playback.js?v=5847e2b65376';
+import {createOpeningPlayback} from './opening-playback.js?v=6f08161e9101';
 const OPENING_TEXT='You embark upon a great quest. You seek something simple, a name. One word that will allow you to continue your journey. It will not be easy and you will need help along the way. Good luck and may fortune favor you.';
 export function playOpeningScene({beforeFinish=async()=>{}}={}){
  return new Promise(resolve=>{

@@ -13,7 +13,8 @@ async function approachDoor(page){
  await expect(page.getByRole('button',{name:'Open the door and enter',exact:true})).toBeVisible();
 }
 test('Space starts opening, credits hold, and dungeon music waits until reveal',async({page})=>{
- await page.goto('/');await expect(page.locator('#title-status')).toContainText('Press Space Bar');await page.keyboard.press('Space');
+ await page.goto('/');await expect(page.locator('#audio-entry')).toBeVisible();await expect(page.locator('#title-screen')).not.toBeVisible();await expect(page.locator('#title-audio')).toHaveJSProperty('paused',true);await page.keyboard.press('Space');
+ await expect(page.locator('#audio-entry')).toHaveCount(0);await expect(page.locator('#title-screen')).toBeVisible();await expect.poll(()=>page.locator('#title-audio').evaluate(a=>a.paused)).toBe(false);await expect(page.locator('#title-music')).toHaveCount(0);await page.keyboard.press('Space');
  await expect(page.locator('#opening-music')).toBeAttached();await expect(page.locator('#dungeon-music')).toHaveCount(0);
  await expect(page.getByRole('button',{name:'-Press Space Bar-',exact:true})).toBeVisible({timeout:25000});
  await page.keyboard.press('Space');await expect(page.locator('.opening-scene')).toHaveCount(0);await expect(page.locator('body')).not.toHaveClass(/boot-transition/);
@@ -57,3 +58,5 @@ test('earned name runs closing credits and resolves X-13 after static',async({pa
  const frame=page.frameLocator('#dragon-room-encounter');await expect(frame.locator('.closing-scene')).toBeVisible();await expect(frame.locator('#room')).toHaveAttribute('aria-label',/Golden plaque/);await frame.locator('#room').click();
  await expect(frame.locator('.closing-signal')).toBeVisible({timeout:70000});await expect(frame.locator('.closing-signal')).not.toHaveClass(/flickering/,{timeout:15000});await expect(page.locator('#ending-music')).toHaveJSProperty('paused',true);
 });
+
+test('click entry reveals title with music and leaves saves untouched',async({page})=>{await page.goto('/');const before=await page.evaluate(()=>JSON.stringify(localStorage));await page.getByRole('button',{name:'Press Space Bar or tap to begin',exact:true}).click();await expect(page.locator('#title-screen')).toBeVisible();await expect.poll(()=>page.locator('#title-audio').evaluate(a=>a.paused)).toBe(false);await expect(page.locator('#title-music')).toHaveCount(0);expect(await page.evaluate(()=>JSON.stringify(localStorage))).toBe(before);});

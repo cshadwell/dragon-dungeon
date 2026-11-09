@@ -1,20 +1,20 @@
-import {installDialogueLayout} from './dialogue-layout.js?v=5847e2b65376';
-import {createScreenFade} from './screen-fade.js?v=5847e2b65376';
-import {playOpeningScene} from './opening-scene.js?v=5847e2b65376';
-import {animateTitle} from './title-effects.js?v=5847e2b65376';
+import {installDialogueLayout} from './dialogue-layout.js?v=6f08161e9101';
+import {createScreenFade} from './screen-fade.js?v=6f08161e9101';
+import {playOpeningScene} from './opening-scene.js?v=6f08161e9101';
+import {animateTitle} from './title-effects.js?v=6f08161e9101';
 installDialogueLayout();
 // Title view precedes app initialization: opening it never loads or writes a save.
 const title=document.getElementById('title-screen'),enter=document.getElementById('title-enter');
 let titleMusic=null,titleMusicActive=false,stopTitleEffects=()=>{},openingComplete=false;
 function stopTitleMusic(){titleMusicActive=false;if(titleMusic){titleMusic.pause();titleMusic.currentTime=0;}}
 const preview=['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).has('preview');
-let starting=false;
+let starting=false,titleRevealed=preview,unlockTitle=()=>{};
 function titleKeys(e){
  if(starting){e.preventDefault();e.stopImmediatePropagation();return;}
- if(e.code==='Space'){e.preventDefault();e.stopImmediatePropagation();if(!e.repeat)start();}
+ if(e.code==='Space'){e.preventDefault();e.stopImmediatePropagation();if(!e.repeat){if(titleRevealed)start();else unlockTitle();}}
 }
 async function start(){
- if(starting)return;starting=true;enter.disabled=true;stopTitleMusic();
+ if(starting||!titleRevealed)return;starting=true;enter.disabled=true;stopTitleMusic();
  const fade=preview?null:createScreenFade();
  try{
   if(!preview){document.body.classList.add('boot-transition');title.inert=true;await fade.darken();stopTitleEffects();}
@@ -25,7 +25,7 @@ async function start(){
    await opening;openingComplete=true;
    window.addEventListener('keydown',titleKeys,true);
   }
-  await import('./app.js?v=5847e2b65376');
+  await import('./app.js?v=6f08161e9101');
   document.body.classList.remove('title-open');title.remove();
   if(fade)await fade.reveal();
   document.body.classList.remove('boot-transition');
@@ -37,26 +37,33 @@ async function start(){
 }
 if(preview){start();}else{
  const canvas=document.getElementById('title-art'),ctx=canvas.getContext('2d'),art=new Image();
- ctx.imageSmoothingEnabled=false;
- art.onload=()=>{if(title.isConnected&&!enter.disabled)stopTitleEffects=animateTitle(canvas,art);};
- art.onerror=()=>{document.getElementById('title-status').textContent='Dungeon of the Nameless Dragon';};
- art.src='./assets/title/nameless-dragon.png';
- titleMusic=new Audio('./assets/audio/title-screen.mp3');titleMusic.loop=false;titleMusic.volume=0.4;titleMusic.preload='auto';titleMusicActive=true;titleMusic.hidden=true;title.append(titleMusic);
- const musicButton=document.createElement('button');musicButton.id='title-music';musicButton.textContent='Play title music';musicButton.setAttribute('aria-pressed','false');title.append(musicButton);
- function musicState(playing){musicButton.textContent=playing?'Mute title music':'Play title music';musicButton.setAttribute('aria-pressed',String(playing));}
- async function playTitleMusic(){
-  try{await titleMusic.play();if(!titleMusicActive){titleMusic.pause();return;}musicState(true);}
-  catch{if(titleMusicActive)musicState(false);}
- }
- musicButton.addEventListener('click',()=>{if(!titleMusic.paused){titleMusic.pause();musicState(false);}else playTitleMusic();});
- titleMusic.addEventListener('ended',()=>{musicButton.textContent='Title music finished';musicButton.disabled=true;musicButton.setAttribute('aria-pressed','false');});
- titleMusic.addEventListener('error',()=>{musicButton.textContent='Title music unavailable';musicButton.disabled=true;});
+ ctx.imageSmoothingEnabled=false;title.hidden=true;
+ const artwork=new Promise((resolve,reject)=>{art.onload=resolve;art.onerror=()=>reject(Error('Title artwork unavailable'));});
+ artwork.catch(()=>{});art.src='./assets/title/nameless-dragon.png';
+ titleMusic=new Audio('./assets/audio/title-screen.mp3');titleMusic.id='title-audio';titleMusic.loop=false;titleMusic.volume=.4;titleMusic.preload='auto';titleMusic.hidden=true;title.append(titleMusic);
+ const entry=document.createElement('section');entry.id='audio-entry';entry.setAttribute('aria-label','Begin the adventure');
+ const begin=document.createElement('button');begin.textContent='Press Space Bar or tap to begin';
+ const status=document.createElement('p');status.setAttribute('role','status');
+ const silent=document.createElement('button');silent.textContent='Continue without sound';silent.hidden=true;
+ entry.append(begin,status,silent);document.body.append(entry);
+ let unlocking=false;
+ unlockTitle=async(withoutSound=false)=>{
+  if(unlocking||titleRevealed)return;unlocking=true;status.textContent='';
+  // Invoke play in the actual Space/click handler, before awaiting art or fades.
+  const playback=withoutSound?Promise.resolve():titleMusic.play();
+  try{
+   await Promise.all([playback,artwork]);titleRevealed=true;titleMusicActive=true;title.hidden=false;entry.remove();
+   stopTitleEffects=animateTitle(canvas,art);enter.focus({preventScroll:true});
+  }catch{titleMusic.pause();status.textContent='Sound could not start. Press Space Bar or tap to try again.';silent.hidden=false;}
+  finally{unlocking=false;}
+ };
+ begin.onclick=()=>unlockTitle();silent.onclick=()=>unlockTitle(true);
+ async function playTitleMusic(){try{await titleMusic.play();if(!titleMusicActive)titleMusic.pause();}catch{}}
  let titleWasPlaying=false;
  function suspendTitle(){if(starting||!titleMusicActive)return;titleWasPlaying=titleMusicActive&&!titleMusic.paused;titleMusicActive=false;titleMusic.pause();stopTitleEffects();}
- function resumeTitle(){if(starting||!title.isConnected||document.hidden)return;titleMusicActive=true;if(titleWasPlaying)playTitleMusic();if(art.complete&&art.naturalWidth){stopTitleEffects();stopTitleEffects=animateTitle(canvas,art);}}
+ function resumeTitle(){if(starting||!titleRevealed||!title.isConnected||document.hidden)return;titleMusicActive=true;if(titleWasPlaying)playTitleMusic();if(art.complete&&art.naturalWidth){stopTitleEffects();stopTitleEffects=animateTitle(canvas,art);}}
  window.addEventListener('pagehide',suspendTitle);window.addEventListener('pageshow',resumeTitle);
  document.addEventListener('visibilitychange',()=>document.hidden?suspendTitle():resumeTitle());
- playTitleMusic();
  window.addEventListener('keydown',titleKeys,true);
- enter.addEventListener('click',start);enter.focus({preventScroll:true});
+ enter.addEventListener('click',start);begin.focus({preventScroll:true});
 }

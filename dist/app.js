@@ -1,19 +1,19 @@
-import {DOOR_DESCRIPTIONS as doorDescriptions} from './dialogue-copy.js?v=5847e2b65376';
-import {createEndingAudio} from './ending-audio.js?v=5847e2b65376';
-import {createDungeonMusic} from './dungeon-music.js?v=5847e2b65376';
-import {showRoomPreview} from './room-preview.js?v=5847e2b65376';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=5847e2b65376';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=5847e2b65376';
-import {drawCorridor} from './corridor.js?v=5847e2b65376';
-import {exploredMap} from './explored-map.js?v=5847e2b65376';
-import {dragonView,dragonArt} from './dragon.js?v=5847e2b65376';
-import {queenView,queenArt,queenNotes as legacyQueenNotes} from './queen.js?v=5847e2b65376';
-import {wizardView,wizardArt,wizardNotes as legacyWizardNotes} from './wizard.js?v=5847e2b65376';
-import {createAttempt,tick,respond} from './reaction.js?v=5847e2b65376';
-import {lessons,notes as legacyOgreNotes} from './ogre.js?v=5847e2b65376';
-import {ogreView} from './ogre.js?v=5847e2b65376';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=5847e2b65376';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER,banishDragon,completeDragon,guardiansReady,GUARDIAN_WARNING} from './runtime.js?v=5847e2b65376';
+import {DOOR_DESCRIPTIONS as doorDescriptions} from './dialogue-copy.js?v=6f08161e9101';
+import {createEndingAudio} from './ending-audio.js?v=6f08161e9101';
+import {createDungeonMusic} from './dungeon-music.js?v=6f08161e9101';
+import {showRoomPreview} from './room-preview.js?v=6f08161e9101';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=6f08161e9101';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=6f08161e9101';
+import {drawCorridor} from './corridor.js?v=6f08161e9101';
+import {exploredMap} from './explored-map.js?v=6f08161e9101';
+import {dragonView,dragonArt} from './dragon.js?v=6f08161e9101';
+import {queenView,queenArt,queenNotes as legacyQueenNotes} from './queen.js?v=6f08161e9101';
+import {wizardView,wizardArt,wizardNotes as legacyWizardNotes} from './wizard.js?v=6f08161e9101';
+import {createAttempt,tick,respond} from './reaction.js?v=6f08161e9101';
+import {lessons,notes as legacyOgreNotes} from './ogre.js?v=6f08161e9101';
+import {ogreView} from './ogre.js?v=6f08161e9101';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=6f08161e9101';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER,banishDragon,completeDragon,guardiansReady,GUARDIAN_WARNING} from './runtime.js?v=6f08161e9101';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}

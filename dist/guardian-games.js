@@ -1,5 +1,5 @@
 // Guardian graphics shared verbatim with the final encounter. Palette overrides only.
-import {ORBIT} from './elf-defence-model.js?v=5847e2b65376';
+import {ORBIT} from './elf-defence-model.js?v=6f08161e9101';
 export function drawDefenceArena(ctx,state,settings,{flash=null,running=true,loaded=true,completed=false,palette={}}={}){
  const color=value=>palette[value]??value;
  const rad=degrees=>degrees*Math.PI/180;
