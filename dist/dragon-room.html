@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>The Nameless Dragon</title>
+  <link rel="stylesheet" href="ogre-playtest.css?v=6d789c038015">
+  <link rel="stylesheet" href="iron-brass.css?v=6d789c038015">
+  <link rel="stylesheet" href="dragon-room.css?v=6d789c038015">
+<link rel="stylesheet" href="guardian-games.css?v=6d789c038015"></head>
+<body class="encounter-ui dragon-intro">
+  <main>
+    <section class="frame" aria-label="Dragon chamber">
+      <div class="stage"><canvas id="room" width="470" height="200" role="img" aria-label="Dragon pose 1 in the volcanic lair"></canvas><canvas id="dragon-gauge" width="71" height="304" role="img" aria-label="Full worthiness gauge" hidden></canvas></div>
+    </section>
+    <div class="bottom">
+      <section class="frame narrative" aria-label="Dialogue"><p id="message" role="status"></p></section>
+      <section class="frame controls" aria-label="Controls and menus"></section>
+    </div>
+    <dialog id="room-menu" class="frame" aria-labelledby="room-menu-title">
+      <h2 id="room-menu-title"></h2>
+      <p id="room-menu-text"></p>
+      <button id="room-menu-confirm" hidden>Begin new game</button>
+      <button id="room-menu-leave">Return to the maze</button>
+      <button id="room-menu-close">Close</button>
+    </dialog>
+  </main>
+  <script type="module" src="dragon-room.js?v=6d789c038015"></script>
+</body>
+</html>

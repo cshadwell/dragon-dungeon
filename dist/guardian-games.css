@@ -1,0 +1,14 @@
+/* Identical Wizard compass geometry and type, shared with the dragon. */
+.guardian-choices {
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));
+ gap:8px;align-items:stretch;width:100%;height:min(240px,100%);min-height:0;margin:0;
+}
+.guardian-choices .up{grid-area:1 / 2}.guardian-choices .left{grid-area:2 / 1}
+.guardian-choices .right{grid-area:2 / 3}.guardian-choices .down{grid-area:3 / 2}
+.guardian-choices button {
+ background:#000;container-type:inline-size;display:flex;flex-direction:column;justify-content:center;align-items:center;
+ gap:3px;padding:4px;min-height:0;letter-spacing:0;border:2px solid var(--brass);box-shadow:inset -2px -2px var(--bevel);color:var(--ink);
+}
+.guardian-choices .color-word {display:block;max-width:100%;font:400 min(30px,calc(92cqi / var(--letters)))/1.1 var(--pixel);letter-spacing:0;white-space:nowrap}
+.guardian-choices .direction {font:14px/1 monospace;color:var(--ink);margin-top:4px}
+.guardian-choices button:disabled {opacity:1}

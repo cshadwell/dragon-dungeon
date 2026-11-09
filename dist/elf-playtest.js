@@ -1,8 +1,9 @@
-import {setupRoomControls} from './encounter-console.js?v=9b2f8bc9e7ff';
-import {ELF_DEFENCE_POSES} from './elf-defence-poses.js?v=9b2f8bc9e7ff';
-import {getCharacterPose} from './character-art.js?v=9b2f8bc9e7ff';
-import {getRoomArt} from './room-art.js?v=9b2f8bc9e7ff';
-import {DEFENCE_DEFAULTS,DEFENCE_STAGES,DEFENCE_GOAL,defenceProgress,ORBIT,SPAWN_RADIUS,freshDefence,spawnAttack,stepDefence} from './elf-defence-model.js?v=9b2f8bc9e7ff';
+import {drawDefenceArena} from './guardian-games.js?v=6d789c038015';
+import {setupRoomControls} from './encounter-console.js?v=6d789c038015';
+import {ELF_DEFENCE_POSES} from './elf-defence-poses.js?v=6d789c038015';
+import {getCharacterPose} from './character-art.js?v=6d789c038015';
+import {getRoomArt} from './room-art.js?v=6d789c038015';
+import {DEFENCE_DEFAULTS,DEFENCE_STAGES,DEFENCE_GOAL,defenceProgress,ORBIT,SPAWN_RADIUS,freshDefence,spawnAttack,stepDefence} from './elf-defence-model.js?v=6d789c038015';
 const params=new URLSearchParams(location.search),integrated=params.get('encounter')==='1'&&parent!==window;
 if(integrated)document.body.classList.add('elf-intro');
 const notify=(type,extra={})=>{if(integrated)parent.postMessage({type:'elf-defence:'+type,...extra},location.origin);};
@@ -59,13 +60,7 @@ function pause(message){running=false;clearInputs();last=null;$('start').textCon
 function reset(){teaching=-1;reactionTime=0;if(loaded)showPose(1);stage=0;completed=false;$('size').value=DEFENCE_DEFAULTS.shieldSize;$('shield-speed').value=DEFENCE_DEFAULTS.shieldSpeed;$('attack-speed').value=DEFENCE_DEFAULTS.attackSpeed;tune();state=freshDefence();running=false;attackNumber=0;nextAttack=0;flash=null;flashTime=0;last=null;clearInputs();scores();$('start').textContent='Begin practice';$('message').textContent='“Watch what approaches, then move your shield to meet it.”';draw();}
 function dot(x,y,w,color){ctx.fillStyle=color;ctx.fillRect(Math.round(x),Math.round(y),w,w);}
 function ring(radius,color,step=2){for(let deg=0;deg<360;deg+=step)dot(100+Math.cos(rad(deg))*radius,100+Math.sin(rad(deg))*radius,1,color);}
-function draw(){ctx.imageSmoothingEnabled=false;ctx.fillStyle='#09110e';ctx.fillRect(0,0,200,200);ring(91,'#526044');ring(89,'#273c2b');for(let deg=0;deg<360;deg+=15)dot(99+Math.cos(rad(deg))*91,99+Math.sin(rad(deg))*91,3,'#a99c62');ring(ORBIT,'#354637',9);
- // A single physical arc. No separate shields or instant directional snapping.
- for(let offset=-settings.shieldSize/2;offset<=settings.shieldSize/2;offset+=1.5){const a=rad(state.angle+offset);dot(99+Math.cos(a)*ORBIT,99+Math.sin(a)*ORBIT,3,flash==='block'?'#fff0bb':'#b5c2af');dot(100+Math.cos(a)*(ORBIT-2),100+Math.sin(a)*(ORBIT-2),2,'#5e8c65');}
- const hurt=flash==='miss';ctx.fillStyle=hurt?'#c0654c':'#806b35';ctx.fillRect(97,94,7,13);ctx.fillRect(94,97,13,7);ctx.fillStyle=hurt?'#ffa575':'#edcd77';ctx.fillRect(98,96,5,9);ctx.fillRect(96,98,9,5);dot(99,99,3,'#fff0bc');
- if(state.projectile){const p=state.projectile,a=rad(p.angle),x=100+Math.cos(a)*p.radius,y=100+Math.sin(a)*p.radius;for(let n=1;n<=4;n++)dot(x+Math.cos(a)*n*3-1,y+Math.sin(a)*n*3-1,2,['','#b4a4e6','#8474b6','#554969','#302e40'][n]);ctx.fillStyle='#d6caff';ctx.fillRect(Math.round(x)-3,Math.round(y)-2,7,5);ctx.fillRect(Math.round(x)-2,Math.round(y)-3,5,7);dot(x-1,y-1,3,'#fff0d0');}
- if(!running){ctx.fillStyle='#09110ec9';ctx.fillRect(51,162,98,18);ctx.fillStyle='#d8c98e';ctx.font='9px monospace';ctx.textAlign='center';ctx.fillText(completed?'WELL DEFENDED':loaded?'READY / PAUSED':'LOADING…',100,174);}
-}
+function draw(){drawDefenceArena(ctx,state,settings,{flash,running,loaded,completed});}
 function tick(now){const dt=last===null?0:Math.min(.05,(now-last)/1000);last=now;
  if(running&&!document.hidden){if(!state.projectile){nextAttack-=dt;if(nextAttack<=0){const angle=attackNumber===0?270:Math.random()*360;state=spawnAttack(state,angle);attackNumber++;}}
  state=stepDefence(state,dt,inputs(),settings);

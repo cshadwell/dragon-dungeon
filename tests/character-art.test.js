@@ -9,13 +9,13 @@ test('locked approved V2 poses retain their exact reviewed bytes',()=>{
  for(const item of [...catalog.sheets,...catalog.poses])assert.equal(createHash('sha256').update(readFileSync(new URL(item.file,root))).digest('hex'),item.sha256,item.file+' changed from approved artwork');
 });
 test('stable character numbering covers every approved pose once, with safe exact lookup',()=>{
- assert.deepEqual(CHARACTER_POSE_COUNTS,{ogre:15,wizard:34,elf:13,dragon:37});assert.equal(catalog.poses.length,78);
+ assert.deepEqual(CHARACTER_POSE_COUNTS,{ogre:15,wizard:34,elf:13,dragon:58});assert.equal(catalog.poses.length,78);
  for(const [character,count] of Object.entries(CHARACTER_POSE_COUNTS)){
   const poses=listCharacterPoses(character);assert.deepEqual(poses.map(p=>p.number),Array.from({length:count},(_,i)=>i+1));
   for(const p of poses){assert.equal(getCharacterPose(character,p.number),p);assert.ok(Object.isFrozen(p));assert.equal(p.url,new URL(p.file,root).href);}
  }
  assert.equal(getCharacterPose('Dragon',3).sheet,'dragon-emotions');assert.equal(getCharacterPose('elf queen',13).id,'elf-013');
- assert.throws(()=>getCharacterPose('dragon',38),RangeError);assert.throws(()=>getCharacterPose('ogre',0),RangeError);assert.throws(()=>getCharacterPose('wizard',1.5),RangeError);assert.throws(()=>getCharacterPose('unknown',1),RangeError);
+ assert.throws(()=>getCharacterPose('dragon',59),RangeError);assert.throws(()=>getCharacterPose('ogre',0),RangeError);assert.throws(()=>getCharacterPose('wizard',1.5),RangeError);assert.throws(()=>getCharacterPose('unknown',1),RangeError);
 });
 
 test('V2 promotion preserves every V1 pose ID and the reviewed native image dimensions',()=>{

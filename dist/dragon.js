@@ -1,7 +1,7 @@
-import {SHIELD} from './ogre.js?v=9b2f8bc9e7ff';import {LENS} from './wizard.js?v=9b2f8bc9e7ff';import {SEAL} from './queen.js?v=9b2f8bc9e7ff';
+import {SHIELD} from './ogre.js?v=6d789c038015';import {LENS} from './wizard.js?v=6d789c038015';import {SEAL} from './queen.js?v=6d789c038015';
 export const DRAGON='4,2';
-// Development answer only. Replace only after testing the actual book's letter lock.
-export const NAME_CONFIG={name:'TEST',placeholder:true};
+// Approved final name from the supplied golden plaque.
+export const NAME_CONFIG={name:'CHAZ',placeholder:false};
 export const freshDragon=()=>({phase:'intro',discovered:false,victory:false,name:null,placeholder:null,returnTo:null,feedback:''});
 export const missing=s=>[SHIELD,LENS,SEAL].filter(x=>!s.items.includes(x));
 export function dragonAct(s,action){

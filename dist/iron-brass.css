@@ -275,63 +275,63 @@ body > header, body > footer { padding-inline: var(--gutter); }
 }
 
 /* Ogre introduction shell, ready for the revised conversation. */
-:is(.ogre-intro, .elf-intro, .wizard-intro) header, :is(.ogre-intro, .elf-intro, .wizard-intro) footer, :is(.ogre-intro, .elf-intro, .wizard-intro) .badge,
-:is(.ogre-intro, .elf-intro, .wizard-intro) .railhead, :is(.ogre-intro, .elf-intro, .wizard-intro) .railfoot,
-:is(.ogre-intro, .elf-intro, .wizard-intro) .narrative > *, :is(.ogre-intro, .elf-intro, .wizard-intro) .controls > button,
-:is(.ogre-intro, .elf-intro, .wizard-intro) .controls > .keys { display: none; }
-:is(.ogre-intro, .elf-intro, .wizard-intro) .rail { visibility: hidden; }
-:is(.ogre-intro, .elf-intro, .wizard-intro) .bottom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-:is(.ogre-intro, .elf-intro, .wizard-intro) .narrative, :is(.ogre-intro, .elf-intro, .wizard-intro) .controls {
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) header, :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) footer, :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .badge,
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .railhead, :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .railfoot,
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .narrative > *, :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .controls > button,
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .controls > .keys { display: none; }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .rail { visibility: hidden; }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .bottom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .narrative, :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .controls {
   min-height: 0;
   padding: clamp(10px, 1.2vw, 18px);
 }
-:is(.ogre-intro, .elf-intro, .wizard-intro) .controls {
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .controls {
   grid-template-columns: minmax(0, 3fr) minmax(86px, 1fr);
   gap: clamp(8px, 1vw, 16px);
   align-content: stretch;
 }
-:is(.ogre-intro, .elf-intro, .wizard-intro) .control-area { padding-right: clamp(6px, 1vw, 14px); border-right: 1px solid var(--bevel); }
-:is(.ogre-intro, .elf-intro, .wizard-intro) .toolbar { display: grid; grid-template-rows: repeat(3, minmax(44px, 1fr)); }
-:is(.ogre-intro, .elf-intro, .wizard-intro) .movement-pad button, :is(.ogre-intro, .elf-intro, .wizard-intro) .toolbar button {
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .control-area { padding-right: clamp(6px, 1vw, 14px); border-right: 1px solid var(--bevel); }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .toolbar { display: grid; grid-template-rows: repeat(3, minmax(44px, 1fr)); }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .movement-pad button, :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .toolbar button {
   display: grid; place-items: center; background: #000;
   border-color: var(--brass); box-shadow: none; color: var(--gold);
   padding: 4px; font-size: clamp(8px, .86vw, 13px); text-transform: uppercase;
   letter-spacing: 0;
 }
-:is(.ogre-intro, .elf-intro, .wizard-intro) #room-menu {
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) #room-menu {
   width: min(560px, 92vw); padding: 20px; max-height: 90dvh; overflow-y: auto;
 }
-:is(.ogre-intro, .elf-intro, .wizard-intro) #room-menu::backdrop { background: #000b; }
-:is(.ogre-intro, .elf-intro, .wizard-intro) #room-menu p { white-space: pre-line; }
-:is(.ogre-intro, .elf-intro, .wizard-intro) #room-menu button { margin-top: 8px; }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) #room-menu::backdrop { background: #000b; }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) #room-menu p { white-space: pre-line; }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) #room-menu button { margin-top: 8px; }
 @media (min-width: 651px) and (min-height: 500px) {
-  :is(.ogre-intro, .elf-intro, .wizard-intro) main {
+  :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) main {
     height: 100dvh; margin: 0; padding: var(--gutter);
     display: grid; gap: clamp(8px, 1.2vw, 18px);
     grid-template-rows: minmax(0, 1fr) clamp(236px, 32dvh, 300px);
   }
-  :is(.ogre-intro, .elf-intro, .wizard-intro) main > section.frame { min-height: 0; display: flex; flex-direction: column; }
-  :is(.ogre-intro, .elf-intro, .wizard-intro) .stage { flex: 1; min-height: 0; }
-  :is(.ogre-intro, .elf-intro, .wizard-intro) .stage #room { height: 100%; max-height: none; }
-  :is(.ogre-intro, .elf-intro, .wizard-intro) .railbox { flex-shrink: 0; }
-  :is(.ogre-intro, .elf-intro, .wizard-intro) .bottom { margin: 0; min-height: 0; gap: clamp(8px, 1.2vw, 18px); }
+  :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) main > section.frame { min-height: 0; display: flex; flex-direction: column; }
+  :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .stage { flex: 1; min-height: 0; }
+  :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .stage #room { height: 100%; max-height: none; }
+  :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .railbox { flex-shrink: 0; }
+  :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .bottom { margin: 0; min-height: 0; gap: clamp(8px, 1.2vw, 18px); }
 }
 @media (max-width: 650px) {
-  :is(.ogre-intro, .elf-intro, .wizard-intro) .bottom { grid-template-columns: 1fr; }
-  :is(.ogre-intro, .elf-intro, .wizard-intro) .narrative { min-height: 140px; }
+  :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .bottom { grid-template-columns: 1fr; }
+  :is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .narrative { min-height: 140px; }
 }
 
-:is(.ogre-intro, .elf-intro, .wizard-intro) .narrative { display: flex; flex-direction: column; }
-:is(.ogre-intro, .elf-intro, .wizard-intro) .narrative > #message,
-:is(.ogre-intro, .elf-intro, .wizard-intro) .narrative > #dialogue-continue { display: block; }
-:is(.ogre-intro, .elf-intro, .wizard-intro) #message { margin-top: 0; }
-:is(.ogre-intro, .elf-intro, .wizard-intro) #dialogue-continue {
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .narrative { display: flex; flex-direction: column; }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .narrative > #message,
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .narrative > #dialogue-continue { display: block; }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) #message { margin-top: 0; }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) #dialogue-continue {
   margin: auto 0 0; padding-top: 12px;
   text-align: center; color: var(--gold);
   font: 17px/1.15 var(--dialogue);
 }
-:is(.ogre-intro, .elf-intro, .wizard-intro).ogre-rail-visible .rail { visibility: visible; }
-:is(.ogre-intro, .elf-intro, .wizard-intro) .narrative { overflow-y: auto; }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro).ogre-rail-visible .rail { visibility: visible; }
+:is(.ogre-intro, .elf-intro, .wizard-intro, .dragon-intro) .narrative { overflow-y: auto; }
 
 
 /* Journal occupies the top layer while the game remains visible behind it. */
@@ -461,3 +461,5 @@ body > header, body > footer { padding-inline: var(--gutter); }
   position: absolute; top: 8px; left: 18px;
   width: calc(100% - 36px); height: 8px; margin: 0;
 }
+
+#dragon-room-encounter { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: #080708; z-index: 20; }

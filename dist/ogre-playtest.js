@@ -1,7 +1,8 @@
-import {setupRoomControls} from './encounter-console.js?v=9b2f8bc9e7ff';
-import {getCharacterPose} from './character-art.js?v=9b2f8bc9e7ff';
-import {getRoomArt} from './room-art.js?v=9b2f8bc9e7ff';
-import {ATTACK_DEFAULTS,PRACTICE_NEXT,targetForAttempt,attackPosition,judgeAttack,reactionPose} from './ogre-attack-model.js?v=9b2f8bc9e7ff';
+import {updateAttackRail} from './guardian-games.js?v=6d789c038015';
+import {setupRoomControls} from './encounter-console.js?v=6d789c038015';
+import {getCharacterPose} from './character-art.js?v=6d789c038015';
+import {getRoomArt} from './room-art.js?v=6d789c038015';
+import {ATTACK_DEFAULTS,PRACTICE_NEXT,targetForAttempt,attackPosition,judgeAttack,reactionPose} from './ogre-attack-model.js?v=6d789c038015';
 const encounterParams=new URLSearchParams(location.search),integrated=encounterParams.get('encounter')==='1'&&window.parent!==window;
 if(integrated)document.body.classList.add('ogre-intro');
 const notify=type=>{if(integrated)window.parent.postMessage({type:'ogre-attack:'+type},location.origin);};
@@ -30,7 +31,7 @@ function roomAction(){
  }else trigger();
 }
 function draw(number){pose=number;const p=getCharacterPose('ogre',number);ctx.imageSmoothingEnabled=false;ctx.clearRect(0,0,470,200);ctx.drawImage(images.get('room'),0,0,470,200);ctx.drawImage(images.get(number),Math.round((470-p.width)/2),192-p.height,p.width,p.height);$('pose-label').textContent='OGRE · POSE '+number;canvas.setAttribute('aria-label',`The Ogre’s armory, approved Ogre pose ${number}`);}
-function tuning(){config={passMs:Number($('speed').value),targetWidth:Number($('width').value)/100,targetCenter};$('speed-value').textContent=(config.passMs/1000).toFixed(2)+' s';$('width-value').textContent=Math.round(config.targetWidth*100)+'%';$('target').style.left=(targetCenter*100-config.targetWidth*50)+'%';$('target').style.width=config.targetWidth*100+'%';}
+function tuning(){config={passMs:Number($('speed').value),targetWidth:Number($('width').value)/100,targetCenter};$('speed-value').textContent=(config.passMs/1000).toFixed(2)+' s';$('width-value').textContent=Math.round(config.targetWidth*100)+'%';updateAttackRail($('rail'),config);}
 function progress(){ $('progress').textContent=mode==='practice'?`PRACTICE ${practiceStage+1} / 2 · ${hits} HITS · ${perfects} PERFECT`:`CHALLENGE · ${['ready','running'].includes(phase)?attempt+1:attempt} / 5 · ${hits} HITS`; }
 function lock(value){for(const id of ['speed','width','defaults','challenge','practice'])$(id).disabled=value;}
 function setMode(next){mode=next;practiceStage=0;advancePractice=practiceDone=false;targetCenter=.5;phase='idle';attempt=hits=perfects=elapsed=0;draw(9);$('outcome').hidden=true;$('rail').parentElement.classList.remove('last');$('pass').textContent='READY';$('marker').style.left='0%';$('direction').textContent='→ FIRST PASS';$('attack').textContent=next==='practice'?'Begin practice':'Start challenge';$('practice').hidden=next==='practice';$('challenge').hidden=next==='challenge';$('message').textContent=next==='practice'?'“Be quick. Be precise. Strike in the gold. A dragon won’t wait forever.”':'“Three good hits in five attempts. One second per crossing. Stay on your toes!”';$('instruction').textContent='“The opening won’t always be in the middle. Watch the gold: it shifts between attempts, sometimes right, sometimes left. Never hesitate.”';const d=ATTACK_DEFAULTS[next];$('speed').value=d.passMs;$('width').value=d.targetWidth*100;tuning();lock(false);progress();}

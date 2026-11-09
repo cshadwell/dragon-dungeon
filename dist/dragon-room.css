@@ -1,0 +1,128 @@
+.dragon-intro {
+  --iron: #080708;
+  --panel: #140d11;
+  --brass: #70616d;
+  --bevel: #3d303a;
+  --ink: #eee0e2;
+  --muted: #b7a5ae;
+  --gold: #edc2c4;
+}
+.dragon-intro .frame {
+  position: relative;
+  border: 0;
+  box-shadow: none;
+  padding: 16px;
+  background: var(--panel);
+}
+.dragon-intro .stage { background: #020203; }
+.dragon-intro .forged-border {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  image-rendering: pixelated;
+}
+.dragon-intro .controls { gap: 14px; }
+.dragon-intro .movement-pad button,
+.dragon-intro .toolbar button {
+  background: #050405;
+  border-color: #70616d;
+  color: var(--gold);
+}
+.dragon-intro button:hover { border-color: #d78a72; }
+.dragon-intro button:focus-visible { outline-color: #f0b09a; }
+.dragon-intro #message, .dragon-intro #room-menu-text { color: var(--ink); }
+.dragon-intro #room-menu-title { color: var(--gold); }
+.dragon-intro .control-area { border-color: #542c38; }
+@media (min-width: 651px) and (min-height: 500px) {
+  .dragon-intro main {
+    grid-template-rows: minmax(0, 1fr) calc(clamp(236px, 32dvh, 300px) + 64px);
+  }
+}
+.dragon-intro .narrative > .forged-border { display: block; }
+
+.dragon-intro .stage { position: relative; }
+.dragon-intro #dragon-gauge {
+  position: absolute;
+  right: 5%;
+  top: 7%;
+  height: 86%;
+  width: auto;
+  max-width: 12%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.dragon-intro #dragon-gauge[hidden] { display: none; }
+/* Reserve a side lane so the gauge never covers the approved scene artwork. */
+.dragon-intro .stage #room { width: 76%; margin: 0 12%; }
+.dragon-intro #dragon-gauge { right: 3%; top: 19%; height: 62%; max-width: 7%; }
+
+.dragon-intro.boss-playing .controls { display: block; }
+.dragon-intro.boss-playing .controls > .control-area,
+.dragon-intro.boss-playing .controls > .toolbar { display: none; }
+#boss-game { height: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 0; }
+#boss-game[hidden], #boss-game [hidden] { display: none !important; }
+#boss-status { margin: 0; color: var(--gold); font: 18px/1 var(--dialogue); }
+.boss-arena { flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+#boss-canvas { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; cursor: pointer; }
+#boss-game[data-phase="defence"] #boss-canvas { width: auto; max-width: 100%; aspect-ratio: 1; }
+.boss-inputs { display: flex; gap: 8px; justify-content: center; }
+.boss-inputs button { background: #000; color: var(--gold); min-width: 75px; padding: 10px; touch-action: none; }
+
+.boss-inputs button { font: 10px/1.4 var(--pixel); letter-spacing: 0; }
+#boss-menu { position: absolute; right: 18px; top: 15px; width: auto; min-height: 24px; padding: 5px; font: 7px/1.3 var(--pixel); background: #000; color: var(--gold); letter-spacing: 0; }
+#boss-status { align-self: flex-start; font-size: 16px; }
+
+
+
+/* The boss reuses the three guardian arrangements, with a shared scene above. */
+.dragon-intro #boss-rail { padding: 8px 16px; min-height: 0; }
+.dragon-intro #boss-rail[hidden] { display: none; }
+.dragon-intro #boss-rail #boss-canvas { display: block; height: 100%; width: 100%; }
+.dragon-intro #boss-rail .boss-inputs { height: 100%; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+.dragon-intro #boss-rail .boss-inputs button { padding: 6px; min-height: 0; }
+.dragon-intro[data-boss-phase="attack"] .controls { display: grid; }
+.dragon-intro[data-boss-phase="attack"] .controls > .control-area,
+.dragon-intro[data-boss-phase="attack"] .controls > .toolbar { display: grid; }
+.dragon-intro #boss-choices button { font-weight: 400; }
+@media (min-width: 651px) and (min-height: 500px) {
+  .dragon-intro[data-boss-phase="attack"] main {
+    grid-template-rows: minmax(0,1fr) 64px clamp(236px,32dvh,300px);
+  }
+  .dragon-intro[data-boss-phase="defence"] main {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    grid-template-rows: minmax(150px,1fr) 64px minmax(220px,32dvh);
+  }
+  .dragon-intro[data-boss-phase="defence"] main > section.frame:first-of-type { grid-area: 1 / 1 / 2 / 3; }
+  .dragon-intro[data-boss-phase="defence"] .bottom { display: contents; }
+  .dragon-intro[data-boss-phase="defence"] #boss-rail { grid-area: 2 / 1; }
+  .dragon-intro[data-boss-phase="defence"] .narrative { grid-area: 3 / 1; }
+  .dragon-intro[data-boss-phase="defence"] .controls { grid-area: 2 / 2 / 4 / 3; }
+}
+
+.dragon-intro[data-boss-phase="attack"] #boss-rail #boss-canvas { object-fit: fill; }
+
+/* Guardian components retain their original geometry; only their palette changes. */
+.dragon-intro #boss-attack-rail { visibility: visible; width:100%;height:35px;cursor:pointer; }
+.dragon-intro #boss-rail:has(#boss-attack-rail:not([hidden])) { display:flex;align-items:center; }
+.dragon-intro #boss-attack-rail .marker { background:var(--ink); }
+.dragon-intro #boss-attack-rail { background:repeating-linear-gradient(90deg,#252027 0 9.8%,#433541 9.8% 10%);border-color:#786873; }
+.dragon-intro #boss-attack-rail .target { background:#8b763a;border-color:#eacb76; }
+.dragon-intro #boss-attack-rail .perfect { background:#f9dc8b; }
+.dragon-intro #boss-rail .movement-pad { grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr; }
+.dragon-intro #boss-rail .movement-pad [data-action="left"]{grid-area:1 / 1}
+.dragon-intro #boss-rail .movement-pad #boss-action{grid-area:1 / 2}
+.dragon-intro #boss-rail .movement-pad [data-action="right"]{grid-area:1 / 3}
+.dragon-intro #boss-rail .movement-pad button {font-size:clamp(8px,.86vw,13px);background:#000;color:var(--gold);border-color:var(--brass);display:flex;align-items:center;justify-content:center;}
+.dragon-intro #boss-menu,.dragon-intro #boss-status {display:none}
+.dragon-intro[data-boss-phase="defence"] .controls {padding:8px}
+.dragon-intro[data-boss-phase="mind"] .controls {padding:24px 18px}
+.dragon-intro[data-boss-phase="mind"] .boss-arena {display:grid;place-items:center}
+#boss-timer {position:absolute;top:8px;left:18px;width:calc(100% - 36px);height:8px;margin:0;accent-color:var(--gold)}
+.dragon-intro #boss-choices button {padding:4px}
+.dragon-intro[data-boss-phase="mind"] .boss-arena { grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr); }
+
+.dragon-intro[data-boss-round="2"] .guardian-choices .color-word { text-shadow:2px 0 #080708,-2px 0 #080708,0 2px #080708,0 -2px #080708; }
+.dragon-intro[data-boss-round="2"] .guardian-choices .direction {text-shadow:1px 1px #000,-1px -1px #000;}

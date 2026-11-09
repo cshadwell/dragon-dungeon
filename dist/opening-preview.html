@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Opening prologue · Preview</title>
+<style>
+@font-face{font-family:Pixel;src:url('./assets/fonts/PressStart2P-Regular.ttf')}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#000;color:#f6ce6d}body{overflow:hidden;font-family:Pixel,monospace}button{font:inherit;color:#f6ce6d;background:#000;border:2px solid #927037;padding:20px 28px;cursor:pointer;line-height:1.8}button:focus-visible{outline:3px solid #ffe9a3;outline-offset:6px}[hidden]{display:none!important}#intro,#complete{position:fixed;inset:0;display:grid;place-content:center;gap:32px;text-align:center;padding:30px}small{font-size:10px;line-height:2;color:#ad8e50}#prologue{position:absolute;top:0;left:50%;width:88vw;margin:0;text-align:center;font-size:clamp(18px,4vw,56px);line-height:1.8;letter-spacing:.02em;transform:translate(-50%,110vh)}#prologue span{color:#f5c660;background:linear-gradient(110deg,#ad701e 0%,#ffdf86 25%,#e7ac3d 45%,#fff2bc 50%,#e7ac3d 55%,#ffdf86 75%,#ad701e 100%);background-size:240% 100%;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #61400b);animation:shine 7s steps(24) infinite}#continue{position:fixed;bottom:6vh;left:0;right:0;text-align:center;font-size:clamp(9px,1vw,14px);color:#d9ab4f}#continue button{border:0;padding:12px;font-size:inherit}@keyframes shine{from{background-position:100% 0}to{background-position:-140% 0}}@media(max-height:550px){#prologue{font-size:clamp(14px,3.5vh,28px);width:90vw;line-height:1.65}}@media(prefers-reduced-motion:reduce){#prologue span{animation:none}}
+</style></head><body>
+<div id="intro"><button id="start">Preview opening</button><small>Music and scrolling begin together.<br>Standalone preview · game unchanged</small></div>
+<p id="prologue" hidden><span>You embark upon a great quest. You seek something simple, a name. One word that will allow you to continue your journey. It will not be easy and you will need help along the way. Good luck and may fortune favor you.</span></p>
+<div id="continue" hidden><button id="proceed">-Press Space Bar-</button></div>
+<div id="complete" hidden><small>The dungeon would begin here.</small><button id="replay">Replay opening</button></div>
+<audio id="music" src="./assets/audio/opening.mp3" preload="auto"></audio>
+<script type="module">
+const $=id=>document.getElementById(id),music=$('music'),text=$('prologue');music.volume=.4;music.loop=false;
+let mode='ready',frame=0;
+function fit(){text.style.fontSize='';let size=parseFloat(getComputedStyle(text).fontSize);while(text.offsetHeight>innerHeight*.76&&size>10){size-=1;text.style.fontSize=size+'px';}}
+function place(progress){const end=(innerHeight-text.offsetHeight)/2;const start=innerHeight+24;const y=Math.round(start+(end-start)*progress);text.style.transform=`translate(-50%,${y}px)`;}
+function tick(){if(mode!=='playing')return;place(Math.min(1,music.currentTime/(music.duration||12.565)));frame=requestAnimationFrame(tick);}
+async function start(){if(mode==='playing')return;cancelAnimationFrame(frame);music.currentTime=0;mode='playing';$('intro').hidden=true;$('complete').hidden=true;$('continue').hidden=true;text.hidden=false;fit();place(0);try{await music.play();tick();}catch{mode='ready';text.hidden=true;$('intro').hidden=false;$('start').textContent='Play opening music';}}
+music.addEventListener('ended',()=>{cancelAnimationFrame(frame);mode='holding';place(1);$('continue').hidden=false;});
+music.addEventListener('error',()=>{cancelAnimationFrame(frame);mode='ready';text.hidden=true;$('intro').hidden=false;$('start').textContent='Music unavailable · retry';});
+function proceed(){if(mode!=='holding')return;mode='complete';text.hidden=true;$('continue').hidden=true;$('complete').hidden=false;}
+$('start').onclick=start;$('replay').onclick=start;$('proceed').onclick=proceed;
+window.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();if(e.repeat)return;if(mode==='holding')proceed();else if(mode==='ready'||mode==='complete')start();}});
+window.addEventListener('resize',()=>{if(!text.hidden)fit();if(mode==='holding')place(1);else if(mode==='playing')place(Math.min(1,music.currentTime/(music.duration||12.565)));});
+window.addEventListener('pagehide',()=>{cancelAnimationFrame(frame);music.pause();});
+</script></body></html>

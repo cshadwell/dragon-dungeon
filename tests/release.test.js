@@ -1,6 +1,6 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import {readFileSync,readdirSync} from 'node:fs';import {createHash} from 'node:crypto';
 import * as adventure from '../dist/engine.js';import * as maze from '../dist/runtime.js';
-test('entry point, stylesheet and every module import use one coherent release version',()=>{const root=new URL('../dist/',import.meta.url),html=readFileSync(new URL('index.html',root),'utf8');const version=html.match(/src="boot\.js\?v=([a-f0-9]+)"/)?.[1];assert.ok(version);for(const page of ['index.html','ogre-playtest.html','elf-playtest.html','wizard-playtest.html']){
+test('entry point, stylesheet and every module import use one coherent release version',()=>{const root=new URL('../dist/',import.meta.url),html=readFileSync(new URL('index.html',root),'utf8');const version=html.match(/src="boot\.js\?v=([a-f0-9]+)"/)?.[1];assert.ok(version);for(const page of ['index.html','ogre-playtest.html','elf-playtest.html','wizard-playtest.html','dragon-room.html']){
  const markup=readFileSync(new URL(page,root),'utf8');
  const styles=[...markup.matchAll(/href="([^"]+\.css)([^"]*)"/g)];
  assert.ok(styles.some(link=>link[1]==='iron-brass.css'),page+' loads the shared theme');

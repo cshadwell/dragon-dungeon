@@ -134,3 +134,38 @@ User approved supplied spell poses and reaction roles and authorized live integr
 
 ## 8-bit Iron & Brass interface
 The user selected Iron & Brass and approved the pixel treatment. Use warm dark panels, stepped brass borders, beveled buttons, Press Start 2P for short interface labels, and VT323 for longer text. Exploration uses two columns at desktop widths and stacks at narrow widths. Keep approved pixel artwork at its original proportions and keep wizard choices black with readable color lettering.
+
+## Dragonforged final chamber interface — 2026-11-08
+User selected Dragonforged for the final dragon chamber. Keep the wide upper scene and two lower panels. Use dark steel borders, crimson insets, pixel claw corner brackets, small center crests and pale rose/ivory type. Initial screen uses approved volcanic lair and Dragon1, blank dialogue and default controls. Final boss rules remain under discussion.
+
+## Dragon introduction and gauge — 2026-11-08
+Eight-line opening approved with assigned permanent poses12,11,7,6,4,6,8,10. Supplied vertical red gauge belongs at upper right and is introduced when discussed. Gauge consequences, recovery and final boss minigames will be designed separately.
+
+## Dragon warm-up tuning — 2026-11-08
+First round uses three attacks,three defenses,three color choices at the guardians medium practice presets. Interpreted as three successes each,consistent with the lessons,with safe retries while health behavior is deferred. Later medium/final rounds await user testing. Dragon remains centered within equal side lanes,smaller gauge at right.
+
+## Dragon uses guardian arrangements — 2026-11-08
+User requested exact guardian interaction arrangements for each boss skill: Ogre horizontal attack window beneath scene,Elf circular arena lower right with controls above text,Wizard compass choices. Gameplay instruction text is removed. Seven supplied color sheets replace synthetic spell cue and use the Wizard shuffle policy.
+
+## Reuse guardian graphics literally — 2026-11-08
+User requested source-level reuse of guardian windows,not visual approximations. Share rendering/DOM helpers and matching CSS. Dragon variants change palette and ornamental frames only. Preserve guardian gameplay and approved artwork.
+
+## Dragon meter prototype — 2026-11-08
+User set ten levels:10full,1empty. Every miss costs one;every three consecutive correct results restores one up to full. Empty consequences deferred. Use dragon hit reactions16/18/19and player-miss reactions15/6/20. Meter/reaction changes apply to each individual attack,block or color answer. Ten levels use evenly sampled supplied art across the eleven-image sheet.
+
+## Second dragon round — 2026-11-08
+User increased easy requirements to4attack/6defence/5mind successes. Pose22says: “You clearly have some skills, but I was just warming up. Let's see if you survive this next round.” Default console/Space continuation. Next round requires5attack/8defence/6mind at guardian final settings:1s crossing,10%target,three passes per target;70attack speed/0.2sgap defense;2s conflicting ink spells. Life meter and streak continue,empty mechanic still deferred. Interpreted “three attempts” as the existing three crossings per strike opportunity,consistent with requiring five successful attacks.
+
+## Final mixed round — 2026-11-08
+User requested pose4final-intro dialogue,smaller/faster attack with two passes,immediate subsequent defence shots,and faster colors with distinct word/ink/tile background. Implemented initial tuning850ms/7%,75defence speed/0block gap,1.75s colors.25successes are a shuffled mix of8attacks,8spells,and9blocks organized into3unbroken volleys. Each volley starts near current shield,then arbitrary angles. Misses retain successes and affect existing life meter. Final reward/name reveal and empty-life consequences remain for later design. Unsaved final-round shortcut supports tuning without replaying earlier rounds.
+
+## Zero-life banishment — 2026-11-08
+User supplied Defeat.wav and pose27dialogue: “I thought you worthy. Clearly you are no match for me. I banish you!” Space triggers sound-synchronized black fade and random return to one of5maze locations,never entrance. No door/footsteps effect for this transition. Guardian lessons remain;dragon attempt restarts on return. Quest ambience persists on journey back. Zero is now empty,superseding previous1-empty prototype,and every supplied gauge image maps directly to10..0.
+
+
+## Dragon victory and name reveal — 2026-11-08
+Final challenge completion freezes gameplay, hides the gauge, stops dragon music and plays supplied victory.wav once. Pose17 shows “DEFEAT! I have been bested by a true warrior.” Space advances to pose4 and the supplied prize invitation. Victory audio ended triggers ending.mp3 at40%, looping through the ending; mute and cleanup remain supported. Space on the second line fades pose4 out over the unchanged approved lair (900ms), then fades the exact supplied CHAZ plaque background in (1400ms), with stepped opacity and nearest-neighbor rendering. Reduced motion reveals immediately. CHAZ is now the confirmed name, superseding TEST placeholder. Prize completion persists trialCompleted/victory/name without fabricating guardian rewards; reopened earned encounters show the plaque and resume ending music. Legacy placeholder victories migrate to CHAZ. Supplied assets remain exact copies. Standalone unsaved preview: dragon-room.html?playtest=ending; integrated door preview: ?preview=doors&door=dragon&round=ending. Browser verified pose17 → pose4 → plaque. All123tests pass. No push requested.
+
+2026-11-08: Approved enlarged golden opening prologue integrated between title Start and gameplay. Preserve exact supplied wording,black background,existing pixel font,metallic gold sheen,and scroll synchronized to opening.mp3. Hold centered after music ends until Space/click. Initialize dungeon/save only after prologue; local encounter previews bypass it.
+
+2026-11-08: Opening flow uses Space/click, stepped title-to-black before opening music, and credits-to-black then dungeon reveal before dungeon music. Reuse door fade timing/stepping without door SFX. Preserve development preview bypass.

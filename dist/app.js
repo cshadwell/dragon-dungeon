@@ -1,17 +1,18 @@
-import {createDungeonMusic} from './dungeon-music.js?v=9b2f8bc9e7ff';
-import {showRoomPreview} from './room-preview.js?v=9b2f8bc9e7ff';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=9b2f8bc9e7ff';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=9b2f8bc9e7ff';
-import {drawCorridor} from './corridor.js?v=9b2f8bc9e7ff';
-import {exploredMap} from './explored-map.js?v=9b2f8bc9e7ff';
-import {dragonView,dragonArt} from './dragon.js?v=9b2f8bc9e7ff';
-import {queenView,queenArt,queenNotes as legacyQueenNotes} from './queen.js?v=9b2f8bc9e7ff';
-import {wizardView,wizardArt,wizardNotes as legacyWizardNotes} from './wizard.js?v=9b2f8bc9e7ff';
-import {createAttempt,tick,respond} from './reaction.js?v=9b2f8bc9e7ff';
-import {lessons,notes as legacyOgreNotes} from './ogre.js?v=9b2f8bc9e7ff';
-import {ogreView} from './ogre.js?v=9b2f8bc9e7ff';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=9b2f8bc9e7ff';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER} from './runtime.js?v=9b2f8bc9e7ff';
+import {createEndingAudio} from './ending-audio.js?v=6d789c038015';
+import {createDungeonMusic} from './dungeon-music.js?v=6d789c038015';
+import {showRoomPreview} from './room-preview.js?v=6d789c038015';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=6d789c038015';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=6d789c038015';
+import {drawCorridor} from './corridor.js?v=6d789c038015';
+import {exploredMap} from './explored-map.js?v=6d789c038015';
+import {dragonView,dragonArt} from './dragon.js?v=6d789c038015';
+import {queenView,queenArt,queenNotes as legacyQueenNotes} from './queen.js?v=6d789c038015';
+import {wizardView,wizardArt,wizardNotes as legacyWizardNotes} from './wizard.js?v=6d789c038015';
+import {createAttempt,tick,respond} from './reaction.js?v=6d789c038015';
+import {lessons,notes as legacyOgreNotes} from './ogre.js?v=6d789c038015';
+import {ogreView} from './ogre.js?v=6d789c038015';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=6d789c038015';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER,banishDragon,completeDragon} from './runtime.js?v=6d789c038015';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
@@ -31,6 +32,7 @@ if(previewMode&&new URLSearchParams(location.search).get('preview')==='doors'){c
 const explorationAudio=new Audio('./assets/audio/dungeon-exploration.mp3');explorationAudio.id='dungeon-music';explorationAudio.preload='metadata';explorationAudio.hidden=true;document.body.append(explorationAudio);
 const doorAudio=new Audio('./assets/audio/door-creaks-open-footsteps.mp3');
 doorAudio.preload='auto';
+const defeatAudio=new Audio('./assets/audio/defeat.wav');defeatAudio.id='defeat-sound';defeatAudio.preload='auto';defeatAudio.hidden=true;document.body.append(defeatAudio);
 const ogreAudio=new Audio('./assets/audio/ogre-chamber.mp3');
 ogreAudio.id='ogre-music';ogreAudio.preload='metadata';ogreAudio.hidden=true;document.body.append(ogreAudio);
 const ogreMusic=createDungeonMusic(ogreAudio);
@@ -40,6 +42,17 @@ const elfMusic=createDungeonMusic(elfAudio);
 const wizardAudio=new Audio('./assets/audio/wizard-chamber.mp3');
 wizardAudio.id='wizard-music';wizardAudio.preload='metadata';wizardAudio.hidden=true;document.body.append(wizardAudio);
 const wizardMusic=createDungeonMusic(wizardAudio);
+const dragonAudio=new Audio('./assets/audio/dragon-chamber.mp3');
+dragonAudio.id='dragon-music';dragonAudio.preload='metadata';dragonAudio.hidden=true;document.body.append(dragonAudio);
+const dragonMusic=createDungeonMusic(dragonAudio);
+const victoryAudio=new Audio('./assets/audio/victory.wav');victoryAudio.id='victory-sound';victoryAudio.preload='auto';victoryAudio.hidden=true;document.body.append(victoryAudio);
+const endingAudio=new Audio('./assets/audio/ending.mp3');endingAudio.id='ending-music';endingAudio.preload='metadata';endingAudio.hidden=true;document.body.append(endingAudio);
+const endingPlayback=createEndingAudio(victoryAudio,endingAudio);
+let dragonEnding=false,dragonVictoryReady=false,dragonVictoryPending=false;
+function beginDragonVictory(){
+ if(dragonEnding)return;dragonEnding=true;dragonVictoryReady=true;dragonVictoryPending=false;
+ dungeonMusic.stop();ogreMusic.stop();elfMusic.stop();wizardMusic.stop();dragonMusic.stop();endingPlayback.setMuted(soundMuted);endingPlayback.start();
+}
 const musicControl=$('dungeon-music-toggle');
 let soundMuted=false;
 const dungeonMusic=createDungeonMusic(explorationAudio,status=>{
@@ -50,16 +63,21 @@ const dungeonMusic=createDungeonMusic(explorationAudio,status=>{
 });
 musicControl.onclick=()=>dungeonMusic.toggle();
 // Retry only on a real player gesture if the browser blocked initial playback.
-window.addEventListener('pointerdown',e=>{if(!e.target.closest('#dungeon-music-toggle'))dungeonMusic.retry();},{capture:true});window.addEventListener('keydown',e=>{if(!e.target.closest('#dungeon-music-toggle'))dungeonMusic.retry();},{capture:true});
-window.addEventListener('pagehide',()=>{dungeonMusic.stop();ogreMusic.stop();elfMusic.stop();wizardMusic.stop();doorAudio.pause();});
-window.addEventListener('pageshow',()=>{dungeonMusic.setExploring(!state.encounter&&!ogreRefresher&&!elfRefresher&&!wizardRefresher&&!enteringDoor);syncRoomMusic();});
+window.addEventListener('pointerdown',e=>{if(!e.target.closest('#dungeon-music-toggle')){dungeonMusic.retry();if(dragonEnding)endingPlayback.retry();}},{capture:true});window.addEventListener('keydown',e=>{if(!e.target.closest('#dungeon-music-toggle')){dungeonMusic.retry();if(dragonEnding)endingPlayback.retry();}},{capture:true});
+window.addEventListener('pagehide',()=>{dungeonMusic.stop();ogreMusic.stop();elfMusic.stop();wizardMusic.stop();dragonMusic.stop();doorAudio.pause();defeatAudio.pause();endingPlayback.stop();});
+window.addEventListener('pageshow',()=>{dungeonMusic.setExploring(!document.body.classList.contains('boot-transition')&&!state.encounter&&!ogreRefresher&&!elfRefresher&&!wizardRefresher&&!enteringDoor);syncRoomMusic();});
 function syncRoomMusic(){
+ if(document.body.classList.contains('boot-transition'))return;
+ endingPlayback.setMuted(soundMuted);
+ if(state.encounter==='dragon'&&state.dragon.victory&&state.dragon.name==='CHAZ'&&!enteringDoor){dragonEnding=true;dragonVictoryReady=true;}
+ if(dragonEnding&&!enteringDoor)endingPlayback.resume();
   const insideOgre=ogreRefresher||Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
   ogreMusic.setExploring(insideOgre&&!enteringDoor&&!soundMuted);
   elfMusic.setExploring((elfRefresher||state.encounter==='queen')&&!enteringDoor&&!soundMuted);
   wizardMusic.setExploring((wizardRefresher||state.encounter==='wizard')&&!enteringDoor&&!soundMuted);
+  dragonMusic.setExploring(state.encounter==='dragon'&&!enteringDoor&&!soundMuted&&!dragonEnding);
 }
-let attempt=null, reactionFrame=null, slowReaction=false, motion=null, enteringDoor=false;
+let attempt=null, reactionFrame=null, slowReaction=false, motion=null, enteringDoor=false,dragonBanished=false;
 const doorDescriptions={
   ogre:'Its hinges are strong and its timber is aged but sturdy.',
   wizard:'Ancient runes shine from its surface in languages long forgotten.',
@@ -77,6 +95,7 @@ function journalKnowledge(){
   if(state.completed)discoveries.unshift('The Ogre’s advice: Be fast and accurate when you attack.');
   if(state.queen.completed)discoveries.push('The Elf Queen’s advice: Stay aware, keep moving, and react quickly to block incoming attacks.');
   if(state.wizard.completed)discoveries.push('The Wizard’s advice: Stay focused and concentrate. Match the spell’s color to its written name, and ignore distractions.');
+  if(state.dragon.victory)discoveries.push('The dragon’s true name: '+state.dragon.name+'.');
   return discoveries.join(' ');
 }
 function persist(){if(writable&&!save(storage,state)){writable=false;showStorageWarning('Saving failed. Progress lasts only for this open session.');}}
@@ -90,8 +109,30 @@ function render(){
   $('live-map').innerHTML=exploredMap(state);
   scene();if(state.encounter)openPanel('encounter');else if(state.gate)openPanel('gate');else syncPanels();
 }
-let ogreFrame=null,elfFrame=null,wizardFrame=null,ogreRefresher=false,elfRefresher=false,wizardRefresher=false;
+let ogreFrame=null,elfFrame=null,wizardFrame=null,dragonFrame=null,ogreRefresher=false,elfRefresher=false,wizardRefresher=false;
 window.addEventListener('message',event=>{
+ if(dragonFrame&&event.source===dragonFrame.contentWindow&&event.origin===location.origin){
+   if(handleRoomMenu(event,dragonFrame,'dragon-room','dragon-room'))return;
+   if(event.data?.type==='dragon-room:victory'&&state.encounter==='dragon'){
+    if(enteringDoor)dragonVictoryPending=true;else beginDragonVictory();return;
+   }
+   if(event.data?.type==='dragon-room:prize'&&state.encounter==='dragon'&&(dragonVictoryReady||state.dragon.victory)){
+    state=completeDragon(state);persist();render();return;
+   }
+   if(event.data?.type==='dragon-room:banish'&&state.encounter==='dragon'&&!enteringDoor){
+    stopHeldMovement();enterThroughDoor(()=>{
+     dragonBanished=true;state=banishDragon(state);persist();
+     if(modal.open){panel=null;modal.close();}render();
+    },defeatAudio);return;
+   }
+   if(event.data?.type==='dragon-room:leave'&&!enteringDoor)enterThroughDoor(()=>{
+     endingPlayback.stop();dragonEnding=false;dragonVictoryReady=false;dragonVictoryPending=false;
+     state=act(state,'leave');persist();
+     if(modal.open){panel=null;modal.close();}
+     render();
+   });
+   return;
+ }
  if(wizardFrame&&event.source===wizardFrame.contentWindow&&event.origin===location.origin){
   if(handleRoomMenu(event,wizardFrame,'wizard-mind','wizard-room'))return;
   if(event.data?.type==='wizard-mind:leave'){
@@ -155,13 +196,21 @@ function handleRoomMenu(event,frame,requestPrefix,responsePrefix){
  }
  return false;
 }
+window.addEventListener('dungeon:ready',()=>syncPanels());
 function syncPanels(){
  syncRoomMusic();
- dungeonMusic.setExploring(!state.encounter&&!ogreRefresher&&!elfRefresher&&!wizardRefresher&&!enteringDoor);
+ dungeonMusic.setExploring(!document.body.classList.contains('boot-transition')&&!state.encounter&&!ogreRefresher&&!elfRefresher&&!wizardRefresher&&!enteringDoor);
  const attackRoom=ogreRefresher||Boolean(state.encounter&&!['wizard','queen','dragon'].includes(state.encounter));
  const defenceRoom=elfRefresher||state.encounter==='queen';
  const mindRoom=wizardRefresher||state.encounter==='wizard';
- document.body.classList.toggle('ogre-attack-room',attackRoom||defenceRoom||mindRoom);
+ const dragonRoom=state.encounter==='dragon';
+ document.body.classList.toggle('ogre-attack-room',attackRoom||defenceRoom||mindRoom||dragonRoom);
+ if(dragonRoom&&!dragonFrame){
+   dragonFrame=document.createElement('iframe');dragonFrame.id='dragon-room-encounter';dragonFrame.title='The Nameless Dragon chamber';
+   const dragonPreview=new URLSearchParams(location.search);
+   const dragonMode=state.dragon.victory&&state.dragon.name==='CHAZ'?'?ending=earned':dragonPreview.get('preview')==='doors'&&dragonPreview.get('door')==='dragon'&&['final','ending'].includes(dragonPreview.get('round'))&&!dragonBanished?'?playtest='+dragonPreview.get('round'):'';
+   dragonFrame.src='./dragon-room.html'+dragonMode;document.body.append(dragonFrame);
+ }else if(!dragonRoom&&dragonFrame){dragonFrame.remove();dragonFrame=null;}
  if(mindRoom&&!wizardFrame){wizardFrame=document.createElement('iframe');wizardFrame.id='wizard-mind-encounter';wizardFrame.title='Wizard mind training';wizardFrame.src='./wizard-playtest.html?'+new URLSearchParams({encounter:'1',correct:String(state.wizard.mindCorrect??0),completed:String(state.wizard.completed),refresher:String(Number(wizardRefresher))});document.body.append(wizardFrame);}
  else if(!mindRoom&&wizardFrame){wizardFrame.remove();wizardFrame=null;}
 
@@ -272,7 +321,7 @@ function updatePanel(){
   }
 }
 function namePlate(body){
-  const label=document.createElement('p');label.className='note';label.textContent=state.dragon.placeholder?'DEVELOPMENT PLACEHOLDER — not the verified book combination.':'The dragon’s true name, revealed on stone.';body.append(label);
+  const label=document.createElement('p');label.className='note';label.textContent=state.dragon.placeholder?'DEVELOPMENT PLACEHOLDER — not the verified book combination.':'The dragon’s true name.';body.append(label);
   const name=document.createElement('p');name.className='earned-name';name.textContent=state.dragon.name;body.append(name);
 }
 function renderVictory(body){$('modal-title').textContent='The name beneath the binding.';namePlate(body);const text=document.createElement('p');text.textContent='Your victory and this earned name are saved on this browser and device.';body.append(text);}
@@ -342,35 +391,35 @@ function animateNavigation(from,to,action){
 function enterChamber(){
   state=act(state,'gate-enter');persist();render();
 }
-function playDoorSound(){
+function playTransitionSound(audio=doorAudio){
   if(soundMuted)return Promise.resolve();
   return new Promise(resolve=>{
     // Unavailable or stalled audio should never strand the player on black.
     const timeout=setTimeout(done,9000);
-    doorAudio.addEventListener('ended',done,{once:true});
-    doorAudio.addEventListener('error',done,{once:true});
-    doorAudio.addEventListener('pause',done,{once:true});
+    audio.addEventListener('ended',done,{once:true});
+    audio.addEventListener('error',done,{once:true});
+    audio.addEventListener('pause',done,{once:true});
     function done(){
       clearTimeout(timeout);
-      doorAudio.removeEventListener('ended',done);
-      doorAudio.removeEventListener('error',done);
-      doorAudio.removeEventListener('pause',done);
-      doorAudio.pause();
+      audio.removeEventListener('ended',done);
+      audio.removeEventListener('error',done);
+      audio.removeEventListener('pause',done);
+      audio.pause();
       resolve();
     }
-    doorAudio.currentTime=0;
-    doorAudio.play().catch(done);
+    audio.currentTime=0;
+    audio.play().catch(done);
   });
 }
-async function enterThroughDoor(changeScene=enterChamber){
+async function enterThroughDoor(changeScene=enterChamber,transitionAudio=doorAudio){
   if(document.hidden){changeScene();return;}
   enteringDoor=true;
   dungeonMusic.setExploring(false);
-  ogreMusic.stop();elfMusic.stop();wizardMusic.stop();
-  const currentFrame=ogreFrame||elfFrame||wizardFrame;
+  ogreMusic.stop();elfMusic.stop();wizardMusic.stop();dragonMusic.stop();
+  const currentFrame=ogreFrame||elfFrame||wizardFrame||dragonFrame;
   if(currentFrame)currentFrame.inert=true;
   // Start playback directly from the entry click for browsers that require a gesture.
-  const soundFinished=playDoorSound();
+  const soundFinished=playTransitionSound(transitionAudio);
   const fade=$('door-fade');
   const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   fade.hidden=false;
@@ -382,7 +431,7 @@ async function enterThroughDoor(changeScene=enterChamber){
   try{
     await darken?.finished;
     changeScene();
-    frame=ogreFrame||elfFrame||wizardFrame;
+    frame=ogreFrame||elfFrame||wizardFrame||dragonFrame;
     if(frame){
       frame.inert=true;
       await new Promise(resolve=>{
@@ -395,6 +444,7 @@ async function enterThroughDoor(changeScene=enterChamber){
     if(ogreFrame&&!soundMuted)ogreMusic.setExploring(true);
     if(elfFrame&&!soundMuted)elfMusic.setExploring(true);
     if(wizardFrame&&!soundMuted)wizardMusic.setExploring(true);
+    if(dragonFrame&&!soundMuted&&!dragonEnding&&!dragonVictoryPending)dragonMusic.setExploring(true);
     if(!state.encounter&&!ogreRefresher&&!elfRefresher&&!wizardRefresher)dungeonMusic.setExploring(true);
     if(!reducedMotion){
       const reveal=playFade(1,0,950);
@@ -402,7 +452,7 @@ async function enterThroughDoor(changeScene=enterChamber){
     }
   }finally{
     if(frame){frame.inert=false;frame.contentWindow.focus();}
-    fade.hidden=true;darken?.cancel();enteringDoor=false;
+    fade.hidden=true;darken?.cancel();enteringDoor=false;syncRoomMusic();if(dragonVictoryPending)beginDragonVictory();
   }
 }
 function perform(action){
@@ -418,7 +468,7 @@ function perform(action){
   }
   if(action==='show-name'&&state.dragon.victory){openPanel('victory');return;}
   const now=performance.now();if(now-lastInput<220)return;lastInput=now;
-  if(action==='reset'){ogreRefresher=false;elfRefresher=false;wizardRefresher=false;state=fresh();writable=!previewMode;showStorageWarning();persist();panel=null;modal.close();render();return;}
+  if(action==='reset'){endingPlayback.stop();dragonEnding=false;dragonVictoryReady=false;dragonVictoryPending=false;ogreRefresher=false;elfRefresher=false;wizardRefresher=false;state=fresh();writable=!previewMode;showStorageWarning();persist();panel=null;modal.close();render();return;}
   if(panel&&panel!=='encounter'&&panel!=='gate')return;
   if(action==='gate-enter'&&state.gate){enterThroughDoor();return;}
   const before=state;

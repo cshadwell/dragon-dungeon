@@ -1,8 +1,9 @@
-import {setupRoomControls} from './encounter-console.js?v=9b2f8bc9e7ff';
-import {getCharacterPose} from './character-art.js?v=9b2f8bc9e7ff';
-import {getRoomArt} from './room-art.js?v=9b2f8bc9e7ff';
-import {makeRound,judge,STAGES,MIND_GOAL,mindProgress} from './wizard-mind-model.js?v=9b2f8bc9e7ff';
-import {chooseWizardSpellPose,WIZARD_SPELL_POSES} from './wizard-spell-poses.js?v=9b2f8bc9e7ff';
+import {createColorChoices} from './guardian-games.js?v=6d789c038015';
+import {setupRoomControls} from './encounter-console.js?v=6d789c038015';
+import {getCharacterPose} from './character-art.js?v=6d789c038015';
+import {getRoomArt} from './room-art.js?v=6d789c038015';
+import {makeRound,judge,STAGES,MIND_GOAL,mindProgress} from './wizard-mind-model.js?v=6d789c038015';
+import {chooseWizardSpellPose,WIZARD_SPELL_POSES} from './wizard-spell-poses.js?v=6d789c038015';
 const params=new URLSearchParams(location.search),integrated=params.get('encounter')==='1'&&parent!==window;
 if(integrated)document.body.classList.add('wizard-intro');
 const notify=(type,extra={})=>{if(integrated)parent.postMessage({type:'wizard-mind:'+type,...extra},location.origin);};
@@ -48,7 +49,7 @@ let bg,wizard;const spellImages=new Map();
 function draw(){if(!ready)return;ctx.clearRect(0,0,470,200);ctx.drawImage(bg,0,0,470,200);const id=phase==='active'||(phase==='feedback'&&stage===2)?round.pose:reactionPose;const pose=spellImages.get(id)||wizard;ctx.drawImage(pose,Math.round((470-pose.width)/2),192-pose.height);$('room').setAttribute('aria-label',`Wizard pose ${id} in his study`);}
 function score(){$('score').textContent=`STAGE ${stage+1} / 3 · CORRECT ${hits} / ${STAGES[stage].hits} · MISSES ${misses}`;}
 function disable(){for(const b of $('choices').children)b.disabled=phase!=='active';}
-function renderChoices(){$('choices').replaceChildren(...round.choices.map(({word,ink},i)=>{const b=document.createElement('button');const direction=directions[i];b.className=direction.position;b.setAttribute('aria-label',`${direction.position}: ${word.toUpperCase()}`);const arrow=document.createElement('span');arrow.className='direction';arrow.textContent=direction.label;arrow.setAttribute('aria-hidden','true');const name=document.createElement('span');name.className='color-word';name.style.setProperty('--letters',word.length);name.textContent=word.toUpperCase();name.style.color=palette[ink];b.append(name,arrow);b.onclick=()=>answer(word);return b;}));disable();}
+function renderChoices(){$('choices').replaceChildren(...createColorChoices(round,answer,palette));disable();}
 function next(){round=makeRound(stage,Math.random,round?.answer);round.pose=chooseWizardSpellPose(round.answer);elapsed=0;phase='active';renderChoices();$('message').textContent=stage<2?'Watch the staff. Choose the matching written word.':'Trust the spell. Ignore the color of the lettering.';$('start').textContent='Pause';$('ready-cue').hidden=true;score();draw();}
 function answer(word){if(phase!=='active')return;const result=judge(round,word,elapsed);phase='feedback';wait=stage===2?.18:1.3;reactionPose=result==='correct'?6:result==='timeout'?4:5;if(result==='correct'){hits++;notify('progress',{correct:[0,3,7][stage]+hits});$('message').textContent='Correct. You saw through the distraction.';}else{misses++;$('message').textContent=result==='timeout'?'Too slow. Stay focused and try the next spell.':`The spell was ${round.answer.toUpperCase()}. Read the word, not the ink.`;}
 if(hits===STAGES[stage].hits){if(stage===2){phase=integrated?'farewell':'done';reactionPose=3;notify('complete');$('message').textContent='Huzzah! You are indeed keen of mind. The dragon will surely test your intellect further, but stay focused and you will prevail. Fare thee well!';if(integrated)$('dialogue-continue').textContent='-Press Space Bar-';$('start').textContent='Play again';}else{$('message').textContent=stage===0?'Well done. Stay focused as the spells get faster. You have 3 seconds.':'Faster now. Keep your focus. You have 2 seconds.';reactionPose=3;wait=2;}}

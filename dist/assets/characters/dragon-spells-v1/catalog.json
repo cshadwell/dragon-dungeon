@@ -1,0 +1,448 @@
+{
+  "version": "dragon-spells-v1",
+  "scale": 0.46,
+  "method": "RGBA cell extraction and nearest-neighbor sampling; source colors preserved; shared blue-reference exterior white mask; alpha retained elsewhere",
+  "poses": [
+    {
+      "character": "dragon",
+      "number": 38,
+      "id": "dragon-038",
+      "sheet": "dragon-spells-blue",
+      "cell": 1,
+      "color": "blue",
+      "spellPose": 1,
+      "file": "../dragon-spells-v1/dragon/pose-038.png",
+      "width": 264,
+      "height": 160,
+      "bounds": [
+        0,
+        2,
+        528,
+        303
+      ],
+      "scale": 0.46,
+      "sha256": "de59f32cfa7fc56fe60d215c179d248c18bd986cc083738b67d973f7a3c5df40",
+      "sourceSha256": "1272ed550ffae8bf9e161b0e186b7de38972e256c6934e06b1f5bba472351047"
+    },
+    {
+      "character": "dragon",
+      "number": 39,
+      "id": "dragon-039",
+      "sheet": "dragon-spells-blue",
+      "cell": 2,
+      "color": "blue",
+      "spellPose": 2,
+      "file": "../dragon-spells-v1/dragon/pose-039.png",
+      "width": 208,
+      "height": 160,
+      "bounds": [
+        546,
+        3,
+        963,
+        302
+      ],
+      "scale": 0.46,
+      "sha256": "82db2e30b9ca9633e78545055582839a90cfd64dfac76b214653911057916910",
+      "sourceSha256": "1272ed550ffae8bf9e161b0e186b7de38972e256c6934e06b1f5bba472351047"
+    },
+    {
+      "character": "dragon",
+      "number": 40,
+      "id": "dragon-040",
+      "sheet": "dragon-spells-blue",
+      "cell": 3,
+      "color": "blue",
+      "spellPose": 3,
+      "file": "../dragon-spells-v1/dragon/pose-040.png",
+      "width": 248,
+      "height": 152,
+      "bounds": [
+        988,
+        21,
+        1492,
+        305
+      ],
+      "scale": 0.46,
+      "sha256": "a86e35142ffa6b7ad31376fb32ca284c886866e2202be46e95b180c955f20b26",
+      "sourceSha256": "1272ed550ffae8bf9e161b0e186b7de38972e256c6934e06b1f5bba472351047"
+    },
+    {
+      "character": "dragon",
+      "number": 41,
+      "id": "dragon-041",
+      "sheet": "dragon-spells-green",
+      "cell": 1,
+      "color": "green",
+      "spellPose": 1,
+      "file": "../dragon-spells-v1/dragon/pose-041.png",
+      "width": 264,
+      "height": 160,
+      "bounds": [
+        0,
+        2,
+        528,
+        303
+      ],
+      "scale": 0.46,
+      "sha256": "a0cbd037073dc7ace0560c96fc688df49bfc92fbcaf73858b46ff4f0c57ae66f",
+      "sourceSha256": "cee109752d7943a431506bd95276aa6e3ad48069675f4d3d0dfce6eef0315819"
+    },
+    {
+      "character": "dragon",
+      "number": 42,
+      "id": "dragon-042",
+      "sheet": "dragon-spells-green",
+      "cell": 2,
+      "color": "green",
+      "spellPose": 2,
+      "file": "../dragon-spells-v1/dragon/pose-042.png",
+      "width": 208,
+      "height": 160,
+      "bounds": [
+        546,
+        3,
+        963,
+        302
+      ],
+      "scale": 0.46,
+      "sha256": "148754ecee0bb54c5cb4b594619a88063ff91a8400e29abb1edd731968d926f8",
+      "sourceSha256": "cee109752d7943a431506bd95276aa6e3ad48069675f4d3d0dfce6eef0315819"
+    },
+    {
+      "character": "dragon",
+      "number": 43,
+      "id": "dragon-043",
+      "sheet": "dragon-spells-green",
+      "cell": 3,
+      "color": "green",
+      "spellPose": 3,
+      "file": "../dragon-spells-v1/dragon/pose-043.png",
+      "width": 248,
+      "height": 152,
+      "bounds": [
+        988,
+        21,
+        1492,
+        305
+      ],
+      "scale": 0.46,
+      "sha256": "44d17fab16f59f0d98d6952c5d3d35f2d9100e2d292461e2c3872bbdfe84fc1a",
+      "sourceSha256": "cee109752d7943a431506bd95276aa6e3ad48069675f4d3d0dfce6eef0315819"
+    },
+    {
+      "character": "dragon",
+      "number": 44,
+      "id": "dragon-044",
+      "sheet": "dragon-spells-orange",
+      "cell": 1,
+      "color": "orange",
+      "spellPose": 1,
+      "file": "../dragon-spells-v1/dragon/pose-044.png",
+      "width": 264,
+      "height": 160,
+      "bounds": [
+        0,
+        2,
+        528,
+        303
+      ],
+      "scale": 0.46,
+      "sha256": "822e9b9e626e39ffe56239a4d4c539f0c139e88b06dca5238ddbf83359842e54",
+      "sourceSha256": "107a7babe9274b9cad50677c025ce02f33f2763480a52146d48d1fb1da4ee191"
+    },
+    {
+      "character": "dragon",
+      "number": 45,
+      "id": "dragon-045",
+      "sheet": "dragon-spells-orange",
+      "cell": 2,
+      "color": "orange",
+      "spellPose": 2,
+      "file": "../dragon-spells-v1/dragon/pose-045.png",
+      "width": 208,
+      "height": 160,
+      "bounds": [
+        546,
+        3,
+        963,
+        302
+      ],
+      "scale": 0.46,
+      "sha256": "b371fed76eaea0a333f6e71a530cb694fb4b9a5cae4c1e8bd1937d066339994d",
+      "sourceSha256": "107a7babe9274b9cad50677c025ce02f33f2763480a52146d48d1fb1da4ee191"
+    },
+    {
+      "character": "dragon",
+      "number": 46,
+      "id": "dragon-046",
+      "sheet": "dragon-spells-orange",
+      "cell": 3,
+      "color": "orange",
+      "spellPose": 3,
+      "file": "../dragon-spells-v1/dragon/pose-046.png",
+      "width": 248,
+      "height": 152,
+      "bounds": [
+        988,
+        21,
+        1492,
+        305
+      ],
+      "scale": 0.46,
+      "sha256": "0956a1de75963c4f74b76ba0a45d0cef2e1918025dd729ef2f041ac84c4ee012",
+      "sourceSha256": "107a7babe9274b9cad50677c025ce02f33f2763480a52146d48d1fb1da4ee191"
+    },
+    {
+      "character": "dragon",
+      "number": 47,
+      "id": "dragon-047",
+      "sheet": "dragon-spells-purple",
+      "cell": 1,
+      "color": "purple",
+      "spellPose": 1,
+      "file": "../dragon-spells-v1/dragon/pose-047.png",
+      "width": 264,
+      "height": 160,
+      "bounds": [
+        0,
+        2,
+        528,
+        303
+      ],
+      "scale": 0.46,
+      "sha256": "b37c49f7a82e49cf5d5e89b77f3aef2ae59a1568e4423c1e59297a757c95f86b",
+      "sourceSha256": "69f9f70987df1920d418a19facba7d41e954489267da91c3ba195a8909fe25b1"
+    },
+    {
+      "character": "dragon",
+      "number": 48,
+      "id": "dragon-048",
+      "sheet": "dragon-spells-purple",
+      "cell": 2,
+      "color": "purple",
+      "spellPose": 2,
+      "file": "../dragon-spells-v1/dragon/pose-048.png",
+      "width": 208,
+      "height": 160,
+      "bounds": [
+        546,
+        3,
+        963,
+        302
+      ],
+      "scale": 0.46,
+      "sha256": "b979a37ef5e6219905f356b474aa821b02c1417aea05ead8235c996ecc41d98f",
+      "sourceSha256": "69f9f70987df1920d418a19facba7d41e954489267da91c3ba195a8909fe25b1"
+    },
+    {
+      "character": "dragon",
+      "number": 49,
+      "id": "dragon-049",
+      "sheet": "dragon-spells-purple",
+      "cell": 3,
+      "color": "purple",
+      "spellPose": 3,
+      "file": "../dragon-spells-v1/dragon/pose-049.png",
+      "width": 248,
+      "height": 152,
+      "bounds": [
+        988,
+        21,
+        1492,
+        305
+      ],
+      "scale": 0.46,
+      "sha256": "9184c60ce06ff4176aea83c770b8c364edeb8e22f77cb74a92999d0be6b69ca4",
+      "sourceSha256": "69f9f70987df1920d418a19facba7d41e954489267da91c3ba195a8909fe25b1"
+    },
+    {
+      "character": "dragon",
+      "number": 50,
+      "id": "dragon-050",
+      "sheet": "dragon-spells-red",
+      "cell": 1,
+      "color": "red",
+      "spellPose": 1,
+      "file": "../dragon-spells-v1/dragon/pose-050.png",
+      "width": 264,
+      "height": 160,
+      "bounds": [
+        0,
+        2,
+        528,
+        303
+      ],
+      "scale": 0.46,
+      "sha256": "e16d6ae5a6455004ccaec977f253c88ee6b419c637dce72d84179f2e6e0de092",
+      "sourceSha256": "a957e7811a913fe2e8f122cf168b7ed133756511b2378357ffdd010bd82be7d1"
+    },
+    {
+      "character": "dragon",
+      "number": 51,
+      "id": "dragon-051",
+      "sheet": "dragon-spells-red",
+      "cell": 2,
+      "color": "red",
+      "spellPose": 2,
+      "file": "../dragon-spells-v1/dragon/pose-051.png",
+      "width": 208,
+      "height": 160,
+      "bounds": [
+        546,
+        3,
+        963,
+        302
+      ],
+      "scale": 0.46,
+      "sha256": "dbd91bd362bfcc281b0735759d22ed746e1c929ccd0a6d7c62a56cafd0aefe0b",
+      "sourceSha256": "a957e7811a913fe2e8f122cf168b7ed133756511b2378357ffdd010bd82be7d1"
+    },
+    {
+      "character": "dragon",
+      "number": 52,
+      "id": "dragon-052",
+      "sheet": "dragon-spells-red",
+      "cell": 3,
+      "color": "red",
+      "spellPose": 3,
+      "file": "../dragon-spells-v1/dragon/pose-052.png",
+      "width": 248,
+      "height": 152,
+      "bounds": [
+        988,
+        21,
+        1492,
+        305
+      ],
+      "scale": 0.46,
+      "sha256": "ae6fc59c72d244e5b9d8f28bdf1b15bc222e57016dd725b5ec167451354e3500",
+      "sourceSha256": "a957e7811a913fe2e8f122cf168b7ed133756511b2378357ffdd010bd82be7d1"
+    },
+    {
+      "character": "dragon",
+      "number": 53,
+      "id": "dragon-053",
+      "sheet": "dragon-spells-white",
+      "cell": 1,
+      "color": "white",
+      "spellPose": 1,
+      "file": "../dragon-spells-v1/dragon/pose-053.png",
+      "width": 264,
+      "height": 160,
+      "bounds": [
+        0,
+        2,
+        528,
+        303
+      ],
+      "scale": 0.46,
+      "sha256": "0af027a9922242edcf7b55a37fd3dabb9ff9b505ab3552cc90b5bd1fe7ed477b",
+      "sourceSha256": "78e372ddfacb8e03442ccd26ba4155dfd0464d393e4c207ed4da64c2f61891f6"
+    },
+    {
+      "character": "dragon",
+      "number": 54,
+      "id": "dragon-054",
+      "sheet": "dragon-spells-white",
+      "cell": 2,
+      "color": "white",
+      "spellPose": 2,
+      "file": "../dragon-spells-v1/dragon/pose-054.png",
+      "width": 208,
+      "height": 160,
+      "bounds": [
+        546,
+        3,
+        963,
+        302
+      ],
+      "scale": 0.46,
+      "sha256": "534dad5054af6adf25b8f940bef32e24e80bef607ee71c2340e82cbed11e8cc7",
+      "sourceSha256": "78e372ddfacb8e03442ccd26ba4155dfd0464d393e4c207ed4da64c2f61891f6"
+    },
+    {
+      "character": "dragon",
+      "number": 55,
+      "id": "dragon-055",
+      "sheet": "dragon-spells-white",
+      "cell": 3,
+      "color": "white",
+      "spellPose": 3,
+      "file": "../dragon-spells-v1/dragon/pose-055.png",
+      "width": 248,
+      "height": 152,
+      "bounds": [
+        988,
+        21,
+        1492,
+        305
+      ],
+      "scale": 0.46,
+      "sha256": "00fe118601b67c75c108053d8f7387cf007880d183023e7ecd60b0c3be67c509",
+      "sourceSha256": "78e372ddfacb8e03442ccd26ba4155dfd0464d393e4c207ed4da64c2f61891f6"
+    },
+    {
+      "character": "dragon",
+      "number": 56,
+      "id": "dragon-056",
+      "sheet": "dragon-spells-yellow",
+      "cell": 1,
+      "color": "yellow",
+      "spellPose": 1,
+      "file": "../dragon-spells-v1/dragon/pose-056.png",
+      "width": 264,
+      "height": 160,
+      "bounds": [
+        0,
+        2,
+        528,
+        303
+      ],
+      "scale": 0.46,
+      "sha256": "66543c2950cf426573902dd515788b624cc42e7fa29c1b572480472b5dea7c6e",
+      "sourceSha256": "f80954ac3e8f5170c81f09e330e2f6f5961344f6362f83cb6dffae918abf2d3a"
+    },
+    {
+      "character": "dragon",
+      "number": 57,
+      "id": "dragon-057",
+      "sheet": "dragon-spells-yellow",
+      "cell": 2,
+      "color": "yellow",
+      "spellPose": 2,
+      "file": "../dragon-spells-v1/dragon/pose-057.png",
+      "width": 208,
+      "height": 160,
+      "bounds": [
+        546,
+        3,
+        963,
+        302
+      ],
+      "scale": 0.46,
+      "sha256": "14f23b6d1a1d1bc855f29ef817ffd0275829a09e30dd97224bbf100949e0a001",
+      "sourceSha256": "f80954ac3e8f5170c81f09e330e2f6f5961344f6362f83cb6dffae918abf2d3a"
+    },
+    {
+      "character": "dragon",
+      "number": 58,
+      "id": "dragon-058",
+      "sheet": "dragon-spells-yellow",
+      "cell": 3,
+      "color": "yellow",
+      "spellPose": 3,
+      "file": "../dragon-spells-v1/dragon/pose-058.png",
+      "width": 248,
+      "height": 152,
+      "bounds": [
+        988,
+        21,
+        1492,
+        305
+      ],
+      "scale": 0.46,
+      "sha256": "b2b83fea55c133e9ff2c70a5e99ec0c4166b62ffc3b84521420423ff0f0de1ad",
+      "sourceSha256": "f80954ac3e8f5170c81f09e330e2f6f5961344f6362f83cb6dffae918abf2d3a"
+    }
+  ]
+}
