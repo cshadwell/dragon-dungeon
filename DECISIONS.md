@@ -1,5 +1,7 @@
 # Decisions and superseded approaches
 
+**Current authority:** See [CURRENT_SPEC.md](CURRENT_SPEC.md). The dated entries below preserve development history; earlier conflicting mechanics are superseded by the current specification.
+
 Recorded from inspected code, current user requests and existing milestone evidence on 2026-10-23. Implementation dates below follow those records; reasons are limited to what is established.
 
 | Decision | Basis / reason | Replaces / consequence |
@@ -169,3 +171,19 @@ Final challenge completion freezes gameplay, hides the gauge, stops dragon music
 2026-11-08: Approved enlarged golden opening prologue integrated between title Start and gameplay. Preserve exact supplied wording,black background,existing pixel font,metallic gold sheen,and scroll synchronized to opening.mp3. Hold centered after music ends until Space/click. Initialize dungeon/save only after prologue; local encounter previews bypass it.
 
 2026-11-08: Opening flow uses Space/click, stepped title-to-black before opening music, and credits-to-black then dungeon reveal before dungeon music. Reuse door fade timing/stepping without door SFX. Preserve development preview bypass.
+
+2026-11-09 — Approved reliability pass and rule clarification:
+- Perfect dragon attack restores1life immediately,capped at10;ordinary successes no longer trigger three-in-a-row healing.
+- All three guardian lessons must be completed before dragon entry;use exact approved unprepared warning and keep maze retreat available.
+- Preserve existing difficulty and full-fight restarts;no boss checkpoints.
+- Pause all live challenges consistently through menus/focus/page interruptions;recover interrupted audio and artwork without changing approved art.
+- Persist boss victory immediately while delaying visible name reveal until plaque.
+- Consolidate current specification,prepare lean release and automated checks. No automatic publishing/push.
+
+
+## 2026-11-09 — Shared dialogue sizing and locked gate copy
+The unprepared dragon gate shows only the guardian warning and maze retreat choice. Maze and encounter narrative panes use centered VT323 text at one shared viewport-dependent size, measured against the opening dialogue corpus, maze introduction, door descriptions, farewells and complete journal sample. Continuation prompts retain reserved bottom space. Font size does not change between messages. Browser checks of the longest Wizard opening passage showed no text overflow at 1440×900 (43px), 1280×720 (38px), 1024×600 (31px), and 390×844 (32px). Approved artwork and challenge settings remain unchanged. Browser regression coverage was added; the automated browser runner was not executed locally.
+
+
+## 2026-11-09 — Approved closing sequence integrated
+After the CHAZ plaque reveal, keep the upper frame and exact plaque visible. Fade both lower panels over1.25seconds and scroll the approved congratulations/Dragon’s Book/Press ever onward text upward in the opening golden pixel style at half the original preview speed. After the final line clears, stop ending music and play supplied static.mp3 once. Large dark-red X-13 appears briefly and irregularly through mostly black gaps, then resolves steadily when audio ends. Visibility interruption pauses scrolling/static; blocked audio offers a retry. Saved earned-name re-entry also shows this ending. Standalone ending-preview.html remains available. No difficulty or approved art changes.

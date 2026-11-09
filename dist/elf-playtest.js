@@ -1,24 +1,23 @@
-import {drawDefenceArena} from './guardian-games.js?v=6d789c038015';
-import {setupRoomControls} from './encounter-console.js?v=6d789c038015';
-import {ELF_DEFENCE_POSES} from './elf-defence-poses.js?v=6d789c038015';
-import {getCharacterPose} from './character-art.js?v=6d789c038015';
-import {getRoomArt} from './room-art.js?v=6d789c038015';
-import {DEFENCE_DEFAULTS,DEFENCE_STAGES,DEFENCE_GOAL,defenceProgress,ORBIT,SPAWN_RADIUS,freshDefence,spawnAttack,stepDefence} from './elf-defence-model.js?v=6d789c038015';
+import {installDialogueLayout} from './dialogue-layout.js?v=5847e2b65376';
+import {ELF_OPENING} from './dialogue-copy.js?v=5847e2b65376';
+import {createImageLoader,recoverArtwork} from './image-loader.js?v=5847e2b65376';
+import {installChallengePause} from './challenge-pause.js?v=5847e2b65376';
+import {drawDefenceArena} from './guardian-games.js?v=5847e2b65376';
+import {setupRoomControls} from './encounter-console.js?v=5847e2b65376';
+import {ELF_DEFENCE_POSES} from './elf-defence-poses.js?v=5847e2b65376';
+import {getCharacterPose} from './character-art.js?v=5847e2b65376';
+import {getRoomArt} from './room-art.js?v=5847e2b65376';
+import {DEFENCE_DEFAULTS,DEFENCE_STAGES,DEFENCE_GOAL,defenceProgress,ORBIT,SPAWN_RADIUS,freshDefence,spawnAttack,stepDefence} from './elf-defence-model.js?v=5847e2b65376';
+installDialogueLayout();
 const params=new URLSearchParams(location.search),integrated=params.get('encounter')==='1'&&parent!==window;
 if(integrated)document.body.classList.add('elf-intro');
 const notify=(type,extra={})=>{if(integrated)parent.postMessage({type:'elf-defence:'+type,...extra},location.origin);};
 const artCache=new Map();let teaching=-1,reactionTime=0,poseNumber=1;
 const $=id=>document.getElementById(id),canvas=$('arena'),ctx=canvas.getContext('2d'),keys=new Set(),pointers=new Map();
 let settings={...DEFENCE_DEFAULTS},state=freshDefence(),running=false,loaded=false,last=null,nextAttack=0,attackNumber=0,flash=null,flashTime=0,stage=0,completed=false;
-const openingDialogue=[
- [1,"Welcome traveler! You must have traveled long to reach this far into the dungeon. You must be seeking the Nameless One."],
- [9,"He is a terrifying foe and has defeated many a brave soul. He's sure to attack you from all sides. Fortunately, we elves are experts in defense."],
- [13,"Defense is all about awareness and reflexes. Stay on the move and expect attacks from anywhere. I will teach you our ways."],
- [7,"Look at the window below. You are in the middle and will have to block incoming projectiles with your shield. Move your shield left and right to defend yourself."],
- [8,"Too slow or too fast? The dragon's fire will burn you. You can only take so many hits before you will succumb to his power."],
- [4,"Do you see? Let us practice and hone your skills. We will begin slowly. Ready?"]
-];
+const openingDialogue=ELF_OPENING;
 let dialogueIndex=null,spaceHeld=false,farewell=false;
+const suspension=installChallengePause(()=>{last=null;spaceHeld=false;clearInputs();});
 function showOpeningDialogue(){
  const [pose,text]=openingDialogue[dialogueIndex];
  showPose(pose);$('message').textContent=text;
@@ -62,7 +61,7 @@ function dot(x,y,w,color){ctx.fillStyle=color;ctx.fillRect(Math.round(x),Math.ro
 function ring(radius,color,step=2){for(let deg=0;deg<360;deg+=step)dot(100+Math.cos(rad(deg))*radius,100+Math.sin(rad(deg))*radius,1,color);}
 function draw(){drawDefenceArena(ctx,state,settings,{flash,running,loaded,completed});}
 function tick(now){const dt=last===null?0:Math.min(.05,(now-last)/1000);last=now;
- if(running&&!document.hidden){if(!state.projectile){nextAttack-=dt;if(nextAttack<=0){const angle=attackNumber===0?270:Math.random()*360;state=spawnAttack(state,angle);attackNumber++;}}
+ if(running&&!document.hidden&&!suspension.paused){if(!state.projectile){nextAttack-=dt;if(nextAttack<=0){const angle=attackNumber===0?270:Math.random()*360;state=spawnAttack(state,angle);attackNumber++;}}
  state=stepDefence(state,dt,inputs(),settings);
  if(state.result){
  flash=state.result;flashTime=.3;notify('progress',{blocks:state.blocks});
@@ -76,24 +75,24 @@ function tick(now){const dt=last===null?0:Math.min(.05,(now-last)/1000);last=now
  scores();
  }
  }
- if(reactionTime>0){reactionTime-=dt;if(reactionTime<=0&&teaching<0&&!completed)showPose(ELF_DEFENCE_POSES.readyTeaching[0]);}
- if(flashTime>0){flashTime-=dt;if(flashTime<=0)flash=null;}draw();requestAnimationFrame(tick);
+ if(!suspension.paused&&reactionTime>0){reactionTime-=dt;if(reactionTime<=0&&teaching<0&&!completed)showPose(ELF_DEFENCE_POSES.readyTeaching[0]);}
+ if(!suspension.paused&&flashTime>0){flashTime-=dt;if(flashTime<=0)flash=null;}draw();requestAnimationFrame(tick);
 }
 function bindShieldButton(direction){const button=$(direction);button.setAttribute('aria-pressed','false');button.addEventListener('pointerdown',e=>{if(e.button!==0)return;e.preventDefault();button.setPointerCapture(e.pointerId);pointers.set(e.pointerId,direction);updateControls();});for(const type of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(type,e=>{pointers.delete(e.pointerId);updateControls();});button.addEventListener('contextmenu',e=>e.preventDefault());}
 for(const direction of ['left','right'])bindShieldButton(direction);
 document.addEventListener('keydown',e=>{
  if(integrated){
-   if($('room-menu').open)return;
+   if($('room-menu').open||suspension.paused)return;
    if(e.code==='Space'){e.preventDefault();if(!e.repeat&&!spaceHeld){spaceHeld=true;roomAction();}return;}
-   if(e.code==='Escape'){e.preventDefault();if(running){pause('Practice paused. Resume when you’re ready.');$('dialogue-continue').textContent='-Press Space Bar-';}$('journal').click();return;}
+   if(e.code==='Escape'){e.preventDefault();$('journal').click();return;}
    if(dialogueIndex!==null||farewell)return;
  }if(e.target.tagName==='INPUT'||!['ArrowLeft','ArrowRight','KeyA','KeyD'].includes(e.code))return;e.preventDefault();keys.add(e.code);updateControls();});document.addEventListener('keyup',e=>{if(e.code==='Space')spaceHeld=false;keys.delete(e.code);updateControls();});
-window.addEventListener('blur',()=>{spaceHeld=false;if(running)pause('Practice paused. Resume when you’re ready.');else clearInputs();});document.addEventListener('visibilitychange',()=>{if(document.hidden&&running)pause('Practice paused while you were away.');last=null;});
+
 $('start').onclick=()=>{if(!loaded)return;if(teaching>=0){teaching++;if(teaching<4){showLesson();return;}teaching=-1;showPose(2);$('message').textContent='“Ready? Watch the first approach.”';$('start').textContent='Begin practice';return;}if(completed)reset();if(running)pause('“Take a breath. Resume when you are ready.”');else{clearInputs();running=true;last=null;$('start').textContent='Pause practice';$('message').textContent='“One shield. Watch the wisp and rotate into its path.”';}};$('reset').onclick=reset;
 for(const id of ['size','shield-speed','attack-speed'])$(id).oninput=tune;$('defaults').onclick=()=>{$('size').value=DEFENCE_DEFAULTS.shieldSize;$('shield-speed').value=DEFENCE_DEFAULTS.shieldSpeed;$('attack-speed').value=DEFENCE_STAGES[stage].attackSpeed;tune();};
-function image(url){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=reject;im.src=url;});}
+const image=createImageLoader();
 tune();scores();draw();
-Promise.all([image(getRoomArt('elf').url).then(im=>artCache.set('room',im)),...Array.from({length:13},(_,i)=>i+1).map(n=>image(getCharacterPose('elf',n).url).then(im=>artCache.set(n,im)))]).then(()=>{
+recoverArtwork(()=>Promise.all([image(getRoomArt('elf').url).then(im=>artCache.set('room',im)),...Array.from({length:13},(_,i)=>i+1).map(n=>image(getCharacterPose('elf',n).url).then(im=>artCache.set(n,im)))]),{message:$('message')}).then(()=>{
  loaded=true;showPose(1);$('start').disabled=false;$('start').textContent='Begin practice';
  const lessonButton=document.createElement('button');lessonButton.className='secondary';lessonButton.textContent='Defence lesson';lessonButton.onclick=explain;document.querySelector('.actions').append(lessonButton);
  if(integrated){

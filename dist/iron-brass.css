@@ -463,3 +463,60 @@ body > header, body > footer { padding-inline: var(--gutter); }
 }
 
 #dragon-room-encounter { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: #080708; z-index: 20; }
+
+/* Retry controls must remain available inside the otherwise minimal encounter UI. */
+.art-retry { display: block !important; position: relative; z-index: 1; margin: 12px auto; }
+
+/* Shared story typography: the same measured font in every maze/room pane. */
+:root { --story-row: clamp(280px, 39dvh, 420px); --dialogue-size: 36px; }
+#message, .encounter-ui .guidance #message, .encounter-ui .narrative #message,
+#modal-body > p, #room-menu-text, .mask-claim, .revealed-inscription {
+  font: var(--dialogue-size)/1.08 var(--dialogue);
+  text-align: center;
+  overflow-wrap: normal;
+}
+.dungeon-ui .narrative, :is(.ogre-intro,.elf-intro,.wizard-intro,.dragon-intro) .narrative {
+  display: flex; flex-direction: column;
+  min-height: 0; height: var(--story-row);
+  overflow: visible;
+}
+.narrative > #message {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  margin: 0; min-height: 0;
+}
+:is(.ogre-intro,.elf-intro,.wizard-intro,.dragon-intro) #dialogue-continue {
+  flex: none; margin: 0; min-height: 28px; padding-top: 10px;
+}
+#modal.door-prompt[open] { display: flex; flex: 1; flex-direction: column; min-height: 0; }
+.door-prompt #modal-body {
+  display: flex; flex-direction: column; justify-content: center;
+  flex: 1; min-height: 0; gap: 14px; text-align: center;
+}
+.door-prompt .choices { flex: none; display: grid; width: 100%; }
+.door-prompt .choices:has(> button:only-child) { grid-template-columns: 1fr; }
+#modal.journal-overlay[open] { overflow: visible !important; }
+#modal.journal-overlay #modal-body { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+#modal.journal-overlay #modal-body > p { grid-column: 1 / -1; margin: 0 0 8px; }
+#modal.journal-overlay #modal-body button { margin: 0; }
+#room-menu { overflow: visible; }
+#room-menu-text { margin: 12px 0; }
+:is(.ogre-intro,.elf-intro,.wizard-intro,.dragon-intro) #room-menu { width: min(760px,calc(100vw - 32px)); overflow: visible; }
+@media (min-width: 651px) and (min-height: 500px) {
+  .dungeon-ui:not(.encounter-room) .console,
+  .dungeon-ui:not(.encounter-room) .console:has(.door-prompt[open]) {
+    grid-template-rows: minmax(0,1fr) var(--story-row);
+  }
+  :is(.ogre-intro,.elf-intro,.wizard-intro,.dragon-intro) main {
+    grid-template-rows: minmax(0,1fr) var(--story-row);
+  }
+  .elf-defending main {
+    grid-template-rows: minmax(0,1fr) 64px var(--story-row);
+  }
+}
+@media (max-width: 650px), (max-height: 499px) {
+  :is(.ogre-intro,.elf-intro,.wizard-intro,.dragon-intro) .narrative { min-height: var(--story-row); }
+}
+
+.dungeon-ui:not(.encounter-room) .narrative { overflow: visible; }
+.dungeon-ui .narrative > #message, .encounter-ui .narrative > #message { display: flex; }
+:is(.ogre-intro,.elf-intro,.wizard-intro,.dragon-intro) #dialogue-continue { font-size: clamp(18px,1.35vw,22px); }

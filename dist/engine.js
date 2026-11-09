@@ -1,7 +1,7 @@
-import {DRAGON,freshDragon,dragonAct,missing,NAME_CONFIG} from './dragon.js?v=6d789c038015';
-import {QUEEN,SEAL,queenNotes,freshQueen,queenAct} from './queen.js?v=6d789c038015';
-import {WIZARD,LENS,wizardNotes,freshWizard,wizardAct} from './wizard.js?v=6d789c038015';
-import {SHIELD,lessons,notes} from './ogre.js?v=6d789c038015';
+import {DRAGON,freshDragon,dragonAct,missing,NAME_CONFIG} from './dragon.js?v=5847e2b65376';
+import {QUEEN,SEAL,queenNotes,freshQueen,queenAct} from './queen.js?v=5847e2b65376';
+import {WIZARD,LENS,wizardNotes,freshWizard,wizardAct} from './wizard.js?v=5847e2b65376';
+import {SHIELD,lessons,notes} from './ogre.js?v=5847e2b65376';
 export const VERSION = 1;
 export const CONTENT = 'dragon-1';
 export const DIRS = [[0,-1],[1,0],[0,1],[-1,0]];
@@ -74,7 +74,8 @@ export function valid(s, world=DEFAULT_WORLD) {
   if((d.phase==='hurt')!==(d.returnTo!==null)||d.victory!==(d.phase==='victory'))return false;
   if(d.discovered&&!s.visited.includes(world.DRAGON))return false;
   if(s.encounter==='dragon'&&!d.discovered)return false;
-  if(![undefined,false,true].includes(d.trialCompleted))return false;
+  if(![undefined,false,true].includes(d.trialCompleted)||![undefined,false,true].includes(d.prizeRevealed))return false;
+  if(d.prizeRevealed&&!d.victory)return false;
   if(d.trialCompleted&&(!d.victory||d.name!==NAME_CONFIG.name||d.placeholder!==false))return false;
   if(d.phase!=='intro'&&(!d.discovered||(missing(s).length&&!d.trialCompleted)))return false;
   if(d.victory ? !(typeof d.name==='string'&&/^[A-Z]{4}$/.test(d.name)&&typeof d.placeholder==='boolean') : !(d.name===null&&d.placeholder===null))return false;

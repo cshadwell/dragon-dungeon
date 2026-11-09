@@ -1,5 +1,7 @@
 # Current software state
 
+**Current authority:** See [CURRENT_SPEC.md](CURRENT_SPEC.md). The dated entries below preserve development history; earlier conflicting mechanics are superseded by the current specification.
+
 Latest approved-art checkpoint 2026-10-25; initial audit 2026-10-23. Authoritative working folder: `dragon-dungeon/` under the White Elephant Gift local Project mirror. Local Git version control is now established in this folder, with the initial 60-file checkpoint titled `Baseline: verified Dragon Dungeon working version`. Private GitHub origin is configured at https://github.com/cshadwell/dragon-dungeon.git; baseline 03ef24b was pushed. The earlier audit preceded Git initialization. README links here; older milestone documents are historical evidence, not current configuration.
 
 ## Baseline and launch
@@ -279,3 +281,40 @@ Browser verified Space launches title fade,opening audio plays afterward with ti
 
 ## Current working version checkpoint — 2026-11-08
 Prepared current Dragon boss,life/banishment,victory/name reveal,shared guardian graphics,and approved opening prologue with Space and stepped transitions for main checkpoint. Release6d789c038015;123tests passing;git diff --check clean. Reviewed pending source/tests/art/audio/continuity files;credential-pattern scan found no matches,no added files over50MiB. GitHub origin verified private and remote main at c10e7af before push.
+
+## Reliability pass and final gameplay rules — 2026-11-09
+Current authority consolidated in CURRENT_SPEC.md; AGENTS.md/README.md now point to current rules. Previous README retained in README_HISTORY.md. Historical chronology remains intact.
+
+Implemented shared independent pause reasons for all four live challenges (menus including New Game confirmation,focus,visibility,page-history interruptions),cleared held controls,and reset timing clocks to prevent catch-up penalties. Confirmed in browser that Ogre remains GET READY beyond its whole attack duration while Journal is open,then advances on close;Wizard remains4.0s and Elf remains0misses while their Journals stay open.
+
+Replaced three-success meter recovery with immediate+1on perfect dragon attacks only,capped at10. Ordinary successes do not heal;misses still cost1. Browser observed a perfect strike raise life1→2. Round goals,speeds,target widths,defence volleys and full-fight restart behavior remain unchanged.
+
+Dragon gate now requires all three completed lessons,shows exact approved warning,and offers only Stay in the maze until ready. Pure regressions cover all8completion combinations;browser verified warning/no Enter choice. Older unfinished unprepared room saves migrate safely to the gate;earned wins remain earned. Unsaved prepared door preview seeds lessons in memory;prepared=0 reviews the blocked state.
+
+Dragon victory persists at final success,with prizeRevealed=false until actual plaque reveal. Reload resumes victory dialogue instead of the fight;name/journal controls withhold the reveal until completed. Save/reload and old-win compatibility tests pass.
+
+Scene music now separates scene intent from temporary suspension,preserves position/mute through interruption,and retries on actual gestures including iframe gestures. Ending stinger has bounded fallback. Prologue has resumable audio-clock playback,silent recovery after stalls/errors,and an explicit silent option when permanently blocked. Unit tests cover history-style suspension,blocked retry,stalls,hidden errors and late playback promises. Browser back during prologue returned to a usable title in the tested browser (that navigation reloaded rather than retaining BFCache state).
+
+Shared artwork loader has10s timeout,retryable caching and accessible retry controls. All guardians gain retry UI. Dragon loads only essential opening art up front,prefetches needed poses,and pauses when a demanded pose is missing. Ending plaque is loaded on demand. A temporary fault server returned503for Dragon12;browser displayed Retry artwork and successfully loaded pose12after retry. No approved assets changed.
+
+Release9bb622811ffb:135core tests pass,including all runtime module syntax and artwork hashes. Four Playwright smoke cases are checked in and discover successfully;the full Playwright runner/GitHub Actions execution was not performed locally this turn. Added development-only pinned Playwright1.65.0/lockfile and read-only-permission GitHub workflow for core/browser/package checks on next push. No deployment or push performed.
+
+Lean unpublished package verified at build/dragon-dungeon-wjmd5ms3 (~59.8MiB versus~105MiBsource dist);omits historical approved-v1 and standalone opening preview,retains repository originals. Friends will assess fairness;difficulty intentionally unchanged.
+Final verification: release9bb622811ffb passes135core tests. Browser also verified the final normal title→prologue hold→Space→dungeon flow,with exploration audio playing after reveal. Temporary503test server stopped after recovery verification. Current changes remain local and unpushed.
+
+
+## 2026-11-09 — Shared dialogue sizing and locked gate copy
+The unprepared dragon gate shows only the guardian warning and maze retreat choice. Maze and encounter narrative panes use centered VT323 text at one shared viewport-dependent size, measured against the opening dialogue corpus, maze introduction, door descriptions, farewells and complete journal sample. Continuation prompts retain reserved bottom space. Font size does not change between messages. Browser checks of the longest Wizard opening passage showed no text overflow at 1440×900 (43px), 1280×720 (38px), 1024×600 (31px), and 390×844 (32px). Approved artwork and challenge settings remain unchanged. Browser regression coverage was added; the automated browser runner was not executed locally.
+
+## 2026-11-09 — Standalone closing credits proposal
+Added ending-preview.html/css/js, isolated from live game routes and saves. Uses unchanged CHAZ plaque, existing Dragonforged frame drawing, opening pixel font/gold shine and upward scrolling. Lower mock panels fade away before credits, ending music stops after final line clears, supplied static-radio.mp3 plays once while dark-red X-13 flickers, and its ended event resolves the title. Preview starts with a gesture; R replays and M mutes. Awaiting user review before integration. Supplied clip is MP3, approximately15.696seconds. Existing137tests pass; live game ending unchanged.
+
+### Closing preview adjustment
+Credits now move at exactly half the prior scroll speed. Replaced preview playback with the newly supplied static.mp3 (approximately10.48seconds, retained without trimming). X-13 now scales up to20vw, capped by28dvh so it fills more of the lower area without clipping. Still standalone; no live ending integration.137tests pass.
+
+### X-13 signal acquisition revision
+Replaced repeating color flicker with audio-timed randomized visibility: brief60–160ms dark-red appearances separated by280–850ms fully black gaps. Signal is absent most of the static sequence, then becomes continuously visible on audio ended. No white flashes or changes to final size/color. Hidden-page audio pauses also freeze the signal timing. Remains an isolated ending preview.137tests pass.
+
+
+## 2026-11-09 — Approved closing sequence integrated
+After the CHAZ plaque reveal, keep the upper frame and exact plaque visible. Fade both lower panels over1.25seconds and scroll the approved congratulations/Dragon’s Book/Press ever onward text upward in the opening golden pixel style at half the original preview speed. After the final line clears, stop ending music and play supplied static.mp3 once. Large dark-red X-13 appears briefly and irregularly through mostly black gaps, then resolves steadily when audio ends. Visibility interruption pauses scrolling/static; blocked audio offers a retry. Saved earned-name re-entry also shows this ending. Standalone ending-preview.html remains available. No difficulty or approved art changes.

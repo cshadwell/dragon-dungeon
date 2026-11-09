@@ -27,3 +27,6 @@ test('live dragon victory saves CHAZ independently without fabricating guardian 
  const s={...start,pos:DRAGON,encounter:'dragon',visited:[...start.visited,DRAGON]};const won=completeDragon(s);assert.ok(valid(won));assert.equal(won.dragon.name,'CHAZ');assert.equal(won.dragon.placeholder,false);assert.deepEqual(won.items,start.items);
  const store=new Map(),storage={setItem:(k,v)=>store.set(k,v),getItem:k=>store.get(k)??null};assert.ok(save(storage,won));assert.deepEqual(load(storage).state,won);
 });
+test('suspended victory resumes its position and hands off once without leaking the old track',async()=>{
+ const v=new Audio(),e=new Audio(),p=createEndingAudio(v,e);p.start();await flush();v.currentTime=1;p.setSuspended(true);assert.ok(v.paused);p.retry();await flush();assert.ok(v.paused);p.setSuspended(false);await flush();assert.equal(v.currentTime,1);assert.ok(!v.paused);v.dispatchEvent(new Event('ended'));await flush();assert.ok(v.paused);assert.ok(!e.paused);p.stop();
+});

@@ -1,6 +1,8 @@
-import {createScreenFade} from './screen-fade.js?v=6d789c038015';
-import {playOpeningScene} from './opening-scene.js?v=6d789c038015';
-import {animateTitle} from './title-effects.js?v=6d789c038015';
+import {installDialogueLayout} from './dialogue-layout.js?v=5847e2b65376';
+import {createScreenFade} from './screen-fade.js?v=5847e2b65376';
+import {playOpeningScene} from './opening-scene.js?v=5847e2b65376';
+import {animateTitle} from './title-effects.js?v=5847e2b65376';
+installDialogueLayout();
 // Title view precedes app initialization: opening it never loads or writes a save.
 const title=document.getElementById('title-screen'),enter=document.getElementById('title-enter');
 let titleMusic=null,titleMusicActive=false,stopTitleEffects=()=>{},openingComplete=false;
@@ -23,7 +25,7 @@ async function start(){
    await opening;openingComplete=true;
    window.addEventListener('keydown',titleKeys,true);
   }
-  await import('./app.js?v=6d789c038015');
+  await import('./app.js?v=5847e2b65376');
   document.body.classList.remove('title-open');title.remove();
   if(fade)await fade.reveal();
   document.body.classList.remove('boot-transition');
@@ -49,7 +51,11 @@ if(preview){start();}else{
  musicButton.addEventListener('click',()=>{if(!titleMusic.paused){titleMusic.pause();musicState(false);}else playTitleMusic();});
  titleMusic.addEventListener('ended',()=>{musicButton.textContent='Title music finished';musicButton.disabled=true;musicButton.setAttribute('aria-pressed','false');});
  titleMusic.addEventListener('error',()=>{musicButton.textContent='Title music unavailable';musicButton.disabled=true;});
- window.addEventListener('pagehide',()=>{stopTitleMusic();stopTitleEffects();});
+ let titleWasPlaying=false;
+ function suspendTitle(){if(starting||!titleMusicActive)return;titleWasPlaying=titleMusicActive&&!titleMusic.paused;titleMusicActive=false;titleMusic.pause();stopTitleEffects();}
+ function resumeTitle(){if(starting||!title.isConnected||document.hidden)return;titleMusicActive=true;if(titleWasPlaying)playTitleMusic();if(art.complete&&art.naturalWidth){stopTitleEffects();stopTitleEffects=animateTitle(canvas,art);}}
+ window.addEventListener('pagehide',suspendTitle);window.addEventListener('pageshow',resumeTitle);
+ document.addEventListener('visibilitychange',()=>document.hidden?suspendTitle():resumeTitle());
  playTitleMusic();
  window.addEventListener('keydown',titleKeys,true);
  enter.addEventListener('click',start);enter.focus({preventScroll:true});

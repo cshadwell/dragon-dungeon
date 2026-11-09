@@ -26,13 +26,13 @@ test('all four wall doors prompt at the earlier tile, preserve saves, and enter 
   assert.equal(doorFace(d.wallX,d.wallY,d.side,d.step),d);assert.equal(doorFace(d.wallX,d.wallY,d.side,-d.step),undefined);assert.ok(doorPixel(d,64,80));assert.equal(doorPixel(d,0,0),null);
   const mem={value:null,getItem(){return this.value;},setItem(k,v){this.value=v;}};save(mem,s);assert.equal(load(mem).state.gate,d.character);
   const outside=act(s,'gate-decline');assert.equal(outside.encounter,null);assert.equal(outside.gate,null);
-  s=act(s,'gate-enter');assert.equal(s.encounter,d.character==='ogre'?'intro':d.character);assert.ok(valid(s));
+  s=act(s,'gate-enter');assert.equal(s.encounter,d.character==='dragon'?null:d.character==='ogre'?'intro':d.character);assert.ok(valid(s));
  }
 });
 test('older active guardian saves migrate from the close tile with progress intact',()=>{
  for(const [oldPos,encounter] of [['4,22','wizard'],['56,4','queen'],['0,0','dragon']]){
   const s={...fresh(),pos:oldPos,visited:[fresh().pos,oldPos],encounter};
   if(encounter==='dragon')s.dragon.discovered=true;
-  const result=load({getItem(){return JSON.stringify(s);}});assert.ok(result.writable);assert.equal(result.state.encounter,encounter);assert.ok(valid(result.state));assert.notEqual(result.state.pos,oldPos);
+  const result=load({getItem(){return JSON.stringify(s);}});assert.ok(result.writable);assert.equal(result.state.encounter,encounter==='dragon'?null:encounter);if(encounter==='dragon')assert.equal(result.state.gate,'dragon');assert.ok(valid(result.state));assert.notEqual(result.state.pos,oldPos);
  }
 });

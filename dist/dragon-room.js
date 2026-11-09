@@ -1,33 +1,29 @@
-import {createEndingAudio} from './ending-audio.js?v=6d789c038015';
-import {dragonGaugeFrame} from './dragon-warmup-model.js?v=6d789c038015';
-import {setupDragonWarmup} from './dragon-warmup.js?v=6d789c038015';
-import {getCharacterPose} from './character-art.js?v=6d789c038015';
-import {getRoomArt} from './room-art.js?v=6d789c038015';
-import {setupRoomControls} from './encounter-console.js?v=6d789c038015';
+import {playClosingScene} from './closing-scene.js?v=5847e2b65376';
+import {installDialogueLayout} from './dialogue-layout.js?v=5847e2b65376';
+import {DRAGON_OPENING} from './dialogue-copy.js?v=5847e2b65376';
+import {createImageLoader,recoverArtwork} from './image-loader.js?v=5847e2b65376';
+import {createEndingAudio} from './ending-audio.js?v=5847e2b65376';
+import {dragonGaugeFrame} from './dragon-warmup-model.js?v=5847e2b65376';
+import {setupDragonWarmup} from './dragon-warmup.js?v=5847e2b65376';
+import {getCharacterPose} from './character-art.js?v=5847e2b65376';
+import {getRoomArt} from './room-art.js?v=5847e2b65376';
+import {setupRoomControls} from './encounter-console.js?v=5847e2b65376';
+installDialogueLayout();
 
 const integrated=window.parent!==window;
 const notify=type=>{if(integrated)parent.postMessage({type:'dragon-room:'+type},location.origin);};
-const dialogue=[
-  [12,"WHO DARES ENTER MY CHAMBER?!?!"],
-  [11,"Another so-called challenger come to discover my true name? Know that you are one of many. All before you have fallen short."],
-  [7,"Perhaps you will be the one who finally is able to overcome my greatness. It will not be easy. Those pathetic guardians think they might have prepared you."],
-  [6,"Their skills are nothing compared to mine. You will need to take all you have practiced and put it to the test. Here you face consequences."],
-  [4,"You will need to attack, defend and think quickly. Every mistake will cost you. I'll track your progress on this gauge."],
-  [6,"If this ever falls to empty, you will have shown your unworthiness, and I will expel you back into the maze."],
-  [8,"However, I am fair. If you do well, you may find the level will rise. There is but one way to find out."],
-  [10,"Let's begin and see if you are truly worthy to know my name!!!"]
-];
-let dialogueIndex=0,artReady=false,roomImage,plaqueImage;
+const dialogue=DRAGON_OPENING;
+let dialogueIndex=0,artReady=false,roomImage,plaqueImage,closingStarted=false,roomMuted=false;
+window.addEventListener('message',event=>{if(event.source===parent&&event.origin===location.origin&&event.data?.type==='dragon-room:sound')roomMuted=event.data.muted;});
 const standaloneEnding=integrated?null:createEndingAudio(new Audio('./assets/audio/victory.wav'),new Audio('./assets/audio/ending.mp3'));
 const poseImages=new Map();
 let gaugeImage=null;
 const message=document.getElementById('message');
 const prompt=document.createElement('p');prompt.id='dialogue-continue';prompt.textContent='-Press Space Bar-';document.querySelector('.narrative').append(prompt);
-function loadImage(url){
-  return new Promise((resolve,reject)=>{
-    const image=new Image();image.onload=()=>resolve(image);image.onerror=reject;image.src=url;
-  });
-}
+const loadImage=createImageLoader();
+let loadingArt=false,poseRequest=0;
+const recoverArt=task=>recoverArtwork(task,{message});
+function artPause(active){loadingArt=active;window.dispatchEvent(new CustomEvent('encounter:pause',{detail:{reason:'art',active}}));}
 function showDialogue(){
   const [number,text]=dialogue[dialogueIndex];
   message.textContent=text;
@@ -36,6 +32,10 @@ function showDialogue(){
 }
 function showPose(number,spellColor=null,spellName=''){
   if(!artReady)return;
+  if(!poseImages.has(number)){
+   const token=++poseRequest;artPause(true);const saved=message.textContent;
+   recoverArt(()=>loadImage(getCharacterPose('dragon',number).url)).then(image=>{poseImages.set(number,image);if(token!==poseRequest)return;message.textContent=saved;showPose(number,spellColor,spellName);artPause(false);});return;
+  }
   const pose=getCharacterPose('dragon',number),canvas=document.getElementById('room'),ctx=canvas.getContext('2d');
   ctx.imageSmoothingEnabled=false;ctx.clearRect(0,0,470,200);
   ctx.drawImage(roomImage,0,0,470,200);
@@ -57,6 +57,7 @@ function showMeter(level){
   ctx.putImageData(pixels,0,0);
 }
 async function revealPrize(animate=true){
+ if(!plaqueImage){artPause(true);plaqueImage=await recoverArt(()=>loadImage('./assets/ending/chaz-golden-plaque.png'));artPause(false);}
  const canvas=document.getElementById('room'),ctx=canvas.getContext('2d'),pose=getCharacterPose('dragon',4);
  document.getElementById('dragon-gauge').hidden=true;
  function draw(alpha,plaque=0){
@@ -68,9 +69,10 @@ async function revealPrize(animate=true){
  if(animate&&!matchMedia('(prefers-reduced-motion: reduce)').matches){await fade(900,t=>draw(1-t));await fade(1400,t=>draw(0,t));}
  draw(0,1);canvas.setAttribute('aria-label','Golden plaque revealing the dragon’s true name: CHAZ');notify('prize');
  if(!integrated&&!animate)standaloneEnding.resume();
+ if(!closingStarted){closingStarted=true;document.body.classList.add('closing');playClosingScene({muted:roomMuted,stopMusic:()=>{if(integrated)notify('credits-finished');else standaloneEnding.stop();}});}
 }
 function advanceDialogue(){
-  if(!artReady||document.getElementById('room-menu').open)return;
+  if(!artReady||loadingArt||document.getElementById('room-menu').open)return;
   if(warmup.isActive()){warmup.strike();return;}
   if(dialogueIndex<dialogue.length-1){dialogueIndex++;showDialogue();}
   else warmup.start();
@@ -78,16 +80,22 @@ function advanceDialogue(){
 const warmup=setupDragonWarmup({showPose,message,prompt,action:advanceDialogue,onDefeat:()=>notify('banish'),onVictory:()=>{document.getElementById('dragon-gauge').hidden=true;if(integrated)notify('victory');else standaloneEnding.start();},onPrize:revealPrize,onMeter:showMeter,onMenu:()=>{if(integrated)notify('journal');}});
 if(integrated)setupRoomControls({notify,prefix:'dragon-room',onAction:advanceDialogue});
 showDialogue();
-Promise.all([
-  loadImage(getRoomArt('dragon').url).then(image=>{roomImage=image;}),
-  loadImage('./assets/ending/chaz-golden-plaque.png').then(image=>{plaqueImage=image;}),
-  ...Array.from({length:58},(_,i)=>i+1).map(async number=>{poseImages.set(number,await loadImage(getCharacterPose('dragon',number).url));}),
-  loadImage('./assets/ui/dragon-gauge-source.png').then(image=>{gaugeImage=image;showMeter(10);})
-]).then(()=>{artReady=true;const params=new URLSearchParams(location.search);
+recoverArt(()=>Promise.all([
+ loadImage(getRoomArt('dragon').url).then(image=>{roomImage=image;}),
+ loadImage(getCharacterPose('dragon',12).url).then(image=>poseImages.set(12,image)),
+ loadImage('./assets/ui/dragon-gauge-source.png').then(image=>{gaugeImage=image;showMeter(10);})
+])).then(()=>{
+ artReady=true;
+ // Optional prefetch cannot block the opening or make one unused pose fatal.
+ for(const number of [1,4,6,7,8,10,11,15,16,17,18,19,20,22,23,27,...Array.from({length:21},(_,i)=>i+38)]){
+  loadImage(getCharacterPose('dragon',number).url).then(image=>poseImages.set(number,image)).catch(()=>{});
+ }
+ const params=new URLSearchParams(location.search);
  if(params.get('ending')==='earned')warmup.showEarned();
- else if(params.get('playtest')==='ending')warmup.previewVictory();
+ else if(params.get('ending')==='victory'||params.get('playtest')==='ending')warmup.previewVictory();
  else if(params.get('playtest')==='final'){document.getElementById('dragon-gauge').hidden=false;warmup.previewFinal();}
- else showDialogue();}).catch(()=>{message.textContent='The room artwork could not load. Reload to try again.';});
+ else showDialogue();
+});
 
 // Draw the frame on a two-screen-pixel grid so its ornaments stay crisp on resize.
 function drawFrame(frame,canvas){

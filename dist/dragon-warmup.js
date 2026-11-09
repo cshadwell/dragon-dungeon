@@ -1,9 +1,10 @@
-import {drawDefenceArena,updateAttackRail,createColorChoices} from './guardian-games.js?v=6d789c038015';
-import {chooseDragonSpellPose} from './dragon-spell-poses.js?v=6d789c038015';
-import {DRAGON_ROUNDS,WARMUP,warmupProgress,chooseDragonReaction,freshDragonMeter,updateDragonMeter,makeFinalSchedule,finalProgress,finalDefenceAngle,makeFinalMindRound} from './dragon-warmup-model.js?v=6d789c038015';
-import {attackPosition,judgeAttack,targetForAttempt} from './ogre-attack-model.js?v=6d789c038015';
-import {freshDefence,spawnAttack,stepDefence,ORBIT} from './elf-defence-model.js?v=6d789c038015';
-import {makeRound,judge} from './wizard-mind-model.js?v=6d789c038015';
+import {installChallengePause} from './challenge-pause.js?v=5847e2b65376';
+import {drawDefenceArena,updateAttackRail,createColorChoices} from './guardian-games.js?v=5847e2b65376';
+import {chooseDragonSpellPose} from './dragon-spell-poses.js?v=5847e2b65376';
+import {DRAGON_ROUNDS,WARMUP,warmupProgress,chooseDragonReaction,freshDragonMeter,updateDragonMeter,makeFinalSchedule,finalProgress,finalDefenceAngle,makeFinalMindRound} from './dragon-warmup-model.js?v=5847e2b65376';
+import {attackPosition,judgeAttack,targetForAttempt} from './ogre-attack-model.js?v=5847e2b65376';
+import {freshDefence,spawnAttack,stepDefence,ORBIT} from './elf-defence-model.js?v=5847e2b65376';
+import {makeRound,judge} from './wizard-mind-model.js?v=5847e2b65376';
 export const SPELL_COLORS={red:'#ef454b',blue:'#3984ff',green:'#49d665',orange:'#ff8c22',purple:'#b669ee',white:'#ffffff',yellow:'#ffe040'};
 export function setupDragonWarmup({showPose,message,prompt,action,onMenu,onMeter,onDefeat,onVictory,onPrize}){
  const host=document.createElement('div');host.id='boss-game';host.hidden=true;
@@ -23,6 +24,7 @@ export function setupDragonWarmup({showPose,message,prompt,action,onMenu,onMeter
  let active=false,mode='cue',successes=0,attempt=0,elapsed=0,wait=1.2,last=null,round=null,defence=freshDefence(),left=false,right=false,paused=false,previousColor=null;
  const phase=()=>progress().phase;
  const held=new Set();
+ const suspension=installChallengePause(()=>{last=null;clearInput();});
  function clearInput(){held.clear();left=false;right=false;}
  function updateStatus(){const p=progress();status.textContent=p.complete?'WARM-UP COMPLETE':`${p.phase==='mind'?'FOCUS':p.phase.toUpperCase()} · ${p.hits} / ${p.goal}`;}
  function prepare(){
@@ -52,10 +54,10 @@ export function setupDragonWarmup({showPose,message,prompt,action,onMenu,onMeter
   }else showPose(phase()==='attack'?10:23);
   draw();
  }
- function result(ok,text){
+ function result(ok,text,perfect=false){
   mode='feedback';wait=roundIndex===2?(phase()==='defence'?(ok?0:.15):.25):phase()==='defence'?settings().defence.gap:1.2;
   if(ok)successes++;
-  meter=updateDragonMeter(meter,ok);onMeter(meter.level);
+  meter=updateDragonMeter(meter,ok?(perfect?'perfect':'hit'):'miss');onMeter(meter.level);
   if(meter.level===0){
    mode='defeated';paused=false;clearInput();rail.hidden=true;timer.hidden=true;host.hidden=true;canvas.hidden=true;choices.hidden=true;
    document.body.classList.remove('boss-playing');delete document.body.dataset.bossPhase;
@@ -66,6 +68,7 @@ export function setupDragonWarmup({showPose,message,prompt,action,onMenu,onMeter
   message.textContent='';showPose(chooseDragonReaction(ok));updateStatus();choices.querySelectorAll('button').forEach(b=>b.setAttribute('aria-disabled','true'));
  }
  function strike(){
+  if(suspension.paused)return;
   if(!active){action();return;}
   if(mode==='defeated'){mode='banishing';prompt.textContent='';onDefeat();return;}
   if(['banishing','prize-reveal','prize'].includes(mode))return;
@@ -76,9 +79,9 @@ export function setupDragonWarmup({showPose,message,prompt,action,onMenu,onMeter
   if(phase()==='defence'){paused=!paused;inputs.querySelector('#boss-action').textContent=paused?'RESUME':'SPACE BAR';return;}
   if(mode!=='active'||paused||phase()!=='attack')return;
   const verdict=judgeAttack(elapsed*1000,{...settings().attack,targetCenter:targetForAttempt(Math.max(0,attackAttempt-1))});
-  result(['hit','perfect'].includes(verdict.result),verdict.result==='perfect'?'Perfect strike!':verdict.result==='hit'?'A solid hit.':'You missed. Watch the next opening.');draw();
+  result(['hit','perfect'].includes(verdict.result),verdict.result==='perfect'?'Perfect strike!':verdict.result==='hit'?'A solid hit.':'You missed. Watch the next opening.',verdict.result==='perfect');draw();
  }
- function answer(word){if(active&&mode==='active'&&phase()==='mind'&&!paused){const ok=judge(round,word,elapsed)==='correct';result(ok,ok?'Spell countered. Stay focused.':'The spell fooled you. Try the next color.');}}
+ function answer(word){if(!suspension.paused&&active&&mode==='active'&&phase()==='mind'&&!paused){const ok=judge(round,word,elapsed)==='correct';result(ok,ok?'Spell countered. Stay focused.':'The spell fooled you. Try the next color.');}}
  function draw(){
   if(!active||['interlude','defeated','banishing','victory-first','victory-second','prize-reveal','prize'].includes(mode))return;
   if(host.dataset.phase==='attack'){
@@ -123,7 +126,7 @@ export function setupDragonWarmup({showPose,message,prompt,action,onMenu,onMeter
   b.onpointerup=b.onpointercancel=()=>{if(side==='left')left=false;else right=false;};
  }
  window.addEventListener('keydown',e=>{
-  if(!active||document.getElementById('room-menu').open)return;
+  if(!active||suspension.paused||document.getElementById('room-menu').open)return;
   if(['defeated','banishing'].includes(mode)&&e.code!=='Space'){e.preventDefault();return;}
   if(e.code==='Escape'){e.preventDefault();clearInput();onMenu();return;}
   if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.code))return;
@@ -134,7 +137,7 @@ export function setupDragonWarmup({showPose,message,prompt,action,onMenu,onMeter
  window.addEventListener('keyup',e=>held.delete(e.code));window.addEventListener('blur',clearInput);document.addEventListener('visibilitychange',clearInput);
  function tick(now){
   const dt=last===null?0:Math.min(.05,(now-last)/1000);last=now;
-  if(active&&!paused&&!document.hidden&&!document.getElementById('room-menu').open){
+  if(active&&!paused&&!suspension.paused&&!document.hidden&&!document.getElementById('room-menu').open){
    if(mode==='cue'||mode==='feedback'){
     wait-=dt;
     if(wait<=0){

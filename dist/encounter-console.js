@@ -9,9 +9,12 @@ export function setupRoomControls({notify,prefix,onAction=()=>{}}){
   controls.append(pad,toolbar);
   $('space-action').onclick=onAction;
   const menu=$('room-menu');
-  $('journal').onclick=()=>notify('journal');
+  const pause=active=>window.dispatchEvent(new CustomEvent('encounter:pause',{detail:{reason:'menu',active}}));
+  $('journal').onclick=()=>{pause(true);notify('journal');};
+  menu.addEventListener('close',()=>pause(false));
   $('dungeon-music-toggle').onclick=()=>notify('sound');
   $('reset').onclick=()=>{
+    pause(true);
     $('room-menu-title').textContent='Begin again?';
     $('room-menu-text').textContent='This replaces your saved expedition and training progress.';
     $('room-menu-confirm').hidden=false;menu.showModal();
@@ -31,5 +34,7 @@ export function setupRoomControls({notify,prefix,onAction=()=>{}}){
       $('dungeon-music-toggle').setAttribute('aria-pressed',String(!event.data.muted));
     }
   });
+  window.addEventListener('pointerdown',()=>notify('audio-gesture'),{capture:true});
+  window.addEventListener('keydown',()=>notify('audio-gesture'),{capture:true});
   notify('sound-status');
 }

@@ -17,3 +17,6 @@ test('late play promise cannot leak audio into a room or after cleanup',async()=
  const audio=fake();let finish;audio.play=()=>new Promise(resolve=>{finish=()=>{audio.paused=false;resolve();};});const music=createDungeonMusic(audio);music.setExploring(true);music.setExploring(false);finish();await flush();assert.equal(audio.paused,true);
  music.setExploring(true);music.dispose();finish();await flush();assert.equal(audio.paused,true);
 });
+test('browser interruption preserves position and mute; scene changes still restart',async()=>{
+ const a=fake(),p=createDungeonMusic(a);p.setExploring(true);await flush();a.currentTime=23;p.setSuspended(true);assert.ok(a.paused);assert.equal(a.currentTime,23);await p.retry();assert.ok(a.paused);p.setSuspended(false);await flush();assert.equal(a.currentTime,23);assert.ok(!a.paused);p.setMuted(true);p.setSuspended(true);p.setSuspended(false);await flush();assert.ok(a.paused);p.setExploring(false);assert.equal(a.currentTime,0);
+});

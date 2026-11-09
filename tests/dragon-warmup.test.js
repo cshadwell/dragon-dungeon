@@ -55,11 +55,12 @@ test('life meter drops once per miss, resets streaks, and stops at empty without
  for(let n=0;n<15;n++)meter=updateDragonMeter(meter,false);
  assert.deepEqual(meter,{level:0,streak:0});
 });
-test('each three consecutive correct results restore one level, including recovery from empty',()=>{
- let meter={level:0,streak:0};
- for(let n=1;n<=6;n++){meter=updateDragonMeter(meter,true);assert.equal(meter.level,Math.floor(n/3));}
- meter={level:9,streak:0};for(let n=0;n<9;n++)meter=updateDragonMeter(meter,true);
- assert.deepEqual(meter,{level:10,streak:0});
+test('only perfect strikes heal immediately; ordinary successes never heal and full life is capped',()=>{
+ let meter={level:7,streak:2};
+ for(let n=0;n<12;n++)meter=updateDragonMeter(meter,'hit');assert.deepEqual(meter,{level:7,streak:0});
+ meter=updateDragonMeter(meter,'perfect');assert.equal(meter.level,8);
+ meter=updateDragonMeter(meter,'miss');assert.equal(meter.level,7);
+ for(let n=0;n<8;n++)meter=updateDragonMeter(meter,'perfect');assert.equal(meter.level,10);
 });
 test('eleven gauge frames span level zero through full without reversing or repeating frames',()=>{
  const frames=Array.from({length:11},(_,n)=>dragonGaugeFrame(n));

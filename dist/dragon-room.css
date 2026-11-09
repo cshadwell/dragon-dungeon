@@ -126,3 +126,10 @@
 
 .dragon-intro[data-boss-round="2"] .guardian-choices .color-word { text-shadow:2px 0 #080708,-2px 0 #080708,0 2px #080708,0 -2px #080708; }
 .dragon-intro[data-boss-round="2"] .guardian-choices .direction {text-shadow:1px 1px #000,-1px -1px #000;}
+
+/* Keep the boss dialogue pane identical to the guardian/maze story pane. */
+@media (min-width: 651px) and (min-height: 500px) {
+ .dragon-intro main { grid-template-rows: minmax(0,1fr) var(--story-row); }
+ .dragon-intro[data-boss-phase="attack"] main,
+ .dragon-intro[data-boss-phase="defence"] main { grid-template-rows: minmax(0,1fr) 64px var(--story-row); }
+}

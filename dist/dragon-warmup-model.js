@@ -1,6 +1,6 @@
-import {PRACTICE_NEXT} from './ogre-attack-model.js?v=6d789c038015';
-import {DEFENCE_DEFAULTS,DEFENCE_STAGES} from './elf-defence-model.js?v=6d789c038015';
-import {STAGES,shuffle,makeRound,COLORS} from './wizard-mind-model.js?v=6d789c038015';
+import {PRACTICE_NEXT} from './ogre-attack-model.js?v=5847e2b65376';
+import {DEFENCE_DEFAULTS,DEFENCE_STAGES} from './elf-defence-model.js?v=5847e2b65376';
+import {STAGES,shuffle,makeRound,COLORS} from './wizard-mind-model.js?v=5847e2b65376';
 export const DRAGON_ROUNDS=Object.freeze([
  Object.freeze({goals:Object.freeze([4,6,5]),attack:PRACTICE_NEXT,defence:Object.freeze({...DEFENCE_DEFAULTS,...DEFENCE_STAGES[1]}),mind:STAGES[1],mindStage:1}),
  Object.freeze({goals:Object.freeze([5,8,6]),attack:Object.freeze({passMs:1000,targetWidth:.10}),defence:Object.freeze({...DEFENCE_DEFAULTS,...DEFENCE_STAGES[2]}),mind:STAGES[2],mindStage:2}),
@@ -17,10 +17,9 @@ export function warmupProgress(successes,roundIndex=0){
 export const DRAGON_REACTIONS=Object.freeze({hit:Object.freeze([16,18,19]),miss:Object.freeze([15,6,20])});
 export function chooseDragonReaction(correct,random=Math.random){const poses=DRAGON_REACTIONS[correct?'hit':'miss'];return poses[Math.floor(random()*poses.length)];}
 export function freshDragonMeter(){return {level:10,streak:0};}
-export function updateDragonMeter(meter,correct){
- if(!correct)return {level:Math.max(0,meter.level-1),streak:0};
- const streak=meter.streak+1;
- return {level:Math.min(10,meter.level+(streak===3?1:0)),streak:streak===3?0:streak};
+export function updateDragonMeter(meter,outcome){
+ const miss=outcome===false||outcome==='miss';
+ return {level:Math.max(0,Math.min(10,meter.level+(miss?-1:outcome==='perfect'?1:0))),streak:0};
 }
 // Full10 through empty0 now uses every supplied illustration.
 export function dragonGaugeFrame(level){return 10-Math.max(0,Math.min(10,level));}

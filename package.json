@@ -3,7 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test",
-    "start": "python3 tools/stamp-release.py && python3 tools/serve.py"
+    "test": "node --test tests/*.test.js",
+    "start": "python3 tools/stamp-release.py && python3 tools/serve.py",
+    "test:browser": "playwright test",
+    "package": "python3 tools/package-release.py"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0"
   }
 }

@@ -1,7 +1,7 @@
-import {dragonSpellPoses} from './dragon-spell-art-data.js?v=6d789c038015';
+import {dragonSpellPoses} from './dragon-spell-art-data.js?v=5847e2b65376';
 // Stable character pose lookup. See CHARACTER_ART.md before changing this library.
-import {characterPoseData} from './character-pose-data.js?v=6d789c038015';
-import {wizardSpellPoses} from './wizard-spell-art-data.js?v=6d789c038015';
+import {characterPoseData} from './character-pose-data.js?v=5847e2b65376';
+import {wizardSpellPoses} from './wizard-spell-art-data.js?v=5847e2b65376';
 export const CHARACTER_POSE_COUNTS=Object.freeze({...characterPoseData.counts,wizard:34,dragon:58});
 const names={'elf queen':'elf','elf-queen':'elf','elf_queen':'elf'};
 const poses=[...characterPoseData.poses,...wizardSpellPoses,...dragonSpellPoses].map(p=>Object.freeze({...p,bounds:Object.freeze([...p.bounds]),url:new URL('assets/characters/approved-v2/'+p.file,import.meta.url).href}));
