@@ -30,7 +30,7 @@ test('Ogre timer freezes while Journal is open and resumes when closed',async({p
  await page.getByRole('button',{name:'Open the door and enter',exact:true}).click();const frame=page.frameLocator('#ogre-attack-encounter');
  await expect(frame.locator('#message')).toContainText('Greetings friend');await expect(page.locator('#door-fade')).not.toBeVisible({timeout:15000});
  await frame.locator('#space-action').focus();for(let i=0;i<6;i++)await page.keyboard.press('Space');
- await frame.getByRole('button',{name:'JOURNAL',exact:true}).click();await expect(frame.locator('#room-menu')).toBeVisible();
+ await frame.locator('#journal').click();await expect(frame.locator('#room-menu')).toBeVisible();
  const before=await frame.locator('#pass').textContent();await page.waitForTimeout(5500);await expect(frame.locator('#pass')).toHaveText(before);
  await frame.getByRole('button',{name:'Close',exact:true}).click();await expect.poll(()=>frame.locator('#pass').textContent()).not.toBe(before);
 });
