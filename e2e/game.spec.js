@@ -1,6 +1,8 @@
 import {test,expect} from '@playwright/test';
 import {fresh,DRAGON} from '../dist/runtime.js';
 async function approachDoor(page){
+ await expect(page.locator('body')).not.toHaveClass(/title-open/);
+ await page.waitForTimeout(230); // First input also observes the boot-time cooldown.
  // Review starts two tiles before the trigger. Wait for each actual movement,
  // then respect the game's input cooldown before taking the next step.
  for(let i=0;i<2;i++){
