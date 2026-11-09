@@ -14,7 +14,7 @@ test('incomplete expedition cannot open the dragon gate',async({page})=>{
  await expect(page.getByRole('button',{name:'Open the door and enter'})).toHaveCount(0);await page.getByRole('button',{name:'Stay in the maze',exact:true}).click();await expect(page.locator('#modal')).not.toBeVisible();
 });
 test('Ogre timer freezes while Journal is open and resumes when closed',async({page})=>{
- await page.goto('/?preview=doors&door=ogre');await page.keyboard.down('ArrowUp');await page.waitForTimeout(850);await page.keyboard.up('ArrowUp');
+ await page.goto('/?preview=doors&door=ogre');await page.getByRole('button',{name:'Move forward',exact:true}).click();
  await page.getByRole('button',{name:'Open the door and enter',exact:true}).click();const frame=page.frameLocator('#ogre-attack-encounter');
  await expect(frame.locator('#message')).toContainText('Greetings friend');await expect(page.locator('#door-fade')).not.toBeVisible({timeout:15000});
  await frame.locator('#space-action').focus();for(let i=0;i<6;i++)await page.keyboard.press('Space');
@@ -28,7 +28,7 @@ test('saved victory resumes reveal dialogue rather than replaying the boss',asyn
  const frame=page.frameLocator('#dragon-room-encounter');await expect(frame.locator('#message')).toContainText('DEFEAT!');await frame.locator('#space-action').click();await expect(frame.locator('#message')).toContainText('worthy to know my true name');await frame.locator('#space-action').click();await expect(frame.locator('#room')).toHaveAttribute('aria-label',/Golden plaque/);await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('dragon-dungeon-maze-adventure-v1')).dragon.prizeRevealed)).toBe(true);
 });
 test('largest dialogue stays centered, same-size and scroll-free across viewport sizes',async({page})=>{
- await page.setViewportSize({width:1440,height:900});await page.goto('/?preview=doors&door=wizard');await page.keyboard.down('ArrowUp');await page.waitForTimeout(850);await page.keyboard.up('ArrowUp');await page.getByRole('button',{name:'Open the door and enter',exact:true}).click();
+ await page.setViewportSize({width:1440,height:900});await page.goto('/?preview=doors&door=wizard');await page.getByRole('button',{name:'Move forward',exact:true}).click();await page.getByRole('button',{name:'Open the door and enter',exact:true}).click();
  const frame=page.frameLocator('#wizard-mind-encounter');await expect(page.locator('#door-fade')).not.toBeVisible({timeout:15000});await expect(frame.locator('#message')).toContainText('Salutations');await frame.locator('#space-action').focus();for(let i=0;i<3;i++)await page.keyboard.press('Space');await expect(frame.locator('#message')).toContainText('Observe this spell');
  for(const size of [{width:1440,height:900},{width:1280,height:720},{width:1024,height:600},{width:390,height:844}]){
   await page.setViewportSize(size);await expect.poll(async()=>await frame.locator('html').getAttribute('data-dialogue-size')===await page.locator('html').getAttribute('data-dialogue-size')).toBe(true);
@@ -40,7 +40,7 @@ test('largest dialogue stays centered, same-size and scroll-free across viewport
 
 test('earned name runs closing credits and resolves X-13 after static',async({page})=>{
  test.setTimeout(90000);
- const state=fresh();state.pos=DRAGON;state.encounter='dragon';state.dragon={...state.dragon,victory:true,name:'CHAZ',prizeRevealed:true};
+ const state=fresh();state.pos=DRAGON;state.visited.push(DRAGON);state.encounter='dragon';state.dragon={phase:'victory',discovered:true,victory:true,trialCompleted:true,name:'CHAZ',placeholder:false,prizeRevealed:true,returnTo:null,feedback:''};
  await page.addInitScript(s=>localStorage.setItem('dragon-dungeon-maze-adventure-v1',JSON.stringify(s)),state);await page.goto('/?preview=audit');
  const frame=page.frameLocator('#dragon-room-encounter');await expect(frame.locator('.closing-scene')).toBeVisible();await expect(frame.locator('#room')).toHaveAttribute('aria-label',/Golden plaque/);
  await expect(frame.locator('.closing-signal')).toBeVisible({timeout:70000});await expect(frame.locator('.closing-signal')).not.toHaveClass(/flickering/,{timeout:15000});await expect(page.locator('#ending-music')).toHaveJSProperty('paused',true);
