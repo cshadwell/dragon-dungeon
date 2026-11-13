@@ -1,4 +1,4 @@
-import {STORY_SAMPLES,DOOR_DESCRIPTIONS,GUARDIAN_WARNING,JOURNAL_SAMPLE} from './dialogue-copy.js?v=6f08161e9101';
+import {STORY_SAMPLES,DOOR_DESCRIPTIONS,GUARDIAN_WARNING,JOURNAL_SAMPLE} from './dialogue-copy.js?v=a06f70034131';
 export function largestFittingFont(maximum,fits){
  let lo=10,hi=Math.floor(maximum),best=10;
  while(lo<=hi){const size=Math.floor((lo+hi)/2);if(fits(size)){best=size;lo=size+1;}else hi=size-1;}

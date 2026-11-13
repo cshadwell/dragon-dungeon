@@ -1,14 +1,14 @@
-import {GUARDIAN_WARNING,MAZE_INTRO} from './dialogue-copy.js?v=6f08161e9101';
-import {freshDragon,NAME_CONFIG} from './dragon.js?v=6f08161e9101';
-import {MIND_GOAL} from './wizard-mind-model.js?v=6f08161e9101';
-import {DEFENCE_GOAL} from './elf-defence-model.js?v=6f08161e9101';
-import {LENS,wizardNotes} from './wizard.js?v=6f08161e9101';
-import {SEAL,queenNotes} from './queen.js?v=6f08161e9101';
-import {SHIELD,notes} from './ogre.js?v=6f08161e9101';
-import {mazeHint} from './maze-hints.js?v=6f08161e9101';
+import {GUARDIAN_WARNING,MAZE_INTRO} from './dialogue-copy.js?v=a06f70034131';
+import {freshDragon,NAME_CONFIG} from './dragon.js?v=a06f70034131';
+import {MIND_GOAL} from './wizard-mind-model.js?v=a06f70034131';
+import {DEFENCE_GOAL} from './elf-defence-model.js?v=a06f70034131';
+import {LENS,wizardNotes} from './wizard.js?v=a06f70034131';
+import {SEAL,queenNotes} from './queen.js?v=a06f70034131';
+import {SHIELD,notes} from './ogre.js?v=a06f70034131';
+import {mazeHint} from './maze-hints.js?v=a06f70034131';
 // Supplied maze + user-approved encounter locations. The small prototype remains intact.
-import * as adventure from './engine.js?v=6f08161e9101';
-import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=6f08161e9101';
+import * as adventure from './engine.js?v=a06f70034131';
+import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=a06f70034131';
 export const MAZE_ONLY=false;
 export const WORLD_WIDTH=MAZE_WIDTH,WORLD_HEIGHT=MAZE_HEIGHT;
 export const START=MAZE_START,ENCOUNTER='35,30',WIZARD='3,22',QUEEN='55,4',DRAGON='0,1',DIRS=adventure.DIRS;
@@ -36,7 +36,7 @@ export function completeDragon(state,revealed=false){
  next.dragon={...next.dragon,phase:'victory',discovered:true,victory:true,trialCompleted:true,name:NAME_CONFIG.name,placeholder:false,prizeRevealed:revealed||next.dragon.prizeRevealed===true,returnTo:null,feedback:''};
  next.dragonReturn=false;next.message='The dragon’s true name is '+NAME_CONFIG.name+'.';return next;
 }
-export function fresh(){return {...adventure.fresh(),content:WORLD.CONTENT,dragonReturn:false,gate:null,pos:START,checkpoint:START,facing:0,visited:[START],message:MAZE_INTRO};}
+export function fresh(){return {...adventure.fresh(),content:WORLD.CONTENT,dragonReturn:false,musicalPassageUnlocked:false,gate:null,pos:START,checkpoint:START,facing:0,visited:[START],message:MAZE_INTRO};}
 export function act(s,a){
  if(!guardiansReady(s)&&!s.dragon.victory&&((s.gate==='dragon'&&a==='gate-enter')||(s.pos===START&&a==='dragon-shortcut')))return {...structuredClone(s),message:GUARDIAN_WARNING};
  if(s.pos===WIZARD&&s.encounter==='wizard'&&(a==='mind-complete'||/^mind-progress-(?:[0-9]|1[0-2])$/.test(a))){
@@ -80,11 +80,11 @@ export function act(s,a){
  if(!s.encounter&&['forward','back'].includes(a)&&next.pos!==s.pos&&Object.values(entries).includes(next.pos)){next.encounter=null;next.gate=Object.keys(entries).find(k=>entries[k]===next.pos);next.message='You stand in front of a door in the passage.';}
  return next;
 }
-export const valid=s=>adventure.valid(s,WORLD)&&([undefined,false,true].includes(s.dragonReturn))&&(s.wizard.mindCorrect===undefined||(Number.isInteger(s.wizard.mindCorrect)&&s.wizard.mindCorrect>=0&&s.wizard.mindCorrect<=MIND_GOAL))&&(s.queen.defenceBlocks===undefined||(Number.isInteger(s.queen.defenceBlocks)&&s.queen.defenceBlocks>=0&&s.queen.defenceBlocks<=DEFENCE_GOAL))&&(s.ogre.attackPractice===undefined||(Number.isInteger(s.ogre.attackPractice)&&s.ogre.attackPractice>=0&&s.ogre.attackPractice<=2))&&([undefined,null].includes(s.gate)||(['ogre','wizard','queen','dragon'].includes(s.gate)&&s.pos===({ogre:ENCOUNTER,wizard:WIZARD,queen:QUEEN,dragon:DRAGON}[s.gate])&&s.encounter===null));
+export const valid=s=>adventure.valid(s,WORLD)&&([undefined,false,true].includes(s.musicalPassageUnlocked))&&([undefined,false,true].includes(s.dragonReturn))&&(s.wizard.mindCorrect===undefined||(Number.isInteger(s.wizard.mindCorrect)&&s.wizard.mindCorrect>=0&&s.wizard.mindCorrect<=MIND_GOAL))&&(s.queen.defenceBlocks===undefined||(Number.isInteger(s.queen.defenceBlocks)&&s.queen.defenceBlocks>=0&&s.queen.defenceBlocks<=DEFENCE_GOAL))&&(s.ogre.attackPractice===undefined||(Number.isInteger(s.ogre.attackPractice)&&s.ogre.attackPractice>=0&&s.ogre.attackPractice<=2))&&([undefined,null].includes(s.gate)||(['ogre','wizard','queen','dragon'].includes(s.gate)&&s.pos===({ogre:ENCOUNTER,wizard:WIZARD,queen:QUEEN,dragon:DRAGON}[s.gate])&&s.encounter===null));
 function explorationValid(s){return s&&s.content==='maze-image-1'&&cells.has(s.pos)&&Number.isInteger(s.facing)&&s.facing>=0&&s.facing<4&&Array.isArray(s.visited)&&s.visited.every(p=>cells.has(p))&&s.visited.includes(s.pos)&&s.visited.includes(START);}
 export function load(storage){try{
  const raw=storage.getItem(SAVE_KEY);
- if(raw!==null){try{let s=JSON.parse(raw);if(s.dragon?.victory&&s.dragon.placeholder===true&&s.dragon.name==='TEST')s.dragon={...s.dragon,name:NAME_CONFIG.name,placeholder:false};if(s.pos==='35,29'&&(s.gate==='ogre'||(s.encounter&&!['wizard','queen','dragon'].includes(s.encounter)))&&adventure.valid(s,{...WORLD,ENCOUNTER:'35,29'})){s={...s,pos:ENCOUNTER,visited:[...new Set([...s.visited,ENCOUNTER])]};}if(['4,22','56,4','0,0'].includes(s.pos)){const oldWorld={...WORLD,WIZARD:'4,22',QUEEN:'56,4',DRAGON:'0,0'};if(adventure.valid(s,oldWorld)){s={...s,pos:({'4,22':WIZARD,'56,4':QUEEN,'0,0':DRAGON}[s.pos])};s.visited=[...new Set([...s.visited,s.pos])];}}if(s.dragon?.discovered&&s.visited?.includes('0,0')&&!s.visited.includes(DRAGON))s={...s,visited:[...s.visited,DRAGON]};if(s.encounter==='dragon'&&!s.dragon.victory&&!guardiansReady(s))s={...s,encounter:null,gate:'dragon',message:GUARDIAN_WARNING};if(valid(s))return {state:{...s,gate:s.gate??null},writable:true,notice:'Maze adventure restored. Earlier saves kept separate.'};}catch{}return {state:fresh(),writable:false,notice:'Unreadable adventure save preserved. New game can replace it.'};}
+ if(raw!==null){try{let s=JSON.parse(raw);if(s.dragon?.victory&&s.dragon.placeholder===true&&s.dragon.name==='TEST')s.dragon={...s.dragon,name:NAME_CONFIG.name,placeholder:false};if(s.pos==='35,29'&&(s.gate==='ogre'||(s.encounter&&!['wizard','queen','dragon'].includes(s.encounter)))&&adventure.valid(s,{...WORLD,ENCOUNTER:'35,29'})){s={...s,pos:ENCOUNTER,visited:[...new Set([...s.visited,ENCOUNTER])]};}if(['4,22','56,4','0,0'].includes(s.pos)){const oldWorld={...WORLD,WIZARD:'4,22',QUEEN:'56,4',DRAGON:'0,0'};if(adventure.valid(s,oldWorld)){s={...s,pos:({'4,22':WIZARD,'56,4':QUEEN,'0,0':DRAGON}[s.pos])};s.visited=[...new Set([...s.visited,s.pos])];}}if(s.dragon?.discovered&&s.visited?.includes('0,0')&&!s.visited.includes(DRAGON))s={...s,visited:[...s.visited,DRAGON]};if(s.encounter==='dragon'&&!s.dragon.victory&&!guardiansReady(s))s={...s,encounter:null,gate:'dragon',message:GUARDIAN_WARNING};if(valid(s))return {state:{...s,musicalPassageUnlocked:s.musicalPassageUnlocked??false,gate:s.gate??null},writable:true,notice:'Maze adventure restored. Earlier saves kept separate.'};}catch{}return {state:fresh(),writable:false,notice:'Unreadable adventure save preserved. New game can replace it.'};}
  const previous=storage.getItem(EXPLORATION_KEY);
  if(previous){try{const old=JSON.parse(previous);if(explorationValid(old)){
    let s={...fresh(),pos:old.pos,facing:old.facing,visited:[...new Set(old.visited)],message:'Your explored paths are retained. The four marked encounters are now active; this maze has fresh encounter progress.'};

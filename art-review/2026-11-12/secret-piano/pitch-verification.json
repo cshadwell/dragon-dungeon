@@ -1,0 +1,227 @@
+[
+  {
+    "id": "white-01",
+    "measuredHz": 175.097,
+    "recordedMidi": 53,
+    "midi": 48,
+    "pitch": "C3",
+    "rate": 0.7470887204364474,
+    "relativeFundamental": 0.09549
+  },
+  {
+    "id": "black-01",
+    "measuredHz": 185.473,
+    "recordedMidi": 54,
+    "midi": 49,
+    "pitch": "C#3",
+    "rate": 0.747232277727121,
+    "relativeFundamental": 0.09117
+  },
+  {
+    "id": "white-02",
+    "measuredHz": 196.516,
+    "recordedMidi": 55,
+    "midi": 50,
+    "pitch": "D3",
+    "rate": 0.7471796546580257,
+    "relativeFundamental": 0.10932
+  },
+  {
+    "id": "black-02",
+    "measuredHz": 208.165,
+    "recordedMidi": 56,
+    "midi": 51,
+    "pitch": "D#3",
+    "rate": 0.7473088786163405,
+    "relativeFundamental": 0.09567
+  },
+  {
+    "id": "white-03",
+    "measuredHz": 220.544,
+    "recordedMidi": 57,
+    "midi": 52,
+    "pitch": "E3",
+    "rate": 0.7473055432404119,
+    "relativeFundamental": 0.10447
+  },
+  {
+    "id": "white-04",
+    "measuredHz": 233.639,
+    "recordedMidi": 58,
+    "midi": 53,
+    "pitch": "F3",
+    "rate": 0.7473674087547485,
+    "relativeFundamental": 0.10216
+  },
+  {
+    "id": "black-03",
+    "measuredHz": 247.531,
+    "recordedMidi": 59,
+    "midi": 54,
+    "pitch": "F#3",
+    "rate": 0.7473689480893398,
+    "relativeFundamental": 0.11485
+  },
+  {
+    "id": "white-05",
+    "measuredHz": 262.236,
+    "recordedMidi": 60,
+    "midi": 55,
+    "pitch": "G3",
+    "rate": 0.747410756390652,
+    "relativeFundamental": 0.12272
+  },
+  {
+    "id": "black-04",
+    "measuredHz": 277.181,
+    "recordedMidi": 61,
+    "midi": 56,
+    "pitch": "G#3",
+    "rate": 0.7491575639891597,
+    "relativeFundamental": 0.06447
+  },
+  {
+    "id": "white-06",
+    "measuredHz": 293.636,
+    "recordedMidi": 62,
+    "midi": 57,
+    "pitch": "A3",
+    "rate": 0.749226249712437,
+    "relativeFundamental": 0.06971
+  },
+  {
+    "id": "black-05",
+    "measuredHz": 311.837,
+    "recordedMidi": 63,
+    "midi": 58,
+    "pitch": "A#3",
+    "rate": 0.7474480921763473,
+    "relativeFundamental": 0.13921
+  },
+  {
+    "id": "white-07",
+    "measuredHz": 330.401,
+    "recordedMidi": 64,
+    "midi": 59,
+    "pitch": "B3",
+    "rate": 0.7474009367043655,
+    "relativeFundamental": 0.13638
+  },
+  {
+    "id": "white-08",
+    "measuredHz": 350.034,
+    "recordedMidi": 65,
+    "midi": 60,
+    "pitch": "C4",
+    "rate": 0.7474285089323442,
+    "relativeFundamental": 0.16594
+  },
+  {
+    "id": "black-06",
+    "measuredHz": 370.515,
+    "recordedMidi": 66,
+    "midi": 61,
+    "pitch": "C#4",
+    "rate": 0.74810001590687,
+    "relativeFundamental": 0.09444
+  },
+  {
+    "id": "white-09",
+    "measuredHz": 392.638,
+    "recordedMidi": 67,
+    "midi": 62,
+    "pitch": "D4",
+    "rate": 0.7479280507824317,
+    "relativeFundamental": 0.10131
+  },
+  {
+    "id": "black-07",
+    "measuredHz": 414.373,
+    "recordedMidi": 68,
+    "midi": 63,
+    "pitch": "D#4",
+    "rate": 0.7508377025326695,
+    "relativeFundamental": 0.07846
+  },
+  {
+    "id": "white-10",
+    "measuredHz": 441.761,
+    "recordedMidi": 69,
+    "midi": 64,
+    "pitch": "E4",
+    "rate": 0.7461675982536681,
+    "relativeFundamental": 0.04377
+  },
+  {
+    "id": "white-11",
+    "measuredHz": 468.001,
+    "recordedMidi": 70,
+    "midi": 65,
+    "pitch": "F4",
+    "rate": 0.7462124183878613,
+    "relativeFundamental": 0.04465
+  },
+  {
+    "id": "black-08",
+    "measuredHz": 490.699,
+    "recordedMidi": 71,
+    "midi": 66,
+    "pitch": "F#4",
+    "rate": 0.754015345288568,
+    "relativeFundamental": 0.00947
+  },
+  {
+    "id": "white-12",
+    "measuredHz": 519.853,
+    "recordedMidi": 72,
+    "midi": 67,
+    "pitch": "G4",
+    "rate": 0.7540511970333693,
+    "relativeFundamental": 0.00665
+  },
+  {
+    "id": "black-09",
+    "measuredHz": 552.42,
+    "recordedMidi": 73,
+    "midi": 68,
+    "pitch": "G#4",
+    "rate": 0.751791041299536,
+    "relativeFundamental": 0.35772
+  },
+  {
+    "id": "white-13",
+    "measuredHz": 584.902,
+    "recordedMidi": 74,
+    "midi": 69,
+    "pitch": "A4",
+    "rate": 0.752262335886601,
+    "relativeFundamental": 0.15106
+  },
+  {
+    "id": "black-10",
+    "measuredHz": 619.797,
+    "recordedMidi": 75,
+    "midi": 70,
+    "pitch": "A#4",
+    "rate": 0.7521234395303009,
+    "relativeFundamental": 0.12537
+  },
+  {
+    "id": "white-14",
+    "measuredHz": 658.453,
+    "recordedMidi": 76,
+    "midi": 71,
+    "pitch": "B4",
+    "rate": 0.7500661124488825,
+    "relativeFundamental": 0.12938
+  },
+  {
+    "id": "white-15",
+    "measuredHz": 697.681,
+    "recordedMidi": 77,
+    "midi": 72,
+    "pitch": "C5",
+    "rate": 0.7499866295028432,
+    "relativeFundamental": 0.15912
+  }
+]

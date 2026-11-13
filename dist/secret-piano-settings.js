@@ -1,0 +1,2 @@
+// Exact geometry/volume from the supplied working piano.
+export const PIANO_SETTINGS={"blackKeysEnabled":true,"recordedNotes":25,"volume":0.85,"whiteEdges":[57,197,339,479,617,756,893,1029,1165,1304,1438,1574,1712,1853,1992,2116],"blackBounds":[[143,242],[298,399],[558,657],[706,804],[854,954],[1107,1206],[1261,1361],[1514,1613],[1665,1765],[1816,1915]],"artworkWidth":2172,"artworkHeight":724,"keyTop":66,"whiteBottom":674,"blackBottom":440};

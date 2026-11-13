@@ -191,3 +191,20 @@ After the CHAZ plaque reveal, keep the upper frame and exact plaque visible. Fad
 
 ## 2026-11-09 — Approved audio entry integrated
 User verified the standalone entry in three browsers and approved integration. Initial black screen now asks Press Space Bar or tap to begin. The gesture starts non-looping title music directly at40% before awaiting title art readiness, then reveals the unchanged animated title. Title Play/Mute button removed; in-game sound control retained. Second Space/click enters the existing prologue/dungeon sequence. Includes blocked-audio retry/silent fallback and visibility resume. Initial title is hidden in HTML to avoid a premature visual flash. No adventure storage read/write until entering the game, as before. Added Space/click browser coverage and generalized main-page stylesheet/module cache stamping so the new stylesheet shares the release ID.137local tests pass; final GitHub browser/deploy result recorded in workflow. Standalone audio preview excluded from release package.
+
+
+2026-11-13: Secret piano entrance uses supplied gold/black eye and rumble; stone wall splits vertically into black, then isolated footsteps and piano fade-in. Normal doors and existing progress remain unchanged. Local review only.
+
+
+2026-11-13: User approved recessed-eye preview and authorized integration/testing. Use the approved inset with original procedural corridor around it; preserve native pixel resolution and split the complete stone mechanism with the existing opening panels. Local only.
+
+
+2026-11-13: User requested an instruction-free black upper window with only the piano below. Seven notes now automatically check after the final note ends; wrong entry opens exact feedback and Retry/Return choices. Supersedes the prior explicit-submit/progress UI. Preserve previously unlocked studio access.
+
+
+## 2026-11-13 — Two octaves and candle success sequence (local only)
+Accept either complete E3–B3–A3–G3–E3–C4–B3 or E4–B4–A4–G4–E4–C5–B4 sequence; mixed octaves and longer/random fragments do not unlock. After the seventh note finishes, persist the existing unlock flag and play the supplied correct.mp3 through the piano's unlocked audio context. Seven transparent animated candles appear left to right at recording offsets 0, 0.5, 1, 1.5, 2, 2.5 and 3 seconds, in the user's staggered vertical pattern. Hold all seven for three seconds after the four-second recording finishes, then use the existing two-second fade and same-tab finale navigation. Input and repeated navigation are guarded throughout. Closing cancels audio/animation; visibility pauses the sequence. Reduced motion uses a still candle.
+
+Use the supplied APNG, retaining all 121 frames and transparency, cropped to its shared alpha bounds and nearest-neighbor reduced to 80×130. Original files remain unchanged. Preparation and hashes: tools/prepare-secret-candle.py and art-review/2026-11-13/candle-celebration/asset-record.json. No runtime WebM dependency. The chamber remains blank before success; wrong-attempt behavior is unchanged.
+
+Validation: 157 automated tests pass; 186 Pages asset references pass. Safari manually verified the lower-octave success, seven candles in the supplied arrangement, and same-tab arrival at The Maker's Last Echo entry screen. Both complete octaves, rejection of mixed octaves, candle/audio clock timing, hold duration and cancellation have automated coverage. Physical touch and other browsers remain unverified manually for this addition. No push or publication.

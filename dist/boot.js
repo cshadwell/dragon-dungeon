@@ -1,7 +1,7 @@
-import {installDialogueLayout} from './dialogue-layout.js?v=6f08161e9101';
-import {createScreenFade} from './screen-fade.js?v=6f08161e9101';
-import {playOpeningScene} from './opening-scene.js?v=6f08161e9101';
-import {animateTitle} from './title-effects.js?v=6f08161e9101';
+import {installDialogueLayout} from './dialogue-layout.js?v=a06f70034131';
+import {createScreenFade} from './screen-fade.js?v=a06f70034131';
+import {playOpeningScene} from './opening-scene.js?v=a06f70034131';
+import {animateTitle} from './title-effects.js?v=a06f70034131';
 installDialogueLayout();
 // Title view precedes app initialization: opening it never loads or writes a save.
 const title=document.getElementById('title-screen'),enter=document.getElementById('title-enter');
@@ -25,7 +25,7 @@ async function start(){
    await opening;openingComplete=true;
    window.addEventListener('keydown',titleKeys,true);
   }
-  await import('./app.js?v=6f08161e9101');
+  await import('./app.js?v=a06f70034131');
   document.body.classList.remove('title-open');title.remove();
   if(fade)await fade.reveal();
   document.body.classList.remove('boot-transition');

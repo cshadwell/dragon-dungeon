@@ -24,7 +24,8 @@ test('incomplete expedition cannot open the dragon gate',async({page})=>{
  const state=fresh();state.pos=DRAGON;state.visited.push(DRAGON);state.dragon.discovered=true;state.gate='dragon';
  await page.addInitScript(s=>localStorage.setItem('dragon-dungeon-maze-adventure-v1',JSON.stringify(s)),state);
  await page.goto('/?preview=audit');await expect(page.locator('#door-intro')).toContainText('You are NOT prepared.');
- await expect(page.getByRole('button',{name:'Open the door and enter'})).toHaveCount(0);await page.getByRole('button',{name:'Stay in the maze',exact:true}).click();await expect(page.locator('#modal')).not.toBeVisible();
+ await expect(page.getByRole('button',{name:'Open the door and enter'})).toHaveCount(0);await page.waitForTimeout(230); // Respect the same initial input cooldown as movement tests.
+ await page.getByRole('button',{name:'Stay in the maze',exact:true}).click();await expect(page.locator('#modal')).not.toBeVisible();
 });
 test('Ogre timer freezes while Journal is open and resumes when closed',async({page})=>{
  await page.goto('/?preview=doors&door=ogre');await approachDoor(page);

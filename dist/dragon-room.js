@@ -1,13 +1,13 @@
-import {playClosingScene} from './closing-scene.js?v=6f08161e9101';
-import {installDialogueLayout} from './dialogue-layout.js?v=6f08161e9101';
-import {DRAGON_OPENING} from './dialogue-copy.js?v=6f08161e9101';
-import {createImageLoader,recoverArtwork} from './image-loader.js?v=6f08161e9101';
-import {createEndingAudio} from './ending-audio.js?v=6f08161e9101';
-import {dragonGaugeFrame} from './dragon-warmup-model.js?v=6f08161e9101';
-import {setupDragonWarmup} from './dragon-warmup.js?v=6f08161e9101';
-import {getCharacterPose} from './character-art.js?v=6f08161e9101';
-import {getRoomArt} from './room-art.js?v=6f08161e9101';
-import {setupRoomControls} from './encounter-console.js?v=6f08161e9101';
+import {playClosingScene} from './closing-scene.js?v=a06f70034131';
+import {installDialogueLayout} from './dialogue-layout.js?v=a06f70034131';
+import {DRAGON_OPENING} from './dialogue-copy.js?v=a06f70034131';
+import {createImageLoader,recoverArtwork} from './image-loader.js?v=a06f70034131';
+import {createEndingAudio} from './ending-audio.js?v=a06f70034131';
+import {dragonGaugeFrame} from './dragon-warmup-model.js?v=a06f70034131';
+import {setupDragonWarmup} from './dragon-warmup.js?v=a06f70034131';
+import {getCharacterPose} from './character-art.js?v=a06f70034131';
+import {getRoomArt} from './room-art.js?v=a06f70034131';
+import {setupRoomControls} from './encounter-console.js?v=a06f70034131';
 installDialogueLayout();
 
 const integrated=window.parent!==window;

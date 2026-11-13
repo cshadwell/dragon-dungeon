@@ -1,4 +1,4 @@
-import {animateTitle} from './title-effects.js?v=6f08161e9101';
+import {animateTitle} from './title-effects.js?v=a06f70034131';
 const $=id=>document.getElementById(id),music=$('entry-music'),canvas=$('title-art'),art=new Image();
 music.volume=.4;music.loop=false;
 let mode='entry',busy=false,stopEffects=()=>{},wasPlaying=false;

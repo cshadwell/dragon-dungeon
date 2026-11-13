@@ -1,7 +1,8 @@
+import {eyePixel,updateSecretEye} from './secret-eye.js?v=a06f70034131';
 // Original procedural 256×216 renderer. World cells are shared with collision/map.
-import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=6f08161e9101';
-import {textures,sample} from './textures.js?v=6f08161e9101';
-import {doorFace,doorPixel} from './maze-doors.js?v=6f08161e9101';
+import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=a06f70034131';
+import {textures,sample} from './textures.js?v=a06f70034131';
+import {doorFace,doorPixel} from './maze-doors.js?v=a06f70034131';
 // Preserve nearby texture detail; progressively fade distant surfaces toward black.
 // One shared depth curve keeps doors, walls, floor and ceiling visually connected.
 export function distanceShade(depth){return 1/(1+depth*.13+Math.max(0,depth-1)**2*.075);}
@@ -17,10 +18,10 @@ export function corridorPixels(state,w=256,h=216,pose=null){
    let tx=(rx<0?px-mx:mx+1-px)*ddx,ty=(ry<0?py-my:my+1-py)*ddy;
    for(let n=0;n<WORLD_WIDTH+WORLD_HEIGHT+4;n++){if(tx<ty){tx+=ddx;mx+=sx;side=0;}else{ty+=ddy;my+=sy;side=1;}if(!cells.has(`${mx},${my}`))break;}
    dist=Math.max(.05,side?ty-ddy:tx-ddx);const wallH=h/dist,top=(h-wallH)/2,bottom=(h+wallH)/2;
-   const hit=side?px+dist*rx:py+dist*ry,u=Math.floor((hit-Math.floor(hit))*128);
+   const hit=side?px+dist*rx:py+dist*ry,u=(hit-Math.floor(hit))*128;
    for(let y=0;y<h;y++){
      if(y>=top&&y<=bottom){
-       const v=Math.floor((y-top)/wallH*128),shade=(side?.88:1)*distanceShade(dist),door=doorFace(mx,my,side,side?sy:sx),[r,g,b]=(door&&doorPixel(door,u,v))||sample(textures.wall,u,v);
+       const v=(y-top)/wallH*128,shade=(side?.88:1)*distanceShade(dist),door=doorFace(mx,my,side,side?sy:sx),[r,g,b]=eyePixel(mx,my,side,side?sy:sx,u,v)||(door&&doorPixel(door,u,v))||sample(textures.wall,u,v);
        put(x,y,r*shade,g*shade,b*shade);
      }else{
        const ceiling=y<h/2,depth=h/(2*Math.max(1,Math.abs(y-h/2))),wx=px+depth*rx,wy=py+depth*ry;
@@ -31,8 +32,9 @@ export function corridorPixels(state,w=256,h=216,pose=null){
  }
  return data;
 }
-export function drawCorridor(host,state,pose=null){
+export function drawCorridor(host,state,pose=null,onEye=null){
  let canvas=host.querySelector('canvas');if(!canvas){canvas=document.createElement('canvas');canvas.width=256;canvas.height=216;canvas.setAttribute('role','img');host.replaceChildren(canvas);}
  canvas.setAttribute('aria-label',`Pixel stone corridor. ${cells.has(neighbor(state.pos,state.facing))?'Passage ahead.':'Wall ahead.'} ${cells.has(neighbor(state.pos,(state.facing+3)%4))?'Opening left.':''} ${cells.has(neighbor(state.pos,(state.facing+1)%4))?'Opening right.':''}`);
+ updateSecretEye(host,state,pose,onEye);
  canvas.getContext('2d').putImageData(new ImageData(corridorPixels(state,256,216,pose),256,216),0,0);
 }

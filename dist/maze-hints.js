@@ -1,4 +1,4 @@
-import {HINT_ZONE_ROWS} from './hint-zone-data.js?v=6f08161e9101';
+import {HINT_ZONE_ROWS} from './hint-zone-data.js?v=a06f70034131';
 export const DEFAULT_PASSAGE_MESSAGE='Your footsteps echo through the passage.';
 export const ZONE_MESSAGES=Object.freeze({
  O:'The corridors begin to fill with the sounds of banging metal. Something is near.',
