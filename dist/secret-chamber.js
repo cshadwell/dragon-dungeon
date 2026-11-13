@@ -1,7 +1,7 @@
-import {startCandleCelebration,prefetchCandleCelebration,CANDLE_POSITIONS} from './secret-celebration.js?v=ff7edfdc3c95';
-import {SamplePiano} from './secret-sample-piano.js?v=ff7edfdc3c95';
-import {PIANO_SETTINGS} from './secret-piano-settings.js?v=ff7edfdc3c95';
-import {createMelodyEntry,FINALE_URL} from './secret-passage-model.js?v=ff7edfdc3c95';
+import {startCandleCelebration,prefetchCandleCelebration,CANDLE_POSITIONS} from './secret-celebration.js?v=351d764579df';
+import {SamplePiano} from './secret-sample-piano.js?v=351d764579df';
+import {PIANO_SETTINGS} from './secret-piano-settings.js?v=351d764579df';
+import {createMelodyEntry,FINALE_URL} from './secret-passage-model.js?v=351d764579df';
 export const WRONG_MELODY_MESSAGE="Hmmmm. That doesn't sound quite right.";
 export function openSecretChamber({unlocked=false,muted=false,onUnlock=()=>true,onClose=()=>{},navigate=url=>location.assign(url),celebrationFactory=startCandleCelebration}={}){
  const overlay=document.createElement('section');overlay.className='secret-chamber';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Hidden piano chamber');
@@ -21,7 +21,7 @@ export function openSecretChamber({unlocked=false,muted=false,onUnlock=()=>true,
  function close(){if(!active)return;active=false;generation++;pending=null;celebration?.cancel();animation?.cancel();model.cancel();piano.dispose();if(result.open)result.close();overlay.remove();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('pagehide',pagehide);window.removeEventListener('pageshow',pageshow);window.removeEventListener('keydown',keys,true);onClose();}
  async function celebrate(){
   if(!active||celebrating||transitioning)return;celebrating=true;render();piano.stop();const token=generation;
-  const room=q('.secret-room'),candlePath=matchMedia('(prefers-reduced-motion: reduce)').matches?'./assets/secret/candle-still.png':'./assets/secret/candle.apng';
+  const room=q('.secret-room'),candlePath=matchMedia('(prefers-reduced-motion: reduce)').matches?'./assets/secret/candle-still.png':'./assets/secret/candle.apng?play-once=1';
   celebration=celebrationFactory({piano,onCandle:index=>{if(!active)return;const candle=document.createElement('img');candle.className='secret-candle';candle.src=candlePath;candle.alt='';candle.draggable=false;const [x,y]=CANDLE_POSITIONS[index];Object.assign(candle.style,{left:x+'%',top:y+'%'});room.append(candle);}});
   celebration.setPaused(document.hidden);const completed=await celebration.finished;if(completed&&active&&!leftPage&&token===generation)enterStudio();
  }
@@ -36,6 +36,6 @@ export function openSecretChamber({unlocked=false,muted=false,onUnlock=()=>true,
  function pageshow(){if(leftPage)close();}
  window.addEventListener('keydown',keys,true);window.addEventListener('pagehide',pagehide);window.addEventListener('pageshow',pageshow);document.addEventListener('visibilitychange',visibility);
  q('#keyboard-image').onerror=()=>{if(active)showResult('The piano could not load. Please try again.');};
- prefetchCandleCelebration();const candlePreload=document.createElement('img');candlePreload.hidden=true;candlePreload.src='./assets/secret/candle.apng';candlePreload.alt='';overlay.append(candlePreload);
+ prefetchCandleCelebration();const candlePreload=document.createElement('img');candlePreload.hidden=true;candlePreload.src='./assets/secret/candle.apng?play-once=1';candlePreload.alt='';overlay.append(candlePreload);
  render();piano.keys[0]?.focus({preventScroll:true});return {close};
 }

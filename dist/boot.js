@@ -1,8 +1,8 @@
-import {load,fresh,save,SAVE_KEY} from './runtime.js?v=ff7edfdc3c95';
-import {installDialogueLayout} from './dialogue-layout.js?v=ff7edfdc3c95';
-import {createScreenFade} from './screen-fade.js?v=ff7edfdc3c95';
-import {playOpeningScene} from './opening-scene.js?v=ff7edfdc3c95';
-import {animateTitle} from './title-effects.js?v=ff7edfdc3c95';
+import {load,fresh,save,SAVE_KEY} from './runtime.js?v=351d764579df';
+import {installDialogueLayout} from './dialogue-layout.js?v=351d764579df';
+import {createScreenFade} from './screen-fade.js?v=351d764579df';
+import {playOpeningScene} from './opening-scene.js?v=351d764579df';
+import {animateTitle} from './title-effects.js?v=351d764579df';
 installDialogueLayout();
 // Title view reads save availability; only confirmed New Game replaces progress.
 const title=document.getElementById('title-screen'),enter=document.getElementById('title-enter'),resume=document.getElementById('title-resume');
@@ -31,7 +31,7 @@ async function start(mode='resume'){
    await opening;openingComplete=true;
    window.addEventListener('keydown',titleKeys,true);
   }
-  await import('./app.js?v=ff7edfdc3c95');
+  await import('./app.js?v=351d764579df');
   document.body.classList.remove('title-open');title.remove();
   if(fade)await fade.reveal();
   document.body.classList.remove('boot-transition');

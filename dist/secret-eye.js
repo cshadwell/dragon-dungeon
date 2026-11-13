@@ -1,5 +1,5 @@
-import {SECRET_ENTRANCE,canEnterSecret} from './secret-passage-model.js?v=ff7edfdc3c95';
-import {EYE_PIXELS,EYE_WIDTH,EYE_HEIGHT,EYE_UV} from './secret-eye-pixels.js?v=ff7edfdc3c95';
+import {SECRET_ENTRANCE,canEnterSecret} from './secret-passage-model.js?v=351d764579df';
+import {EYE_PIXELS,EYE_WIDTH,EYE_HEIGHT,EYE_UV} from './secret-eye-pixels.js?v=351d764579df';
 export function eyePixel(mx,my,side,step,u,v){
  const e=SECRET_ENTRANCE,r=EYE_UV;if(mx!==e.wallX||my!==e.wallY||side!==e.side||step!==e.step||u<r.x||u>=r.x+r.width||v<r.y||v>=r.y+r.height)return null;
  const i=(Math.floor((v-r.y)/r.height*EYE_HEIGHT)*EYE_WIDTH+Math.floor((u-r.x)/r.width*EYE_WIDTH))*4;

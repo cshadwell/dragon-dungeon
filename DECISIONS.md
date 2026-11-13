@@ -216,3 +216,11 @@ After the closing static finishes and X-13 resolves, show a clickable -Press Spa
 
 ## 2026-11-13 — Title New Game / Resume Game (local)
 Replace the title start control with New Game and Resume Game. Resume is available only for a readable existing adventure and resumes directly without opening credits. New Game replays the prologue and creates a fresh adventure; existing progress requires confirmation before replacement. Cancelling leaves the save and title unchanged. Both controls retain the pixel/iron-brass theme, click and focused Space activation; the initial audio-unlock gesture remains. Verification: 157 Node tests, three targeted browser tests (fresh start/prologue, audio entry/save preservation, resume and cancelled/confirmed reset), and 187 Pages references pass. Not pushed.
+
+
+## 2026-11-13 — Completed adventure map
+A saved dragon victory reveals the full maze atlas and all three guardian/dragon landmarks when viewing the maze, including after X-13 return or Resume Game. Rendering does not rewrite visited cells or reset any progress; older completed saves gain this automatically. New Game retains fog of war. Secret entrance receives no map marker. 159 Node tests pass, including full-atlas/landmark visibility, preserved visited cells and new-game fog; 187 Pages references pass. Local only, not pushed.
+
+
+## 2026-11-13 — Candle reset removed
+The supplied candle animation now plays once and holds its final frame rather than looping back into its zoom. Only the APNG animation control/play count and CRC changed; all 121 frame pixels, alpha, timing and size remain unchanged. Preparation tool reproduces play_count=1; hashes updated. Candle asset URL is versioned to avoid cached looping artwork. Melody cues, three-second hold and fade/navigation remain unchanged. 159 tests pass, including an explicit APNG play-count regression. Local only; not pushed.

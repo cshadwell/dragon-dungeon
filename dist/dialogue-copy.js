@@ -1,5 +1,5 @@
 // Shared approved dialogue copy also supplies the typography fitting corpus.
-import {WIZARD_SPELL_POSES} from './wizard-spell-poses.js?v=ff7edfdc3c95';
+import {WIZARD_SPELL_POSES} from './wizard-spell-poses.js?v=351d764579df';
 export const OGRE_OPENING=[
  [9,"Greetings friend! Don't see many heroes these days. If your quest leads you to the Nameless Dragon, you've come to the right place!"],
  [8,"The Dragon won't give up his name easily. He's sure to challenge you to combat. Lucky for you, I'm an expert on attacking!"],

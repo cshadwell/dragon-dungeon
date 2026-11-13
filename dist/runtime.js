@@ -1,14 +1,14 @@
-import {GUARDIAN_WARNING,MAZE_INTRO} from './dialogue-copy.js?v=ff7edfdc3c95';
-import {freshDragon,NAME_CONFIG} from './dragon.js?v=ff7edfdc3c95';
-import {MIND_GOAL} from './wizard-mind-model.js?v=ff7edfdc3c95';
-import {DEFENCE_GOAL} from './elf-defence-model.js?v=ff7edfdc3c95';
-import {LENS,wizardNotes} from './wizard.js?v=ff7edfdc3c95';
-import {SEAL,queenNotes} from './queen.js?v=ff7edfdc3c95';
-import {SHIELD,notes} from './ogre.js?v=ff7edfdc3c95';
-import {mazeHint} from './maze-hints.js?v=ff7edfdc3c95';
+import {GUARDIAN_WARNING,MAZE_INTRO} from './dialogue-copy.js?v=351d764579df';
+import {freshDragon,NAME_CONFIG} from './dragon.js?v=351d764579df';
+import {MIND_GOAL} from './wizard-mind-model.js?v=351d764579df';
+import {DEFENCE_GOAL} from './elf-defence-model.js?v=351d764579df';
+import {LENS,wizardNotes} from './wizard.js?v=351d764579df';
+import {SEAL,queenNotes} from './queen.js?v=351d764579df';
+import {SHIELD,notes} from './ogre.js?v=351d764579df';
+import {mazeHint} from './maze-hints.js?v=351d764579df';
 // Supplied maze + user-approved encounter locations. The small prototype remains intact.
-import * as adventure from './engine.js?v=ff7edfdc3c95';
-import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=ff7edfdc3c95';
+import * as adventure from './engine.js?v=351d764579df';
+import {MAZE_ROWS,MAZE_START,MAZE_WIDTH,MAZE_HEIGHT} from './maze-data.js?v=351d764579df';
 export const MAZE_ONLY=false;
 export const WORLD_WIDTH=MAZE_WIDTH,WORLD_HEIGHT=MAZE_HEIGHT;
 export const START=MAZE_START,ENCOUNTER='35,30',WIZARD='3,22',QUEEN='55,4',DRAGON='0,1',DIRS=adventure.DIRS;

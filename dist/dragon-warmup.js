@@ -1,10 +1,10 @@
-import {installChallengePause} from './challenge-pause.js?v=ff7edfdc3c95';
-import {drawDefenceArena,updateAttackRail,createColorChoices} from './guardian-games.js?v=ff7edfdc3c95';
-import {chooseDragonSpellPose} from './dragon-spell-poses.js?v=ff7edfdc3c95';
-import {DRAGON_ROUNDS,WARMUP,warmupProgress,chooseDragonReaction,freshDragonMeter,updateDragonMeter,makeFinalSchedule,finalProgress,finalDefenceAngle,makeFinalMindRound} from './dragon-warmup-model.js?v=ff7edfdc3c95';
-import {attackPosition,judgeAttack,targetForAttempt} from './ogre-attack-model.js?v=ff7edfdc3c95';
-import {freshDefence,spawnAttack,stepDefence,ORBIT} from './elf-defence-model.js?v=ff7edfdc3c95';
-import {makeRound,judge} from './wizard-mind-model.js?v=ff7edfdc3c95';
+import {installChallengePause} from './challenge-pause.js?v=351d764579df';
+import {drawDefenceArena,updateAttackRail,createColorChoices} from './guardian-games.js?v=351d764579df';
+import {chooseDragonSpellPose} from './dragon-spell-poses.js?v=351d764579df';
+import {DRAGON_ROUNDS,WARMUP,warmupProgress,chooseDragonReaction,freshDragonMeter,updateDragonMeter,makeFinalSchedule,finalProgress,finalDefenceAngle,makeFinalMindRound} from './dragon-warmup-model.js?v=351d764579df';
+import {attackPosition,judgeAttack,targetForAttempt} from './ogre-attack-model.js?v=351d764579df';
+import {freshDefence,spawnAttack,stepDefence,ORBIT} from './elf-defence-model.js?v=351d764579df';
+import {makeRound,judge} from './wizard-mind-model.js?v=351d764579df';
 export const SPELL_COLORS={red:'#ef454b',blue:'#3984ff',green:'#49d665',orange:'#ff8c22',purple:'#b669ee',white:'#ffffff',yellow:'#ffe040'};
 export function setupDragonWarmup({showPose,message,prompt,action,onMenu,onMeter,onDefeat,onVictory,onPrize}){
  const host=document.createElement('div');host.id='boss-game';host.hidden=true;

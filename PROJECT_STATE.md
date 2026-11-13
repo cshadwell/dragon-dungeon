@@ -363,3 +363,11 @@ Replace the title start control with New Game and Resume Game. Resume is availab
 
 
 2026-11-13 publication verification: New Game / Resume Game and post-X-13 maze return approved for publication. Final complete run: 157 Node tests and all 8 browser tests pass; 187 asset references pass; CHAZ confirmed.
+
+
+## 2026-11-13 — Completed adventure map
+A saved dragon victory reveals the full maze atlas and all three guardian/dragon landmarks when viewing the maze, including after X-13 return or Resume Game. Rendering does not rewrite visited cells or reset any progress; older completed saves gain this automatically. New Game retains fog of war. Secret entrance receives no map marker. 159 Node tests pass, including full-atlas/landmark visibility, preserved visited cells and new-game fog; 187 Pages references pass. Local only, not pushed.
+
+
+## 2026-11-13 — Candle reset removed
+The supplied candle animation now plays once and holds its final frame rather than looping back into its zoom. Only the APNG animation control/play count and CRC changed; all 121 frame pixels, alpha, timing and size remain unchanged. Preparation tool reproduces play_count=1; hashes updated. Candle asset URL is versioned to avoid cached looping artwork. Melody cues, three-second hold and fade/navigation remain unchanged. 159 tests pass, including an explicit APNG play-count regression. Local only; not pushed.
