@@ -1,7 +1,7 @@
-import {startCandleCelebration,prefetchCandleCelebration,CANDLE_POSITIONS} from './secret-celebration.js?v=a06f70034131';
-import {SamplePiano} from './secret-sample-piano.js?v=a06f70034131';
-import {PIANO_SETTINGS} from './secret-piano-settings.js?v=a06f70034131';
-import {createMelodyEntry,FINALE_URL} from './secret-passage-model.js?v=a06f70034131';
+import {startCandleCelebration,prefetchCandleCelebration,CANDLE_POSITIONS} from './secret-celebration.js?v=ff7edfdc3c95';
+import {SamplePiano} from './secret-sample-piano.js?v=ff7edfdc3c95';
+import {PIANO_SETTINGS} from './secret-piano-settings.js?v=ff7edfdc3c95';
+import {createMelodyEntry,FINALE_URL} from './secret-passage-model.js?v=ff7edfdc3c95';
 export const WRONG_MELODY_MESSAGE="Hmmmm. That doesn't sound quite right.";
 export function openSecretChamber({unlocked=false,muted=false,onUnlock=()=>true,onClose=()=>{},navigate=url=>location.assign(url),celebrationFactory=startCandleCelebration}={}){
  const overlay=document.createElement('section');overlay.className='secret-chamber';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Hidden piano chamber');

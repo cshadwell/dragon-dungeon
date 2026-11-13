@@ -1,6 +1,6 @@
-import {PRACTICE_NEXT} from './ogre-attack-model.js?v=a06f70034131';
-import {DEFENCE_DEFAULTS,DEFENCE_STAGES} from './elf-defence-model.js?v=a06f70034131';
-import {STAGES,shuffle,makeRound,COLORS} from './wizard-mind-model.js?v=a06f70034131';
+import {PRACTICE_NEXT} from './ogre-attack-model.js?v=ff7edfdc3c95';
+import {DEFENCE_DEFAULTS,DEFENCE_STAGES} from './elf-defence-model.js?v=ff7edfdc3c95';
+import {STAGES,shuffle,makeRound,COLORS} from './wizard-mind-model.js?v=ff7edfdc3c95';
 export const DRAGON_ROUNDS=Object.freeze([
  Object.freeze({goals:Object.freeze([4,6,5]),attack:PRACTICE_NEXT,defence:Object.freeze({...DEFENCE_DEFAULTS,...DEFENCE_STAGES[1]}),mind:STAGES[1],mindStage:1}),
  Object.freeze({goals:Object.freeze([5,8,6]),attack:Object.freeze({passMs:1000,targetWidth:.10}),defence:Object.freeze({...DEFENCE_DEFAULTS,...DEFENCE_STAGES[2]}),mind:STAGES[2],mindStage:2}),

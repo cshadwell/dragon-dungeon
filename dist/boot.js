@@ -1,38 +1,44 @@
-import {installDialogueLayout} from './dialogue-layout.js?v=a06f70034131';
-import {createScreenFade} from './screen-fade.js?v=a06f70034131';
-import {playOpeningScene} from './opening-scene.js?v=a06f70034131';
-import {animateTitle} from './title-effects.js?v=a06f70034131';
+import {load,fresh,save,SAVE_KEY} from './runtime.js?v=ff7edfdc3c95';
+import {installDialogueLayout} from './dialogue-layout.js?v=ff7edfdc3c95';
+import {createScreenFade} from './screen-fade.js?v=ff7edfdc3c95';
+import {playOpeningScene} from './opening-scene.js?v=ff7edfdc3c95';
+import {animateTitle} from './title-effects.js?v=ff7edfdc3c95';
 installDialogueLayout();
-// Title view precedes app initialization: opening it never loads or writes a save.
-const title=document.getElementById('title-screen'),enter=document.getElementById('title-enter');
+// Title view reads save availability; only confirmed New Game replaces progress.
+const title=document.getElementById('title-screen'),enter=document.getElementById('title-enter'),resume=document.getElementById('title-resume');
+let storage,hasSave=false,canResume=false;
+try{storage=window.localStorage;hasSave=storage.getItem(SAVE_KEY)!==null;canResume=hasSave&&load(storage).writable;}catch{}
+resume.disabled=!canResume;
 let titleMusic=null,titleMusicActive=false,stopTitleEffects=()=>{},openingComplete=false;
 function stopTitleMusic(){titleMusicActive=false;if(titleMusic){titleMusic.pause();titleMusic.currentTime=0;}}
 const preview=['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).has('preview');
 let starting=false,titleRevealed=preview,unlockTitle=()=>{};
 function titleKeys(e){
  if(starting){e.preventDefault();e.stopImmediatePropagation();return;}
- if(e.code==='Space'){e.preventDefault();e.stopImmediatePropagation();if(!e.repeat){if(titleRevealed)start();else unlockTitle();}}
+ if(e.code==='Space'){e.preventDefault();e.stopImmediatePropagation();if(!e.repeat){if(titleRevealed){if(e.target===enter)start('new');else if(e.target===resume){if(canResume)start('resume');}else start(canResume?'resume':'new');}else unlockTitle();}}
 }
-async function start(){
- if(starting||!titleRevealed)return;starting=true;enter.disabled=true;stopTitleMusic();
+async function start(mode='resume'){
+ if(starting||!titleRevealed)return;if(mode==='new'&&hasSave&&!window.confirm('Start a new game? This will replace the saved adventure on this browser.'))return;
+ if(mode==='new'&&!preview){if(!save(storage,fresh())){document.getElementById('title-status').textContent='Progress could not be saved. Your existing adventure has not been replaced.';return;}}
+ starting=true;enter.disabled=resume.disabled=true;stopTitleMusic();
  const fade=preview?null:createScreenFade();
  try{
   if(!preview){document.body.classList.add('boot-transition');title.inert=true;await fade.darken();stopTitleEffects();}
-  if(!preview&&!openingComplete){
+  if(!preview&&mode==='new'&&!openingComplete){
    const opening=playOpeningScene({beforeFinish:()=>fade.darken()});fade.hide();
    // The opening owns Space while its music/text are active.
    window.removeEventListener('keydown',titleKeys,true);
    await opening;openingComplete=true;
    window.addEventListener('keydown',titleKeys,true);
   }
-  await import('./app.js?v=a06f70034131');
+  await import('./app.js?v=ff7edfdc3c95');
   document.body.classList.remove('title-open');title.remove();
   if(fade)await fade.reveal();
   document.body.classList.remove('boot-transition');
   window.dispatchEvent(new Event('dungeon:ready'));
   window.removeEventListener('keydown',titleKeys,true);
   document.querySelector('[data-action="forward"]')?.focus({preventScroll:true});
- }catch(error){starting=false;title.inert=false;enter.disabled=false;document.body.classList.remove('boot-transition');document.getElementById('title-status').textContent='The dungeon could not load. Please try again.';console.error(error);}
+ }catch(error){starting=false;title.inert=false;enter.disabled=false;resume.disabled=!canResume;document.body.classList.remove('boot-transition');document.getElementById('title-status').textContent='The dungeon could not load. Please try again.';console.error(error);}
  finally{fade?.remove();}
 }
 if(preview){start();}else{
@@ -53,7 +59,7 @@ if(preview){start();}else{
   const playback=withoutSound?Promise.resolve():titleMusic.play();
   try{
    await Promise.all([playback,artwork]);titleRevealed=true;titleMusicActive=true;title.hidden=false;entry.remove();
-   stopTitleEffects=animateTitle(canvas,art);enter.focus({preventScroll:true});
+   stopTitleEffects=animateTitle(canvas,art);(canResume?resume:enter).focus({preventScroll:true});
   }catch{titleMusic.pause();status.textContent='Sound could not start. Press Space Bar or tap to try again.';silent.hidden=false;}
   finally{unlocking=false;}
  };
@@ -65,5 +71,5 @@ if(preview){start();}else{
  window.addEventListener('pagehide',suspendTitle);window.addEventListener('pageshow',resumeTitle);
  document.addEventListener('visibilitychange',()=>document.hidden?suspendTitle():resumeTitle());
  window.addEventListener('keydown',titleKeys,true);
- enter.addEventListener('click',start);begin.focus({preventScroll:true});
+ enter.addEventListener('click',()=>start('new'));resume.addEventListener('click',()=>start('resume'));begin.focus({preventScroll:true});
 }

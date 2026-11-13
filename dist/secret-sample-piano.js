@@ -17,7 +17,7 @@ export function pianoKeyRegions(settings) {
     .map((key, index) => ({...key, available: index < settings.recordedNotes}));
 }
 
-import {SECRET_PITCHES} from './secret-pitches.js?v=a06f70034131';
+import {SECRET_PITCHES} from './secret-pitches.js?v=ff7edfdc3c95';
 const pitchById=new Map(SECRET_PITCHES.map(p=>[p.id,p]));
 const sampleUrl=id=>new URL(`assets/secret/piano/${id}.wav`,import.meta.url).href;
 // Adapted from Maker's SamplePiano; independent local assets, same regions/mixer.

@@ -1,22 +1,22 @@
-import {openSecretEntrance,prefetchSecretEntrance} from './secret-entrance.js?v=a06f70034131';
-import {openSecretChamber} from './secret-chamber.js?v=a06f70034131';
-import {canEnterSecret,unlockMusicalPassage,SECRET_APPROACH_MESSAGE} from './secret-passage-model.js?v=a06f70034131';
-import {DOOR_DESCRIPTIONS as doorDescriptions} from './dialogue-copy.js?v=a06f70034131';
-import {createEndingAudio} from './ending-audio.js?v=a06f70034131';
-import {createDungeonMusic} from './dungeon-music.js?v=a06f70034131';
-import {showRoomPreview} from './room-preview.js?v=a06f70034131';
-import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=a06f70034131';
-import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=a06f70034131';
-import {drawCorridor} from './corridor.js?v=a06f70034131';
-import {exploredMap} from './explored-map.js?v=a06f70034131';
-import {dragonView,dragonArt} from './dragon.js?v=a06f70034131';
-import {queenView,queenArt,queenNotes as legacyQueenNotes} from './queen.js?v=a06f70034131';
-import {wizardView,wizardArt,wizardNotes as legacyWizardNotes} from './wizard.js?v=a06f70034131';
-import {createAttempt,tick,respond} from './reaction.js?v=a06f70034131';
-import {lessons,notes as legacyOgreNotes} from './ogre.js?v=a06f70034131';
-import {ogreView} from './ogre.js?v=a06f70034131';
-import {ogreArt,flameDiagram} from './ogre-art.js?v=a06f70034131';
-import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER,banishDragon,completeDragon,guardiansReady,GUARDIAN_WARNING} from './runtime.js?v=a06f70034131';
+import {openSecretEntrance,prefetchSecretEntrance} from './secret-entrance.js?v=ff7edfdc3c95';
+import {openSecretChamber} from './secret-chamber.js?v=ff7edfdc3c95';
+import {canEnterSecret,unlockMusicalPassage,SECRET_APPROACH_MESSAGE} from './secret-passage-model.js?v=ff7edfdc3c95';
+import {DOOR_DESCRIPTIONS as doorDescriptions} from './dialogue-copy.js?v=ff7edfdc3c95';
+import {createEndingAudio} from './ending-audio.js?v=ff7edfdc3c95';
+import {createDungeonMusic} from './dungeon-music.js?v=ff7edfdc3c95';
+import {showRoomPreview} from './room-preview.js?v=ff7edfdc3c95';
+import {MAZE_ONLY,DRAGON,QUEEN,WIZARD} from './runtime.js?v=ff7edfdc3c95';
+import {MOTION,navigationChanged,transitionPose,motionDuration} from './movement.js?v=ff7edfdc3c95';
+import {drawCorridor} from './corridor.js?v=ff7edfdc3c95';
+import {exploredMap} from './explored-map.js?v=ff7edfdc3c95';
+import {dragonView,dragonArt} from './dragon.js?v=ff7edfdc3c95';
+import {queenView,queenArt,queenNotes as legacyQueenNotes} from './queen.js?v=ff7edfdc3c95';
+import {wizardView,wizardArt,wizardNotes as legacyWizardNotes} from './wizard.js?v=ff7edfdc3c95';
+import {createAttempt,tick,respond} from './reaction.js?v=ff7edfdc3c95';
+import {lessons,notes as legacyOgreNotes} from './ogre.js?v=ff7edfdc3c95';
+import {ogreView} from './ogre.js?v=ff7edfdc3c95';
+import {ogreArt,flameDiagram} from './ogre-art.js?v=ff7edfdc3c95';
+import {act,fresh,load,save,SAVE_KEY,cells,neighbor,START,ENCOUNTER,banishDragon,completeDragon,guardiansReady,GUARDIAN_WARNING} from './runtime.js?v=ff7edfdc3c95';
 if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('preview')==='rooms'){showRoomPreview();}else{
 const $=id=>document.getElementById(id), modal=$('modal');
 let storage;try{storage=window.localStorage;}catch{}
@@ -142,6 +142,11 @@ window.addEventListener('message',event=>{
    }
    if(event.data?.type==='dragon-room:prize'&&state.encounter==='dragon'&&(dragonVictoryReady||state.dragon.victory)){
     state=completeDragon(state,true);persist();render();return;
+   }
+   if(event.data?.type==='dragon-room:return-maze'&&state.encounter==='dragon'&&state.dragon.victory&&state.dragon.prizeRevealed){
+    stopHeldMovement();endingPlayback.stop();dragonEnding=false;dragonVictoryReady=false;dragonVictoryPending=false;
+    state={...state,pos:START,facing:0,encounter:null,gate:null,visited:[...new Set([...state.visited,START])],message:'Your footsteps echo through the passage.'};persist();
+    panel=null;if(modal.open)modal.close();render();window.focus();return;
    }
    if(event.data?.type==='dragon-room:credits-finished'&&state.encounter==='dragon'&&state.dragon.victory){endingPlayback.stop();return;}
    if(event.data?.type==='dragon-room:banish'&&state.encounter==='dragon'&&!enteringDoor){

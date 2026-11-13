@@ -1,8 +1,8 @@
-import {eyePixel,updateSecretEye} from './secret-eye.js?v=a06f70034131';
+import {eyePixel,updateSecretEye} from './secret-eye.js?v=ff7edfdc3c95';
 // Original procedural 256×216 renderer. World cells are shared with collision/map.
-import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=a06f70034131';
-import {textures,sample} from './textures.js?v=a06f70034131';
-import {doorFace,doorPixel} from './maze-doors.js?v=a06f70034131';
+import {cells,DIRS,neighbor,WORLD_WIDTH,WORLD_HEIGHT} from './runtime.js?v=ff7edfdc3c95';
+import {textures,sample} from './textures.js?v=ff7edfdc3c95';
+import {doorFace,doorPixel} from './maze-doors.js?v=ff7edfdc3c95';
 // Preserve nearby texture detail; progressively fade distant surfaces toward black.
 // One shared depth curve keeps doors, walls, floor and ceiling visually connected.
 export function distanceShade(depth){return 1/(1+depth*.13+Math.max(0,depth-1)**2*.075);}

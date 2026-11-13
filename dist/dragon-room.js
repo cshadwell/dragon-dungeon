@@ -1,13 +1,13 @@
-import {playClosingScene} from './closing-scene.js?v=a06f70034131';
-import {installDialogueLayout} from './dialogue-layout.js?v=a06f70034131';
-import {DRAGON_OPENING} from './dialogue-copy.js?v=a06f70034131';
-import {createImageLoader,recoverArtwork} from './image-loader.js?v=a06f70034131';
-import {createEndingAudio} from './ending-audio.js?v=a06f70034131';
-import {dragonGaugeFrame} from './dragon-warmup-model.js?v=a06f70034131';
-import {setupDragonWarmup} from './dragon-warmup.js?v=a06f70034131';
-import {getCharacterPose} from './character-art.js?v=a06f70034131';
-import {getRoomArt} from './room-art.js?v=a06f70034131';
-import {setupRoomControls} from './encounter-console.js?v=a06f70034131';
+import {playClosingScene} from './closing-scene.js?v=ff7edfdc3c95';
+import {installDialogueLayout} from './dialogue-layout.js?v=ff7edfdc3c95';
+import {DRAGON_OPENING} from './dialogue-copy.js?v=ff7edfdc3c95';
+import {createImageLoader,recoverArtwork} from './image-loader.js?v=ff7edfdc3c95';
+import {createEndingAudio} from './ending-audio.js?v=ff7edfdc3c95';
+import {dragonGaugeFrame} from './dragon-warmup-model.js?v=ff7edfdc3c95';
+import {setupDragonWarmup} from './dragon-warmup.js?v=ff7edfdc3c95';
+import {getCharacterPose} from './character-art.js?v=ff7edfdc3c95';
+import {getRoomArt} from './room-art.js?v=ff7edfdc3c95';
+import {setupRoomControls} from './encounter-console.js?v=ff7edfdc3c95';
 installDialogueLayout();
 
 const integrated=window.parent!==window;
@@ -69,7 +69,7 @@ async function revealPrize(animate=true){
  if(animate&&!matchMedia('(prefers-reduced-motion: reduce)').matches){await fade(900,t=>draw(1-t));await fade(1400,t=>draw(0,t));}
  draw(0,1);canvas.setAttribute('aria-label','Golden plaque revealing the dragon’s true name: CHAZ');notify('prize');
  if(!integrated&&!animate)standaloneEnding.resume();
- if(!closingStarted){closingStarted=true;document.body.classList.add('closing');playClosingScene({muted:roomMuted,stopMusic:()=>{if(integrated)notify('credits-finished');else standaloneEnding.stop();}});}
+ if(!closingStarted){closingStarted=true;document.body.classList.add('closing');playClosingScene({onReturn:()=>{if(integrated)notify('return-maze');else location.assign('./');},muted:roomMuted,stopMusic:()=>{if(integrated)notify('credits-finished');else standaloneEnding.stop();}});}
 }
 function advanceDialogue(){
   if(!artReady||loadingArt||document.getElementById('room-menu').open)return;

@@ -57,7 +57,7 @@ body > header, body > footer {
     linear-gradient(var(--iron), var(--iron)) bottom right / 3px 3px;
   background-repeat: no-repeat;
 }
-button, .secondary, .quiet, #title-enter, #title-music {
+button, .secondary, .quiet, #title-enter, #title-resume, #title-music {
   background: var(--key);
   border: 2px solid;
   border-color: var(--brass) var(--bevel) var(--bevel) var(--brass);
@@ -68,7 +68,7 @@ button, .secondary, .quiet, #title-enter, #title-music {
   letter-spacing: 0;
   overflow-wrap: anywhere;
 }
-button:hover, button[aria-pressed="true"], #title-enter:hover {
+button:hover, button[aria-pressed="true"], #title-enter:hover, #title-resume:hover {
   background: #4b311b;
   border-color: var(--gold) var(--brass) var(--brass) var(--gold);
 }
@@ -93,7 +93,7 @@ h3 { font-size: 12px; }
   border-color: var(--brass);
 }
 .dot { background: var(--gold); border-radius: 0; }
-#title-enter { color: var(--gold); font-size: clamp(10px, 1.3vw, 15px); }
+#title-enter, #title-resume { color: var(--gold); font-size: clamp(10px, 1.3vw, 15px); }
 #title-music { font-size: 9px; }
 #ogre-attack-encounter, #elf-defence-encounter, #wizard-mind-encounter {
   background: var(--iron);

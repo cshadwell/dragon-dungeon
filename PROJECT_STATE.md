@@ -352,3 +352,14 @@ Validation: 157 automated tests pass; 186 Pages asset references pass. Safari ma
 
 
 2026-11-13 release verification: 157 Node tests pass; six browser regressions passed in the full run and the gate regression passed on targeted rerun after adding the existing 230ms startup cooldown to that test (no gameplay change). Lean Pages package validates 171 references and CHAZ. Current secret passage and candle version approved for commit/push.
+
+
+## 2026-11-13 — Return after X-13
+After the closing static finishes and X-13 resolves, show a clickable -Press Space Bar- prompt. A fresh Space press or click sends one guarded return request to the parent game. Return to START facing north, clear encounter/gate, stop ending audio, restore maze music/controls, and preserve victory, CHAZ reveal, guardian progress, exploration and musical passage unlock. No New Game/reset is performed. Prompt is unavailable during credits/static. Local validation: 157 Node tests, 186 asset references, and the end-to-end browser test covering credits/static, keyboard return, entrance position and retained victory/reveal all pass. Not yet pushed.
+
+
+## 2026-11-13 — Title New Game / Resume Game (local)
+Replace the title start control with New Game and Resume Game. Resume is available only for a readable existing adventure and resumes directly without opening credits. New Game replays the prologue and creates a fresh adventure; existing progress requires confirmation before replacement. Cancelling leaves the save and title unchanged. Both controls retain the pixel/iron-brass theme, click and focused Space activation; the initial audio-unlock gesture remains. Verification: 157 Node tests, three targeted browser tests (fresh start/prologue, audio entry/save preservation, resume and cancelled/confirmed reset), and 187 Pages references pass. Not pushed.
+
+
+2026-11-13 publication verification: New Game / Resume Game and post-X-13 maze return approved for publication. Final complete run: 157 Node tests and all 8 browser tests pass; 187 asset references pass; CHAZ confirmed.

@@ -208,3 +208,11 @@ Accept either complete E3–B3–A3–G3–E3–C4–B3 or E4–B4–A4–G4–E
 Use the supplied APNG, retaining all 121 frames and transparency, cropped to its shared alpha bounds and nearest-neighbor reduced to 80×130. Original files remain unchanged. Preparation and hashes: tools/prepare-secret-candle.py and art-review/2026-11-13/candle-celebration/asset-record.json. No runtime WebM dependency. The chamber remains blank before success; wrong-attempt behavior is unchanged.
 
 Validation: 157 automated tests pass; 186 Pages asset references pass. Safari manually verified the lower-octave success, seven candles in the supplied arrangement, and same-tab arrival at The Maker's Last Echo entry screen. Both complete octaves, rejection of mixed octaves, candle/audio clock timing, hold duration and cancellation have automated coverage. Physical touch and other browsers remain unverified manually for this addition. No push or publication.
+
+
+## 2026-11-13 — Return after X-13
+After the closing static finishes and X-13 resolves, show a clickable -Press Space Bar- prompt. A fresh Space press or click sends one guarded return request to the parent game. Return to START facing north, clear encounter/gate, stop ending audio, restore maze music/controls, and preserve victory, CHAZ reveal, guardian progress, exploration and musical passage unlock. No New Game/reset is performed. Prompt is unavailable during credits/static. Local validation: 157 Node tests, 186 asset references, and the end-to-end browser test covering credits/static, keyboard return, entrance position and retained victory/reveal all pass. Not yet pushed.
+
+
+## 2026-11-13 — Title New Game / Resume Game (local)
+Replace the title start control with New Game and Resume Game. Resume is available only for a readable existing adventure and resumes directly without opening credits. New Game replays the prologue and creates a fresh adventure; existing progress requires confirmation before replacement. Cancelling leaves the save and title unchanged. Both controls retain the pixel/iron-brass theme, click and focused Space activation; the initial audio-unlock gesture remains. Verification: 157 Node tests, three targeted browser tests (fresh start/prologue, audio entry/save preservation, resume and cancelled/confirmed reset), and 187 Pages references pass. Not pushed.

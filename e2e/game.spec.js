@@ -14,7 +14,7 @@ async function approachDoor(page){
 }
 test('Space starts opening, credits hold, and dungeon music waits until reveal',async({page})=>{
  await page.goto('/');await expect(page.locator('#audio-entry')).toBeVisible();await expect(page.locator('#title-screen')).not.toBeVisible();await expect(page.locator('#title-audio')).toHaveJSProperty('paused',true);await page.keyboard.press('Space');
- await expect(page.locator('#audio-entry')).toHaveCount(0);await expect(page.locator('#title-screen')).toBeVisible();await expect.poll(()=>page.locator('#title-audio').evaluate(a=>a.paused)).toBe(false);await expect(page.locator('#title-music')).toHaveCount(0);await page.keyboard.press('Space');
+ await expect(page.locator('#audio-entry')).toHaveCount(0);await expect(page.locator('#title-screen')).toBeVisible();await expect.poll(()=>page.locator('#title-audio').evaluate(a=>a.paused)).toBe(false);await expect(page.locator('#title-music')).toHaveCount(0);await page.getByRole('button',{name:'New Game',exact:true}).click();
  await expect(page.locator('#opening-music')).toBeAttached();await expect(page.locator('#dungeon-music')).toHaveCount(0);
  await expect(page.getByRole('button',{name:'-Press Space Bar-',exact:true})).toBeVisible({timeout:25000});
  await page.keyboard.press('Space');await expect(page.locator('.opening-scene')).toHaveCount(0);await expect(page.locator('body')).not.toHaveClass(/boot-transition/);
@@ -58,6 +58,21 @@ test('earned name runs closing credits and resolves X-13 after static',async({pa
  await page.addInitScript(s=>localStorage.setItem('dragon-dungeon-maze-adventure-v1',JSON.stringify(s)),state);await page.goto('/?preview=audit');
  const frame=page.frameLocator('#dragon-room-encounter');await expect(frame.locator('.closing-scene')).toBeVisible();await expect(frame.locator('#room')).toHaveAttribute('aria-label',/Golden plaque/);await frame.locator('#room').click();
  await expect(frame.locator('.closing-signal')).toBeVisible({timeout:70000});await expect(frame.locator('.closing-signal')).not.toHaveClass(/flickering/,{timeout:15000});await expect(page.locator('#ending-music')).toHaveJSProperty('paused',true);
+ await expect(frame.locator('.closing-return')).toBeVisible();await page.keyboard.press('Space');
+ await expect(page.locator('#dragon-room-encounter')).toHaveCount(0);await expect(page.getByRole('button',{name:'Move forward',exact:true})).toBeVisible();
+ const restored=await page.evaluate(()=>JSON.parse(localStorage.getItem('dragon-dungeon-maze-adventure-v1')));expect(restored.pos).toBe(fresh().pos);expect(restored.encounter).toBeNull();expect(restored.dragon.prizeRevealed).toBe(true);expect(restored.dragon.victory).toBe(true);
 });
 
 test('click entry reveals title with music and leaves saves untouched',async({page})=>{await page.goto('/');const before=await page.evaluate(()=>JSON.stringify(localStorage));await page.getByRole('button',{name:'Press Space Bar or tap to begin',exact:true}).click();await expect(page.locator('#title-screen')).toBeVisible();await expect.poll(()=>page.locator('#title-audio').evaluate(a=>a.paused)).toBe(false);await expect(page.locator('#title-music')).toHaveCount(0);expect(await page.evaluate(()=>JSON.stringify(localStorage))).toBe(before);});
+
+ test('title resumes saved progress and confirms a new expedition',async({page})=>{
+ const state=fresh();state.pos=DRAGON;state.visited.push(DRAGON);state.gate='dragon';
+ await page.addInitScript(s=>{if(!localStorage.getItem('dragon-dungeon-maze-adventure-v1'))localStorage.setItem('dragon-dungeon-maze-adventure-v1',JSON.stringify(s));},state);
+ await page.goto('/');await page.keyboard.press('Space');await page.getByRole('button',{name:'Resume Game',exact:true}).click();
+ await expect(page.locator('#door-intro')).toBeVisible();await expect(page.locator('#opening-music')).toHaveCount(0);
+ expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('dragon-dungeon-maze-adventure-v1')).pos)).toBe(DRAGON);
+ await page.reload();await page.keyboard.press('Space');page.once('dialog',dialog=>dialog.dismiss());await page.getByRole('button',{name:'New Game',exact:true}).click();
+ await expect(page.locator('#title-screen')).toBeVisible();expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('dragon-dungeon-maze-adventure-v1')).pos)).toBe(DRAGON);
+ page.once('dialog',dialog=>dialog.accept());await page.getByRole('button',{name:'New Game',exact:true}).click();await expect(page.locator('#opening-music')).toBeAttached();
+ expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('dragon-dungeon-maze-adventure-v1')).pos)).toBe(fresh().pos);
+ });
